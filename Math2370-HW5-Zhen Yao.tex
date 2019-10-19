@@ -1,0 +1,160 @@
+\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage{latexsym,amsmath,amssymb}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 5 for Math 2370}
+\centerline{Zhen Yao}
+
+\bigskip
+
+\medskip
+
+\noindent \textbf{Problem 1.} 
+Let $A,B,C$ be $n\times n$ matrices satisfying $AB=BA$. Show that
+$$
+\det\left(  A+BC\right)  =\det\left(  A+CB\right).
+$$
+\begin{proof}
+(1)Since $AB=BA$, if $B$ is invertible, then we have $A=B^{-1}AB$. Then we have
+\begin{align*}
+    \det (A+BC) &= \det (B^{-1}(A+BC)B) \\
+    & = \det(B^{-1}AB+CB) \\
+    & = \det(A+CB)
+\end{align*}
+\hspace*{3em}(2)If $B$ is not invertible. We can set a new matrix $M = \begin{pmatrix}
+C & -I \\
+A & B
+\end{pmatrix}$, and we can solve for the determinant of this matrix. Since $AB=BA$, then $\det(M)=\det(CB-(-I)A)=\det(CB+A)$. Also, we have $-IB=B(-I)$, then the determinant can be presented as $\det (M)=\det(BC-(-I)A)=\det(BC+A)$. Then we have $\det(A+BC)=\det(A+CB)$. The proof is complete.
+\end{proof}
+\hspace*{2em}Remark: In (2), we used if $AB=BC$, then $\det(M)=\det(CB-(-I)A)$. We should give proper proof to this. Suppose matrix $M = \begin{pmatrix}
+P & Q \\
+R & S
+\end{pmatrix}$ and we have $RS=SR$. Then, if $S$ is invertible, we have 
+\begin{align*}
+    \det \begin{pmatrix}
+    P & Q \\
+    R & S
+    \end{pmatrix}
+    = &\det 
+    \begin{pmatrix}
+    P-RS^{-1}Q & 0 \\
+    R & S
+    \end{pmatrix} \\
+    & = \det(PS-SRS^{-1}Q) \\
+    & = \det(PS-RSS^{-1}Q) \\
+    & = \det(PS-RQ)
+\end{align*}
+If $S$ is not invertibe, then there exists $\varepsilon_k \rightarrow 0$ such that $\det S_k = \det(B+\varepsilon_k I) \neq 0$ and $S_k R = R S_k$. Then $\det \begin{pmatrix}
+P & Q \\
+R & S_k
+\end{pmatrix} = \det (PS_k-QR)$. Taking $k\rightarrow \infty$ will prove this case. The proof is complete. Similarly, we can prove that if $QS=SQ$, then $\det M = \det(SP-QR)$.\\
+
+\medskip
+
+\noindent \textbf{Problem 2.} 
+Let $A,B,C$ be $n\times n$ matrices. Is it always true that
+$$
+\det\left(  A+BC\right)  =\det\left(  A+CB\right)  ?
+$$
+Prove or find a counter example.
+\begin{proof}
+In general, it is not true. Take $A = \begin{pmatrix}
+    1 & 0 \\
+    0 & 10
+    \end{pmatrix},
+    B = 
+    \begin{pmatrix}
+    2 & 3 \\
+    4 & 5
+    \end{pmatrix}$
+and $C = \begin{pmatrix}
+    0 & 1 \\
+    1 & 6
+    \end{pmatrix}$.
+Then we have $\det(A+BC) = 76$ and $\det(A+CB) = 85$.
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 3.} 
+Let $n\geq2$. Given $\left(  2n-1\right)  $ scalars $x_{1}%
+,\cdots,x_{n-1}$ and $y_{1},\cdots,y_{n}$, we can define an $n\times n$ matrix
+$A=\left(  a_{ij}\right)  $ such that%
+\begin{align*}
+a_{ij} &  =x_{j}\text{ if }i>j,\\
+a_{ij} &  =y_{j}\text{ if }i\leq j.
+\end{align*}
+Show that%
+$$
+\det A=y_{n}%
+%TCIMACRO{\dprod \limits_{k=1}^{n-1}}%
+%BeginExpansion
+{\displaystyle\prod\limits_{k=1}^{n-1}}
+%EndExpansion
+\left(  y_{k}-x_{k}\right).
+$$
+\begin{proof}
+We can know that $A$ has the form 
+\begin{align*}
+    A = \begin{pmatrix}
+    y_1 & y_2 & y_3 & \cdots & y_n \\
+    x_1 & y_2 & y_3 & \cdots & y_n \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_1 & x_2 & x_3 & \cdots & y_n
+    \end{pmatrix}
+\end{align*}
+We can do elementary row operations that starting from the first row, and then apply $\text{row}_i=\text{row}_i+(-1)\text{row}_{i+1}$. Then we get new matrix
+\begin{align*}
+    A = \begin{pmatrix}
+    y_1-x_1 & 0 & 0 & \cdots & 0 \\
+    0 & y_2-x_2 & 0 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_1 & x_2 & x_3 & \cdots & y_n
+    \end{pmatrix}
+\end{align*}
+Then it is obvious that $\det(A)=y_n \prod_{k=1}^{n-1} (y_k-x_k)$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
