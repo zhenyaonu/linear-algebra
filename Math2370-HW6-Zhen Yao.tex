@@ -1,0 +1,128 @@
+\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage{latexsym,amsmath,amssymb}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 6 for Math 2370}
+\centerline{Zhen Yao}
+
+\bigskip
+
+\medskip
+
+\noindent \textbf{Problem 1.} 
+Let $A$ be an invertible $n\times n$ matrix, show that there exists a
+polynomial $g$ such that
+$$
+A^{-1}=g\left(A\right).
+$$
+\begin{proof}
+Since $A$ is invertible, then $A$ has no engenvalues. Thus, the characteristic polynomial $P(x)$ for $A$ has constant terms, which can be written as $P(x)= x^n + a_{n-1} x^{n-1} + \cdots + a_0$. Also, we know that $P(A)=0$, thus we have
+\begin{align*}
+    & A^n + a_{n-1} A^{n-1} + \cdots + a_0 = 0 \\
+    \Rightarrow & A^{-1} = -\frac{1}{a_0}(A^{n-1}+a_{n-1}A^{n-2}+\cdots+a_1) = g(A)
+\end{align*}
+Then $A^{-1}=g(A)$, the proof is complete. 
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 2.} 
+Let
+\begin{align*}
+  A=\left(
+    \begin{array}
+    [c]{cc}%
+    A_{1} & \\
+    & A_{2}%
+    \end{array}
+    \right).  
+\end{align*}
+Show that the minimal polynomial $m_{A}$ is the least common multiple of
+$m_{A_{1}}$ and $m_{A_{2}}$.
+\begin{proof}
+From the form of $A$, we can know that $\det(\lambda-IA)=\det(\lambda-IA_1)\det(\lambda-IA_1)$. Then, for any polynomial $T(x)$ such that $T(A)=0$, then we have $T(A_1)=0$ and $T(A_2)=0$. And since $m_A$, $m_{A_1}$ and $m_{A_2}$ are minimal polynomials corresponding to $A$, $A_1$ and $A_2$, then we have $T(x)=m_1 m_{A_1}(x)$ and $T(x)=m_2 m_{A_1}(x)$ for some $m_1, m_2$. Also, we have $m_A(x)|T(x)$, then we have $m_{A_1}(x)|m_A(x)$ and $m_{A_1}(x)|m_A(x)$, then $m_A$ is the least common multiple of $m_{A_{1}}$ and $m_{A_{2}}$.
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 3.}
+Find the minimal polynomial $m_{A}$ for%
+$$
+A=\left(
+\begin{array}
+[c]{ccc}%
+1 & -1 & 1\\
+0 & 2 & 0\\
+0 & 0 & 2
+\end{array}
+\right)  .
+$$
+\begin{proof}
+The characteristic polynomial for $A$ is that $P(\lambda)=(\lambda-1)(\lambda-2)^2$. Then the minimal polynomial is $m_A=(\lambda-1)(\lambda-2)$.
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 4.}
+Let $A$ be an $n\times n$ matrix where $n\geq2$ satisfying
+$\operatorname*{rank}A=1$.
+\newline(i) Show that there exists two column
+vectors $a,b$ such that $A=ab^{T}$.
+\newline(ii) Show that the minimal
+polynomial%
+$$
+m_{A}=\lambda^{2}-\left(  a^{T}b\right)  \lambda.
+$$
+\begin{proof}
+(i)Since $\text{rank}A=1$, then the image of $A$ is one-dimensional. Thus, there exist $u,v\in \mathbb{R}^n$ such that $Au=kv$ for a fixed $v$. It also holds for a basis for $\mathbb{R}^n$, then every column of $A$ is a multiple of $v$. Then there exists $(w_1, w_2,\cdots,w_n)\in\mathbb{R}^n$, such that
+\begin{align*}
+    A=v(w_1, w_2,\cdots,w_n)
+\end{align*}
+then we denote $v=a$, and $(w_1, w_2,\cdots,w_n)=b^T$, where $a,b\in\mathbb{R}^n$.Then $A=ab^T$.\\
+\hspace*{3em}(ii)We have $A^2=ab^Tab^T=a(b^Ta)b^T=(b^Ta)ab^T=(b^Ta)A$, which implies $q(A)=A^2-(b^Ta)A=0$. This polynomial satisfies that $q(A)=0$, then $m_a|q(\lambda)=\lambda^2-(b^Ta)\lambda$. Also, $m_A$ cannot be $\lambda$ or $\lambda-(b^Ta)$, since this means $A$ is a scalar. Thus, $m_A=\lambda^2-(b^Ta)\lambda$. The proof is complete.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
