@@ -6,6 +6,7 @@ Some exercies and homework I have during this Linear Analysis graduate course to
 
 ### HW2
 - Dual Spaces
+- Other material: *Note on Dual Spaces*
 
 ### HW3
 - Linear Mappings
@@ -19,3 +20,4 @@ Some exercies and homework I have during this Linear Analysis graduate course to
 ### HW6
 - Determinant of Special Matrices
 - Spectral Theory
+- Other material: *Note on Jordan Form*
