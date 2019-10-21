@@ -20,4 +20,4 @@ Some exercies and homework I have during this Linear Analysis graduate course to
 ### HW6
 - Determinant of Special Matrices
 - Spectral Theory
-- Other material: *Note on Jordan Form*
+- Other material: *Note on Jordan Form 1* and *Note on Jordan Form 2*
