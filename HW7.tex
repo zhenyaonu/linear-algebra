@@ -1,0 +1,346 @@
+\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage{latexsym,amsmath,amssymb}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 7 for Math 2370}
+\centerline{Zhen Yao}
+
+\bigskip
+
+\medskip
+
+\noindent \textbf{Problem 1.} 
+Let $A_{k}$, $1\leq k\leq K$ be $n\times n$ matrices satisfying%
+$$
+A_{i}A_{j}=A_{j}A_{i}\text{ for any }1\leq i,j\leq k.
+$$
+Show the existence of a basis of $\mathbb{C}^{n}$ which consists of
+eigenvector and generalized eigenvectors of $A_{k}$ for each $1\leq k\leq K$.
+\begin{proof}
+Let $\{\lambda_j\}^J_j=1$ be $J$ distinct eigenvalues of $A_1$, and then we have
+\begin{align*}
+    \mathbb{C}^n = \bigoplus^J_{j=1}N_j
+\end{align*}
+where $N_j=N_{(A_1-\lambda_j I)^{d_j}}$, $d_j$ is index of $j$th eigenvalue $\lambda_j$. For $\forall x\in\mathbb{C}^n$, since $A_1 A_i=A_i A_1,2\leq i \leq K$, then we have $(A_1-\lambda_j I)^{d_j}A_i=A_i(A_1-\lambda_j I)^{d_j}$. Thus, if $x\in N_k$
+\begin{align*}
+    (A_1-\lambda_j I)^{d_j}A_ix =A_i(A_1-\lambda_j I)^{d_j}x = 0
+\end{align*}
+which means $A_i x\in N_j$. Thus, $A_i$ is a mapping from $N_j$ to $N_j$. Now we apply Spectral Theorem to the linear mapping $A_i$ and we know that $N_j$ has a basis consisting of eigenvevtors and generalized eigenvevtors of $A_i$. And it is true for all $A_i, 2\leq i \leq K$. Thus, a basis of $\mathbb{C}^{n}$ consists of
+eigenvectors and generalized eigenvectors of $A_{j}$ for each $1\leq j\leq K$. The proof is complete.
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 2.} 
+Let $\lambda$ be an eigenvalue of an $n\times n$ matrix $A$. Suppose
+that%
+\begin{align*}
+    \dim N_{1}\left(\lambda\right) & = 2, \dim N_{2}\left(\lambda\right) = 4\\
+    \text{ and }\dim N_{3}\left(\lambda\right) & = \dim N_{4}\left(\lambda\right) = 5,
+\end{align*}
+Find the Jordan blocks of $A$ corresponding to $\lambda$.
+\begin{proof}
+Since $\dim N_{3}\left(\lambda\right) = \dim N_{4}\left(\lambda\right) = 5$, then we can know that the index $d(\lambda) = 3$, then we can know the Jordan blocks of $A$ corresponding to $\lambda$ is 
+\begin{align*}
+    J = \left(\begin{array}
+    [c]{ccccc}%
+    \lambda & 1 & 0 & 0 & 0\\
+    0 & \lambda & 1 & 0 & 0\\
+    0 & 0 & \lambda & 0 & 0\\
+    0 & 0 & 0 & \lambda & 1\\
+    0 & 0 & 0 & 0 & \lambda
+    \end{array}\right)
+\end{align*}
+We can verify that this is the Jordan blocks we want. We can compute $N_{(J-\lambda I)}$, $N_{(J-\lambda I)^2}$, $N_{(J-\lambda I)^3}$ and $N_{(J-\lambda I)^4}$. We have
+\begin{align*}
+    J-\lambda I = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right)
+\end{align*}
+and it is obvious that $\dim N_{(J-\lambda I)} = 2$, since there are two $0$ column vectors. Similarly, we have 
+\begin{align*}
+    (J-\lambda I)^2 = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right), 
+    (J-\lambda I)^3 = (J-\lambda I)^4 = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right)
+\end{align*}
+and we can know that $\dim N_{(J-\lambda I)^2} = 4$ and $\dim N_{(J-\lambda I)^3} = \dim N_{(J-\lambda I)^3} = 5$. The proof is complete.
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 3.}
+Let $A$ be a $5\times5$ rank one matrix, find all possible Jordan
+canonical forms of $A$. The order of Jordan blocks should be ignored.
+\begin{proof}
+Since $A$ is rank one matrix, then there exists two column vectors $a,b$ such that $A=ab^T$, also we know that the minimal polynomial for $A$ is $m_A(\lambda) = \lambda^2 - \alpha \lambda$. So $A$ has eigenvalue $0$ with multiplicity $4$ and $\alpha$ with multiplicity $1$. There are several possible Jordan forms for eigenvalue $0$, which are
+\begin{align*}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right)
+\end{align*}
+and $$
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right).$$
+Since the null space of $A-0I$ has dimension $4$ and one of them is generated by eigenvalue $\alpha$. Thus, $\dim N_{A-0I}=3$, which means that there are $3$ blocks corresponding to eigenvalue $0$. Thus, we can know that all possible Jordan canonical forms of $A$ are
+\begin{align*}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right), \text{and}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 4.}
+Let%
+$$
+A=\left(
+\begin{array}
+[c]{ccc}%
+1 & 1 & 1\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{array}
+\right)  .
+$$
+Find its eigenvectors and generalized eigenvectors. Find its Jordan canonical
+form $J$ and the corresponding matrix $S$ so that%
+$$
+A=SJS^{-1}\text{.}%
+$$
+\begin{proof}
+Taking $A-\lambda I = 0$, we can have characteristic polynomial $p_A(\lambda) = (1-\lambda)^3$, which gives us eigenvalues $1$. Now we determine the null space of $A-1\dots I$
+\begin{align*}
+    A-I =\left(\begin{array}
+    [c]{ccc}%
+    0 & 1 & 1\\
+    0 & 0 & 0\\
+    0 & 0 & 0
+    \end{array}\right)
+\end{align*}
+So this eigenspace is dimensional-$2$. Hence there are two Jordan blocks corresponding to the eigenvalue 1 in the Jordan form. So we have its Jordan canonical form
+\begin{align*}
+    J = \left(\begin{array}
+    [c]{ccc}%
+    1 & 1 & 0\\
+    0 & 1 & 0\\
+    0 & 0 & 1
+    \end{array}\right)
+\end{align*}
+Then we can know the eigenvectors corresponding to $1$ are 
+\begin{align*}
+    v_1 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    0 \\
+    0 
+    \end{array}\right) 
+    \text{and}\quad 
+    v_2 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    -1 
+    \end{array}\right)
+\end{align*}
+Each of these will give Jordan chain and we compute $(A-I)w_1 = v_1$ and $(A-I)w_2 = v_2$. The second equation does not have solution, so we can know that
+\begin{align*}
+    w_1 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    0 
+    \end{array}\right)
+\end{align*}
+Then we have the engenvectors and generalized engenvectors, which are 
+\begin{align*}
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    0 
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    0 \\
+    0 
+    \end{array}\right),
+    \text{and}\quad
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    -1 
+    \end{array}\right)
+\end{align*}
+Thus, we can find $S$, such that $AS=JS$, and we have
+\begin{align*}
+    S = \left(\begin{array}
+    [c]{ccc}%
+    1 & 1 & 1\\
+    0 & 1 & 1\\
+    0 & 0 & -1
+    \end{array}\right).
+\end{align*}
+\end{proof}
+
+\medskip 
+
+\noindent \textbf{Problem 5.}
+Let $P$ be the linear space of polynomials with real coefficients
+equipped with the scalar product%
+$$
+\left(  f,g\right)  =\int_{0}^{1}f\left(  x\right)  g\left(  x\right)  dx.
+$$
+(a) Using Gram-Schmidt process to generate an orthonormal basis of the span of
+vectors $\left\{  1,x^{2}\right\}  $.
+\newline(b) Find the projection of polynomial $x$ on the span of vectors $\left\{  1,x^{2}\right\}  $.
+\begin{proof}
+(a)Set $y_1 = 1$ and $y_2 = x^2$, using Gram-Schmidt process, we can have 
+\begin{align*}
+    x_1 & = \frac{y_1}{\left \|y_1\right \|} = \frac{1}{\sqrt{\int^1_0 1dx}} = 1 \\
+    x_2 & = \frac{y_2-(y_2,x_1)x_1}{\left \|y_2-(y_2,x_1)x_1\right \|} = \frac{x^2 - \frac{1}{3}}{\sqrt{\int^1_0 (x^2 - 1/3)^2}dx} = \frac{3\sqrt{5}x^2 - \sqrt{5}}{2}
+\end{align*}
+\hspace*{3em}(b)Finding the projection of polynomial $x$ on the span of vectors $\left\{  1,x^{2}\right\}$ is equivalent to findind the solution for $a,b$ in the equations
+\begin{align*}
+    (1,x-(a+bx^2)) & = 0 \\
+    (x^2,x-(a+bx^2)) & = 0 
+\end{align*}
+which gives us $b = \frac{15}{16}, a = \frac{3}{16}$. Thus, the projection is $\left(\frac{3}{16},\frac{15}{16}\right)$.
+\end{proof}
+\medskip
+
+\noindent \textbf{Problem 6.}
+Find the least squares solution to the over-determined system%
+\begin{align*}
+3x-y  &  =1,\\
+x+y  &  =1,\\
+2x+3y  &  =2.
+\end{align*}
+\begin{proof}
+Writting these equations into $AX=b$, where $A = \left(\begin{array}
+    [c]{cc}%
+    3 & -1\\
+    1 & 1\\
+    2 & 3
+    \end{array}\right), X = \left(\begin{array}
+    [c]{c}%
+    x\\
+    y\\
+    \end{array}\right)$, and $b = \left(\begin{array}
+    [c]{c}%
+    1\\
+    1\\
+    2
+    \end{array}\right)$, then the least square least solution can be determined by $z = (A^TA)^{-1}A^T b = \left(\begin{array}
+    [c]{c}%
+    0.4638\\
+    0.3768\\
+    \end{array}\right)
+    $.
+\end{proof}
+
+
+
+
+
+\end{document}
+
