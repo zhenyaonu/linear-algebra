@@ -1,0 +1,120 @@
+\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage{latexsym,amsmath,amssymb}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 7 for Math 2370}
+\centerline{Zhen Yao}
+
+\bigskip
+
+\medskip
+
+\noindent \textbf{Problem 1.} 
+Suppose $1\leq k\leq n$ and $x_{1},x_{2},\cdots x_{k}$ are $k$ vectors
+in $\mathbb{R}^{n}$ satisfying for any $1\leq i,j\leq k$,%
+$$
+\left(  x_{i},x_{j}\right)  =\delta_{ij}.
+$$
+For each $1\leq j\leq k$, let $a_{j}$ be the first component of $x_{j}$. Show
+that%
+$$
+\sum_{j=1}^{k}a_{j}^{2}\leq1.
+$$
+\begin{proof}
+Since $(x_i,x_j) = \delta_{ij}, 1\leq i,j\leq n$, then we can arrange $x_1, x_2,\cdots, x_n$ into a matrix and denote it by $A = (x_1, x_2,\cdots, x_n)$, then we have $A$ is an orthogonal matrix with determinant $1$. Then $\det A^* = 1$. \\
+\hspace*{3em}Now we pick a vector $z = (1,0,\cdots,0)^T \in \mathbb{R}^{n}$. Then we have $A^*z = (a_1, a_2, \cdots, a_n)^T$, and therefore the first component of the vector $AA^*z$ is $\sum_{j=1}^{k}a_{j}^{2}$, which means $AA^*z = \left(\sum_{j=1}^{k}a_{j}^{2}, \cdots \right)^T$. Also, we have $\left\|AA^*z \right\| \leq \left\| I z \right\| = 1$. We denote other components of $AA^*z$ as $w_2, w_3, \cdots, w_n$, then we have 
+\begin{align*}
+    \sum_{j=1}^{k}a_{j}^{2} \leq \left\|AA^*z \right\|^{1/2} & = \sqrt{\sum_{j=1}^{k}a_{j}^{2} + w_2^2 + \cdots + w_n^2} = 1 \\
+    \Rightarrow \sum_{j=1}^{k}a_{j}^{2} & \leq 1
+\end{align*}
+The proof is complete.
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 2.}
+Let $A$ be an $m\times n$ matrix, $c_{j}$ $1\leq j\leq n$ be column
+vectors of $A$ and $r_{i}$, $1\leq i\leq m$ be row vectors of $A$, show that%
+$$
+\left\Vert A\right\Vert \geq\max_{1\leq j\leq n}\left\Vert c_{j}\right\Vert
+\text{ and }\left\Vert A\right\Vert \geq\max_{1\leq i\leq m}\left\Vert
+r_{i}\right\Vert .
+$$
+Here we view $A$ as a linear map from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
+\begin{proof}
+For $j$th column $c_j$ of $A$, we pick a unit vector $e_j = (0,\cdots, 0,1,0,\cdots,0)^T \in \mathbb{R}^n$, where $j$th entry is $1$, others are all zero. Then we can have $Ae_j = c_j$. Thus, we have 
+\begin{align*}
+    \left\|c_j \right\| \leq \left\|A \right\| \left\|e_j  \right\| = \left\|A \right\|
+\end{align*}
+since this is true for all $1\leq j \leq n$, then we have $\max_{1\leq j \leq n}\left\|c_j \right\| \leq \left\|A \right\|$. \\
+\hspace*{3em}For $i$th row $r_i$ of $A$, we can consider $A^* = (r_1, r_2,\cdots, r_m)$. And still, we pick a vector $e_i' = (0,\cdots, 0,1,0,\cdots,0)^T \in \mathbb{R}^m$, where $i$th entry is $1$, others are all zero. And then we take $A^* e_i' = r_i$, which gives us 
+\begin{align*}
+    \left\|r_i \right\| \leq \left\|A^* \right\| \left\|e_i'  \right\| = \left\|A^* \right\| = \left\|A \right\|
+\end{align*}
+in the last step we used the fact that $\left\|A^* \right\| = \left\|A \right\|$ . This is true for all $1\leq i \leq m$, then we have $\max_{1\leq i \leq m}\left\|r_i \right\| \leq \left\|A \right\|$. The proof is complete.
+\end{proof}
+
+\medskip
+
+\noindent \textbf{Problem 3.}
+Let
+$$
+A=\left(
+\begin{array}
+[c]{cc}%
+1 & 2\\
+0 & 3
+\end{array}
+\right)  .
+$$
+Find the spectral radius, operator norm and Hilbert-Schmidt norm of
+$A:\mathbb{R}^{n}\rightarrow\mathbb{R}^{n}$.
+\begin{proof}
+The eigenvalues of $A$ are $1$ and $3$, and then we can know that the spectral radius is $r(a) = \max |\lambda| = 3$. The operator norm of $A$ is  the largest eigenvalues of $AA^T$, which is 
+$$
+AA^T=\left(
+\begin{array}
+[c]{cc}%
+5 & 6\\
+6 & 9
+\end{array}
+\right)
+$$
+And the charasteristic polynomial is $\lambda^2 - 14\lambda + 9 = 0$, which gives us norm of $A$ is $\max_{j=1,2} \lambda_j = 7+2\sqrt{10}$. The Hilbert-Schmidt norm of $A$ is $\left\| A\right\| = \left(\sum_{i,j}|a_{ij}^2| \right)^{1/2} = \sqrt{14}$.
+\end{proof}
+
+
+\end{document}
+
+
