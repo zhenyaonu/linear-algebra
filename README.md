@@ -22,3 +22,9 @@ Some exercies and homework I have during this Linear Analysis graduate course to
 - Spectral Theory
 - Other material: *Note on Jordan Form 1*, *Note on Jordan Form 2*,
 *Note on Minimal Polynomials and Jordan Normal Forms*
+
+### HW7
+- Jordan Canonical Forms
+
+### HW8
+- Euclidean Space and Norm
