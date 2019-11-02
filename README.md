@@ -28,3 +28,4 @@ Some exercies and homework I have during this Linear Analysis graduate course to
 
 ### HW8
 - Euclidean Space and Norm
+- Other materials: *Notes on Orthogonal and Symmetric Matrices*, *Notes on The Norm of A Matrix*
