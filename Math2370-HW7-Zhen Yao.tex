@@ -59,6 +59,22 @@ where $N_j=N_{(A_1-\lambda_j I)^{d_j}}$, $d_j$ is index of $j$th eigenvalue $\la
 which means $A_i x\in N_j$. Thus, $A_i$ is a mapping from $N_j$ to $N_j$. Now we apply Spectral Theorem to the linear mapping $A_i$ and we know that $N_j$ has a basis consisting of eigenvevtors and generalized eigenvevtors of $A_i$. And it is true for all $A_i, 2\leq i \leq K$. Thus, a basis of $\mathbb{C}^{n}$ consists of
 eigenvectors and generalized eigenvectors of $A_{j}$ for each $1\leq j\leq K$. The proof is complete.
 \end{proof}
+\noindent \textbf{Method 2 of proof}
+\begin{proof}
+We will prove it by induction on $\dim V$ and $1\leq k\leq K$. And assume we have pairwise commuting operators $A_1, A_2,\cdots, A_K$ on $V$. \\
+\hspace*{3em}When $\dim V = 1$, and in this case, all $A_i$ are scalars. Take $B = \{1\}$, and $k$ be arbitrary. Assume the result is true whenever $\dim V < l$, and $A_1, A_2, \cdots, A_k$ are pairwise commuting operators on $V$ if $\dim V < l$. And we want to show that if $\dim V = l$, and $A_1, \cdots, A_{k+1}$ are pairwise commuting operators on $V$, then there exists a basis of generalized eigenvectors. \\
+\hspace*{3em}For $A_1$, we have 
+\begin{align*}
+    \mathbb{C}^l = \bigoplus^m_{j=1}N_{\lambda_j}(A_1)
+\end{align*}
+since $A_1A_i = A_iA_1, 2 \leq i \leq k+1$, we have $A_i:N_{\lambda_j}(A_1)\rightarrow N_{\lambda_j}(A_1), \forall j = 1,\cdots, m$ and $\forall i = 1,2,\cdots, k+1$. \\
+\hspace*{3em}Case I. If $m = 1$, then there exists a basis $B$ of $\mathbb{C}^1$ consisting of generalized eigenvectors for $A_2, \cdots, A_k,A_{k+1}$. Any vectors in $\mathbb{C}^l$ is a generalized eigenvectors for $A_1$ because $\mathbb{C}^l = N_{\lambda_1}(A_1)$, then any vectors in $B$ is a a generalized eigenvectors for $A_1, A_2, \cdots, A_{k+1}$. \\
+\hspace*{3em}Case II. If $m > 1$, then $N_{\lambda_j}(A_1)\neq \mathbb{C}^l, \forall j = 1,\cdots, k+1$. On $N_{\lambda_j}(A_1)$, we have $A_1|_{N_{\lambda_j}(A_1)}, A_2|_N_{\lambda_j}(A_1), \cdots, A_{k+1}|_N_{\lambda_j}(A_1)$. By induction, there exists a basis $\beta_j, j=1,2,\cdots, m$ of $N_{\lambda_j}(A_1)$, which are generalized engenectors for $A_1|_{N_{\lambda_j}(A_1)}, \cdots, A_{k+1}|_N_{\lambda_j}(A_1)$. Take 
+\begin{align*}
+    \beta = \bigcup^m_{j=1}\beta_j
+\end{align*}
+Then $\beta$ is a basis for $\mathbb{C}^l$ consisting of generalized eigenvectors for $A_1, A_2, \cdots, A_{k+1}$.
+\end{proof}
 
 \medskip
 
