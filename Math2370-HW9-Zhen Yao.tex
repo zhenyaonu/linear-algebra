@@ -167,18 +167,17 @@ Ax=-Bx.
 $$
 
 \begin{proof}
-Since $A$ and $B$ are orthogonal matrices, then we have $\det A = \det B = \pm 1$ and $A^TA = B^TB = I$. We prove by contradiction, and suppose that there does not exist $x\in \mathbb{R}^n$ and $\|x\| = 1$ such that $Ax = -Bx$.  \\
-\hspace*{1em}\, Then for $\forall x$, $(A+B)x\neq 0$, then $(A^T+B^T)(A+B)x\neq 0$. Then we have, for $\forall x\neq 0$
+Since $A$ and $B$ are orthogonal matrices, then we have $\det A = \det B = \pm 1$ and $A^TA = B^TB = I$. Also, with $\det A+\det B=0$, we have $\det A\det B = -1$. Now consider 
 \begin{align*}
-    & (A^TA + A^TB - B^TA - B^TB)x \neq 0 \\
-    \Rightarrow & (A^TB - B^TA)x \neq 0 \\
-    \Rightarrow & A^TB - B^TA \neq 0 \\
-    \Rightarrow & \det A^TB \neq \det B^TA \\
-    \Rightarrow & \frac{1}{\det A}\det B \neq \frac{1}{\det B}\det A \\
-    \Rightarrow & (\det A)^2 \neq (\det B)^2
+    \det(A+B) &= \det(A(A^T+B^T)B) = \det A \det(A^T+B^T) \det B \\
+    & = - \det(A^T+B^T) = - \det(A+B)^T = - \det(A+B)
 \end{align*}
-Since $\det A + \det B = 0$, and $\det A = \det B = \pm 1$, without losing generality, we can assume $\det A = 1$ and $\det B = -1$. Then this contradicts $(\det A)^2 \neq (\det B)^2$. The proof is complete.
+Then we have $\det(A+B) = 0$, which means $A+B$ is not full rank. Then we can find a vector $y\in N_{A+B}$ such that $(A+B)y = 0$. Now we pick $x = \frac{y}{\|y\|}$, this is the unit vector we need.
 \end{proof}
+
+
+
+
 
 
 
