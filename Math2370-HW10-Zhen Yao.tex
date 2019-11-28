@@ -1,0 +1,130 @@
+\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage{latexsym,amsmath,amssymb}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 10 for Math 2370}
+\centerline{Zhen Yao}
+
+
+
+\noindent{\bf Problem 1.}
+Suppose $A$ and $B$ are normal complex $n\times n$ matrices. Prove that%
+$$
+r(AB)\leq r(A)r(B).
+$$
+Here $r(\cdot)$ is the spectral radius of a matrix. Find a counter example if
+$A$ or $B$ is not normal.
+\begin{proof}
+We have $r(AB)\leq \|AB\|$, since if $\lambda$ be an eigenvalue of $AB$, then for $x\in\mathbb{C}^n, x\neq 0$ being corresponding eigenvector, we have 
+\begin{align*}
+    AB x & = \lambda x \\
+    \Rightarrow \|AB\|\|x\| & \geq \|AB x\| = |\lambda|\|x\| \\
+    \Rightarrow \|AB\| & \geq |\lambda|
+\end{align*}
+Also, we have $\|AB\|\leq \|A\| \|B\|$. And with $A, B$ being normal matrices, we know $\|A\| = r(A)$ and $\|B\| = r(B)$. Thus, with all the results above, we have 
+\begin{align*}
+    r(AB)\leq \|AB\|\leq \|A\| \|B\| = r(A)r(B)
+\end{align*}
+The proof is complete. 
+
+Take $A = \left(
+\begin{matrix}
+1 & 0\\
+1 & 1
+\end{matrix}
+\right)$ and $B = \left(
+\begin{matrix}
+2 & 1\\
+-1 & 0
+\end{matrix}
+\right)$ and $A,B$ are not normal. We can compute that $r(AB) = \sqrt{3}$ and $r(A)r(B) = 1\cdot 1 = 1 < r(AB)$. This is a counter example if $A$ and $B$ are not normal.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.} 
+What is the operator norm of the matrix%
+$$
+\left(
+\begin{array}
+[c]{ccc}%
+1 & 0 & 1\\
+2 & 3 & 0
+\end{array}
+\right)
+$$
+in the standard Euclidean structures of $\mathbb{R}^{2}$ and $\mathbb{R}^{3}$.
+\begin{proof}
+Denote the matrix above by $A$, then the operator norm of $A$ is $\sqrt{r(A^*A)} = \sqrt{\frac{15+\sqrt{137}}{2}}$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.} 
+Let $\left\{  \lambda_{i}\right\}  _{i=1}^{n}$ be eigenvalues of matrix
+$A=\left(  a_{ij}\right)  _{n\times n}$. Show that%
+$$
+\sum_{j=1}^{n}\left\vert \lambda_{j}\right\vert ^{2}\leq\sum_{i,j=1}%
+^{n}\left\vert a_{ij}\right\vert ^{2}.
+$$
+\begin{proof}
+With Schur decomposition, we cnould know that $A = Q U Q^*$, where $Q$ is unitary and $U$ is upper triangular and its diagonal entries are engenvalues of $A$, since $A$ and $U$ are similar. And we can show that Hilbert-Schwarz norm norm $\|A\|_{HS} = \sqrt{\sum_{i,j=1}^{n} \left|a_{ij}\right|^2}$ is invariant under unitary matrix multiplication:
+\begin{align*}
+    \|QA\|_{HS}^2 = \text{tr} \left((QA)^* (QA)\right) = \text{tr} \left(A^* Q^* QA\right) = \text{tr} \left(A^* A\right) = \|A\|_{HS}^2
+\end{align*}
+then we can have 
+\begin{align*}
+    \|A\|_{HS}^2 = \|QAQ^*\|_{HS}^2 = \|U\|_{HS}^2
+\end{align*}
+Also we can know that
+\begin{align*}
+    \sum_{j=1}^{n}\left| \lambda_{j}\right|^{2}\leq \sum_{i,j=1}^{n}\left| u_{ij}\right|^{2} = \|A\|_{HS}^2
+\end{align*}
+since the square sum of all diagonal entries of $U$ is smaller than that of all entries of $U$.
+\end{proof} 
+
+\noindent{\bf Problem 4.} 
+Let $A=\left(  a_{ij}\right)  _{n\times n}$ be normal. Show that%
+$$
+r\left(  A\right)  \geq\max_{1\leq i\leq n}\left\vert a_{ii}\right\vert .
+$$
+\begin{proof}
+Since $A$ is normal matrix, then we have $\|A\| = r(A)$. Also, we have known that for all $a_{ij}$, $\left|a_{ij}\right|\leq \|A\|$. Thus, we have $r(A)\geq \max_{1\leq i\leq n}\left|a_{ii}\right|$.
+\end{proof}
+
+
+
+\end{document}
+
