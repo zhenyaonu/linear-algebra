@@ -1,0 +1,3047 @@
+\documentclass[12pt,leqno]{book}
+\pagestyle{plain}
+%\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\graphicspath{ {images/} }
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\title{Sections and Chapters}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\numberwithin{equation}{subsection}
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+    
+\def\U{{\mathcal U}}
+
+\begin{document}
+\frontmatter
+
+\begin{titlepage}
+	\begin{center}
+	\textbf{\LARGE{}} \\
+	\vspace{40mm}
+    \textbf{\LARGE{Linear Algebra Note}} \\
+    \vspace{2mm} %5mm vertical space
+    \large{\textsc{Zhen Yao, Department of Mathematics}}\\
+    \large{\textsc{University of Pittsburgh}}
+    \end{center}
+\end{titlepage}
+
+\tableofcontents{}
+\mainmatter
+
+\newpage
+
+\chapter{Fundamentals of Linear Spaces}
+\section{Linear Spaces, Isomrphism}
+
+A \emph{field} $K$ is a nonempty set in which two operations are defined, usually called addition and multiplication, denoted by $+$ and $\cdot$ respectively such that it satisfies the following axioms:
+\begin{enumerate}[label=(\arabic*)]
+    \item $K$ is closed under addition and multiplication, i.e., if $a,b\in K$, then $a+b, a\cdot b\in K$.
+    \item Associativity of addition and multiplication, i.e., for any $a,b,c\in K$, $a+(b+c) = (a+b)+c, a\cdot(b\cdot c) = (a\cdot b)\cdot c$.
+    \item Existence of additive and multiplicative identity elements, i.e., there exists an element of $K$ called additive identity, denoted by $0$, such that for any $a
+    \in K, a+0=a$. Similarly, there exists an element of $K$ called multiplicative identity, denoted by $1$, such that for any $a\in K, a\cdot 1=a$.
+    \item Existence of additive inverse and multiplicative inverse, i.e., for any $a\in K$, there exists an element $-a\in K$, such that $a+(-a)=0$. Similarly, for any $a\in K\setminus \{0\}$, there exists an element $a^{-1}\in K$, such that $a\cdot a^{-1}=1$.
+    \item Distributivity of mulitiplication over addition, i.e., for any $a,b,c\in K, a\cdot(b+c)=a\cdot b+a\cdot c$.
+\end{enumerate}
+
+\medskip
+
+\begin{example}
+Examples of field: $\mathbb{R}$, $\mathbb{Q}$, $\mathbb{C}$. When $K$ is $\mathbb{R}$ or $\mathbb{C}$, the elements of $K$ are called scalars.
+\end{example}
+
+\medskip
+
+\begin{example}
+Some important structures are “very nearly”fields. For example, let $\mathbb{R}_\infty = \mathbb{R} \cup \{\infty\}$, and define operations $\boxplus$ and $\boxdot$ on $\mathbb{R}_\infty$ as
+\begin{align*}
+    a \boxplus b = \begin{cases} 
+    \min\{a,b\} & {\rm if}\, a,b\in \mathbb{R}, \\
+    b & {\rm if}\, a = \infty, \\
+    a & {\rm if}\, b = \infty.
+    \end{cases}\,\, {\rm and}\,\,\,
+    a \boxdot b = \begin{cases} 
+    a+b & {\rm if}\, a,b\in \mathbb{R}, \\
+    \infty & {\rm otherwise}.
+    \end{cases}
+\end{align*}
+This structure, called the \emph{optimization algebra}, satisfies all of the conditions of a field \emph{except} for the existence of additive inverse (such structures are known as \emph{semiﬁelds}\cite{2}).
+\end{example}
+
+\medskip
+
+\begin{example}
+Fields do not have to be infinite. Let $p$ be a positive integer and $\mathbb{Z}/(p) = \{1,2,\cdots,p-1\}$. For each nonnegative integer $n$, denote the remainder after dividing $n$ by $p$ as $[n]_p$. Then it is easy to see that $[n]_p\in\mathbb{Z}/(p)$ for each nonnegative integer $n$ and $[i]_p = i$ for all $i\in\mathbb{Z}/(p)$. 
+
+We now define operations on $\mathbb{Z}/(p)$ by setting $[n]_p + [k]_p = [n+k]_p$ and $[n]_p\cdot [k]_p = [n\cdot k]_p$. It is easy to check that if the integer $p$ is prime, then $\mathbb{Z}/(p)$ with two operations is a field, known as the \emph{Galois field} of order $p$, usually denoted by $GF(p)$. 
+\end{example}
+
+\medskip
+
+\begin{proposition}
+Let $a$ be an nonzero element of a finite field $K$ which contains $q$ elements. Then $a^{-1} = a^{q-2}$.
+\end{proposition}
+\begin{proof}
+If $q = 2$, then $K = {\rm GF}(2)$ and $a = 1$. Then the result is obvious. 
+
+If $q > 2$, let $B = \{a_1, \cdots, a_{q-1}\}$ be nonzero elements of $K$. Then $aa_i\neq aa_k$ for $i\neq k$. If not, we would have $a_i = a^{-1}(aa_k) = a_k$. Therefore, $B = \{a a_1, \cdots, a a_{q-1}\}$ and we have 
+\begin{align*}
+    \prod^{q-1}_{i=1}a_i = \prod^{q-1}_{i=1}aa_i = a^{q-1}\prod^{q-1}_{i=1}a_i 
+\end{align*}
+Then we have $a^{q-1} = 1 = a a^{-1}$, which implies $a^{-1} = a^{q-2}$.
+\end{proof}
+
+\medskip
+\begin{definition}
+Now we define the characteristic of a field $K$ to be equal to the smallest positive integer $p$ such that $1+\cdots+1$($p$ summands) equals $0$—if such an integer $p$ exists—and to be equal to $0$ otherwise.
+\end{definition}
+
+\medskip
+
+\begin{proposition}
+If $K$ is a field having characteristic $p > 0$, then $p$ is prime.
+\end{proposition}
+\begin{proof}
+Suppose by contrary that $p = xy, 0<x,y<p$. Therefore $a = x$ nd $b = y$ are nonzero elements of $K$ and we have $ab = xy = 0$, which implies $a=b=0$. Then there is a contradiction. 
+\end{proof}
+
+\medskip
+
+\begin{theorem}[Loo-Keng Hua's Identity]
+If $a$ and $b$ are nonzero elements of a field $K$ satisfying $a\neq b^{-1}$, then
+\begin{align*}
+    a - aba = \left(a^{-} + (b^{-1} - a)^{-1}\right)^{-1}
+\end{align*}
+\end{theorem}
+\begin{proof}
+We have
+\begin{align*}
+    a^{-} + (b^{-1} - a)^{-1} & = a^{-1}\left((b^{-1} - a) + a \right)(b^{-1} - a)^{-1}\\
+    & = a^{-1}b^{-1}(b^{-1} - a)^{-1} \\
+    \Rightarrow \left(a^{-} + (b^{-1} - a)^{-1}\right)^{-} & = (b^{-1} - a)ba = a - aba
+\end{align*}
+\end{proof}
+
+
+\medskip
+
+Now we introduce the term of linear space. 
+\begin{definition}
+A linear space $X$ over a field $K$ is a set in which two operations are defined: 
+\begin{enumerate}[label=(\arabic*)]
+    \item Addition, denoted by $+$, such that for any $x,y
+    \in X, x+y\in X$.
+    \item Scalar multiplication, denoted by $\cdot$, such that for $a\in K$ and $x\in X$, $aX\in X$.
+\end{enumerate}
+And these two operations satisfy the following axioms:
+\begin{enumerate}[label=(\arabic*)]
+    \item Associativity of addition, i.e., for $x,y,z\in X, x+(y+z)=(x+y)+z$.
+    \item Commutativity of addition, i.e., for $x,y\in X, x+y=y+x$.
+    \item Identity element of addiiton, i.e., for all $x\in X$, there exists an element $0\in X$, called the zero vector, such that $x+0=x$.
+    \item Inverse element of addition, i.e., for all $x\in X$, there exists an element $-x\in X$, called the additive inverse of $x$, such that $x+(-x)=0$.
+    \item Compatibility(Associativity) of scalar multiplication with field multiplication, i.e., for any $a,b\in K$ and $x\in X$, $a\cdot(b\cdot x)=(a\cdot b)\cdot x$.
+    \item Identity element of scalar multiplication, i.e., for all $x\in X$, there exists an element $1\in X$, such that $1\cdot x=x$.
+    \item Distributivity of scalar multiplicaytion with respect to vector addition, i.e., for $a\in K, x,y\in X, a\cdot(x+y)=a\cdot x+a\cdot y$.
+    \item Distributivity of scalar multiplicaytion with respect to field addition, i.e., for $a,b\in K, x\in X, (a+b)\cdot x=a\cdot x+b\cdot y$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+Zero vector is unique.
+\end{remark}
+\begin{proof}
+If there exist two zeros $0_1$ and $0_2$ in $X$, then for all $x\in X$, we have $x+(-x)=0_1$, $x+(-x)=0_2$. Then $0_1 = 0_2$.
+\end{proof}
+
+\begin{remark}
+$0x = x, (-1)\cdot x = -x$.
+\end{remark}
+
+\medskip
+
+\begin{example}[Examples of Linear Spaces]\label{example_1}
+~\begin{enumerate}[label=(\roman*)]
+    \item $\mathbb{R}^n, \mathbb{C}^n$.
+    \item Set of all row vectors: $(a_1,\cdots, a_n)$ in $K$, this space is denoted as $K^n$.
+    \item Set of all real-valued functions $f(x)$ defined on the real line, $K=\mathbb{R}$.
+    \item Set of all functions with values in $K$, defined on an arbitrary set $S$.
+    \item Set of all polynomials with real coefficients of order at most $n$.
+\end{enumerate}
+\end{example}
+
+\medskip
+
+\begin{definition}
+A one-to-one corresponding between two linear spaces over the same field that maps sum into sum and scalar multiples into scalar multiples is called isomorphism.
+\end{definition}
+
+\begin{example}
+The linear space of real valued functions on $\{1,2,\cdots,n\}$ is isomorphic to $\mathbb{R}^n$.
+\end{example}
+
+\medskip
+
+\begin{example}
+The set $(ii)$ and $(v)$ in example (\ref{example_1}) are isomorphic.
+\end{example}
+\begin{proof}
+Polynomials can be written as $a_1+a_2x+a_3x^2+\cdots+a_nx^{n-1}$, where we can represent this as $p(x) = (a_1,a_2,\cdots,a_n)x$. Then we can define a map $p(a_1,a_2,\cdots,a_n) = a_1+a_2x+a_3x^2+\cdots+a_nx^{n-1}$, which is an isomorphism.
+\end{proof}
+
+\medskip
+
+\begin{example}
+If $S$ in $(iv)$ has $n$ elements, then $(ii)$ and $(iv)$ in example (\ref{example_1}) are isomorphic.
+\end{example}
+\begin{proof}
+Assume $S = \{x_1, x_2,\cdots, x_n\}$, then we can define $T(f) = (f(x_1), f(x_2), \cdots, f(x_n))\in K^S$, which is indeed an isomorphism.
+\end{proof}
+
+\medskip
+
+\begin{example}
+If $K=\mathbb{R}$ in $(v)$, then $(v)$ and $(iv)$ in example (\ref{example_1}) are isomorphic when S
+consists of $n$ distinct points of $\mathbb{R}$.
+\end{example}
+
+\medskip
+
+\section{Subspace}
+\begin{definition}
+A subset $Y$ of a linear space $X$ is said to be subspace if sums and scalar multiples of elements of $Y$ belong to $Y$. The set $\{0\}$ consisting of the zero element of a linear space $X$ is a subspace of $X$, called the trivial subspace.
+\end{definition}
+
+\medskip
+
+\begin{definition}
+The sum of two subsets $Y$ and $Z$ of a linear space $X$, is the set defined by 
+\begin{align*}
+    Y+Z = \{y+z\in X: y\in Y, z\in Z\}
+\end{align*}
+The intersection of two subsets $Y$ and $Z$ of a linear space $X$, is the set defined by
+\begin{align*}
+    Y\cap Z = \{x\in X: x\in Y, x\in Z\}
+\end{align*}
+\end{definition}
+
+\medskip
+
+\begin{proposition}
+If $Y$ and $Z$ are two linear subspaces of $X$, then both $Y+Z$ and $Y\cap Z$ are linear subspaces of $X$.
+\end{proposition}
+\begin{remark}
+The union of two subspaces many not be a subspace. For exapmle, two lines that intersect into one point in $\mathbb{R}^2$, then the union of these two lines is not a subspace.
+\end{remark}
+
+\medskip
+
+\section{Algebra Over a Field}
+A vector space $X$ over a field $K$ is an \emph{K-algebra} if and only if there exists a function $X\times X\ni (x,y)\mapsto x\cdot y\in X$ such that
+\begin{enumerate}[label=(\arabic*)]
+    \item $x\cdot (y+z) = x\cdot y + x\cdot z$,
+    \item $(x+y)\cdot z = x\cdot z + y\cdot z$,
+    \item $a(x\cdot y) = (ax)\cdot y = x\cdot (ay)$.
+\end{enumerate}
+for all $x,y,z\in X$ and $a\in K$. And these conditions suffice to show that $0\cdot x = x\cdot 0 = 0$ for all $x\in X$. Indeed, $0\cdot x = (-x + x)\cdot x = (-x)\cdot x + x\cdot x = - (x\cdot x) + (x\cdot x) = 0$.
+\begin{remark}
+The operation $\cdot$ need not be associative, nor need there exist an identify element for this operation.
+\end{remark}
+
+
+If this operation is associative, i.e., it satisfies $x\cdot (y\cdot z) = (x\cdot y)\cdot z$ for all $x,y,z\in X$, then the algebra is called an \emph{associative K-algebra}. If an identify element for operation $\cdot$ exists, i.e., there exists an element $e\neq 0\in X$ satisfying $e\cdot x = x\cdot e = x$ for all $x\in X$, then we call this $K$-algebra $(X,\cdot)$ is \emph{unital}. 
+
+If $x$ is an element of an associative $K$-algebra $(K,\cdot)$ and if $n$ is a positive integer, we write $x^n$ instead of $x\cdot x \cdots x \cdot x$ ($n$  factors). If $X$ is also unital and has a multiplicative identity $e$, we set $x^0 = e$ for all $x \in X, x\neq 0$. The element $0^0$ is not defined. 
+
+If $x\cdot y = y\cdot x$ for all $x,y\in X$ in some $K$-algebra $(X,\cdot)$, then the algebra is \emph{commutative}. An $F$-algebra $(X,\cdot)$ satisfying $x\cdot y = - y\cdot x$ is called \emph{anticommutative}. If the characteristic of $K$ is other than $2$, then this condition is equivalent to the condition that $x\cdot x = 0$ for all $x\in X$.
+
+If $(X,\cdot)$ is an associative and $K$-algebra having a multiplicaiton identity $e$, and if $x\in X$ satisfies the condition that there exists an element $y\in X$ such that $x\cdot y = y\cdot x = e$, then we say that $x$ is a \emph{unit} of $X$. If such element $y$ exists, then it is unique and denoted by $x^{-1}$. Also, if $x,y$ are units of $X$, then so is $x\cdot y$. Indeed,
+\begin{align*}
+    (x\cdot y)\cdot \left(y^{-1}\cdot x^{-1}\right) & = \left(x\cdot \left(y\cdot y^{-1}\right)\right)\cdot x^{-1} \\
+    & = (x\cdot e)\cdot x^{-1} = e
+\end{align*}
+similarly, $\left(y^{-1}\cdot x^{-1}\right)\cdot(x\cdot y) = e$. 
+\begin{remark}
+Loo-Keng Hua’s identity holds in any associative unital $F$-algebra in which the inverses exist, since the proof relies only on associativity of addition and multiplication and distributivity of multiplication over addition\cite{2}.
+\end{remark}
+
+\medskip
+
+\begin{example}[Examples of $X$-algebra]
+~\begin{enumerate}[label=(\arabic*)]
+    \item Any vector space $V$ over a field $K$ can be turned into an associative and commutative $K$-algebra which is not unital by setting $x\cdot y = 0$ for all $x,y\in V$.
+    \item If $F$ is a subfield of $K$, then $K$ has the structure of an associative $F$-algebra, with multiplication being the multiplication in $K$. Thus, $\mathbb{C}$ is an $\mathbb{R}$-algebra and $\mathbb{Q}(\sqrt{p})$ is a $\mathbb{Q}$-algebra for prime number $p$.
+\end{enumerate}
+\end{example}
+
+\medskip
+
+\begin{definition}
+Let $K$ be a field. An anticommutative $K$-algebra $(X,\cdot)$ is a Lie algebra over $K$ if and only if it satisfies Jacobi identity:
+\begin{align*}
+    x\cdot (y\cdot z) + y\cdot (z\cdot x) + z\cdot (x\cdot y) = 0
+\end{align*}
+for all $x,y,z\in X$. This algebra is not associative unless $x\cdot y = 0$ for all $x,y\in X$.
+\end{definition}
+
+One particular Lie algebra on $\mathbb{R}^3$ is defined with multiplication $\times$, called \emph{cross product}, as below
+\begin{align*}
+    \begin{bmatrix}
+    a_1 \\
+    a_2 \\
+    a_3
+    \end{bmatrix} \times 
+    \begin{bmatrix}
+    b_1 \\
+    b_2 \\
+    b_3
+    \end{bmatrix} = 
+    \begin{bmatrix}
+    a_2 b_3 - a_3 b_2 \\
+    a_3 b_1 - a_1 b_3 \\
+    a_1 b_2 - a_2 b_1
+    \end{bmatrix}.
+\end{align*}
+and $(\mathbb{R}^3,\times)$ is a Lie algebra over $\mathbb{R}$. Moreover, the cross product is the only possible anticommutative product which can be defined on $\mathbb{R}^3$. Indeed, if $\cdot$ is any such product defined on $\mathbb{R}^3$, then 
+\begin{align*}
+    \begin{bmatrix}
+    a_1 \\
+    a_2 \\
+    a_3
+    \end{bmatrix}\cdot 
+    \begin{bmatrix}
+    b_1 \\
+    b_2 \\
+    b_3
+    \end{bmatrix} & = \left(\sum^3_{i=1} a_i x_i\right)\cdot \left(\sum^3_{i=1} b_i x_i\right) = \sum^3_{i=1}\sum^3_{j=1} a_i b_j (x_i\cdot x_j)\\
+    & = \begin{bmatrix}
+    a_2 b_3 - a_3 b_2 \\
+    a_3 b_1 - a_1 b_3 \\
+    a_1 b_2 - a_2 b_1
+    \end{bmatrix} = \begin{bmatrix}
+    a_1 \\
+    a_2 \\
+    a_3
+    \end{bmatrix} \times 
+    \begin{bmatrix}
+    b_1 \\
+    b_2 \\
+    b_3
+    \end{bmatrix}.
+\end{align*}
+
+
+\medskip
+
+\section{Linear Dependence}
+
+\begin{definition}
+A linear combination of $m$ vectors $x_1,\cdots, x_m$ of a linear space is a vector of the form
+\begin{align*}
+    \sum^m_{j=1} c_j x_j, {\rm where}\, c_j \in K
+\end{align*}
+Given $m$ vectors $x_1,\cdots, x_m$ of a linear space $X$, the set of all linear combinations of $x_1,\cdots, x_m$ is a subspace of $X$, and it is the smallest subspace of $X$
+containing $x_1,\cdots, x_m$. This is called the subspace spanned by $x_1,\cdots, x_m$.
+\end{definition}
+
+\begin{definition}
+A set of vectors $x_1,\cdots, x_m$ in $X$ spans the whole space $X$ if every $x$ in $X$ can be expressed as a linear combination of $x_1,\cdots, x_m$.
+\end{definition}
+
+\begin{definition}
+The vectors $x_1,\cdots, x_m$ are called linearly dependent if there exist scalars $c_1,\cdots, c_m$, not all of them are zero, such that
+\begin{align*}
+    \sum^m_{j=1} c_j x_j = 0
+\end{align*}
+The vectors $x_1,\cdots, x_m$ are called linearly independent if they are not dependent. 
+\end{definition}
+
+\begin{definition}
+A finite set of vectors which span $X$ and are linearly independent is called a basis for $X$.
+\end{definition}
+
+\medskip
+
+\begin{proposition}
+A linear space which is spanned by a finite set of vectors has a basis.
+\end{proposition}
+\begin{proof}
+Let $m$ be the smallest number such that there exist $x_1,\cdots,x_m \in X$, and $X = {\rm span}\{x_1,\cdots,x_m\}$. If $x_1,\cdots,x_m$ are linearly dependent, then there exist $c_1,\cdots,c_m\in K$, not all of them are zero, such that
+\begin{align*}
+    \sum^m_{j=1}c_j x_j = 0
+\end{align*}
+Suppose without losing generality that $c_1 \neq 0$, then 
+\begin{align*}
+    c_1 x_1 + c_2 x_2 + \cdots + c_m x_m = 0\\
+    \Rightarrow x_1 = -\frac{c_2}{c_1}x_2 - \cdots - \frac{c_m}{c_1}x_m
+\end{align*}
+then $\{x_2,\cdots,x_m\}$ is also a span of $X$, which is a contradiction.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+All bases for a finite-dimensional linear space $X$ contain the
+same number of vectors. This number is called the dimension of $X$ and is denoted as ${\rm dim} X$.
+\end{theorem}
+\begin{proof}
+The theorem follows from the lemma below.
+\end{proof}
+
+\begin{lemma}
+Suppose that the vectors $\{x_1,\cdots,x_n\}$ span a linear space $X$ and that
+the vectors $\{y_1,\cdots,y_m\}$ in $X$ are linear independent. Then $m \leq n$.
+\end{lemma}
+\begin{proof}
+Since ${\rm span}\{x_1,\cdots,x_m\} = X$, then for $y_1$, we have $y_1 = \sum^n_{j=1}c_j x_j \neq 0$. Then, for some $k$ such that $c_k\neq 0$, we have
+\begin{align*}
+    c_k x_k & = y_1 - \sum^n_{j=1, j\neq k} c_j x_j \\
+    x_k & = \frac{y_1}{c_k} - \sum^n_{j=1, j\neq k} \frac{c_j}{c_k} x_j
+\end{align*}
+Then we have $\{y_1\}\cup\{x_1,\cdots,x_{j-1},x_{j+1},\cdots, x_n\}$ can span $X$. Then, $y_2$ can be written as a linear combination of $y_1$ and $\{x_j\}_{j\neq k}$. Some coefficients for $x_j, j\neq k$ must be nonzero, since $y_1$ and $y_2$ are linearly independent. Then we can replace $x_j$ by $y_2$, and continue this process until it spans $X$. If $m \geq n$, then $n$ steps total yields that $y_1,\cdots,y_m$ span $X$. If $m > n$, this contradicts the linear independence of the vectors $y_1,\cdots,y_m$.
+\end{proof}
+
+\begin{remark}
+The dimension of the trivial space consisting of the single element $0$ is zero.
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+Every linearly independent set of vectors $y_1,\cdots,y_n$ in a finite dimensional linear space $X$ can be completed to a basis of $X$.
+\end{theorem}
+\begin{proof}
+If ${\rm span}\{y_1,\cdots,y_n\} \neq X$, then there exists $y_{n+1}\in X \setminus \{y_1,\cdots,y_n\}$. We can continue this process if ${\rm span}\{y_1,\cdots,y_n, y_{n+1}\}\neq X$. Since ${\rm dim}X \subset \infty$, then the process will stop after finitely many step, which  constructs a basis of $X$.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $X$ be a finite dimensional space over $K$ with ${\rm dim}X = n$, then $X$ is isomorphic to $K^n$.
+\end{theorem}
+\begin{proof}
+Let $x_1, \cdots, x_n$ be a basis of $X$. For any $x\in X$, we have $x = \sum^n_{k=1}c_k x_k$. We can define $\varphi: X\to K^n$ as $\varphi(x) = (c_1, \cdots, c_n) \in K^n$. Then $\varphi$ is an isomorphism.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\alph*)]
+    \item Every subspace $Y$ of a finite dimensional linear space $X$ is of finite dimensional.
+    \item Every subspace $Y$ has a complement in $X$, that is, another subspace $Z$ such that every vector $x$ in $X$ can be decomposed uniquely as
+    \begin{align*}
+        x = y + z, y\in Y, z\in Z.
+    \end{align*}
+    Furthermore ${\rm dim}X = {\rm dim}Y + {\rm dim}Z$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Construct a finite basis for $X$ and pick $y_1\in Y, y_1\neq 0$. If ${\rm span}\{y_1\} = Y$, then we are done. Otherwise, we can pick $y_2\in Y\setminus\{y_1\}$ and $y_1, y_2$ are linearly independent. And we can continue this process and this process will stop in finite steps, since we cannot find more than ${\rm dim}X$ linearly independent vectors. 
+    \item Let $\{y_1, \cdots, y_m\}$ be a basis of $Y$ and ${\rm dim}Y = m$. Then we can complete it into a basis of $X$, saying ${\rm span}\{y_1, \cdots, y_m, y_{m+1},\cdots, y_n\} = X$. 
+    
+    We define $Z = {\rm span}\{y_{m+1},\cdots, y_n\}$, and then ${\rm dim}Z = n - m$. For any $x\in X$, we have 
+    $$x = \sum^n_{k=1}c_k x_k, y = \sum^m_{k=1}c_k x_k, z = \sum^m_{k=m+1}c_k x_k$$ 
+    then we have $x = y+z$. If $x = \Tilde{y} + \Tilde{z}, \Tilde{y}\in Y, \Tilde{z}\in Z$, then we have $\Tilde{y} + \Tilde{z} = y + z$, which implies $\Tilde{y} - y = z - \Tilde{z}$. Since $Y,Z$ are subspaces of $X$, then we can have 
+    \begin{align*}
+        \Tilde{y} - y = \sum^m_{k=1}a_ky_k & = \sum^m_{k=m+1}b_ky_k = z - \Tilde{z} \\
+        \Rightarrow \sum^m_{k=1}a_ky_k & - \sum^m_{k=m+1}b_ky_k = 0
+    \end{align*}
+    Since $y_1,\cdots, y_n$ are linearly independent, then $a_k = b_k = 0$, which implies that $\Tilde{y}=y, \Tilde{z}=z$.
+\end{enumerate}
+\end{proof}
+\begin{remark}
+~\begin{enumerate}[label=(\alph*)]
+    \item $Y\cap Z = \{0\}$.
+    \item $X$ is said to be direct sum of $Y$ and $Z$, if $X = Y+Z$ and $Y\cap Z = \{0\}$. Then we write $X = Y \oplus Z$.
+\end{enumerate}
+\end{remark}
+
+\medskip
+
+\begin{definition}
+$X$ is said to be a direct sum of its subspaces $Y_1, \cdots, Y_m$ if every $x\in X$ can be uniquely expressed as
+\begin{align*}
+    x = \sum^m_{j=1}y_j, y_j\in Y_j
+\end{align*}
+We write $X = Y_1 \oplus \cdots \oplus Y_m$. Furthermore, ${\rm dim}X = {\rm dim}Y_1 +\cdots + {\rm dim}Y_m$.
+\end{definition}
+
+\medskip
+
+\begin{exercise}
+Prove that if $X = Y_1 \oplus \cdots \oplus Y_m$, then ${\rm dim}X = {\rm dim}Y_1 +\cdots + {\rm dim}Y_m$.
+\end{exercise}
+\begin{proof}
+Suppose $y_{i1}, \cdots, y_{in_i}$ form a basis for $Y_i, 1\leq i\leq m$. Then for any $x\in X$, we have $x = x_1 +\cdots +x_m$, where $x_i\in Y_i$. Also, we can express $x_i$ as $x_i = \sum^{n_i}_{k=1}c_{i k} y_{i k}$. Then we have 
+\begin{align*}
+    x = \sum^m_{i=1}\sum^{n_i}_{k=1}c_{i k} y_{i k}
+\end{align*}
+If $\sum^m_{i=1}\sum^{n_i}_{k=1}c_{i k} y_{i k} = 0$ for some $c_{ik}\neq 0$, then it contradicts with the definition of then direct sum.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Prove that every finite dimensional space $X$ over field $K$ is isomorphic to $K^n$, where $n = {\rm dim}X$. And this isomorphism is not unique if $n > 1$.
+\end{exercise}
+\begin{proof}
+Suppose $x_1,\cdots, x_n$ form a basis for $X$. Then for any $x\in X$, it can be expressed as $x = \sum^n_{k=1}c_k x_k$. We define $T(x) = (c_1, \cdots, c_n)\in K$, then this is an isomorphism. However, different choice of basis will give different isomorphism.
+\end{proof}
+
+\medskip
+
+\section{Quotient Space}
+\begin{definition}
+For $X$ being a linear space, and $Y$ being a subspace of $X$, we say that two vectors $x_1, x_2\in X$ are congruent modulo $Y$, denoted by
+\begin{align*}
+    x_1 \equiv x_2 \bmod Y
+\end{align*}
+if $x_1-x_2\in Y$.
+\end{definition}
+
+Congruent $\bmod Y$ is an equivalence relation, i.e., it satisfies
+\begin{enumerate}[label=(\arabic*)]
+    \item Symmetric, i.e., if $x_1\equiv x_2$, then $x_2\equiv x_1$.
+    \item Reflexive, i.e., $x\equiv x$ for all $x\in X$.
+    \item Transitive, i.e., if $x_1\equiv x_2$ and $x_2\equiv x_3$, then $x_1\equiv x_3$.
+\end{enumerate}
+Thus, we can divide elements of $X$ into congruence classes $\bmod Y$ . The congruence class containing the vector $x$ is the set of all vectors congruent with $X$, denoted by $\{x\}$.
+
+The set of congruence classes can be made into a linear space by deﬁning addition and multiplication by scalars in $K$, as follows:
+\begin{align*}
+    \{x\} + \{y\}& = \{x+y\}\\
+    a\{x\} &= \{ax\}
+\end{align*}
+That is, the sum of the congruence class containing $x$ and the congruence class containing $y$ is the class containing $x + y$. Similarly for multiplication by scalars.
+
+The linear space of congruence classes deﬁned above is called the quotient space of $X \bmod Y$ and is denoted as $X/Y$. 
+
+\medskip
+
+\begin{example}
+Taking $X$ to be the linear space of all row vectors $(x_1,\cdots, x_n)$ with n components, and take $Y$ to be all vectors $y = (0, 0, x_3,\cdots, x_n) $ whose first two components are zero. Then two vectors are congruent $\bmod Y$ if and only if their first two components are equal. Each equivalence class can be represented by a vector with two components, the common components of all vectors in the equivalence class. 
+\end{example}
+
+\medskip
+
+\begin{exercise}
+Prove that two congruence classes are either identical or disjoint. 
+\end{exercise}
+\begin{proof}
+For $\{x\}$ and $\{y\}$ are congruence classes $\bmod Y$, if there exists $z\in \{x\}\cap \{y\}$, then $x-z \in Y$ and $y-z\in Y$. Then we have $x-y = x-z-(y-z) \in Y$. So if $\{x\}\cap \{y\}\neq \varnothing$, then $x\equiv y \bmod Y$, which means $\{x\} = \{y\}$. Otherwise, $\{x\}$ and $\{y\}$ are disjoint.
+\end{proof}
+
+\medskip
+
+\begin{theorem}\label{theorem_quotient_dim}
+If $Y$ is a subspace of a finite-dimensional linear space $X$, then
+\begin{align*}
+    {\rm dim}X = {\rm dim}Y + {\rm dim}X/Y.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Let $\{x_1, \cdots, x_m\}$ be a basis of $Y$, where $m = {\rm dim}Y$. This set can be completed into a basis for $X$ by adding $x_{m+1}, \cdots, x_n, n = {\rm dim}X$. We claim that $\{x_{m+1}\}, \cdots, \{x_n\}$ form a basis for $X/Y$ by  verifying that they span the whole space $X/Y$ and they are linearly independent as below
+\begin{enumerate}[label=(\arabic*)]
+    \item For any $x\in X$, we can write it as 
+    \begin{align*}
+        x = \sum^m_{k=1}a_k x_k + \sum^{n}_{k=m+1}a_k x_k
+    \end{align*}
+    Then we have 
+    \begin{align*}
+        \{x\} = \sum^{n}_{k=m+1}a_k \{x_k\}.
+    \end{align*}
+    \item Suppose that $\sum^{n}_{k=m+1}a_k \{x_k\} = 0$, then we have 
+    \begin{align*}
+        \sum^{n}_{k=m+1}a_k x_k = y, y\in Y
+    \end{align*}
+    And $y$ can be expressed as $\sum^{m}_{k=1}a_k x_k$, then we have 
+    \begin{align*}
+        \sum^{n}_{k=m+1}a_k x_k - \sum^{m}_{k=1}a_k x_k = 0
+    \end{align*}
+    which implies $a_k = 0$ for all $k$, since $x_1, \cdots, x_n$ form a basis for $X$.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+A subspace $Y$ of a finite-dimensional linear space $X$ whose dimension is the same as the dimension of $X$ is all of $X$.
+\end{corollary}
+\begin{proof}
+Suppose ${\rm dim}X = n$, and a subspace $Y$ of $X$ with dimension $n$. Suppose $y_1,\cdots,y_n$ form a basis for $Y$, then we can complete it into a basis of $X$. If we can find another $x\in X$ that is linearly independent with $y_1,\cdots,y_n$, then we have $\{y_1,\cdots,y_n, x\}$ is the basis of $X$, which is a contradiction. 
+
+Also, we can prove it with ${\rm dim}X/Y = 0$, which implies $X/Y = \{\{0\}\}$.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Suppose $X$ is a ﬁnite-dimensional linear space, $U$ and $V$ two subspaces of $X$. Then we have
+\begin{align*}
+    {\rm dim}(U+V) = {\rm dim}U + {\rm dim}V - {\rm dim}(U\cap V).
+\end{align*}
+\end{theorem}
+\begin{proof}
+If $U\cap V = \{0\}$, then $U+V$ is a direct sum and hence 
+$${\rm dim}(U+V) = {\rm dim}U + {\rm dim}V $$
+
+In general, let $W = U\cap V$, we claim that $U/W+V/W = (U+V)/W$, which is a direct sum. It suffices to prove that $U/W\cap V/W = \{0\}$. Let $\{x\}\subset U/W\cap V/W$, then $x = u+w_1$ for some $u\in U$ and $w_1\in W$, also, $x = v+w_2$ for some $v\in V$ and $w_2\in W$. Then we have $u+w_1 = v+w_2$, and hence $u+w_1 = v+w_2\in U\cap V = W$. Thus, we have $x\in W$, which gives $\{x\} = \{0\}$.
+
+Now we proved $U/W+V/W = (U+V)/W$, then we have 
+\begin{align*}
+    {\rm dim}U/W + {\rm dim}V/W & = {\rm dim}(U+V)/W \\
+    \Rightarrow {\rm dim}U - {\rm dim} W + {\rm dim} V - {\rm dim}W & = {\rm dim}(U+V) - {\rm dim}W\\ 
+    \Rightarrow {\rm dim}U + {\rm dim} V - {\rm dim}(U\cap V) & = {\rm dim}(U+V)
+\end{align*}
+The proof is complete.
+\end{proof}
+
+\medskip
+
+\begin{definition}
+The Cartesian sum $X_1\oplus X_2$ of two linear spaces $X_1, X_2$ over the same field is the set of pair $(x_1,x_2)$ where $x_i\in X_i, i = 1,2$. $X_1\oplus X_2$ is a linear space with addition and multiplication by scalars defined componentwisely. 
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+$${\rm dim}X_1\oplus X_2 = {\rm dim}X_1 + {\rm dim}X_2$$
+\end{theorem}
+\begin{proof}
+Let $x_1, \cdots, x_n$ be a basis of $X_1$ and $y_1, \cdots, y_m$ be a basis of $X_2$. We claim that $(x_1,0),\cdots, (x_n,0), (0,y_1), \cdots, (0,y_n)$ form a basis for $X_1\oplus X_2$ by verifying this is indeed a basis.
+
+Also, we can prove it in another way by defining
+\begin{align*}
+    Y_1 = \{(x,0): x\in X_1, 0\in X_2\} \\
+    Y_2 = \{(0,x): 0\in X_1, x\in X_2\}
+\end{align*}
+and it is easy to see that $Y_1$ is isomorphic to $X_1$ and $Y_2$ isomorphic to $X_2$. Also, we have $Y_1\cap Y_2 = \{0\}$, then we have 
+\begin{align*}
+    {\rm dim}X_1\oplus X_2 = {\rm dim}Y_1 + {\rm dim}Y_2 - {\rm dim}X_1(Y_1\cap Y_2) = {\rm dim}X_1 + {\rm dim}X_2
+\end{align*}
+\end{proof}
+
+Moreover, we can define the Cartesian sum $\oplus^m_{k=1}X_k$ of $m$ linear spaces and we have 
+\begin{align*}
+    {\rm dim}\oplus^m_{k=1}X_k = \sum^m_{k=1}{\rm dim}X_k.
+\end{align*}
+
+\medskip
+
+Next we present an important theorem.
+
+\begin{theorem}
+Let $K$ be a field such that it has infinite number of elements and let $X$ be a finite dimensional linear space over $K$. Prove that $X$ cannot be written as a finite union of its proper subspaces.
+\end{theorem}
+\begin{proof}
+Suppose by contrary that there exist $W_1, W_2,\cdots, W_n$, which are proper subspaces of $X$ such that $X = \bigcup^n_{i=1}W_i$. 
+
+If for any $1\leq j\leq n$, $W_j\subset \bigcup^n_{i\neq j}W_i$, then we can remove such $W_j$. Thus, without losing generality, we can assume that no $W_j$ is contained in the union of other $W_i$'s. Note that since $W_i$'s are proper subspaces of $X$, then $X$ must have ${\rm dim}X = n \geq 2$. Since $W_1\not\subset \bigcup^n_{i\neq 1}W_i$, then there exists $u\in W_1$ such that $u\notin W_i, i\geq 2$. Also, $W_1$ is a proper subspace, then there exists $v\notin W_1$. 
+
+Now consider $v + \lambda u$ for $\lambda\in K$. We claim that $v + \lambda u\in W_j$ for at most one $\lambda\in K$. Now we prove this:
+\begin{enumerate}[label=(\arabic*)]
+    \item Consider the case $j=1$. If $v + \lambda u\in W_1$ for some $\lambda\in K$, then $(v + \lambda u) - \lambda u\in W_1$, since $u\in W_1$ and $W_1$ is a subspace. Thus, we have $v\in W_1$, which is a contradiction.
+    \item Now consider the case $j\geq 2$. If there exist $\lambda_1, \lambda_2\in K, \lambda_1\neq\lambda_2$ such that $v+\lambda_1 u\in W_j$ and $v+\lambda_2 u\in W_j$, then $(v+\lambda_1 u) - (v+\lambda_2 u) = (\lambda_1 - \lambda_2)u \in W_j$. Then, since $\lambda_1\neq\lambda_2$, we have $u\in W_j$, which is a contradiction.
+\end{enumerate}
+
+This claim implies that there are only finitely many $\lambda\in K$, saying $\lambda_1, \cdots, \lambda_s$ such that 
+\begin{align*}
+    v+\lambda_i u \in \bigcup^n_{i=1}W_i = X
+\end{align*}
+Since $K$ has infinitely many elements, then we can choose $\lambda_0\in K$ such that $\lambda_0\notin \{\lambda_1, \cdots, \lambda_s\}$, then $v+\lambda_0 u\notin \bigcup^n_{i=1}W_i = X$, which is a contradiction.
+\end{proof}
+
+\medskip
+
+\section{Exercises}
+\begin{exercise}\label{ex_1}
+Consider a polynomial $X(t):\mathbb{C}\to\mathbb{C}$. Let $V$ be vector space for all complex valued polynomials and let $M = \{X(t): X \,\text{is even}\}$ and $N = \{X(t): X \,\text{is odd}\}$. Prove that 
+\begin{enumerate}[label=(\alph*)]
+    \item $M,N$ are subspaces of $X$.
+    \item $M, N$ are each other's complement in $V$, i.e., $V = M\oplus N$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Let $f(t), g(t)\in M$ and $\lambda\in\mathbb{C}$, then we have $f(-t) = f(t)$ and $g(t) = -g(-t)$. Thus, we have $(f+\lambda g)(-t) = f(-t) + \lambda g(-t) = f(t) + \lambda g(t) = (f+\lambda g)(t)$, which implies that $f+\lambda g\in M$. Same argument is similar for $N$.
+    \item Let $f(t)\in V$, then we have 
+    \begin{align*}
+        f(t) & = \frac{f(t) + f(-t)}{2} + \frac{f(t) - f(-t)}{2} \\
+        & = f_1(t) + f_2(t)
+    \end{align*}
+    and it is easy to see that $f_1\in M$ and $f_2\in N$. Also, if $f(t)\in M\cap N$, then we have $f(t) = f(-t)$ and $f(t) = -f(-t)$. Thus, $f(t) = 0$, which implies $M\cap N = \{0\}$. Thus, $V = M\oplus N$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{ex_2}
+Let $U, V$ and $W$ be subspaces of a finite-dimensional vector space $X$. Is the statement
+\begin{align*}
+    {\rm dim}(U + V + W) = & {\rm dim} U + {\rm dim} V + {\rm dim} W - {\rm dim}(U \cap V) - {\rm dim}(U \cap W) \\
+    & - {\rm dim}(V \cap W) + {\rm dim}(U \cap V \cap W)
+\end{align*}
+true or false? If true, prove it. If false, provide a counterexample
+\end{exercise}
+\begin{proof}
+The statement is not true. Consider three lines $U,V,W$ in $\mathbb{R}^2$ such that they intersect in one point. So we have
+$$\text{dim} (U+V+W) = 2$$
+and
+\begin{align*}
+   \text{dim}(U) + \text{dim}(V) & + \text{dim}(W) - \text{dim}(U \cap V) - \text{dim}(U \cap W) - \\
+   & \text{dim}(V \cap W) + \text{dim}(U \cap V \cap W) = 3
+\end{align*}
+the left and right sides are not the same. 
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{ex_3}
+Let $U, V$, and $W$ be subspaces of a finite dimensional linear space $X$. Show that if $W\subset U$, then 
+$$U\cup (V + W) = U\cup V + W$$
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item We set $u_1 \in U \cap (V+W)$, then there exist some $v_1 \in V$ and $w_1 \in W$ such that $u_1 = v_1 + w_1$ since $u_1 \in U$ and also $u_1 \in (V+W)$. Also, $u_1 \in U$ and $W \subset U$ which means $w_1 \in U$, then we have $v_1 \in U$ since $U$ is a subspace which is closed under addition. Then from $v_1 \in U$, we have $v_1 \in (U \cap V)$. Based on the fact that $u_1 = v_1 + w_1$ and $w_1 \in W$, we have $u_1 \in (U \cap V + W)$. This implies that $U \cap (V+W) \subset (U \cap V + W)$.
+    \item Now we set $u_2 \in (U \cap V + W)$, then there exist some $\lambda \in U \cap V$ and $w_2 \in W$ such that $u_2 = \lambda + w_2$. And we have $\lambda + w_2 \in V+W$, since $\lambda \in U \cap V$ and $w_2 \in W$. Also, we know that $W \subset U$, then we have $\lambda + w_2 \in U$. Thus we can have $\lambda + w_2 \in U \cap (V+W)$. Hence, $u_2 \in U \cap (V+W)$, which implies $(U \cap V + W) \subset U \cap (V+W)$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{ex_4}
+Denote by $X$ the linear space of all polynomials $p(t)$ of degree less than $n$, and denote by $Y$ the subset of $X$ containing polynomials that are zero at distinct $t_1,t_2,\cdots,t_m\in K$, where $m < n$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $Y$ is a subspace of $X$.
+    \item Determine ${\rm dim}Y$ and find a basis of $Y$.
+    \item Determine ${\rm dim}X = Y$ and find a basis of $X/Y$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item Set $P_1, P_2 \in Y$ of form $P_i = (t-t_1)(t-t_2) \cdots (t-t_m)q_i(t)$ that are zero at distinct $t_1, t_2, \cdots, t_m\in K$. Then we have 
+    \begin{align*}
+        P_1 + P_2 &= \sum^2_{i=1}(t-t_1)(t-t_2) \cdots (t-t_m)q_i(t) \\
+        a P_1 &= a (t-t_1)(t-t_2) \cdots (t-t_m)q_1(t)
+    \end{align*}
+    where $a \in K$. It is easy to see that both $P_1 + P_2$ and $a P_1$ are zero at points $t_1, t_2, \cdots, t_m\in K$. So $Y$ is closed under addition and multiplication. Hence, $Y$ is a subspace of $X$.
+    \item In order to being zero at distinct $t_1, t_2, \cdots, t_m\in K$ where $m < n$, the polynomial $P_Y(t) \in Y$ has the form $P_Y(t) = (t-t_1)(t-t_2) \cdots (t-t_m)q(t)$, where $q(t)$ is not determined. Also, we know that the space of all polynomials is degree less than $n$, which means that $q(t)$ is degree less than $n-m$.
+    
+    Since the polynomials $P(t)$ in the space $X$ are degree less that $n$, it can be presented by the form
+    \begin{align*}
+        P(t) = \sum^{n-1}_{k=0} c_k t^k
+    \end{align*}
+    So the basis of $X$ can be written as ${1, t, t^2,\cdots, t^{n-1}}$, and we have dim $X = n$. Now we can present $q(t)$ by utilizing this basis as 
+    \begin{align*}
+        q(t) = \sum^{n-m-1}_{k=0} c_k t^k
+    \end{align*}
+    then the basis for subspace $Y$ can be presented as
+    \begin{align*}
+        \left\{ \prod^m_{i=1}(t-t_i), t\prod^m_{i=1}(t-t_i),\cdots, t^{n-m-1}\prod^m_{i=1}(t-t_i) \right\}
+    \end{align*}
+    and we can check that the linear combination of this basis is equal to zero if and only if all coefficients are all zero. So we have dim $Y = n-m$.
+    \item We have dim $X/Y =$ dim $X -$ dim $Y = m$. Now we set a basis that spans the subspace $X/Y$.
+    
+    We firstly set $P_1(t) = (t-t_2)\cdots(t-t_m)q(t)$ and the class $\{P_1\}$ of $P_1$ is the space $\left\{P(t)\in X: P(t) - P_1(t) \in Y \right\}$, and then set $P_2(t) = (t-t_1)(t-t_3)\cdots(t-t_m)q(t)$ and the class $\{P_2 \}$ in the same way. And we continue this process where we get rid of $(t-t_i)$ in class $P_i$ until we finally have $P_m(t) = (t-t_1)\cdots(t-t_{m-1})q(t)$ and the class $\{P_m \}$. Then we can check that $( \{P_1\}, \{P_2\}, \cdots, \{P_m\})$ is the span of $X/Y$.
+    
+    Better solution for (iii): From (ii) we know the basis of $Y$, and we can know that every $p(t)$ in $X$ can be replaced by a polynomial of degree less than $m$ in $x/Y$, so $1, t, \cdots, t^{m-1}$ form a basis of $X/Y$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{ex_5}
+Let $U_1,U_2,\cdots,U_k$ be subspaces of a finite-dimensional linear space $X$ such that
+\begin{align*}
+    {\rm dim}\,U_1 = {\rm dim}\,U_2 = \cdots = {\rm dim}\,U_k
+\end{align*}
+Then there is a subspace $V$ of $X$ for which
+\begin{align*}
+    X = U_1\oplus V = U_2\oplus V = \cdots = U_k\oplus V
+\end{align*}
+\end{exercise}
+\begin{proof}
+If ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n$, then we can simply take $V = \varnothing$.
+
+If ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n-1$, based on the fact that space $X$ cannot be a finite union of its proper subspace, there exists a $v \notin U_k$ for every $k$, and we can define the complement of $U_1, U_2, \cdots, U_k$ as $U^c = \text{span}(v)$.
+
+Then we consider the case when ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n-2$, also there exists a $v \notin U_k$ for every $k$. Then we can define a new subspace $\title{\Tilde{U}_i} = \text{span}(u_i,v)$ for $1 \leq i \leq k$, and we can immediately know that ${\rm dim}\, \Tilde{U}_i = n - 1$. Then we can get a complement of $\Tilde{U}_i$, denoted by $U_i^c$ and we have ${\rm dim}\, U_i^c = 1$. In particular, $v \notin U_i^c$, so we can take $\text{span} (U_i^c, v)$, which is dimension $2$ and a complement of $U_1, U_2, \cdots, U_k$.
+
+Now we can continue this induction and consider ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = m, m < n$, and we can find $v \notin U_k$ for every $k$. Then we can define $\title{\Tilde{U}_i} = \text{span}(u_i,v)$ for $1 \leq i \leq k$, and we can immediately know that ${\rm dim}\, \Tilde{U}_i = m + 1$. Then we can get a complement of $\Tilde{U}_i$, denoted by $U_i^c$ and we have ${\rm dim}\, U_i^c = n - m - 1$. In particular, $v \notin U_i^c$, so we can take $\text{span} (U_i^c, v)$, which is dimension $n - m$ and a complement of $U_1, U_2, \cdots, U_k$.
+\end{proof}
+Exercises (\ref{ex_1}) to (\ref{ex_5}) are Homework 1 for MATH2370. Next we present some exercises from the book Challenging Problems for Students by Fuzhen Zhang\cite{1} and other books.
+
+\medskip
+
+\begin{exercise}\label{ex_6}
+Let $\mathbb{C},\mathbb{R}$, and $\mathbb{Q}$ be the fields of complex, real, and rational numbers, respectively. Determine whether each of the following is a vector space. Find the dimension and a basis for each that is a vector space.
+\begin{enumerate}[label=(\alph*)]
+    \item $\mathbb{C}$ over $\mathbb{C}$. Yes, the dimension is $1$, with a basis $\{1\}$.
+    \item $\mathbb{C}$ over $\mathbb{R}$. Yes, the dimension is $2$, with a basis $\{1, i\}$.
+    \item $\mathbb{R}$ over $\mathbb{C}$. No, since $i\in\mathbb{C}$, and $1\cdot i = i\notin\mathbb{R}$.
+    \item $\mathbb{R}$ over $\mathbb{Q}$. Yes, the dimension is infinite, since $1,\pi,\pi^2,\cdots$ are linearly independent over $\mathbb{Q}$.
+    \item $\mathbb{Q}$ over $\mathbb{R}$. No, since $\pi\in\mathbb{R}$, and $\pi\cdot 1 = \pi\notin\mathbb{Q}$.
+    \item $\mathbb{Q}$ over $\mathbb{Z}$. No, since $\mathbb{Z}$ is not a field.
+    \item $\mathbb{S} = \{a+\sqrt{2}b+\sqrt{5}c|\, a,b,c\in\mathbb{Q}\}$ over $\mathbb{Q},\mathbb{R}$ or $\mathbb{C}$. 
+    
+    Yes over $\mathbb{Q}$, and the dimension is $3$, with a basis $\{1,\sqrt{2},\sqrt{5}\}$. 
+    
+    No over $\mathbb{R}$, since $1+\sqrt{2}+\sqrt{5}\in\mathbb{S}, \sqrt{10}\in\mathbb{R}$, and $(1+\sqrt{2}+\sqrt{5})\cdot \sqrt{10}\notin\mathbb{S}$.
+    
+    No over $\mathbb{C}$, with the similar argument.
+\end{enumerate}
+\end{exercise}
+
+
+
+
+\chapter{Duality}
+\section{Linear Functions and Dual Space}
+
+Let $X$ be a linear space over a field $K$. A scalar valued function $l:X\to K$ is called \emph{linear} if 
+\begin{align*}
+    l(x+y) &= l(x) + l(y) \\
+    l(kx) &= k l(x)
+\end{align*}
+for all $x,y\in X$, and for all $k\in K$.
+
+The set of linear functions on a linear space $X$ forms a linear space $X'$, the \emph{dual space} of $X$, if we define 
+\begin{align*}
+    (l+m)(x) &= l(x) + m(x) \\
+    (kl)(x) &= k(l(x))
+\end{align*}
+
+\medskip
+
+\begin{theorem}\label{theorem_dual}
+Let $X$ be a linear space of dimension $n$. Under a chosen basis $x_1,\cdots,x_n$, the elements of $X$ can be represented as arrays of $n$ scalars:
+$$x = (c_1,\cdots,c_n) = \sum^n_{k=1}c_k x_k$$
+Let $a_1,\cdots,a_n$ be any array of $n$ scalars, the function $l$ defined by
+\begin{align*}
+    l(x) = \sum^n_{k=1} a_k c_k
+\end{align*}
+is a linear function of $X$. Conversely, every linear function $l$ of $X$ can be so represented.
+\end{theorem}
+\begin{proof}
+For any $l\in X'$, define $a_k = l(x_k)$, then we have 
+\begin{align*}
+    l(x) = l\left(\sum^n_{k=1}c_k x_k \right) = \sum^n_{k=1}c_k l(x_k) = \sum^n_{k=1}c_k a_k.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+${\rm dim}X = {\rm dim}X'$.
+\end{theorem}
+\begin{proof}
+Suppose ${\rm dim}X = n$. Define $l_j(x) = c_j$, for $x\in X$. We claim $l_j, 1\leq j\leq n$ form a basis of $X'$. Indeed, we have
+\begin{enumerate}[label=(\arabic*)]
+    \item For any $l\in X'$, we have $l(x) = \sum^n_{k=1}c_k a_k = \sum^n_{k=1}a_k l_k(x)$. Thus, $l = \sum^n_{k=1}a_k l_k$, which implies that $\{l_j, 1\leq j\leq n\}$ span the space $X'$.
+    \item We claim $l_j, 1\leq j\leq n$ are linearly independent. If $\sum^n_{k=1}b_k l_k = 0$, then we have 
+    \begin{align*}
+        \sum^n_{k=1}b_k l_k(x_k) = \sum^n_{k=1}b_k c_k = 0
+    \end{align*}
+    for all $x_k\in X$. Then we have $b_k = 0, 1\leq k \leq n$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+We defined $l(x) = \sum^n_{k=1} a_k c_k$ in theorem (\ref{theorem_dual}), the right-hand side depends symmetrically on $l$ and $x$, then we can write left-hand side also symmetrically, we introduce the \emph{scalar product} notation
+\begin{align*}
+    (l,x) \equiv l(x)
+\end{align*}
+which is a bilinear function of $l$ and $x$. 
+
+The dual of $X'$ is $X''$, consisting of all linear functions on $X'$. Also, $(l,x)$ defines an element in $X''$.
+
+\begin{theorem}
+$(l,x)$ is a bilinear form, which gives a natural identification of $X$ with $X''$. The map $\varphi:X\ni x \to x^{**}\in X''$ is an isomorphism, where $(x^{**},l) = (l,x)$ or any $l\in X'$.
+\end{theorem}
+\begin{proof}
+$\varphi(x)$ is a subspace of $X''$.
+\begin{enumerate}[label=(\arabic*)]
+    \item If $\varphi(x_1) = \varphi(x_2)$, then $(l,x_1) = (l,x_2)$ for any $l\in X'$. Then we have $(l,x_1 - x_2) = 0$. Now we can set $x_1 - x_2 = (c_1,\cdots,c_n)$, and pick $l = (\overline{c_1},\cdots,\overline{c_n})$, then we have $\sum^n_{k=1}|c_k|^2 = 0$. Then, $c_k = 0$, which implies $x_1 = x_2$. Thus, $\varphi$ is noe-to-one.
+    \item We claim that $\varphi(x) = X''$. It suffices to prove that ${\rm dim}\varphi(x) = {\rm dim}X''$.
+    
+    Let $x_1,\cdots,x_n$ be a basis of $X$, then $x_1^{**},\cdots,x_n^{**}$ is a basis of $X''$. Thus, $\varphi$ is onto.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Annihilator and Codimension}
+\begin{definition}
+Let $Y$ be a subspace of $X$. The set of linear functions that vanish on $Y$, that is, satisfying $l(y) = 0$ for all $y\in Y$ is called the annihilator of the subspace $Y$, denoted by $Y^\bot$.
+\end{definition}
+\begin{remark}
+$Y^\bot$ is a subspace of $X'$.
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+${\rm dim}Y^\bot + {\rm dim}Y = {\rm dim}X$.
+\end{theorem}
+\begin{proof}
+We can establish a natural isomorphism $T:Y^\bot\to (X/Y)'$ as follows $$T(l)(\{x\}) = l(x)$$
+for any $l\in Y^\bot$ and $\{x\}\in X/Y$. It suffices to prove that $T$ is well-defined.
+\begin{enumerate}[label=(\arabic*)]
+    \item If $\{x_1\} = \{x_2\}$, then $x_1 = x_2 + y$ for some $y\in Y$. Then $l(x_1) = l(x_2) + l(y) = l(x_2)$. Then $T(l)$ is well defined.
+    \item Also, $T(l)$ is linear. Indeed, for $l_1, l_2\in Y^\bot$ and $a,b \in K$, we have $T(al_1 + bl_2)(\{x\}) = (al_1 + bl_2)(x) = a l_1(x) + bl_2(x) = a T(l_1)(\{x\}) + b T(l_2)(\{x\})$.
+    \item $T(l)$ is an isomorphism. 
+    \begin{enumerate}
+        \item $T$ is one-to-one. Indeed, if $T(l) = 0$, then $T(l)(\{x\}) = l(x) = 0$, for all $x\in X$. Then we have $l = 0$.
+        \item $T$ is onto. For $\forall \Tilde{l}\in (X/Y)'$, define $l\in X'$ such that $l(x) = \Tilde{l}(\{x\})$. If $x\in Y$, then $l(x) = \Tilde{l}(\{0\}) = 0$, it follows $l\in Y^\bot$. Thus, $T(l) = \Tilde{l}$ is onto.
+    \end{enumerate}
+\end{enumerate}
+
+Thus, we have ${\rm dim}Y^\bot = {\rm dim}(X/Y)' = {\rm dim}(X/Y)$ and hence 
+\begin{align*}
+    {\rm dim}Y^\bot = {\rm dim}(X/Y) = {\rm dim}X - {\rm dim}Y.
+\end{align*}
+\end{proof}
+
+\medskip
+
+The dimension of $Y^\bot$ is called the \emph{codimension} of $Y$ as subspace of $X$. And since $Y^\bot$ is a subspace of $X'$, its annihilator denoted by $Y^{\bot \bot}$ is a subspace of $X''$.
+
+\medskip
+
+\begin{theorem}
+Under the natural identification of $X''$ and $X$, for every subspace $Y$ of a finite-dimensional space $X$, $Y^{\bot\bot} = Y$.
+\end{theorem}
+\begin{proof}
+For any $y\in Y$ and $l\in Y^\bot$, $y^{**}(l) = l(y) = 0$, where $y^{**} \in Y^{\bot\bot}$. Thus we have $Y\subset Y^{\bot\bot}$. Also, ${\rm dim}Y^{\bot\bot} = {\rm dim}X' - {\rm dim}Y^\bot = {\rm dim}X - {\rm dim}Y^\bot = {\rm dim}Y$. Thus, $Y = Y^{\bot\bot}$.
+\end{proof}
+
+\medskip
+
+\begin{definition}
+Let $X$ be a finite-dimensional linear space, and let $S$ be a subset of $X$. The annihilator $S^\bot$ of $S$ is the set of linear functions $l$ that are zero at all vectors $s\in S$, that is, $l(s) = 0$. 
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+Denote by $Y$ the smallest subspace containing $S$, then $S^\bot = Y^\bot$.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Since $S\subset Y$, then $Y^\bot\subset S^\bot$. Indeed, if $l\in Y^\bot$, then $l(y) = 0$ for all $y\in Y$. Since $S\subset Y$, then for $\forall s\in S$, we have $l(s) = 0$. Thus, $Y^\bot\subset S^\bot$. 
+    \item Now we prove $S^\bot\subset Y^\bot$. Suppose $x_1,\cdots,x_j$ be the basis of $S$, then ${\rm span}\{x_1,\cdots,x_j\} = Y$. Then for any $y\in Y$, it can be written as $y = \sum^j_{k=1}c_k x_k$. For $l\in S^\bot$, we have $l(x_k) = 0, 1\leq k \leq j$, then $l(y) = \sum^j_{k=1}c_k l(x_k) = 0$. Thus, $l\in Y^\bot$, which implies $S^\bot\subset Y^\bot$. 
+\end{enumerate}
+In another words, $S^\bot = ({\rm span}S)^\bot$.
+\end{proof}
+
+\medskip
+
+\section{Quadrature Formula}
+\begin{theorem}
+Let $I$ be an interval on the real axis, $t_1, \cdots, t_n$ are $n$ distinct points. Then there exist $n$ numbers $m_1,\cdots,m_n$ such that the quadrature formula
+\begin{align*}
+    \int_I p(t) {\rm d}t = m_1 p(t) + \cdots + m_n p(t_n)
+\end{align*}
+holds for all polynomials $p$ of degree less than $n$.
+\end{theorem}
+\begin{proof}
+Denote by $X$ the space of all polynomials $P(t) = a_0 + a_1 t +\cdots+ a_{n-1}t^{n-1}$ of degree less than $n$. Since $X$ is isomorphic to the space $\mathbb{R}^n = (a_0,a_1,\cdots,a_{n-1})$, then ${\rm dim}X = n$. We define $l_j\in X'$ as the linear function 
+\begin{align*}
+    l_j(p) = p(t_j)
+\end{align*}
+
+We claim that $l_j, 1\leq j \leq n$ are linearly independent. Indeed, assume $\sum^n_{k=1}c_k l_k = 0$, then we have 
+$$\sum^n_{k=1}c_k l_k(p) = \sum^n_{k=1}c_k p(t_k) = 0$$
+and for $k$, pick $p(t) = \prod_{j\neq k}(t - t_j)$, then we have $c_k = 0, 1\leq k\leq n$. Then $\{l_j\}^n_{j=1}$ form a basis of $X'$, since ${\rm dim}X' = {\rm dim}X = n$. Then any linear function $l$ on $X$ can be represented as below
+$$l = m_1 l_1 + \cdots + m_n l_n.$$
+
+The integral of $p$ over $I$ is a linear function, therefore it can be represented as above.
+\end{proof}
+
+\medskip
+
+\section{Exercises}
+\begin{exercise}
+Suppose $\{x_1, x_2,\cdots, x_n\}$ is a basis for the vector space $X$. Show that there exists linear functions $\{e_1, e_2,\cdots, e_n\}$ in the dual space $X'$ satisfying 
+\begin{align*}
+    e_i(x_j) = \delta_{ij}
+\end{align*}
+Show that $\{e_1, e_2,\cdots, e_n\}$ is a basis of $X'$, called the dual basis.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item First, we check that $\{e_1, e_2, \cdots, e_n\}$ are linearly independent. Suppose that there exist  $a_1, a_2, \cdots, a_n \in K$ such that 
+    \begin{align*}
+        a_1 e_1 + a_2 e_2 + \cdots + a_n e_n = 0
+    \end{align*}
+    then for $\forall x_i \in X$, we have
+    \begin{align*}
+        (a_1 e_1 + a_2 e_2 + \cdots + a_n e_n)(x_i) = a_1 e_1(x_i) + \cdots + a_n e_n(x_i) = a_i = 0
+    \end{align*}
+    Thus, $a_i = 0$, for $\forall a_i$, which means $\{e_1, e_2, \cdots, e_n\}$ are linearly independent.
+    \item Then, we need to show that span$(e_1, e_2, \cdots, e_n) = X'$. For any $f \in X'$, let $b_i  = f(x_i)$, and $f = b_1 e_1 + b_2 e_2 + \cdots + b_n e_n$. Then, for $\forall x_i$, we have
+    \begin{align*}
+        f(x_i) = (b_1 e_1 + b_2 e_2 + \cdots + b_n e_n)(x_i) = b_i
+    \end{align*}
+    Thus, $f$ can be presented by $\{e_1, e_2, \cdots, e_n\}$. The proof is complete.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $X$ be a finite dimensional linear space. Show that two nonzero linear functionals $T,S\in X'$ have the same null space if and only if there is a nonzero scalar $\lambda$ such that $S = \lambda T$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Since $T: X \rightarrow R$, then there $\exist x_1 \in X$ such that $T x \neq 0$. And we let $x_2  = \frac{x_1}{T(x_1)}$, then we have $T(x_2) = 1$. And for $\forall x \in X$we can know
+    \begin{align*}
+        T(x - T(x)\cdot x_2) = T(x) - T(x) = 0
+    \end{align*}
+    Since $T$ and $S$ have the same null space, then we have $S(x - T(x)\cdot x_2) = 0$, then 
+    \begin{align*}
+        S(x) & = S(x - T(x)\cdot x_2 + T(x)\cdot x_2) \\
+        & = S(x - T(x)\cdot x_2) + S(T(x)\cdot x_2) \\
+        & = 0 + S(x_2) T(x)
+    \end{align*}
+    \item Let $\lambda = S(x_2)$, then we proved that $S = \lambda T$.
+    If $S = \lambda T$, then for $\forall x \in N_P$, we have $T(x) = \frac{1}{\lambda} S(x) = 0$, which means $N_P \subset N_T$. And for $\forall x \in N_T$, $S(x) = 0$, which means $N_T \subset N_P$. So $N_T = N_P$. The proof is complete.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\chapter{Linear Mappings}
+\section{Null-space and Range}
+
+Let $X,U$ be linear spaces over the same field $K$. A mapping $T:X\to Y$ is called linear if it is additive and homogeneous, i.e.,
+\begin{align*}
+    T(x+y) &= T(x)+T(y), \forall x,y \in X\\
+    T(k x) &= k T(x), \forall x\in X, \forall k\in K
+\end{align*}
+For simplicity, we write $T(x) = T x$.
+
+\medskip
+
+\begin{example}[Examples of Linear Mappings]
+~\begin{enumerate}[label=(\arabic*)]
+    \item Any isomorphism.
+    \item Differentiation from polynomial $P_n(t)$ to $P_{n-1}(t)$.
+    \item Linear functionals.
+    \item $X=\mathbb{R}^n, U=\mathbb{R}^m, u = TX$ defined by
+    \begin{align*}
+        u_i = \sum^n_{j=1}t_{ij}x_j, i = 1,2,\cdots,m
+    \end{align*}
+    Hence, $u = (u_1,\cdots,u_m), x = (x_1,\cdots,x_n)$.
+\end{enumerate}
+\end{example}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\arabic*)]
+    \item The image of a subspace of $X$ under a linear map $T$ is a subspace of $U$.
+    \item The inverse image of a subspace of $U$, that is the set of all vectors in $X$ mapped by $T$ into the subspace, is the subspace of $X$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+It follows from the definition of subspace.
+\end{proof}
+
+\medskip
+
+\begin{definition}
+The range of $T$ is the image of $X$ under $T$, denoted by $R_T$. The null-space of $T$ is the inverse image of $\{0\}$, denoted by $N_T$.
+\end{definition}
+\begin{remark}
+If $T:X\to U$, then $R_T\subset U, N_T\subset U$ are subspaces of $U$.
+\end{remark}
+
+\begin{definition}
+${\rm dim}\,R_T$ is called the rank of the mapping $T$ and ${\rm dim}\,N_T$ is called the nullity of the mapping $T$.
+\end{definition}
+
+\medskip
+
+\section{Rank-Nullity Theorem}
+\begin{theorem}[Rank-Nullity Theorem]
+Let $T:X\to U$ be a linear map. Then $${\rm dim}\,R_T + {\rm dim}\,N_T = {\rm dim}\, X.$$
+\end{theorem}
+\begin{proof}
+We can define $\Tilde{T}:X/N_T\to R_T$ as $\Tilde{T}(\{x\}) = Tx \in R_T$, for $\forall x\in X$. We claim that $\Tilde{T}$ is an isomorphism. Indeed, if $\{x\} = \{y\}$, then $x-y\in N_T$, then we have $T(x-y) = 0$, which implies $Tx = Ty$. Thus, $\Tilde{T}(\{x\}) = \Tilde{T}(\{y\})$. Also, $\Tilde{T}$ is linear, since $\Tilde{T}(a\{x\} + b\{y\}) = a\Tilde{T}(\{x\}) + b\Tilde{T}(\{y\})$. 
+
+Thus, we have ${\rm dim}\, X/N_T = {\rm dim}\, R_T$. With theorem (\ref{theorem_quotient_dim}), we have ${\rm dim}\,X - {\rm dim}\,N_T = {\rm dim}\, R_T$.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $T:X\to U$ be a linear map, then
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose ${\rm dim}\,U < {\rm dim}\, X$, then there exists $x\neq 0$, such that $T x = 0$.
+    \item Suppose ${\rm dim}\,U = {\rm dim}\, X$, the only vector satisfying $T x = 0$ is $x= 0$. Then $R_T = U$ and $T$ is an isomorphism.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Since ${\rm dim}\,R_T \leq {\rm dim}\, U < {\rm dim}\, X$, then we have ${\rm dim}\, N_T = {\rm dim}\,X - {\rm dim}\,R_T > 0$. Then there exists $x \neq 0, x\in N_T$ such that $T x = 0$.
+    \item Since ${\rm dim}\,U = {\rm dim}\, X$, we have ${\rm dim}\,N_T = 0$. Then we have ${\rm dim}\,R_T = {\rm dim}\,U$. Thus $R_T = U$ and $T$ is an isomorphism.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Underdetermined Linear Systems}
+\begin{theorem}
+Suppose $m < n$, then for any real numbers $t_{ij}, 1\leq i\leq m, 1\leq i\leq n$, the system of linear equations
+\begin{align*}
+    \sum^n_{j=1}t_{ij} x_j = 0, 1\leq i \leq m
+\end{align*}
+has a nontrivial solution.
+\end{theorem}
+\begin{proof}
+Define $T:\mathbb{R}^n\to\mathbb{R}^m$ as
+\begin{align*}
+    T(x_1,\cdots,x_n) = \left(\sum^n_{j=1}t_{1j} x_j, \cdots, \sum^n_{j=1}t_{nj} x_j\right)
+\end{align*}
+Then $T$ is linear, and with previous theorem, there exists $x\in\mathbb{R}^n, x\neq 0$ such that $T x = 0$. Thus, $x = (x_1,\cdots,x_n)$ is an nontrivial solution.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Given $n^2$ real numbers $t_{ij}, 1\leq i,j\leq n$, the inhomogeneous system of linear equations
+\begin{align*}
+    \sum^n_{j=1}t_{ij} x_j = u_i, 1\leq i \leq n
+\end{align*}
+has a unique solution for any $u_i, 1\leq i \leq n$ if and only if the homogeneous system
+\begin{align*}
+    \sum^n_{j=1}t_{ij} x_j = 0, 1\leq i \leq n
+\end{align*}
+has only the trivial solution.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) Set $u_i = 0$ and it is trivial.
+    \item ($\Leftarrow$) Define $T:\mathbb{R}^n\to\mathbb{R}^n$ as 
+    $$T(x_1,\cdots,x_n) = \left(\sum^n_{j=1}t_{1j} x_j, \cdots, \sum^n_{j=1}t_{nj} x_j\right)$$
+    If homogeneous system has only trivial solution, then $N_T = \{0\}$, which implies $R_T = \mathbb{R}^n$. Thus, $T$ is an isomoorphism. 
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Algebra of Linear Mappings}
+Let $X,U$ be linear spaces and let $\mathscr{L}(X,U)$ be the collection of all linear maps from $X$ to $U$. $\mathscr{L}(X,U)$ is a linear space if we define
+\begin{align*}
+    (T+S)(x) & = Tx + Sx \\
+    (kT)(x) & = k T x
+\end{align*}
+for $\forall x\in X, \forall k\in K, \forall T,S\in \mathscr{L}(X,U)$.
+
+\medskip
+
+\begin{definition}
+Let $T\in \mathscr{L}(X,U)$ and $S\in \mathscr{L}(U,V)$, where $X,U$ and $V$ are linear spaces. The composition of $S$ and $T$ is defined by 
+\begin{align*}
+    S \circ T(x) = S\left(T(x)\right)
+\end{align*}
+denoted by $ST$, called the multipilication of $S$ and $T$. In general, $ST\neq TS$.
+\end{definition}
+\begin{remark}
+~\begin{enumerate}[label=(\arabic*)]
+    \item $S\circ T \in \mathscr{L}(X,V)$.
+    \item The composition is associative, i.e., if $R\in \mathscr{L}(V,Z)$, then $R\circ (S\circ T) = (R\circ S)\circ T$.
+    \item The composition is distributive, i.e., if $T\in \mathscr{L}(X,U)$ and $R,S \in \mathscr{L}(U,V)$, then $(R+S)\circ T = R\circ T + S\circ T$.
+\end{enumerate}
+\end{remark}
+
+\medskip
+
+\begin{definition}
+A linear map is called invertible if it is one-to-one and onto, that is, if it is isomorphism, denoted by $T^{-1}$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\arabic*)]
+    \item The inverse of invertible map is linear.
+    \item If $S$ and $T$ are both invertible, then $ST$ is also invertible and $(ST)^{-1} = T^{-1} S^{-1}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Let $T\in \mathscr{L}(X,U)$ be invertible, it suffices to prove that 
+    \begin{align*}
+        T^{-1}(k_1 u_1+k_2 u_2) = k_1 T^{-1}(u_1) + k_2 T^{-1}(u_2)
+    \end{align*}
+    for all $k_1,k_2\in K$ and $u_1,u_2\in U$. We have
+    \begin{align*}
+        T \left(T^{-1}(k_1 u_1+k_2 u_2)\right) & = k_1 TT^{-1}(u_1) + k_2 TT^{-1}(u_2) \\
+        & = k_1 u_1 + k_2 u_2
+    \end{align*}
+    which implies the above indication.
+    \item Let $T:U\to V, S:V\to W$ and then $ST:U\to W$, then $ST$ is also an isomorphism, which implies it is invertible. For any $w\in W$, there exists a $u\in U$ such that $(ST)^{-1}(w) = u$. It suffices to prove that $T^{-1} S^{-1}(w) = u$.
+    
+    If $T^{-1} S^{-1}(w)\neq u$, then there is another $u'\in U$ such that $T^{-1} S^{-1}(w) = u'$. Since $S$ is isomorphism, then there exists only one element in $V$, saying $v$ such that $S^{-1}(w) = v$ and we have $T^{-1}(v) = u$ and also $T^{-1}(v) = u'$, which is a contradiction.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Transposition}
+\begin{definition}
+Let $T\in L(X,U)$ the transpose $T'\in \mathscr{L}(U',X')$ of $T$ is defined by 
+\begin{align*}
+    \left(T'(l)\right)(x) = l(T(x))
+\end{align*}
+for any $l\in U'$ and $x\in X$. We could use the dual notation to represent the identity as $(T' l,x) = (l, Tx)$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\arabic*)]
+    \item $(ST)' = T'S'$.
+    \item $(T+R)' = T' + R'$.
+    \item $(T^{-1})' = (T')^{-1}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Let $T:X\to U, S:U\to V$. Then we have 
+    \begin{align*}
+        \left((ST)'l, x\right) = (l, ST x) = (S' l, T x) = (T'S' l, x).
+    \end{align*}
+    \item It is obvious.
+    \item Let $T\in \mathscr{L}(X,U)$ be invertible. And we assume $I_U = T\circ T^{-1}:U\to U$. We claim $(T\circ T^{-1})' = (I_U)'$ is an identity of $U'$. Indeed, $(T^{-1})'\circ T' = I_{U'}$, then we have $(T')^{-1} = (T^{-1})'$. We need to prove that $(I_U)' = I_{U'}$. Indeed, we have $\left((I_U)'l,u\right) = (l, I_U u) = (l, u)$, which implies $(I_U)'l = l$. Thus, we have $(I_U)' = I_{U'}$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{example}
+Let $X=\mathbb{R}^n, U=\mathbb{R}^m$ and $T:X\to U$ is defined by $y = T x$, where 
+\begin{align*}
+    y_i = \sum^n_{j=1}t_{ij}x_j, 1\leq i \leq m.
+\end{align*}
+Identifying $(\mathbb{R}^n)'=\mathbb{R}^n, \mathbb{R}^m=\mathbb{R}^m$, then $T':\mathbb{R}^m\to \mathbb{R}^n$ is defined by $v = T' u$, where 
+\begin{align*}
+    v_j = \sum^m_{i=1} t_{ij} u_i, 1\leq j \leq m.
+\end{align*}
+\end{example}
+
+\medskip
+
+\begin{theorem}
+Let $T\in L(X,U)$. Identifying $X''=X, U''=U$, then $T''=T$.
+\end{theorem}
+\begin{proof}
+We have $T'\in \mathscr{L}(U',X'), T''\in \mathscr{L}(X'',U'') = L(X,U)$. Now we pick $X'' \ni x^{**} = x\in X$, then we have
+\begin{align*}
+    \left(T''x^{**},l\right) = \left(x^{**},T'l\right) = (T' l, x) = (l, T x) = \left((T x)^{**},l\right)
+\end{align*}
+Thus, $T'' = T$.
+\end{proof}
+
+\section{Dimension of Null-space and Range}
+\begin{theorem}
+Let $T\in \mathscr{L}(X,U)$, then we have $R_T^\bot = N_{T'}$ and $R_T = N_{T'}^\bot$.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item For $l\in R_T^\bot$, then for any $u\in R_T$, $(l,u) = 0$. Since $u\in R_T$, then $u = T x$ for some $x\in X$. Thus, we have
+    \begin{align*}
+        (l, T x) = 0 \Rightarrow (T' l, x) = 0
+    \end{align*}
+    for $\forall x\in X$. Then $T' l = 0$, which implies $l\in N_{T'}$.
+    \item Since $R_T^\bot = N_{T'}$, then we have $R_T^{\bot\bot} = N_{T'}^\bot = R_T$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $T\in \mathscr{L}(X,U)$, then ${\rm dim}R_T = {\rm dim}R_{T'}$.
+\end{theorem}
+\begin{proof}
+First, we have ${\rm dim}R_T + {\rm dim}R_T^\bot = {\rm dim}U$, then we have $${\rm dim}R_T + {\rm dim}N_{T'} = {\rm dim}U$$
+With Rank-Nullity theorem, we have $${\rm dim}R_{T'} + {\rm dim}N_{T'} = {\rm dim}U' = {\rm dim}U$$ 
+Thus, ${\rm dim}R_{T'} = {\rm dim}R_{T}$.
+\end{proof}
+
+\medskip
+
+\begin{corollary}
+Suppose $T\in \mathscr{L}(X,U)$ and ${\rm dim} X = {\rm dim} U$. Then, ${\rm dim}N_T = {\rm dim}N_{T'}$.
+\end{corollary}
+\begin{proof}
+From Rank-Nullity theorem, we have 
+\begin{align*}
+    {\rm dim}R_T + {\rm dim}N_T & = {\rm dim}U \\
+    {\rm dim}R_{T'} + {\rm dim}N_{T'} & = {\rm dim}U' = {\rm dim}U = {\rm dim}X
+\end{align*}
+Then it is easy to see that ${\rm dim}N_T = {\rm dim}N_{T'}$.
+\end{proof}
+
+\medskip
+
+\section{Similarity}
+\begin{definition}\label{similarity}
+Given an invertible element $S\in \mathscr{L}(X, X)$, we assign to each $M\in \mathscr{L}(X,X)$ the element
+\begin{align*}
+    M_S = SMS^{-1}
+\end{align*}
+The assignment $M\mapsto M_S$ is called similarity transformation, $M$ is said to be similar to $M_S$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\alph*)]
+    \item Every similarity transformation is an automorphism of $\mathscr{L}(X,X)$:
+    \begin{align*}
+        (kM)_S & = kM_S\\
+        (M+K)_S & = M_S + K_S\\
+        (MK)_S & = M_S K_S
+    \end{align*}
+    \item The similarity transformations form a group with $$(M_S)_T = M_{TS}.$$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item We only prove $(MK)_S = M_S K_S$. Indeed, we have 
+    \begin{align*}
+        (MK)_S = S M K S^{-1} = S M S S^{-1} K S^{-1} = M_S K_S.
+    \end{align*}
+    \item We have 
+    \begin{align*}
+        M_{TS} = TS M (TS)^{-1} = TS M S^{-1} T^{-1} & = T(S M S^{-1}) T^{-1} \\
+        & = (M_S)_T.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Similarity is an equivalence relation, i.e., it is:
+\begin{enumerate}[label=(\roman*)]
+    \item Reflexive. $M$ is similar to itself.
+    \item Symmetric. If $M$ is similar to $K$, then $K$ is similar to $M$.
+    \item Transitive. If $M$ is similar to $K$, $K$ is similar to $L$, then $M$ is similar to $L$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item It is true if we choose $S=I$ in definition (\ref{similarity}).
+    \item We have $K = SMS^{-1}$, then we have $S^{-1}KS = S^{-1} S M S^{-1} S = M$. Then $K$ is similar to $M$.
+    \item We have $K = SMS^{-1}$ and $L=TKT^{-1}$, then we have $$L = TSMS^{-1}T^{-1} = (TS)M(TS)^{-1}$$ which is similar to $M$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+If either $A$ or $B$ in $\mathscr{L}(X,X)$ is invertible, then $AB$ and $BA$ are similar.
+\end{theorem}
+\begin{proof}
+Assume $A$ is invertible, then we have 
+$$AB = ABAA^{-1} = (BA)_A.$$
+\end{proof}
+
+\medskip
+
+\section{Projection}
+\begin{definition}
+A linear mapping $P\in \mathscr{L}(X,X)$ is called a projection if $P^2=P$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+If $P\in\mathscr{L}(X,X)$ is a projection, then $X = N_P\oplus R_P$, and $P|_{R_P} = I$ is identity.
+\end{theorem}
+\begin{proof}
+Assume $x\in N_P\cap R_P$, then we have $P(x) = 0$. And $x = P y$ for some $y\in X$. Then we have $Px = P^2 y = P y = x = 0$, which implies $N_P\cap R_P = \{0\}$. Moreover, with ${\rm dim}\, N_P + {\rm dim}\, R_P = {\rm dim}\, X$, we have $X = N_P\oplus R_P$.
+
+For any $x\in R_P$, we have $x = P y$ for some $y\in X$. Then we have $Px = P^2 y = Py = x$, which implies $P|_{R_P}$ is an identity.
+\end{proof}
+\begin{remark}
+The opposite direction of the theorem above is also true. Indeed, for any $x\in X$, we can write $x = y+z$, where $y\in N_P, z\in R_P$. Then we have
+\begin{align*}
+    Px & = Py + Pz = Pz\\
+    P^2 x & = P^2 y + P^2 z = Pz = Px
+\end{align*}
+Then we have $P^2=P$.
+\end{remark}
+
+\medskip
+
+\begin{definition}
+The commutator of two linear mappings $A$ and $B$ of $X$ into $X$ is $AB - BA$. Two mappings of $X$ into $X$ commute if their commutator is zero.
+\end{definition}
+
+\medskip
+
+\section{Exercises}
+\begin{exercise}
+Let $X,U$ be two linear spaces such that ${\rm dim}\, X = {\rm dim}\, U < \infty$. Prove that a linear mapping $T\in\mathscr{L}(X,U)$ is one-to-one if and only if it is onto.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) Assume $(x_1, x_2, \cdots, x_n)$ is a basis of $X$, then we have
+    $\text{dim} R_T = \text{dim} X - \text{dim} N_T$. If $T\in \mathscr{L}(X,U)$ is one-to-one, then $\text{dim} N_T = 0$. We can have 
+    $\text{dim} R_T = \text{dim} X = \text{dim} U$. Then $R_T = U$, which implies that $T$ is an isomorphism. Then $T$ is onto.
+    \item ($\Leftarrow$) If $T$ is onto, and $\text{dim} X = \text{dim} N$, then the only element $x\in X$ satisfying $Tx = 0$ is $x = 0$. So $\text{dim} N_T = 0$. Then $\text{dim} R_T = \text{dim} U$, which means $R_T = U$. Then $T$ is an isomorphism and $T$ is of course one-to-one.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $X$ be a finite dimensional linear space and $T\in\mathscr{L}(X,X)$. Suppose $${\rm dim}\, R_{T^2} = {\rm dim}\, R_T.$$
+Prove that $R_T\cap N_T = \{0\}$, where $T^2 = T\circ T$.
+\end{exercise}
+\begin{proof}
+We knew that $R_{T^2}\subset R_T$, and since ${\rm dim}\, R_{T^2} = {\rm dim}\, R_T$, we have $R_{T^2} = R_T$, which also implies $N_{T^2}\subset N_T$ by Rank-Nullity theorem.
+
+Assume $y\in N_T\cap R_T$,then there must exists a $x\in X$ such that $y = T x$. Then we have $T(Tx) = Ty = 0$, since $y\in N_T$. Then, $x\in N_{T^2} = N_T$, then $Tx = 0 = y$. Now we concluded that $R_T\cap N_T = \{0\}$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+If $Y$ and $Z$ are subspaces of a finite dimensional linear space, prove that 
+\begin{align*}
+    (Y + Z)^\bot = Y^\bot \cap Z^\bot\,\,{\rm and}\,\, (Y \cap Z)^\bot = Y^\bot + Z^\bot.
+\end{align*}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Assume $l \in (Y+Z)^\bot$. Then we have $l(m) = 0$, for all $m \in Y+Z$. Also, we know $Y\subset Y+Z$, so $l(y) = 0, \forall y \in Y$. Similarly, we have $l(z) = 0, \forall z \in Z$. Then we have $l \in Y^\bot \cap Z^\bot$, which implies $(Y+Z)^\bot \subset Y^\bot \cap Z^\bot$.
+    
+    Now assume $l \in Y^\bot \cap Z^\bot$, then we have $l(y) = 0$ and $l(z) = 0$, for $\forall y \in Y, \forall z \in Z$. Then, for $\forall m \in Y+Z$ we have $l(m) = 0$, since $m = y + z$ for some $y \in Y$ and $z \in Z$. Thus, we have $l \in (Y+Z)^\bot$, which implies $Y^\bot \cap Z^\bot \subset (Y+Z)^\bot$. Now we proved that $(Y+Z)^\bot = Y^\bot \cap Z^\bot$.
+    \item It is equivalent to prove that $(Y \cap Z)^{\bot\bot} = Y\cap Z = (Y^\bot + Z^\bot)^\bot$.
+    
+    
+    If $l \in (Y^\bot + Z^\bot)^\bot$, we have $l(l_1 + l_2) = 0$, for $l_1 \in Y^\bot$ and $l_2 \in Z^\bot$. Also, we have $Y^\bot \subset Y^\bot + Z^\bot$, we have $l(l_1) = 0$ for $\forall l_1 \in Y^\bot$. Similarly, we have $l(l_2) = 0$ for $\forall l_2 \in Z^\bot$. Then $l \in Y^{\bot\bot} = Y$ and $l \in Z^{\bot\bot} = Z$. Thus, $l \in Y\cap Z$, which implies $(Y^\bot + Z^\bot)^\bot \subset Y\cap Z$.
+    
+    
+    If $l \in Y\cap Z = (Y\cap Z)^{\bot\bot}$, we have $l \in Y\cap Z$, then $l \in Y = Y^{\bot\bot}$ and $l \in Z = Z^{\bot\bot}$. Then we have $l(l_1) = 0, l_1 \in Y^\bot$ and $l(l_2) = 0, l_2 \in Z^\bot$. Thus, we have $l(l_1 + l_2) = 0, l_1 + l_2 \in Y^\bot + Z^\bot$, which implies $l \in (Y^\bot + Z^\bot)^\bot$. Then we have $Y\cap Z \subset (Y^\bot + Z^\bot)^\bot$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $X,Y$ be finite dimensional linear space and $T\in\mathscr{L}(X,Y)$ be invertible. Prove that $T'$ is also invertible and $(T^{-1})' = (T')^{-1}$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Assume $l_1,l_2 \in Y'$,  and $(T'l_1)(x) = (T'l_2, x)$ for all $x\in X$. Then we have $(l_1 - l_2, Tx) = 0$ for all $x\in X$, then we have $l_1 = l_2$, which imlpies $T$ is one-to-one.
+    
+    Also, if $(T'l)(x) = 0$ for all $x\in X$, then it implies $l(T(x)) = 0$. Then $l$ can only be zero. Thus, $T'$ is invertible.
+    \item Since $T$ is invertible, then $T \circ T^{-1} = I$. For $T'$, we denote 
+    \begin{align*}
+        & (T \circ T^{-1})' = I' \\
+        \Rightarrow & (T^{-1})' \circ T' = I'
+    \end{align*}
+    We need to show $I = I'$. For $y \in Y$, we have 
+    \begin{align*}
+        & (I' l,y) = (l,I(y)) = (l, y)
+    \end{align*}
+    Then $I' = I$, thus we have $(T^{-1})' = (T')^{-1}$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $X$ be an $n$-dimensional linear space and $T\in\mathscr{L}(X,X)$. Prove that there is a non-zero polynomial $p(t)$ of degree no more than $n^2$ such that $p(T) = 0$.
+\end{exercise}
+\begin{proof}
+Since $X$ is $n$-dimensional linear space, and $T\in\mathscr{L}(X,X)$, then $T$ can be presented as an $n\times n$ matrix. Polynomials $p(T)$ can be viewed as an operator acting on the space of matrix $T$, which is $n^2$-dimensional, denoted by $P$. Since $\text{dim} P = n^2$, then for any $T \in P$, $1, T, T^2, \cdots, T^{n^2}$ must be linear dependent, since there are $n^2 + 1$ elements. So there exist $a_0, a_1, a_2, \cdots, a_{n^2}$ such that
+\begin{align*}
+    p(T) = a_0 \cdot 1 + a_1 T + a_2 T^2 + \cdots + a_{n^2}T^{n^2} = 0
+\end{align*}
+which is at most degree $n^2$. 
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Prove that if $U,V,W$ are finite dimensional vector spaces, and $T\in\mathscr{L}(U,V), S\in\mathscr{L}(V,W)$, then
+\begin{align*}
+    {\rm dim}\, N_{ST} \leq {\rm dim}\, N_S + {\rm dim}\, N_T.
+\end{align*}
+\end{exercise}
+\begin{proof}
+Assume $u\in U$, such that $ST(u) = 0$. Then we have two possibilities, that is $u\in N_T$ or $T(u)\in N_S$.
+
+With Rank-Nullity theorem, we have 
+\begin{align*}
+    {\rm dim}\, N_{ST} & \leq {\rm dim}\, U = {\rm dim}\, N_T + {\rm dim}\, R_T \\
+    {\rm dim}\, R_T & \leq {\rm dim}\, V = {\rm dim}\, N_S + {\rm dim}\, R_S\\
+    \Rightarrow {\rm dim}\, N_{ST} & \leq {\rm dim}\, N_T + {\rm dim}\, N_S + {\rm dim}\, R_S
+\end{align*}
+Now we assume $Z = N_{ST}\subset U$, then we have $ST(z) = 0$  for $z\in Z$, and 
+\begin{align*}
+    {\rm dim}\, N_{ST} & = {\rm dim}\, Z = {\rm dim}\, N_T + {\rm dim}\, T|_Z \\
+    {\rm dim}\, T|_Z & \leq {\rm dim}\, N_S + {\rm dim}\, ST(Z)
+\end{align*}
+combining these, we have ${\rm dim}\, N_{ST} \leq {\rm dim}\, N_S + {\rm dim}\, N_T$.
+\end{proof}
+
+\medskip
+
+\chapter{Matrices}
+Let $T:\mathbb{R}^n\to\mathbb{R}^m$ be defined by $y = T x$, where
+\begin{align*}
+    y_i = \sum^n_{j=1} t_{ij}x_j, 1\leq i\leq m.
+\end{align*}
+Then $T$ is a linear map. On the other hand, every map $T\in \mathscr{L}(\mathbb{R}^n,\mathbb{R}^m)$ can be represented in this form. Actually, $t_{ij}$ is the $i$th component of $Te_j$, where $e_j\in \mathbb{R}^n$ has $j$th component $1$, others be $0$. We write
+\begin{align*}
+    T = (t_{ij})_{m\times n} = \left(
+        \begin{matrix}
+        t_{11} & t_{12} & \cdots & t_{1n}\\
+        t_{21} & t_{22} & \cdots & t_{2n}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        t_{m1} & t_{m2} & \cdots & t_{mn}
+        \end{matrix}
+    \right)
+\end{align*}
+which is called an $m$ by $n$ ($m\times n$) matrix, where $t_{ij}$ is called the \emph{entries} of the matrix $T$. A matrix is called a \emph{square matrix} if $m=n$. 
+
+A matrix $T$ can be thought of as a row of column vectors, or a column of row vectors: 
+\begin{align*}
+    T = (c_1,\cdots,c_n) = \left(
+    \begin{matrix}
+        r_1 \\
+        r_2 \\
+        \vdots \\
+        r_m 
+        \end{matrix}
+    \right).
+\end{align*}
+where $c_j = T e_j$, $e_j\in\mathbb{R}^n$ is defined as above.
+
+\medskip
+\section{Matrix Multiplication and Transposition}
+Since matrices represent linear mappings, the algebra of linear mappings induces a corresponding algebra of matrices, i.e., if $T,S\in \mathscr{L}(\mathbb{R}^n,\mathbb{R}^m)$, then
+\begin{align*}
+    T+S &= (t_{ij} + s_{ij})_{m\times n}\\
+    k T &= (kt_{ij})_{m\times n}
+\end{align*}
+If $T\in \mathscr{L}(\mathbb{R}^n,\mathbb{R}^m)$ and $S\in \mathscr{L}(\mathbb{R}^m,\mathbb{R}^l)$, then the product $St = S\circ T \in \mathscr{L}(\mathbb{R}^n,\mathbb{R}^l)$. For $e_j\in\mathbb{R}^n$,
+\begin{align*}
+    (ST)(e_j^n) & = S(Te_j^n) = S\left(\sum^m_{i=1}t_{ij}e^m_i\right) = \sum^m_{i=1}t_{ij} S(e^m_i) \\
+    & = \sum^m_{i=1}t_{ij} \left(\sum^l_{k=1}s_{ki}e^l_k\right) = \sum^l_{k=1}\left(\sum^m_{i=1}t_{ij}s_{ki}\right)e^l_k \\
+    & = \sum^l_{k=1}(ST)_{kj} e^l_k
+\end{align*}
+where $e_j^m\in\mathbb{R}^m,e_j^l\in\mathbb{R}^l$. Hence, we have 
+\begin{align*}
+    (ST)_{kj} = \sum^m_{i=1}t_{ij}s_{ki}
+\end{align*}
+which is the product of $k$th row of $S$ and $j$th column of $T$.
+
+We can write any $n\times n$ matrix $A$ in $2\times 2$ block form
+\begin{align*}
+    A = \left(
+        \begin{matrix}
+        A_{11} & A_{12} \\
+        A_{21} & A_{22} 
+        \end{matrix}
+    \right)
+\end{align*}
+where $A_{11}$ is $k\times k$ matrix, and $A_{22}$ is $(n-k)\times(n-k)$ matrix. 
+
+We shall identify the dual of the space $\mathbb{R}^n$ of all column vectors with $n$ components as the space $(\mathbb{R}^n)'$ of all row vectors with $n$ components. For $l\in (\mathbb{R}^n)'$ and $x\in\mathbb{R}^n$, 
+$$l x = \sum^n_{i=1}l_ix_i$$
+
+Let $x\in\mathscr{L}(\mathbb{R},\mathbb{R}^n), T \in \mathscr{L}(\mathbb{R}^n,\mathbb{R}^m)$, and $l \in \mathscr{L}(\mathbb{R}^m,\mathbb{R})$ be linear mappings, according to associative law, we have
+$$(lT)x = l(Tx)$$
+We identity $l$ as an element of $(\mathbb{R}^m)'$, and $lT$ as an element of $(\mathbb{R}^n)'$, and we can rewrite is into form
+$$(lT, x) = (l, Tx)$$
+and we recall the definition of transpose $T'$ of $T$, defined by $(T'l, x) = (l, Tx)$. Now we can define the transpose $T^T$ of the matrix $T$ as 
+$$\left(T^T\right)_{ij} = T_{ji}.$$
+
+\medskip
+
+\section{Rank}
+\begin{theorem}
+Let $T\in\mathscr{L}(\mathbb{R}^n,\mathbb{R}^m)$, the range of $T$ consists of all linear combinations of the columns of the matrix $T$.
+\end{theorem}
+
+\medskip
+
+\begin{definition}
+The ${\rm dim}\, R_T$ is called the column rank of $T$, and ${\rm dim}\, R_{T^T}$ is called the row rank of $T$.
+\end{definition}
+
+\begin{theorem}
+${\rm dim}\,R_T = {\rm dim}\, R_{T^T}$.
+\end{theorem}
+\begin{proof}
+We can apply elementary row operations and elementary column operations to make $A$ into a matrix that is in both row and column reduced form, i.e., there exist invertible matrices $P$ and $Q$ (which are products of elementary matrices) such that
+\begin{align*}
+    PAQ = E = \left(
+        \begin{matrix}
+        I_{k} &  \\
+         & 0_{(m-k)\times (n-k)}
+        \end{matrix}
+    \right)
+\end{align*}
+Since $P$ and $Q$ are invertible, then the maximum number of linearly independent rows in $A$ is equal to the maximum number of linearly independent rows in $E$. Also, it is similar for the column rank. Then it is obvious that ${\rm dim}\,R_T = {\rm dim}\, R_{T^T}$.
+\end{proof}
+
+Now we present another different approach to prove this theorem.
+
+\begin{proof}
+Let $T$ be $m\times n$ matrix and it has row rank $k$. Therefore, the dimension of the row space of $T$ is $k$. Let $x_1,\cdots,x_k$ be a basis of row space of $T$ and we claim that $Tx_1,\cdots, Tx_k$ are linearly independent. Indeed, we choose coefficients $c_1,\cdots,c_k$ and then 
+\begin{align*}
+    c_1 Tx_1 + \cdots + c_k Tx_k = T(c_1x_1 +\cdots + c_kx_k) = Tx = 0
+\end{align*}
+Then $x$ is a linear combination of basis of row space of $T$, which implies that $x$ belongs to row space of $T$. Also, $TX = 0$ implies that $x$ is orthogonal to every vector of row space of $T$, then $x$ is orthogonal to itself, giving us $x^2 = c_1^2 x_1^2 + \cdots + c_k^2 x_k^2 = 0$. Then it is obvious that $c_1 = \cdots = c_k = 0$.
+
+Now, each $Tx_i$ is obviously in the column space of $T$, and then $Tx_1,\cdots, Tx_k$ are $k$ linearly independent vectors in the column space of $T$, implying that ${\rm dim}\, R_{T_T}\leq {\rm dim}\,R_T$. 
+
+Now we can consider $T^T$ in the similar argument, and it will give us ${\rm dim}\, R_{T_T}\geq {\rm dim}\,R_T$. Thus, we have ${\rm dim}\, R_{T_T} = {\rm dim}\,R_T$. 
+\end{proof}
+
+\medskip
+
+Next, we discuss some properties of rank of a matrix.
+\begin{proposition}
+Let $T\in\mathscr{L}(\mathbb{R}^n,\mathbb{R}^m)$, and define the linear map $f$ by $f(x) = Tx$, then
+\begin{enumerate}[label=(\arabic*)]
+    \item ${\rm rank}\,(T)\leq \min(m,n)$. A matrix that has rank equal to $\min(m, n)$ is called full rank; otherwise, the matrix is rank deficient.
+    \item Only a zero matrix has rank zero.
+    \item $f$ is injective(or one-to-one) if and only if $T$ has rank $n$, i.e. full column rank.
+    \item $f$ is surjective(or onto) if and only if $T$ has rank $m$, i.e. full row rank.
+    \item If $T$ is a square matrix, i.e., $m = n$, then $T$ is invertible if and only if $T$ has rank $n$(that is, $T$ has full rank).
+    \item If $T$ is a square matrix, then $T$ is invertible if and only if its determinant is non-zero.
+    \item If $S\in\mathscr{L}(\mathbb{R}^n,\mathbb{R}^k)$, then $${\rm rank}\,(TS) \leq \min( {\rm rank}\,(T), {\rm rank}\,(S)).$$
+    \item If $S$ is an $n\times k$ matrix of rank $n$, then $${\rm rank}\,(TS) = {\rm rank}\,(T).$$
+    \item If $K$ is a $l\times m$ matrix of rank $m$, then$${\rm rank}\,(KT) = {\rm rank}\,(T).$$
+    \item The rank of $T$ is equal to $k$ if and only if there exists an invertible $m\times m$ matrix $P$ and an invertible $n\times n$ matrix $Q$ such that
+    $$PTQ = \left(
+        \begin{matrix}
+        I_{k} & 0 \\
+        0 & 0
+        \end{matrix}
+    \right)$$
+    where $I_{k\times k}$ is $k\times k$ identity matrix.
+    \item Sylvester’s rank inequality: if $A$ is an $m\times n$ matrix and $B$ is $n\times k$, then
+    $${\rm rank}\,(A) + {\rm rank}\,B - n \leq {\rm rank}\,(AB).$$
+    \item Frobenius inequality: if $AB, ABC$ and $BC$ are defined, then
+    $${\rm rank}\,(AB) + {\rm rank}\,(BC) \leq {\rm rank}\,(B) + {\rm rank}\,(ABC).$$
+    \item Subadditivity:
+    $${\rm rank}\, (A+B)\leq {\rm rank}\, (A)+{\rm rank}\, (B).$$
+    when $A$ and $B$ are of the same dimension. As a consequence, a rank-$k$ matrix can be written as the sum of $k$ rank-$1$ matrices, but not fewer.
+    \item Rank–Nullity theorem: The rank of a matrix plus the nullity of the matrix equals the number of columns of the matrix, i.e., for $T$ being a $m\times n$ matrix, then $${\rm Rank}\, T + {\rm Nullity}\, T = n.$$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Since $T:\mathbb{R}^n\to\mathbb{R}^m$, then the image of $T$ is a subspace of $\mathbb{R}^m$, and it is easy to see that ${\rm rank}\,(T) \leq m$. Also, with Rank-Nullity theorem, we have ${\rm rank}\,(T) \leq n$. Thus, ${\rm rank}\,(T)\leq \min(m,n)$.
+    \item $T$ is $m\times n$ matrix and has rank $0$, then the nullity of $T$ is $n$, which implies that all columns of $T$ are zero vectors.
+    \item ($\Rightarrow$) If $f$ is injective, then there exists only one element $x'$ in $\mathbb{R}^n$ such that $Tx' = 0\in\mathbb{R}^m$. Also, we claim $x' = 0\in\mathbb{R}^n$. Indeed, we have $T0 = T(0 - 0) = T(0) - T(0) = 0$. Thus, we have $N_T = \{0\}$, implying that $T$ is full column rank.
+    
+    ($\Leftarrow$) Since $T$ is full column rank, and then we have $N_T = \{0\}$. For $x_1,x_2\in\mathbb{R}^n$ such that $Tx_1 = Tx_2$, we have $T(x_1 - x_2) = 0$. Thus, $x_1 = x_2$, implying that $f$ is one-to-one.
+    \item ($\Rightarrow$) If $f$ is surjective, then the columns of $T$ span the space $\mathbb{R}^m$, which implies ${\rm rank}\, T = m$.
+    
+    ($\Leftarrow$) This direction is bovious.
+    \item ($\Rightarrow$) If $T$ is invertible, then there exists $T^{-1}$ such that $T T^{-1} = I$. Then we have $\det(T) \det(T^{-1}) = 1$, which implies $\det(T)\neq 0$. Thus, $T$ has full rank.
+    
+    ($\Leftarrow$) If $T$ is full rank, the its row reduced echelon form is identity matrix. Then there exists a $n\times n$ matrix $H$ such that $TH = I$. Thus, $T$ is invertible.
+    \item It is shown in last statement.
+    \item We have $TS$ is a $m\times k$ matrix, and then we have $R_{TS}\subset R_T$, which implies ${\rm rank}\,(TS) \leq {\rm rank}\,(T)$. Similarly, we have $R_{(TS)'}\subset R_{S'}$, which implies ${\rm rank}\,(TS) = {\rm rank}\,(TS)' \leq {\rm rank}\,(S') = {\rm rank}\,S$. Then the result follows.
+    \item The rank is the dimension of the column space. The column space of $TS$ is the same as the column space of $T$. Indeed, for any $y\in \mathbb{R}^n$, there is a $x\in\mathbb{R}^k$ such that $y = S x$, since $S$ is of rank $n$, implying that $S$ is onto. Then we have $Ty = TSx$. Thus, ${\rm rank}\, (TS) = {\rm rank}\, (T)$.
+    \item For any $x\in\mathbb{R}^n$, we denote $T x$ by $y\in\mathbb{R}^m$. And since $K$ is full column rank, then the rank of $Ky$ is equal to the rank of $y$, which implies that ${\rm rank}\,(KT) = {\rm rank}\,(T)$.
+    \item With Rank-Nullity theorem and $T:\mathbb{R}^n\to\mathbb{R}^m$, we have $\dim R_T + \dim N_T = n$. Then we can find a basis $(x_1,\cdots,x_{k},x_{k+1},\cdots,x_n)$ for $\mathbb{R}^n$, where $(x_{k+1},\cdots,x_n)$ is a basis for null space $N_T$ of $T$.
+    
+    Now we define $f_j = T(e_j), 1\leq j\leq k$, then it is easy to see that $(f_1, \cdots, f_k)$ is linearly independent. Then we can complete this basis into a basis $(f_1, \cdots, f_k,f_{k+1},\cdots,f_m)$ of $\mathbb{R}^m$. Relative to this basis, we can choose $$f_1 = (1,0,\cdots, 0)^T, \cdots, f_j = (0,\cdots,\underbrace{1}_{j {\rm th}}, \cdots, 0)^T, \cdots, f_k = (0,\cdots,\underbrace{1}_{k {\rm th}}, \cdots, 0)^T$$
+    which gives us $I_K$, along with all zeros below for the first $k$ columns of $T$, which is \cite{3}
+    \begin{align*}
+        \left(
+        \begin{matrix}
+        I_{k} \\
+        0
+        \end{matrix}
+        \right).
+    \end{align*}
+    \item Suppose $A$ is an $m\times n$ matrix and $B$ is an $n\times k$ matrix, then we have $AB$ is an $m\times k$ matrix. With Rank-Nullity theorem, we have 
+    \begin{align*}
+        \dim R_A + \dim N_A & = n \\
+        \dim R_B + \dim N_B & = k \\
+        \dim R_{AB} + \dim N_{AB} & = k
+    \end{align*}
+    Then, we have
+    \begin{align*}
+        \dim N_A + \dim R_B + \dim N_A + \dim N_B = n + \dim R_{AB} + \dim N_{AB} \\
+        \Rightarrow \dim R_{AB} - \dim R_A - \dim R_B + n = \dim N_A + \dim N_B - \dim N_{AB} \geq \dim N_A \geq 0
+    \end{align*}
+    since $\dim N_B - \dim N_{AB}\leq 0$. Indeed, for any $v\in N_B$, we have $BV = 0$, also, we have $ABv = 0$, which implies $N_B\subset N_{AB}$ \cite{4}. 
+    \item Consider $A_{m\times n}$ and $B_{n\times k}$ and $B$ is of rank $r$. Using full-rank factorization of $B$, we have $B = U_{n\times r}V_{r\times k}$, where both $U$ and $V$ are of rank $r$\cite{7}\cite{5}. With Sylvester’s rank inequality, we have
+    \begin{align*}
+        {\rm rank}\, (ABC) & \geq {\rm rank}\, (AU) + {\rm rank}\, (VC) - r\\
+        & = {\rm rank}\, (AB) + {\rm rank}\, (BC) - {\rm rank}\, (B)
+    \end{align*}
+    Then the inequality follows\cite{6}.
+    \item It is easy to see that $C(A+B)\subset C(A)+C(B)$, where $C(A)$ denote the column space of $A$. Indeed, for any $y\in C(A+B)$, we can find $x$ such that $y = (A+B)x = Ax + Bx\in C(A)+C(B)$. Thus, ${\rm rank}\, (A+B)\leq {\rm rank}\, (A)+{\rm rank}\, (B)$.
+    \item Rank–Nullity theorem is proved before.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+A linear mapping $T\in\mathscr{L}(X,U)$ can be represented by a matrix if the bases for $X$ and $U$ are chosen. A choice of basis for $X$ defineds an isomorphism $B:X\to\mathbb{R}^n$, and similarly, we have isomorphism $C: U\to\mathbb{R}^m$. Clearly, there are as many isomorphisms as there are bases. We can use any of these isomorphisms to represent $T$ as a matrix from $\mathbb{R}^n$ to $\mathbb{R}^m$, and we have a matrix representation $M$:
+\begin{align*}
+    CTB^{-1} = M.
+\end{align*}
+
+If $T\in\mathscr{L}(X,X)$, and $B:X\to\mathbb{R}^n$ is an isomorphism, then we have $M = BTB^{-1}\in\mathscr{L}(\mathbb{R}^n,\mathbb{R}^n)$ is a square matrix. Let $C:X\to\mathbb{R}^n$ be another isomorphism, then $N = CTC^{-1}$ is another square matrix. Also, we have 
+\begin{align*}
+    N = C B^{-1} M B C^{-1}
+\end{align*}
+then $M$ and $N$ are similar. Thus, similar matrices represent the same linear mapping under different choices of bases.
+
+\medskip
+
+\begin{definition}
+Two $n\times n$ matrices $A$ and $B$ are similar if there exists isomorphism $M\in\mathscr{L}(\mathbb{R}^n,\mathbb{R}^n)$ such that $A = MBM^{-1}$.
+\end{definition}
+
+\medskip
+
+\begin{definition}
+An $n\times n$ matrix $A$ is said to be invertible if and only if $A$ is an isomorphism. And we say $A$ is singular if it is not invertible.
+\end{definition}
+\begin{remark}
+Invertible, non-singular and full rank are equivalent.
+\end{remark}
+
+\medskip
+
+\begin{definition}
+Let $I$ be the identity matrix, if $A$ is invertible, then there exists a matrix, called inverse of $A$, denoted by $A^{-1}$ such that $AA^{-1} = A^{-1}A = I$.
+\end{definition}
+
+\medskip
+
+\section{Exercises}
+
+
+\medskip
+
+\chapter{Determinant and Trace}
+\section{Ordered Simplices, Signed Volume and Determinant}
+A \emph{simplex} in $\mathbb{R}^n$ with $n+1$ vertices. We take one of the vertices to be the origin and denote others by $a_1,\cdots, a_n$. The orders in which the vertices are taken matters, and we say $0, a_1,\cdots, a_n$the vertices of an \emph{ordered simplex}.
+
+An ordered simplex $S$ is called \emph{degenerate} if it lies on an $(n-1)$-dimensional subspace. An ordered nondegenerate simplex $S = (0, a_1,\cdots, a_n)$ is called \emph{positively oriented} if it can be deformed continuously and nondegenerately into the standard simplex $(0, e_1,\cdots, e_n)$, where $e_j$ is the $j$th unit vector in the standard basis of $\mathbb{R}^n$. By such deformation we mean $n$ vector-valued continuous functions $a_j(t)$ of $t,0 < t < 1$, such that (i) $S(t) = (0,a_1(t),\cdots, a_n(t))$ is nondegenerate for all $t$ and (ii) $a_j(0) = 0, a_j(i) = e_j$. 
+Otherwise, we say it \emph{negatively oriented}. 
+
+For a nondegenerate simplex $S$, we define $\mathcal{O}(S) = +1(-1)$ if it is positivelt (negatively) oriented. For a degenerate simplex $S$, we set $\mathcal{O}(S) = 0$. The \emph{volume} of a simplex $S$ is given by elementary formula
+\begin{align*}
+    {\rm Vol}(S) = \frac{1}{n} {\rm Vol}_{n-1}({\rm base}) \times {\rm Altitude}
+\end{align*}
+by base we mean any of the $(n-1)$-dimensional surfaces of $S$, and by altitude we mean the distance from the opposite vertices to the hyperplane that contains the base. 
+
+And the \emph{signed volume} of an ordered simplex $S$ is defined as 
+\begin{align*}
+    \sum (S) = \mathcal{O}(S){\rm Vol}(S).
+\end{align*}
+Since $S$ is described by its vertices, $\sum (S)$ is a function of $a_1,\cdots,a_n$. Obviously, when two vertices are equal, $S$ is degenerate. Thus, we have following properties:
+\begin{enumerate}[label=(\roman*)]
+    \item $\sum (S) = 0$ if $a_j = a_k, i\neq k$.
+    \item $\sum (S)$ is a linear function of $a_j$ when $a_k, k\neq j$ are fixed.
+    \item $\sum (0,e_1,\cdots,e_n) = \frac{1}{n!}$.
+\end{enumerate}
+
+Now we consider the signed volume as
+\begin{align*}
+    \sum (S) =\frac{1}{n}{\rm Vol}_{n-1}({\rm base})
+\end{align*}
+where $k = \mathcal{O}(S) {\rm Altitude}$. The altitude is the \emph{distance} of the vertex $a_j$, also $k$ is called \emph{signed distance} of the vertex from the hyperplane containing the base. 
+
+Determinant are related to the signed volume of ordered simplices by formula
+\begin{align*}
+    \sum (S) = \frac{1}{n!}D(a_1,\cdots,a_n).
+\end{align*}
+
+\medskip
+
+\begin{definition}
+Let $A = (a_1,\cdots, a_n)$ be a square matrix, where $a_j\in\mathbb{R}^n, 1\leq j\leq n$ are column vectors. Its determinant is defined by 
+\begin{align*}
+    \det A = D(a_1,\cdots,a_n) = n! \sum (S) 
+\end{align*}
+where $S = (0,a_1,\cdots,a_n)$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}\label{determinant}
+~\begin{enumerate}[label=(\roman*)]
+    \item $D(a_1,\cdots,a_n) = 0$ if $a_j = a_k$ for some $j\neq k$.
+    \item $D(a_1,\cdots,a_n)$ is a multilinear function of its arguments.
+    \item Normalization: $D(e_1,\cdots,e_n) = 1$.
+    \item $D$ is an alternating function of its arguments, i.e., if $a_j$ and $a_k$ are interchanged, $j\neq k$, the value of $D$ changes by $-1$.
+    \item If $a_1,\cdots,a_n$ are linearly dependent, then $D(a_1,\cdots,a_n) = 0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The first three statements are obvious. We only prove $(iv)$ and $(v)$.
+\begin{enumerate}[label=(\roman*)]
+    \setcounter{enumi}{3}
+    \item Let $D(a,b) = (\cdots,a_i,\cdots,a_j,\cdots)$ and $D(b,a) = (\cdots,a_j,\cdots,a_i,\cdots)$. Then we have
+    \begin{align*}
+        D(a,b) & = D(a,a) + D(a,b) \\
+        & = D(a,a+b) - D(a+b, a+b) \\
+        & = - D(b, a+b) \\
+        & = - D(b, a+b) + D(b,b)\\
+        & = -D(b,a).
+    \end{align*}
+    \item Suppose $a_1,\cdots,a_n$ are linearly dependent, then there exist $c_1,\cdots,c_n$ not all zero, such that $\sum^n_{j=1}c_j a_k = 0$. Without losing generality, assume $c_1\neq 0$, then we have
+    \begin{align*}
+        a_1 & = -\sum^n_{j=2}\frac{c_k}{c_1}a_k \\
+        \Rightarrow D(a_1,\cdots,a_n) & = D\left(-\sum^n_{j=2}\frac{c_k}{c_1}a_k, a_2,\cdots,a_n\right) \\
+        & = -\frac{c_k}{c_1} \sum^n_{j=2} D(a_k, a_2, \cdots, a_n) = 0.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Permutation}
+\begin{definition}
+A permutation is a mapping $p$ of $n$ objects, saying the numbers $1,2,\cdots,n$, onto themselves. Permutations are invertible
+and they form a group with compositions. These groups, except for $n = 2$, are noncommutative.
+\end{definition}
+
+\medskip
+
+\begin{example}
+Let $p = \frac{1234}{2413}$. Then
+\begin{align*}
+    p^2 & = \frac{1234}{4321},\quad p^{-1} = \frac{1234}{3142} \\
+    p^3 & = \frac{1234}{3142},\quad p^{4} = \frac{1234}{1234}.
+\end{align*}
+\end{example}
+
+\medskip
+
+Next we introduce \emph{signature} of a permutation, denoted by $\sigma(p)$. Let $x_1,\cdots,x_n$ be $n$ variables, their \emph{discriminant} is defined by 
+\begin{align*}
+    P(x_1,\cdots,x_n) = \prod_{i < j}(x_i - x_j).
+\end{align*}
+Let $p$ be any permutation, then we have 
+\begin{align*}
+    \prod_{i < j}\left(x_{p(i)} - x_{p(j)} \right)
+\end{align*}
+is either $P(x_1,\cdots,x_n)$ or $- P(x_1,\cdots,x_n)$.
+
+\medskip
+
+\begin{definition}
+The signature $\sigma(p)$  of a permutation $p$ is defined by
+\begin{align*}
+    P\left(x_{p(1)},\cdots,x_{p(n)}\right) = \sigma(p) P(x_1,\cdots,x_n).
+\end{align*}
+Hence, $\sigma(p) = \pm 1$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+$\sigma(p_1\circ p_2) = \sigma(p_1) \sigma(p_2)$.
+\end{theorem}
+\begin{proof}
+\begin{align*}
+    \sigma(p_1\circ p_2) & = \frac{P\left(x_{p_1p_2(1)},\cdots,x_{p_1p_2(n)}\right)}{P(x_1,\cdots,x_n)} \\
+    & = \frac{P\left(x_{p_1p_2(1)},\cdots,x_{p_1p_2(n)}\right)}{P(x_{p_2(1)},\cdots,x_{p_2(n)})}\cdot \frac{P\left(x_{p_2(1)},\cdots,x_{p_2(n)}\right)}{P(x_1,\cdots,x_n)}\\
+    & = \sigma(p_1) \sigma(p_2).
+\end{align*}
+\end{proof}
+
+\medskip
+
+Given any pair of indices, $j\neq k$, we can define a permutation $p$ such that
+\begin{align*}
+    p(i) = \begin{cases}
+    i, i\neq j\, {\rm or}\,\, k \\
+    k, i = j \\
+    j, i = k
+    \end{cases}
+\end{align*}
+Such a permutation is called \emph{transposition}. And we claim that transposition has following properties:
+\begin{enumerate}[label=(\arabic*)]
+    \item The signature of a transposition $t$ is $-1$, i.e., $\sigma(t) = -1$.
+    \item Every permutation $p$ can be written as a composition of transpositions, i.e., 
+    \begin{align}\label{transposition}
+        p = t_k\circ \cdots \circ t_1
+    \end{align}
+\end{enumerate}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Assume $t$ interchanges $i_0$ and $j_0$, with $i_0<j_0$, then we have
+    \begin{align*}
+        P\left(t(x_1,\cdots,x_n)\right) & = P(x_1,\cdots,x_{j_0},\cdots,x_{i_0},\cdots,x_n) \\
+        & = (x_{j_0} - x_{i_0})\prod_{i<j,(i,j)\neq(i_0,j_0)} (x_i - x_j) \\
+        & = - \prod_{i<j}(x_i - x_j) \\
+        & = - P(x_1,\cdots,x_n)
+    \end{align*}
+    Hence, $\sigma(t) = -1$.
+    \item It is easy to see that $p = t_k\circ \cdots \circ t_1$ is equivalent to $I = p = t_k\circ \cdots \circ t_1 \circ p^{-1}$. Consider $(1,\cdots, n) = t_k\circ \cdots \circ t_1 \circ p^{-1}(1,\cdots,n)$. Then we claim a sequence of transposition can sort an array of numbers into ascending order.
+\end{enumerate}
+\end{proof}
+
+With the results above, we have
+\begin{align*}
+    \sigma(p) = (-1)^{k}
+\end{align*}
+where $k$ is the number of transpositions in the decomposition (\ref{transposition}) of $p$.
+
+\medskip
+
+\section{Formula for Determinant}
+\begin{theorem}
+Assume that for $1\leq k \leq n$, 
+\begin{align*}
+    a_k = \left(
+    \begin{matrix}
+        a_{1k} \\
+        \vdots \\
+        a_{n k}
+    \end{matrix}
+    \right)\in\mathbb{R}^n.
+\end{align*}
+This is the same as 
+\begin{align*}
+    a_k = a_{1k}e_1 + \cdots + a_{nk}e_n.
+\end{align*}
+with multilinearity, we can write
+\begin{align*}
+    D(a_1,\cdots,a_n) & = D(a_{11}e_1 + \cdots + a_{n1}e_n, a_2,\cdots,a_n) \\
+    & = a_{11}D(e_1,a_2,\cdots,a_n) + \cdots + a_{n1}D(e_n,a_2,\cdots,a_n)
+\end{align*}
+Next we can express $a_2$ as a linear combination of $e_1,\cdots,e_n$, and obtain a equation like above, with $n^2$ terms. Repeating this process, we have
+\begin{align*}
+    D(a_1,\cdots,a_n) = \sum_f a_{f_1 1}a_{f_2 2}\cdots a_{f_n n} D(e_{f_1}, e_{f_2},\cdots, e_{f_n})
+\end{align*}
+where the summation is over all functions $f$ mapping $\{1,\cdots,n\}$ into $\{1,\cdots,n\}$. If $f$ is not a permutation, then $f_i = f_j$ for some $i\neq j$. Then we have $D(e_{f_1}, e_{f_2},\cdots, e_{f_n}) = 0$. This shows that we only need to sum over permutations.
+
+Since each permutation can be decomposed into k transpositions, thus we have 
+\begin{align*}
+    D(e_{f_1}, e_{f_2},\cdots, e_{f_n}) = \sigma(p) D(e_1, e_2,\cdots, e_n)
+\end{align*}
+for any permutation. Then the determinant can be represented as
+\begin{align*}
+    D(a_1,\cdots,a_n) = \sum_p \sigma(p) a_{p(1)1} a_{p(2)2} \cdots a_{p(n)n}
+\end{align*}
+where the summation is over all permutations.
+\end{theorem}
+\begin{proof}
+The proof is within the explanation of the theorem, i.e., 
+\begin{align*}
+    D(a_1,\cdots,a_n) & = D\left(\sum^n_{j=1}a_{j1}e_j, \cdots, \sum^n_{j=1}a_{jn}e_j\right) \\
+    & = \sum_{1\leq j_k \leq n, 1\leq k \leq n} a_{f_1 1}a_{f_2 2}\cdots a_{f_n n} D(e_{f_1}, e_{f_2},\cdots, e_{f_n}) \\
+    & = \sum_p \sigma(p) a_{p(1)1} a_{p(2)2} \cdots a_{p(n)n}.
+\end{align*}
+\end{proof}
+
+\begin{remark}
+Determinant is defined by properties (i),(ii) and (iii) in Theorem \ref{determinant}.
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+$\det A^T = \det A$.
+\end{theorem}
+\begin{proof}
+Assume $A = (a_{ij})_{n\times n}$, then $A^T = (b_{ij})_{n\times n}, b_{ij} = a_{ji}$. Then we have 
+\begin{align*}
+    \det A^T & = \sum_p \sigma(p) b_{p(1)1} b_{p(2)2} \cdots b_{p(n)n} \\
+    & = \sum_p \sigma(p) a_{1 p(1)} a_{2 p(2)} \cdots a_{n p(n)} \\
+    & = \sum_p \sigma(p) a_{p^{-1}(1)} a_{p^{-1}(2) 2} \cdots a_{p^{-1}(n) n}
+\end{align*}
+we denote $p^{-1}$ by $\Tilde{p}$, then we have
+\begin{align*}
+    \det A^T = \sum_{\Tilde{p}} \sigma(\Tilde{p}) a_{\Tilde{p}(1)} a_{\Tilde{p}(2) 2} \cdots a_{\Tilde{p}(n) n} = \det A.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $A,B$ be two $n\times n$ matrices, then $\det (BA) = \det A\cdot \det B$.
+\end{theorem}
+\begin{proof}
+Assume $A = D(a_1,\cdots,a_n)$, then $BA = (Ba_1,\cdots,Ba_n)$, which implies $\det BA = D(Ba_1,\cdots,Ba_n)$. 
+\begin{enumerate}[label=(\arabic*)]
+    \item Define for $\det B\neq 0$, that $C(a_1,\cdots,a_n) = \frac{\det BA}{\det B}$. It suffices to show that $C$ satisfies:
+    \begin{enumerate}[label=(\roman*)]
+        \item If $a_i = a_j$ for some $i\neq j$, then $C = 0$. Indeed, if $a_i = a_j$ for some $i\neq j$, then $Ba_i = Ba_j$. Thus, $D(Ba_1,\cdots,Ba_n) = 0$.
+        \item $C$ is linear in $a_k, 1\leq k \leq n$. This is obvious.
+        \item $C(e_1,\cdots,c_n) = 1$. Indeed, setting $a_i = e_i, 1\leq i\leq n$. And we get 
+        \begin{align*}
+            C(e_1,\cdots,e_n) & = \frac{D(Be_1,\cdots,Be_n)}{\det B} \\
+            & = \frac{D(b_1,\cdots,b_n)}{\det B} \\
+            & = \frac{\det B}{\det B} = 1.
+        \end{align*}
+        Then we claim $C(a_1,\cdots,a_n) = \det A$.
+    \end{enumerate}
+    \item If $\det B = 0$, then there exists $\varepsilon_n\to 0$ as $n\to\infty$ such that $\det (B+\varepsilon_n I)\neq 0$. Then we have 
+    \begin{align*}
+        \det \left((B+\varepsilon_n I)A\right) & = \det (B+\varepsilon_n I) \det A \\
+        \overset{n\to\infty}&{=} \det A \det B.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{corollary}
+Let $A$ be an $n\times n$ matrix, then $A$ is invertible if and only if $\det A\neq 0$.
+\end{corollary}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) If $A$ is invertible, then there exists $A^{-1}$ such that $A^{-1}A = I$. Then we have $\det A = 1/\det A^{-1} \neq 0$.
+    \item If $\det A\neq 0$, then $A$ is both full  row rank and full column rank. Then, $A$ is bijective from $\mathbb{R}^n$ to $\mathbb{R}^n$. Thus, $A$ is invertible.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Laplace Expansion}
+Now we discuss another property of determinant, starting with a lemma.
+
+\medskip
+
+\begin{lemma}
+Let $A$ be an $n\times n$ matrix, whose first column is $e_1$:
+\begin{align*}
+    A = \left(
+    \begin{matrix}
+        1 & \times\\
+        0 & A_{11}
+    \end{matrix}
+    \right),
+\end{align*}
+here $A_{11}$ denote the $(n-1)\times(n-1)$ submatrix formed by entries $a_{ij},i>1, j>1$. We claim that $$\det A = \det A_{11}.$$
+\end{lemma}
+\begin{proof}
+First, we show that $\det A =\det \left(
+    \begin{matrix}
+        1 & 0\\
+        0 & A_{11}
+    \end{matrix}
+    \right)$. And from properties (i) and (ii) that if we add suitable multiples of the first column of $A$ to the others, we can obtain $\left(
+    \begin{matrix}
+        1 & 0\\
+        0 & A_{11}
+    \end{matrix}
+    \right)$, and the determinant will not change.
+
+Define 
+\begin{align*}
+    C(A_{11}) = \det \left(
+    \begin{matrix}
+        1 & 0\\
+        0 & A_{11}
+    \end{matrix}
+    \right)
+\end{align*}
+then it suffices to verify $C$ satisfies all three properties:
+\begin{enumerate}[label=(\arabic*)]
+    \item If $a_i, a_j\in A_{11}$ such that $a_i = a_j, i\neq j$, then we have $\left(
+    \begin{matrix}
+        0\\
+        a_1
+    \end{matrix}
+    \right) = \left(
+    \begin{matrix}
+        0\\
+        a_2
+    \end{matrix}
+    \right)$ Thus, $C(A_{11}) = 0$.
+    \item Any linear operations of $A_{11}$ can be extended to $\left(
+    \begin{matrix}
+        0\\
+        a_i
+    \end{matrix}
+    \right)$, then $C$ is multilinear.
+    \item When $A_{11} = I_{(n-1)\times(n-1)}$, then we have $\left(
+    \begin{matrix}
+        1 & 0\\
+        0 & A_{11}
+    \end{matrix}
+    \right) = I_{n\times n}$, then $C(A_{11}) = 1$.
+\end{enumerate}
+\end{proof}
+
+Now we present another approach to prove this lemma.
+\begin{proof}
+\begin{align*}
+    \det \left(
+    \begin{matrix}
+        1 & \times\\
+        0 & A_{11}
+    \end{matrix}
+    \right) & = \det \left(
+    \begin{matrix}
+        1 & 0\\
+        \times & A_{11}^T
+    \end{matrix}
+    \right) = \det \left(
+    \begin{matrix}
+        1      & 0 & \cdots & 0\\
+        a_{12} &  &\\
+        \vdots &  & A_{11}\\
+        a_{1n}
+    \end{matrix}
+    \right)\\
+    & = D\left(e_1 + \sum^n_{k=2}a_{1k}e_k, \widetilde{A_{11}}\right) \\
+    & = D(e_1, \widetilde{A_{11}}) + \sum^n_{k=2}a_{1k} D(e_k, \widetilde{A_{11}}) \\
+    & = \det A_{11}.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{theorem}[Laplace expansion]
+For any $j = 1,\cdots,n$, 
+\begin{align*}
+    \det A = \sum^n_{i=1}(-1)^{i+j} a_{ij}c\det A_{ij}
+\end{align*}
+where $A_{ij}$ is the $(ij)$th minor of $A$.
+\end{theorem}
+\begin{proof}
+The $j$th column $a_j = \sum a_{ij} e_i$. Hence,
+\begin{align*}
+    \det A & = \sum^N_{i=1} a_{ij} D(a_1,\cdots,a_{j-1},e_i, a_{j+1},\cdots,a_n) \\
+    & = \sum^n_{i=1} (-1)^{i+j} a_{ij} \det A_{ij}
+\end{align*}
+where we need the lemma below.
+\end{proof}
+
+\medskip
+
+\begin{lemma}
+Let $A$ be a matrix with $j$th column being $e_i$. Then 
+\begin{align*}
+    \det A = (-1)^{i+j} \det A_{ij}.
+\end{align*}
+\end{lemma}
+\begin{proof}
+\begin{align*}
+    \det A & = D(a_1,\cdots,a_{j-1}, e_i, a_{j+1}, \cdots, a_n) \\
+    & = (-1)^{j-1} D(e_i, a_1,\cdots,a_{j-1}, a_{j+1}, \cdots, a_n) \\
+    & = (-1)^{i+j-2} \det \left(
+    \begin{matrix}
+        1 & \times\\
+        0 & A_{11}
+    \end{matrix}
+    \right) \\
+    & = (-1)^{i+j} \det A_{11}.
+\end{align*}
+where the last step comes from lemma above. 
+\end{proof}
+
+\medskip
+
+\section{Cramer's Rule}
+
+If $A_{n\times n}$ is invertible, then for all $u\in\mathbb{R}^n$, $Ax = u$ has a unique solution $x = A^{-1}u$. Assume $A = (a_1, \cdots, a_n)$ and $x = \sum x_j e_j$, then we have 
+\begin{align*}
+    u = \sum x_j a_j.
+\end{align*}
+
+Now consider $A_k = (a_1, \cdots, a_{k-1}, \underbrace{u}_{k\,{\rm th}}, a_{k+1}, \cdots, a_n)$. Then we have 
+\begin{align*}
+    \det A_k = \sum x_j \det (a_1, \cdots, a_{k-1}, a_j, a_{k+1}, \cdots, a_n) = x_k \det A
+\end{align*}
+hence, we have
+$$x_k = \frac{\det A_k}{\det A}.$$
+And since 
+\begin{align*}
+    \det A_k = \sum^n_{j=1} (-1)^{j+k} u_j \det A_{jk}
+\end{align*}
+we have 
+\begin{align*}
+    x_k = \sum^n_{j=1} (-1)^{j+k} u_j \frac{\det A_{jk}}{\det A}.
+\end{align*}
+Comparing it with $x = A^{-1} u$, we have the following result.
+
+\medskip
+
+\begin{theorem}
+The inverse matrix $A^{-1}$ of an invertible matrix $A$ has the form
+\begin{align*}
+    \left(A^{-1}\right)_{kj} = (-1)^{j+k} \frac{\det A_{jk}}{\det A}.
+\end{align*}
+\end{theorem}
+
+\medskip
+
+\section{Trace of A Matrix}
+\begin{definition}
+The trace of a square matrix $A$, denoted by $\tr A$, is the sum of all diagonal entries:
+\begin{align*}
+    \tr A = \sum^n_{i=1} a_{ii}.
+\end{align*}
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\roman*)]
+    \item Trace is a linear functional on matrices.
+    \item Trace is commutative: $\tr AB = \tr BA$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The proof is obvious.
+\end{proof}
+
+\medskip
+
+\begin{definition}
+Let $A$ be an $n\times n$ matrix, then we have 
+\begin{align*}
+    \tr AA^T = \sum^n_{i=1}(a_{ii})^2
+\end{align*}
+and the Euclidean norm (or Hilbert-Schmidt norm) of matrix $A$ is defined by \begin{align*}
+    \|A\| = \sqrt{\tr AA^T} = \sqrt{\sum^n_{i=1}(a_{ii})^2}.
+\end{align*}
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+Similar matrices have the same trace and determinant.
+\end{theorem}
+\begin{proof}
+Assume $A$ and $B$ are similar, then there exists an invertible matrix $S$ such that $A = SBS^{-1}$.
+\begin{enumerate}[label=(\arabic*)]
+    \item $\tr A = \tr SBS^{-1} =\tr SS^{-1}B = \tr B$.
+    \item $\det A = \det SBS^{-1} = \det S\cdot \det B \cdot \det S^{-1} = \det I\cdot \det B = \det B$.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+Let $A,B,C,D$ be $n\times n$ matrices, in general, the following equations do not hold
+\begin{align*}
+    \det \left(
+    \begin{matrix}
+        A & B\\
+        C & D
+    \end{matrix}
+    \right) & = \det A \det D - \det C \det B \\
+    \det \left(
+    \begin{matrix}
+        A & B\\
+        C & D
+    \end{matrix}
+    \right)& = \det(AD - CB).
+\end{align*}
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+Let $A,B,C,D$ be $n\times n$ matrices and $AC=CA$, then
+\begin{align*}
+    \det \left(
+    \begin{matrix}
+        A & B\\
+        C & D
+    \end{matrix}
+    \right) & = \det (AD - CB).
+\end{align*}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item If $\det A \neq 0$, then we have
+    \begin{align*}
+    \left(\begin{matrix}
+        A & B\\
+        C & D
+    \end{matrix}\right) 
+    \left(\begin{matrix}
+        I & -A^{-1}B\\
+        0 & I
+    \end{matrix}\right)  = 
+    \left(\begin{matrix}
+        A & 0\\
+        C & D-CA^{-1}B
+    \end{matrix}\right).
+    \end{align*}
+    Thus, we can have 
+    \begin{align*}
+    \det \left(\begin{matrix}
+        A & B\\
+        C & D
+    \end{matrix}\right) & = \det A \det (D-CA^{-1}B) \\
+    & = \det (AD - ACA^{-1}B) \\
+    & = \det (AD - CAA^{-1}B) \\
+    & = \det (AD - CB).
+    \end{align*}
+    \item If $A$ is singular, then there exists $\varepsilon\to 0$, such that, $\det A_k = \det (A+\varepsilon I) \neq 0$. Thus, we have $A_k C = C A_k$ and then
+    \begin{align*}
+        \det \left(\begin{matrix}
+        A_k & B\\
+        C & D
+    \end{matrix}\right) = \det (A_k D - CB) \overset{k\to\infty}{=} \det (AD - CB).
+    \end{align*}
+\end{enumerate} 
+\end{proof}
+
+\begin{remark}
+Similar to the theorem above, we can have following results, that:
+\begin{align*}
+    \det \left(\begin{matrix}
+        A & B\\
+        C & D
+    \end{matrix}\right) = \begin{cases}
+    \det (AD - BC),\, {\rm if}\,\, CD = DC; \\
+    \det (DA - CB),\, {\rm if}\,\, AB = BA; \\
+    \det (DA - BC),\, {\rm if}\,\, BD = DB; \\
+    \det (AD - CB),\, {\rm if}\,\, AC = CA.
+    \end{cases}
+\end{align*}
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+Let $A,B$ be $n\times n$ matrices, then $\det (I-AB) = \det (I-BA)$.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item If $\det A \neq 0$, then we have
+    \begin{align*}
+        \det (I-AB) & = \det A \left(A^{-1} - B\right) \\
+        & = \det A \det \left(A^{-1} - B\right) \\
+        & = \det \left(A^{-1} - B\right) \det A \\
+        & = \det \left(A^{-1} - B\right)A \\
+        & = \left(I - BA\right).
+    \end{align*}
+    \item If $\det A = 0$, then we can approximate $A_k = A + \varepsilon I$ such that $\det A_k \neq 0$ and let $\varepsilon\to 0$.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+In general, $\det (A - BC) \neq \det (A - CB)$.
+\end{remark}
+
+\medskip
+
+\section{Complex Matrix}
+Let $T\in\mathscr{L}(X,X)$, where $X$ is a complex linear space and $\dim X = n$. With chosen basis of $X$, $T$ can be represented by a matrix $A$. For a complex $n\times n$ matrix $A = (a_1,\cdots,a_n)$, we have $\det A = D(a_1,\cdots,a_n)$.
+\begin{remark}
+In general, $\det (A+iB)\neq \det A + i \det B$, for $A, B$ being real matrices.
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+Let $A,B$ be real matrices. Then $A,B$ are similar as real matrices is equivalent to that they are similar as complex matrices, i.e., $A \overset{\mathbb{R}}{\sim} B\iff A \overset{\mathbb{C}}{\sim} B$.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) This is trivial.
+    \item ($\Leftarrow$) If $A \overset{\mathbb{C}}{\sim} B$, then there exists a matrix $M = P + iQ$, where $P,Q$ are real matrices, such that $B = MAM^{-1}$. Then we have
+    \begin{align*}
+        BM & = MA \\
+        \Rightarrow B(P + iQ) & = (P + iQ)A \\
+        \Rightarrow BP + i BQ & = PA + i QA
+    \end{align*}
+    which implies $BP=PA$ and $BQ = QA$. If either $P,Q$ are nonsingular, then we have $A \overset{\mathbb{R}}{\sim} B$.
+    
+    Consider $M_t = P + tQ$, where $t$ can be real or complex. Then $\det (P+tQ)$ is a polynomial in $t$. And $\det M_i \neq 0$, then there exists $t\in\mathbb{R}$ such that $\det (P+tQ)\neq 0$. Since $BM_t = M_t A$, then $B = M_t A M_t^{-1}$. Thus, $A \overset{\mathbb{R}}{\sim} B$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+Next we discuss the determinant of some special matrices.
+
+\begin{example}[Vandermonde matrix]
+Let $n\geq 2$, and $a_1, \cdots, a_n$ are scalars, $n\times n$ Vandermonde matrix is defined as following
+\begin{align*}
+    V(a_1,\cdots,a_n) = \left(\begin{matrix}
+        1 & 1 & \cdots & 1\\
+        a_1 & a_2 \cdots & a_n \\
+        a_1^2 & a_2^2 & \cdots & a_n^2 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_1^{n-1} & a_2^{n-1} & \cdots & a_n^{n-1}
+    \end{matrix}\right)
+\end{align*}
+Then, $\det V(a_1,\cdots,a_n) = \prod_{i < j}(a_j - a_i)$.
+\end{example}
+
+\medskip
+
+\begin{example}[Cauchy matrix]
+Given $2n$ numbers, $a_k, b_k, 1\leq k\leq n$, such that $a_i + b_i \neq 0$ for all $i,j$. The Cauchy matrix is defined as following
+\begin{align*}
+    C(a_1,\cdots,a_n, b_1,\cdots,b_n) = \left(\frac{1}{a_i + b_j}\right)_{n\times n}
+\end{align*}
+where $c_{ij} = \frac{1}{a_i + b_j}$. Then, the determinant of $C$ is 
+\begin{align*}
+    \det C = \frac{\prod_{j>i}(a_j - a_i)\prod_{j>i}(b_j - b_i)}{\prod_{i,j}(a_i + b_j)}.
+\end{align*}
+\end{example}
+
+\medskip
+
+\section{Exercises}
+\begin{exercise}
+Let $A,B,C$ be $n\times n$ matrices satisfying $AB=BA$. Show that
+$$
+\det\left(  A+BC\right)  =\det\left(  A+CB\right).
+$$
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item If $B$ is invertible, since $AB=BA$, then we have $A=B^{-1}AB$. Then we have
+    \begin{align*}
+        \det (A+BC) &= \det (B^{-1}(A+BC)B) \\
+        & = \det(B^{-1}AB+CB) \\
+        & = \det(A+CB).
+    \end{align*}
+    \item If $B$ is not invertible. We can set a new matrix $M = \begin{pmatrix}
+    C & -I \\
+    A & B
+    \end{pmatrix}$, and we can solve for the determinant of this matrix. Since $AB=BA$, then $\det(M)=\det(CB-(-I)A)=\det(CB+A)$. Also, we have $-IB=B(-I)$, then the determinant can be presented as $\det (M)=\det(BC-(-I)A)=\det(BC+A)$. Then we have $\det(A+BC)=\det(A+CB)$. 
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+In (2), we used if $AB=BC$, then $\det(M)=\det(CB-(-I)A)$. We should give proper proof to this. Suppose matrix $M = \begin{pmatrix}
+P & Q \\
+R & S
+\end{pmatrix}$ and we have $RS=SR$. Then, if $S$ is invertible, we have 
+\begin{align*}
+    \det \begin{pmatrix}
+    P & Q \\
+    R & S
+    \end{pmatrix}
+    = &\det 
+    \begin{pmatrix}
+    P-RS^{-1}Q & 0 \\
+    R & S
+    \end{pmatrix} \\
+    & = \det(PS-RS^{-1}QS) \\
+    & = \det(PS-RSS^{-1}Q) \\
+    & = \det(PS-RQ)
+\end{align*}
+If $S$ is not invertibe, then there exists $\varepsilon_k \rightarrow 0$ such that $\det S_k = \det(B+\varepsilon_k I) \neq 0$ and $S_k R = R S_k$. Then $\det \begin{pmatrix}
+P & Q \\
+R & S_k
+\end{pmatrix} = \det (PS_k-QR)$. Taking $k\rightarrow \infty$ will prove this case. The proof is complete. Similarly, we can prove that if $QS=SQ$, then $\det M = \det(SP-QR)$.
+\end{remark}
+
+\medskip
+
+\begin{exercise}
+Let $A,B,C$ be $n\times n$ matrices. Is it always true that
+$$
+\det\left(  A+BC\right)  =\det\left(  A+CB\right)  ?
+$$
+Prove or find a counter example.
+\end{exercise}
+\begin{proof}
+In general, it is not true. Take $A = \begin{pmatrix}
+    1 & 0 \\
+    0 & 10
+    \end{pmatrix},
+    B = 
+    \begin{pmatrix}
+    2 & 3 \\
+    4 & 5
+    \end{pmatrix}$
+and $C = \begin{pmatrix}
+    0 & 1 \\
+    1 & 6
+    \end{pmatrix}$.
+Then we have $\det(A+BC) = 76$ and $\det(A+CB) = 85$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $n\geq2$. Given $\left(  2n-1\right)  $ scalars $x_{1}%
+,\cdots,x_{n-1}$ and $y_{1},\cdots,y_{n}$, we can define an $n\times n$ matrix
+$A=\left(  a_{ij}\right)  $ such that%
+\begin{align*}
+a_{ij} &  =x_{j}\text{ if }i>j,\\
+a_{ij} &  =y_{j}\text{ if }i\leq j.
+\end{align*}
+Show that%
+$$
+\det A=y_{n}%
+%TCIMACRO{\dprod \limits_{k=1}^{n-1}}%
+%BeginExpansion
+{\displaystyle\prod\limits_{k=1}^{n-1}}
+%EndExpansion
+\left(  y_{k}-x_{k}\right).
+$$
+\end{exercise}
+\begin{proof}
+We can know that $A$ has the form 
+\begin{align*}
+    A = \begin{pmatrix}
+    y_1 & y_2 & y_3 & \cdots & y_n \\
+    x_1 & y_2 & y_3 & \cdots & y_n \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_1 & x_2 & x_3 & \cdots & y_n
+    \end{pmatrix}
+\end{align*}
+We can do elementary row operations that starting from the first row, and then apply $\text{row}_i=\text{row}_i+(-1)\text{row}_{i+1}$. Then we get new matrix
+\begin{align*}
+    A = \begin{pmatrix}
+    y_1-x_1 & 0 & 0 & \cdots & 0 \\
+    0 & y_2-x_2 & 0 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_1 & x_2 & x_3 & \cdots & y_n
+    \end{pmatrix}
+\end{align*}
+Then it is obvious that $\det(A)=y_n \prod_{k=1}^{n-1} (y_k-x_k)$.
+\end{proof}
+
+\medskip
+
+\chapter{Spectral Theory}
+
+\section{Eigenvalues and Eigenvectors}
+
+\begin{definition}
+Let $A$ be an $n\times n$ matrix. Suppose that for a nonzero vector $v$ and a scalar number $\lambda$, such that 
+\begin{align*}
+    Av = \lambda v
+\end{align*}
+then $\lambda$ is called an eigenvalue of $A$ and $v$ an eigenvector of $A$ corresponding to $\lambda$.
+\end{definition}
+
+Let $v$ be an eigenvector of $A$ corresponding to $\lambda$, we have, for any positive integer $k$, 
+$$A^k v = \lambda^k v.$$
+and more generally, for any polynomial $p$, we have 
+$$p(A)v = p(\lambda)v.$$
+
+\medskip
+
+\begin{theorem}
+$\lambda$ is an eigenvalue of $A$ if and only if $\det (\lambda I-A) = 0$. The polynomial
+$$p_A(\lambda) = \det (\lambda I-A)$$
+is called the characteristic polynomial of $A$.
+\end{theorem}
+
+\medskip
+
+\begin{theorem}
+Eigenvectors of a matrix $A$ corresponding to distinct eigenvalues
+are linearly independent.
+\end{theorem}
+\begin{proof}
+Let $\lambda_k, 1\leq k \leq n$ be $n$ distinct eigenvalues and $v_k, 1\leq k \leq n$ be corresponding eigenvectors. Now we prove it by induction.
+\begin{enumerate}[label=(\arabic*)]
+    \item When $k = 1$, the theorem holds.
+    \item Suppose it holds for $k = N$. When $k = N+1$, suppose 
+    \begin{align*}
+        \sum^{N+1}_{k=1}c_k v_k = 0,
+    \end{align*}
+    then we have
+    \begin{align*}
+        \sum^{N+1}_{k=1}c_k \lambda_{N+1} v_k = 0.
+    \end{align*}
+    Applying $A$ to both sides of the first equation above, then we have
+    \begin{align*}
+        & \sum^{N+1}_{k=1}c_k \lambda_k v_k = 0 = \sum^{N+1}_{k=1}c_k \lambda_{N+1} v_k \\
+        \Rightarrow & \sum^{N+1}_{k=1}c_k (\lambda_k  - \lambda_{N+1}) v_k = 0 \\
+        \Rightarrow & c_k (\lambda_k  - \lambda_{N+1}) = 0
+    \end{align*}
+    and since $c_k = 0, 1\leq k\leq n$, we have $c_{N+1} = 0$. Thus, the theorem holds for $N+1$. 
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{corollary}
+If the characteristic polynomial $p_A$ of an $n\times n$ matrix $A$ has $n$ distinct roots, then $A$ has a basis formed by $n$ linearly independent eigenvectors.
+\end{corollary}
+
+\medskip
+
+\begin{corollary}
+If $A$ has $n$ distinct eigenvalues, then $A$ is diagonalizable in the sense that $A$ is similar to a diagonal matrix.
+\end{corollary}
+\begin{proof}
+Let $\lambda_k,1\leq k\leq n$ be $n$ distinct eigenvalues of $A$, with corresponding eigenvectors $v_k,1\leq k\leq n$ such that $Av_k = \lambda_k v_k,1\leq k\leq n$. Let $S = (v_1, v_2,\cdots, v_n)$, then we have
+\begin{align*}
+    AS = S \begin{pmatrix}
+    \lambda_1 &  &  &  \\
+     & \lambda_2 &  & \\
+     &   & \ddots &  \\
+     &  &  & \lambda_n
+    \end{pmatrix}
+\end{align*}
+which implies $A = S\Lambda S^{-1}$.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $\lambda_k,1\leq k\leq n$ be eigenvalues of $A$, with the same multiplicity they have as roots of the characteristic equation of $A$. Then 
+\begin{align*}
+    \det A = \sum^n_{k=1}\lambda_k \,\,\text{and}\,\, \tr A = \sum^n_{k=1}\lambda_k.
+\end{align*}
+\end{theorem}
+\begin{proof}
+We claim that $\lambda_1,\lambda_n,\cdots,\lambda_n$ are $n$ roots of polynomial, which has the following form
+\begin{align*}
+    p_A(\lambda) & = \det (\lambda I - A) \\
+    & = \sum_p \sigma(p) \prod^n_{k=1} \left(\lambda \delta_{p_k k} - a_{p_k k}\right) \\
+    & = \lambda^n - \left(\tr A \right)\lambda^{n-1} +\cdots + (-1)^n \prod^n_{k=1}\lambda_k.
+\end{align*}
+Then we have
+\begin{enumerate}[label=(\arabic*)]
+    \item Let $\lambda = 0$, then we have $\det (-A) = (-1)^n \prod^n_{k=1}\lambda_k$, which implies $\det A = \prod^n_{k=1}\lambda_k$.
+    \item According to elementary algebra, the polynomial $p_A$ can be written as 
+    \begin{align*}
+        p_A = \prod^n_{k=1} (\lambda - \lambda_k)
+    \end{align*}
+    which implies the coefficient of $\lambda^{n-1}$ is $ - \sum^n_{k=1}\lambda_k$. Thus, we have $\tr A = \sum^n_{k=1}\lambda_k$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+\section{Spectral Mapping Theorem}
+\begin{theorem}[Spectral Mapping Theorem]
+~\begin{enumerate}[label=(\alph*)]
+    \item Let $q$ be any polynomial, $A$ a square matrix, $\lambda$ an eigenvalue of $A$. Then $q(\lambda)$ is an eigenvalue of $q(A)$.
+    \item Every eigenvalue of $q(A)$ is of the form $q(\lambda)$, where $\lambda$ is an eigenvalue of $A$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item We have $Av = \lambda v$, which implies $q(A)v = q(\lambda)v$. Indeed, we have
+    \begin{align*}
+        q(A) = \sum^m_{k=0} c_k A^k \Rightarrow q(A)v = \sum^m_{k=0} c_k \lambda^k v = q(\lambda)v.
+    \end{align*}
+    \item Let $\mu$ be an eigenvalue of $q(A)$, then we have $\det (\mu I - q(A)) = 0$. Suppose $$q(\lambda) - \mu = c\prod^m_{i=1}(\lambda - \lambda_i),$$ 
+    then substituting by $A$, we have $$\prod^m_{i=1} \det (\lambda_i I - A) = 0.$$
+    Thus, for some $\lambda_i$, $\det (\lambda_i I - A) = 0$, which implies $\mu = q(\lambda_i)$, where $\lambda_i$ is an eigenvalue of $A$. 
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+Let $p_A = \det(\lambda I - A)$, then every eigenvalue of $p_A(A)$ is zero.
+\end{remark}
+
+\medskip
+
+\begin{theorem}[Cayley-Hamilton]
+Every matrix $A$ satisfies its own characteristic equation, i.e.,
+$$p_A(A) = 0.$$
+\end{theorem}
+\begin{proof}
+Let $Q(s) = sI - A$ and $P(s)$ defined as the matrix of cofactors of $Q(s)$, i.e., 
+$$P_{ij}(s) = (-1)^{i+j}D_{ji}(s)$$
+where $D_{ij}(s)$ is the determinant of $(j,i)$th minor of $Q(s)$. Then we have 
+$$P(s)Q(s) = \det (Q(s)) I = p_A(s)I.$$
+Since the coefficients of $Q$ commutes with $A$, we have 
+\begin{align*}
+    P(A)Q(A) = p_A(A)I = 0
+\end{align*}
+hence, $p_A(A) = 0$.
+\end{proof}
+
+\medskip
+
+\begin{lemma}
+Let $P(s), Q(s)$ and $R(s)$ be polynomials in $s$ with $n\times n$ matrices $P_k, Q_k, R_s$ as coefficients. Suppose
+\begin{align*}
+    P(s) = \sum P_k s^k, Q(s) = \sum Q_k s^k, R(s) = \sum R_k s^k
+\end{align*}
+and 
+$$P(s)Q(s) = R(s).$$
+Also, $A$ commutes wit each $Q_k$, then we have 
+$$P(A)Q(A) = R(A).$$
+\end{lemma}
+\begin{proof}
+Since $P(s)Q(s) = R(s)$, we have
+\begin{align*}
+    \sum P_k s^k \sum Q_k s^k = \sum R_k s^k
+\end{align*}
+which implies 
+\begin{align*}
+    R_k = \sum_{i+j=k} P_i Q_j.
+\end{align*}
+Then, substituting by $A$, we have
+\begin{align*}
+    P(A)Q(A) & = \sum P_k A^k \sum Q_k A^k \\
+    & = \sum_{i,j} P_i A^i Q_j A^j \\
+    & = \sum_{i,j} P_i Q_j A^{i+j} \\
+    & = \sum_{i+j=k} P_i Q_j A^{i+j} = \sum R_k A^k = R(A).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\section{Generalized Eigenvectors and Spectral Theorem}
+\begin{definition}
+A nonzero vector $u$ is said to be a generalized eigenvector of $A$ corresponding to eigenvalue $\lambda$ if 
+$$\left(A - \lambda I\right)^m u = 0$$
+for some $m\in\mathbb{N}$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}[Spectral Theorem]
+Every vector in $\mathbb{C}^n$ can be written as a sum of eigenvectors of $A$, genuine or generalized.
+\end{theorem}
+\begin{proof}
+Let $x$ be any vector, then $p_A(A)x = 0$. We factor polynomial as $$p_A(\lambda) = \prod^J_{j=1}\left(\lambda - \lambda_j\right)^{m_j}$$ where $\lambda_j$ are distinct eigenvalues of $A$. Then we have
+\begin{align*}
+    p_A(A) = \prod^J_{j=1}\left(A - \lambda_j\right)^{m_j} = 0 \\
+    \Rightarrow \prod^J_{j=1}\left(A - \lambda_j\right)^{m_j}x = 0.
+\end{align*}
+
+Let $p_j = \left(\lambda - \lambda_j\right)^{m_j}$, then $x\in N_{p_1(A)p_2(A)\cdots p_J(A)}$, i.e., $x$ belongs to the null space of $p_1p_2\cdots p_J(A)$. We claim: 
+\begin{align*}
+    N_{p_1p_2\cdots p_J(A)} = \oplus^J_{i=1} N_{p_i(A)}.
+\end{align*}
+If this is true, then $x = \sum^J_{i=1}x_i, x_i\in N_{p_j(A)}$. Then we need a lemma.
+
+\begin{lemma}
+Let $p, q$ be a pair of polynomials, with complex coefficients, and $p,q$ have no common zeros. Then, we have
+\begin{enumerate}[label=(\arabic*)]
+    \item There exist two polynomials $a,b$, such that $ap+bq = 1$.
+    \item Let $A$ be a square matrix, then 
+    $$N_{p(A)q(A)} = N_{p(A)} \oplus N_{q(A)}.$$
+    \item Let $P_k k = 1, \cdots, m$ be polynomials and they have no common zeros, then 
+    $$N_{p_1(A)\cdots p_m(A)} = N_{p_1(A)} \oplus\cdots\oplus N_{p_m(A)}.$$
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Let $\mathcal{P} = \{ap+bq\}$, where $a,b$ are two polynomials, and let $d$ be a nonzero polynomial in $P$ with lowest degree. 
+    
+    First, we claim that $d$ divides both $p$ and $q$.Indeed, if not, then the division algorithm yields a remainder, i.e.,
+    $$r = p - md.$$
+    where the degree of $r$ is less than that of $d$. Since $p$ and $d$ belong to $\mathcal{P}$, then $r\in \mathcal{P}$, which is a contradiction. 
+    
+    Second, we claim that $d$ has degree zero. Suppose not, then by the fundamental theorem of algebra, $d$ would have a root. Since $d$ divides $p$ and $q$, and $p$ and $q$ have no common zeros, $d$ is a nonzero constant. Thus, $1\in \mathcal{P}$.
+    \item From (1), there are two polynomials $a$ and $b$ such that 
+    $$a(A)p(A) + b(A)q(A) = I.$$
+    For any $x$, we have
+    $$x = a(A)p(A)x + b(A)q(A)x \overset{\Delta}{=} x_1 + x_2 $$
+    and it is easy to see that if $x\in N_{p(A)q(A)}$, then $x\in N_{p(A)}$ and $x\in N_{q(A)}$. Also, suppose $x\in N_{p(A)}\cap N_{q(A)}$, the above equation implies 
+    $$x = a(A)p(A)x + b(A)q(A)x = 0,$$
+    Hence, $N_{p(A)q(A)} = N_{p(A)} \oplus N_{q(A)}$.
+    \item The third argument follows naturally.
+\end{enumerate}
+\end{proof}
+Now the proof of the theorem is completed.
+\end{proof}
+
+\medskip
+
+\section{Minimal Polynomial}
+
+We denote by $\mathcal{P}_A$ the set of all polynomials such that $p(A) = 0$. It is obvious $\mathcal{P}_A$ forms a linear space. Denote by $m = m_A$ a polynomial of smallest degree in $\mathcal{P}_A$, and we normalized $m$ to have coefficient $1$ at its highest degree. 
+
+Now we claim that any $p\in\mathcal{P}_A$ is a multiple of $m$. Indeed, we can write $p = qm +r$, where the degree of $r$ is less that that of $m$. Then we have 
+\begin{align*}
+    r(A) = p(A) - q(A)m(A) = 0
+\end{align*}
+then $r\in\mathcal{P}_A$, hence, $r = 0$, which proved the argument. And this polynomial $m$ is called the \emph{minimal polynomial} of $A$.
+
+Now we consider generalized eigenvector. We denote by $N_m = N_m(\lambda)$ the null space of $(A - \lambda I)^m$. The subspaces
+$N_m$, consist of generalized eigenvectors; they are indexed increasingly, i.e.,
+\begin{align*}
+    N_1\subset N_2 \subset N_3 \subset \cdots \subset \mathbb{C}^n.
+\end{align*}
+We denote by $d = d(\lambda)$ the smallest index such that
+\begin{align*}
+    N_d & = N_{d+k}, k\geq 1 \\
+    N_d & \neq N_{d-1}
+\end{align*}
+and $d$ is called the \emph{index} of the eigenvalue $\lambda$.
+
+\medskip
+
+\begin{remark}
+$A$ maps $N_d$ into itself, i.e., $N_d$ is an invariant subspace under the matrix $A$.
+\end{remark}
+\begin{proof}
+If $v\in N_d$, then $(A - \lambda I)^d v = 0$. Then, we have $(A - \lambda I)^d Av = A(A - \lambda I)^d v = 0$. Thus, $Av \in N_d$.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $\lambda_1,\cdots,\lambda_k$ be distinct eigenvalues of $A$, whose index is $d\left(\lambda_j\right) = d_j, 1\leq j \leq k$. Then,
+\begin{enumerate}[label=(\arabic*)]
+    \item $\mathbb{C}^n = \oplus^k_{j=1}N_{d_j}(\lambda_j).$
+    \item The minimal polynomial is $m_A = \prod^k_{j=1}\left(\lambda - \lambda_j \right)^{d_j}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item $\mathbb{C}^n$ is the span of generalized eigenvectors and others follows from spectral theorem.
+    \item For any $x\in\mathbb{C}^n$, we have $x = \sum^k_{j=1}x_j, x_j\in N_{d_j}(\lambda_j)$. Then, we have 
+    \begin{align*}
+        \prod^k_{j=1} \left(A - \lambda_j I\right)^{d_j}x = \sum^k_{j=1}\left(\prod^k_{j=1} \left(A - \lambda_j I\right)^{d_j} \right)x_j = 0
+    \end{align*}
+    Hence, we have 
+    \begin{align*}
+        \prod^k_{j=1} \left(A - \lambda_j I\right)^{d_j} = 0.
+    \end{align*}
+    Thus, we have $m(\lambda) = \prod^k_{j=1} \left(\lambda - \lambda_j I\right)^{d_j} = 0$. Since $m(A) = 0$, then $m\in \mathcal{P}_A$. Then we can have that $m$ is a multiple of $m_A$. Suppose $m_A = \prod^k_{j=1} \left(\lambda - \lambda_j I\right)^{e_j}, e_j\leq d_j$. Then, we have 
+    \begin{align*}
+        \mathbb{C}^n = N_{m_A(A)} = \oplus^k_{j=1}N_{(A-\lambda_j I)^{e_j}} = \oplus^k_{j=1}N_{(A-\lambda_j I)^{d_j}}
+    \end{align*}
+    which implies $e_j = d_j, 1\leq j \leq k$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Suppose $A$ and $B$ similar, then $A, B$ has the same distinct eigenvalues $\lambda_1, \cdots, \lambda_k$. Furthermore, the null space $N_{(A-\lambda_j I)^m}$ and $N_{(B-\lambda_j I)^m}$ has the same dimension for $1\leq j \leq k, m \geq 1$.
+\end{theorem}
+\begin{proof}
+Since $A$ and $B$ similar, then there exists nonsingular $S$ such that $A = SBS^{-1}$. Then we have 
+\begin{align*}
+    (A - \lambda I)^m = S(A - \lambda I)^m S^{-1}.
+\end{align*}
+If $v\in N_{(A-\lambda_j I)^m}$, then we have $S^{-1}v\in N_{(B-\lambda_j I)^m}$. Thus, $\dim N_{(A-\lambda_j I)^m} = \dim N_{(B-\lambda_j I)^m}$.
+\end{proof}
+
+\begin{remark}
+~\begin{enumerate}[label=(\arabic*)]
+    \item $A - \lambda I$ maps $N_{i+1}(\lambda)$ into $N_{i}(\lambda)$, where $N_{j}(\lambda) = N_{(A - \lambda I)^j}$.
+    \item $A - \lambda I$ defines a map from $N_{i+1}/N_i$ to $N_i/N_{i-1}$, for $i\geq 1$, and $N_0 = \{0\}$.
+    \begin{proof}
+    For all $x,y\in N_{i+1}$ and $x-y\in N_{i}$, we have $(A - \lambda I)x, (A - \lambda I)y \in N_{i}$ and $(A - \lambda I)x - (A - \lambda I)y \in N_{i-1}$.
+    \end{proof}
+\end{enumerate}
+\end{remark}
+
+\medskip
+
+\begin{lemma}
+The map $$A-\lambda I: N_{i+1}/N_i\to N_i/N_{i-1}$$ is one-to-one. Hence, $$\dim N_{i+1}/N_{i} \leq \dim N_{i}/N_{i-1}.$$
+\end{lemma}
+\begin{proof}
+Let $B = A - \lambda I$, if $\left\{B\{x\}_{N_{i+1}/N_{i}} \right\}_{N_{i}/N_{i-1}} = \{0\}$, then $Bx \in N_{i-1}$, which implies $\{x\}\in N_i$ and $\{x\}_{N_{i+1}/N_{i}} = \{0\}_{N_{i+1}/N_{i}}$. Thus, $A - \lambda I$ is one-to-one. 
+\end{proof}
+
+\medskip
+
+\section{Jordan Canonical Form}
+
+We want to construct a basis for $N_{d_j}(\lambda_j)$. For simplicity, assume $\lambda_j = 0$ and $d_j = 0$. Also, we have $N_1\subset N_2 \subset \cdots \subset N_d$, $A:N_{i+1}\to N_{i}, i\geq 1$ and $A:N_{i+1}/N_{i}\to N_{i}/N_{i-1}$. Now we preset how to construct Jordan Canonical form.
+\begin{enumerate}[label=Step \Roman*:]
+    \item Let $l_0 = \dim (N_d/N_{d-1}) \geq 1$. Let $x_1,\cdots,x_{l_0}$ be vectors such that $\{x_1\}, \cdots \{x_{l_0}\} \in N_d$ form a basis of $N_d/N_{d-1}$.
+    \item Let $l_1  = \dim (N_{d-1}/N_{d-2}) \geq l_0$, then $\{Ax_1\},\cdots, \{Ax_{l_0}\} \in N_{d-1}$ are linearly independent. If $l_1 > l_0$, we can pick $x_{l_0+1}, \cdots, x_{l_1}$ such that $\{Ax_1\},\cdots, \{Ax_{l_0}\}, x_{l_0+1}, \cdots, x_{l_1}$ form a basis of $N_{d-1}/N_{d-2}$.
+    \item Continue this process until $N_1$. Let $l_{d-1} = \dim N_1$ and $A:N_2\to N_1$ and add vectors $x_{l_{d-2}+1},\cdots,x_{l_{d-1}}$, and the rest is the similar. We thus constructed a basis of $N_d$.
+    \item We present the vectors in a list as below:
+    \begin{align*}
+        \begin{matrix}
+            x_1 & Ax_1 & \cdots & & A^{d-1}x_1 \\
+            \vdots &  &  & & \vdots \\
+            x_{l_0} & Ax_{l_0} & \cdots & & A^{d-1}x_{l_0} \\
+            x_{l_0+1} & Ax_{l_0+1} & \cdots & A^{d-2}x_{l_0+1} & \\
+            \vdots &  &  &  & \\
+            x_{l_1} & Ax_{l_1} & \cdots & A^{d-2}x_{l_1} & \\
+            \vdots &  &  &  & \\
+            x_{l_{d-2}+1} &  &  &  & \\
+            \vdots &  &  &  & \\
+            x_{l_{d-1}} &  &  &  & 
+        \end{matrix}
+    \end{align*}
+\end{enumerate}
+Also, we have 
+\begin{align*}
+    \dim N_d & = \dim N_1 + \dim N_2/N_1 + \cdots + \dim N_d/N_{d-1} \\
+    & = l_{d-1} + l_{d-2} + \cdots + l_0. \\
+\end{align*}
+and we claim that these vectors are linearly independent. Under this basis, we have 
+\begin{align*}
+    N_d = \oplus^{l_{d-1}}_{k=1} M_K
+\end{align*}
+where $M_k$ is the span of vectors in the $k$th row. Under the basis of $M_k$, $A$ has the representation
+\begin{align*}
+    J_m = \begin{pmatrix}
+    0 & 1 &  &  \\
+     &\ddots & \ddots & \\
+     &   & \ddots & 1 \\
+     &  &  & 0
+    \end{pmatrix}
+\end{align*}
+which is called a \emph{Jordan block} where $J_m(i,j) = 1$ for $j = i+1$ and $J_m(i,j) = 0$ otherwise.
+
+\medskip
+
+\begin{theorem}
+Any matrix $A$ is similar to its Jordan canonical form which consists diagonal blocks of the form 
+\begin{align*}
+    J_m = \begin{pmatrix}
+    \lambda & 1 &  &  \\
+     &\ddots & \ddots & \\
+     &   & \ddots & 1 \\
+     &  &  & \lambda
+    \end{pmatrix}
+\end{align*}
+where $\lambda$ is the eigenvalue of $A$.
+\end{theorem}
+
+\medskip
+
+Now we present more details about Jordan canonical form from other materials\cite{8}. We start from the beginning and consider nilpotent operator.
+\begin{example}
+Let $N\in\mathcal{L}(\mathbb{R}^4,\mathbb{R}^4)$ be the nilpotent operator defined by
+$$N(x_1,x_2,x_3,x_4) = (0,x_1,x_2,x_3).$$
+If $x = (1,0,0,0)$, then $\{N^3x, N^2x, Nx,x\}$ is a basis for $\mathbb{R}^4$. We denote by $M$ the matrix spanned by $\{N^3x, N^2x, Nx,x\}$. The matrix of $N$ with respect to this basis is 
+$$
+J = M^{-1}NM = \begin{pmatrix}
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0\\
+    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0
+\end{pmatrix}\begin{pmatrix}
+    0 & 0 & 0 & 0 \\
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0
+\end{pmatrix} \begin{pmatrix}
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0\\
+    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0
+\end{pmatrix} =  \begin{pmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0
+\end{pmatrix}.
+$$
+\end{example}
+
+\medskip
+
+\begin{example}
+Let $N\in\mathcal{L}(\mathbb{R}^6,\mathbb{R}^4)$ be the nilpotent operator defined by
+$$N(x_1,x_2,x_3,x_4,x_5,x_6) = (0,x_1,x_2,0,x_4,0).$$
+and there does not exist a vector $x\in\mathbb{R}^6$ such that $\{N^5x, N^4x, N^3x, N^2x, Nx, x\}$ form a basis of $\mathbb{R}^6$. If we take $v_1 = (1,0,0,0,0,0), v_2 = (0,0,0,1,0,0)$ and $v_3 = (0,0,0,0,0,1)$, then $\{N^2v_1, Nv_1, v_1, Nv_2, v_2, v_3\}$ form a basis of $\mathbb{R}^6$. The matrix of $N$ with respect to this basis is 
+\begin{align*}
+    J = \begin{pmatrix}
+    0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix}.
+\end{align*}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+\end{document}
