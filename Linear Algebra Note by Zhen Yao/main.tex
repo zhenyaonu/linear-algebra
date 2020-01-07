@@ -2905,6 +2905,7 @@ Let $B = A - \lambda I$, if $\left\{B\{x\}_{N_{i+1}/N_{i}} \right\}_{N_{i}/N_{i-
 \medskip
 
 \section{Jordan Canonical Form}
+\subsection{Proof of Jordan Canonical Form}
 
 We want to construct a basis for $N_{d_j}(\lambda_j)$. For simplicity, assume $\lambda_j = 0$ and $d_j = 0$. Also, we have $N_1\subset N_2 \subset \cdots \subset N_d$, $A:N_{i+1}\to N_{i}, i\geq 1$ and $A:N_{i+1}/N_{i}\to N_{i}/N_{i-1}$. Now we preset how to construct Jordan Canonical form.
 \begin{enumerate}[label=Step \Roman*:]
@@ -2964,6 +2965,7 @@ where $\lambda$ is the eigenvalue of $A$.
 
 \medskip
 
+\subsection{Another Proof}
 Now we present more details about Jordan canonical form from other materials\cite{8}. We start from the beginning and consider nilpotent operator.
 \begin{example}
 Let $N\in\mathcal{L}(\mathbb{R}^4,\mathbb{R}^4)$ be the nilpotent operator defined by
@@ -2997,7 +2999,7 @@ $$
 \medskip
 
 \begin{example}
-Let $N\in\mathcal{L}(\mathbb{R}^6,\mathbb{R}^4)$ be the nilpotent operator defined by
+Let $N\in\mathcal{L}(\mathbb{R}^6,\mathbb{R}^6)$ be the nilpotent operator defined by
 $$N(x_1,x_2,x_3,x_4,x_5,x_6) = (0,x_1,x_2,0,x_4,0).$$
 and there does not exist a vector $x\in\mathbb{R}^6$ such that $\{N^5x, N^4x, N^3x, N^2x, Nx, x\}$ form a basis of $\mathbb{R}^6$. If we take $v_1 = (1,0,0,0,0,0), v_2 = (0,0,0,1,0,0)$ and $v_3 = (0,0,0,0,0,1)$, then $\{N^2v_1, Nv_1, v_1, Nv_2, v_2, v_3\}$ form a basis of $\mathbb{R}^6$. The matrix of $N$ with respect to this basis is 
 \begin{align*}
@@ -3012,18 +3014,395 @@ and there does not exist a vector $x\in\mathbb{R}^6$ such that $\{N^5x, N^4x, N^
 \end{align*}
 \end{example}
 
+\medskip
 
+Next, we show that every nilpotent operator $N\in\mathcal{L}(X,X)$ behaves similarly to the examples above. Specifically, there is a finite collection of vectors $v_1, \cdots, v_n\in X$ such that there is a basis of $X$ consisting of the vectors of the form $N^k v_j \in X$ where $1\leq j \leq n$ and $k$ varies from $0$ to the largest nonnegative integer $m_j$ such that $N^{m_j}v_j\neq 0$. 
 
+\medskip
 
+\begin{theorem}
+Suppose $N\in \mathcal{L}(X,X)$ is nilpotent. Then there exist vectors $v_1, \cdots, v_n\in X$ and nonnegative integers $m_1, \cdots, m_n$ such that 
+\begin{enumerate}[label=(\arabic*)]
+    \item $N^{m_1}v_1, \cdots, Nv_1, v_1, \cdots, N^{m_n}v_n, \cdots, N v_n, v_n$ is a basis of $X$.
+    \item $N^{m_1+1}v_1 = N^{m_2+1}v_2 = \cdots = N^{m_n+1}v_n = 0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+We prove by induction and the theorem obviously holds for $\dim X = 1$, since the only nilpotent operator is $0$ and we can pick any nonzero vector as $v_1$ and $m_1 = 0$. 
 
+Because $N$ is nilpotent, then $N$ is not injective. Thus $N$ is not surjective and hence $R_N$ is a subspace of $X$, i.e., $\dim R_N \leq \dim X$. Thus we can apply the induction to the restriction operator $N|_{R_N}\in\mathcal{L}(R_N)$. We can ignore the case where $R_N = \{0\}$, since we can pick $v_1,\cdots,v_n$ be any basis and $m_1 = \cdots = m_n = 0$. 
 
+By induction applied to $N|_{R_N}\in\mathcal{L}(R_N)$, there exist $v_1,\cdots,v_n\in R_N$ and $m_1,\cdots,m_n$ such that 
+\begin{equation}\label{basis_1}
+    N^{m_1}v_1, \cdots, Nv_1, v_1, \cdots, N^{m_n}v_n, \cdots, N v_n, v_n
+\end{equation}
+is a basis of $R_N$ and 
+\begin{align*}
+    N^{m_1+1}v_1 = N^{m_2+1}v_2 = \cdots = N^{m_n+1}v_n = 0.
+\end{align*}
+Since $v_j\in R_N, 1\leq j \leq n$, then for any $j$, there exists a $u_j\in X$ such that $v_j = Nu_j$. Then $N^{k+1}u_j = N^k v_j$ for each $j$ and each nonnegative integer $k$. 
 
+We claim 
+\begin{equation}\label{basis_2}
+    N^{m_1+1}u_1, \cdots, Nu_1, u_1, \cdots, N^{m_n+1}u_n, \cdots, N u_n, u_n
+\end{equation}
+is linearly independent in $X$. Indeed, suppose $$\sum^n_{j=1}\sum^{m_j+1}_{i=0}N^{i}u_j = 0$$
+then we apply $N$ to both sides and we have
+\begin{align*}
+    \sum^n_{j=1}\sum^{m_j+1}_{i=0}c_{ij}N^{i+1}u_j = \sum^n_{j=1}\sum^{m_j+1}_{i=0}c_{ij}N^{i}v_j = 0
+\end{align*}
+which implies $c_{ij} = 0$ for all $i,j$.
 
+Now we extend (\ref{basis_2}) into a basis 
+\begin{equation}\label{basis_3}
+    N^{m_1+1}u_1, \cdots, Nu_1, u_1, \cdots, N^{m_n+1}u_n, \cdots, N u_n, u_n, w_1,\cdots, w_p
+\end{equation}
+of $X$. Also, each $Nw_j$ is in the range of $N$ and hence $Nw_j$ is in the span of (\ref{basis_1}), and for each $1\leq j\leq p$, there exists $x_j$ in the span of (\ref{basis_2}) such that $Nx_j = Nw_j$. And we define 
+$$u_{n+j} = w_j - x_j$$
+then we have $Nu_{n+j} = 0$. Furthermore, 
+\begin{equation}\label{basis_4}
+    N^{m_1+1}u_1, \cdots, Nu_1, u_1, \cdots, N^{m_n+1}u_n, \cdots, N u_n, u_n, u_{n+1},\cdots, u_{n+p}
+\end{equation}
+form a basis of $X$ since its span contains $w_j, 1\leq j\leq p$. This basis has the required form, completing the proof.
+\end{proof}
 
+\medskip
 
+\begin{definition}
+Suppose $T\in\mathcal{L}(X,X)$. A basis of $X$ is called a Jordan basis for $T$ if, with respect to this basis, $T$ has a block diagonal representation
+\begin{align*}
+    T = \begin{pmatrix}
+    A_1 &  & 0 \\
+     & \ddots &  \\
+    0 &  & A_p 
+    \end{pmatrix},
+\end{align*}
+where each $A_j$ is an upper-triangular matrix of the form
+\begin{align*}
+    A_j = \begin{pmatrix}
+    \lambda_j & 1 & & 0 \\
+     & \ddots &  \ddots & \\
+     &  & \ddots & 1 \\
+    0 & & & \lambda_j
+    \end{pmatrix}.
+\end{align*}
+and $\lambda_j$ is an eigenvalue of $T$.
+\end{definition}
 
+\medskip
 
+\begin{theorem}
+Suppose $X$ is a complex vector space. If $T\in\mathcal{L}(X,X)$, then there exists a basis of $X$ which is a Jordan basis for $T$.
+\end{theorem}
+\begin{proof}
+First consider a nilpotent operator $N\mathcal{L}(X,X)$ and the vector $v_1,\cdots,v_n \in X$ given by previous theorem. For each $j$, $N$ maps the first vector in the list $\{N^{m_j}v_j, \cdots, Nv_j,v_j\}$ to $0$ and each vector other than $N^{m_j}v_j$ to the previous one. Then, the previous theorem gives a basis of $X$ with respect to which, $N$ has a block diagonal matrix, where each one has the form 
+\begin{align*}
+    \begin{pmatrix}
+    0 & 1 & & 0 \\
+     & \ddots &  \ddots & \\
+     &  & \ddots & 1 \\
+    0 & & & 0
+    \end{pmatrix}.
+\end{align*}
+Thus, the theorem holds for nilpotent operators. 
 
+Now suppose $T\in\mathcal{L}(X,X)$, and let $\lambda_1,\cdots,\lambda_m$ be distinct eigenvalues of $T$. Then we have the generalized eigenspace decompisition
+\begin{align*}
+    X = G(\lambda_1, T)\oplus \cdots \oplus G(\lambda_m, T)
+\end{align*}
+where each $(T-\lambda_j I)|_{G(\lambda_j, T)}$ is nilpotent. Thus, some basis of each $G(\lambda_j,T)$ is a Jordan basis for $(T-\lambda_j I)|_{G(\lambda_j, T)}$. Putting these bases together gives a basis of $X$ that is a Jordan basis for $T$.
+\end{proof}
+
+\medskip
+
+\begin{example}
+Consider 
+\begin{align*}
+    A = \begin{pmatrix}
+    1 & -1 & 0 \\
+    -1 & 4 &  -1 \\
+    -4 & 13 & -3 
+    \end{pmatrix}.
+\end{align*}
+The characteristic polynomial of $A$ is 
+$$\lambda(\lambda-1)^2$$
+and the generalized eigenspace corresponding to $0$ is just the ordinary eigenspace, so there will be only one single Jordan block corresponding to $0$ in the Jordan form of $A$. Moreover, this block has size $1$ since $1$ is the exponent of $\lambda$ in the characteristic (and hence in the minimal polynomial as well) polynomial of $A$.
+
+Now we determine the dimension of the eigenspace corresponding to $\lambda = 1$, which is the dimension of the null space of
+\begin{align*}
+    A - I = \begin{pmatrix}
+    0 & -1 & 0 \\
+    -1 & 3 &  -1 \\
+    -4 & 13 & -4 
+    \end{pmatrix}.
+\end{align*}
+and row-reducing gives
+\begin{align*}
+    \begin{pmatrix}
+    0 & -1 & 0 \\
+    -1 & 3 &  -1 \\
+    -4 & 13 & -4 
+    \end{pmatrix} \to \begin{pmatrix}
+    -1 & 3 &  -1 \\
+    0 & -1 & 0 \\
+    0 & 0 & 0 
+    \end{pmatrix}.
+\end{align*}
+Thus, the dimension of the eigenspace corresponding to $\lambda = 1$ is $1$, since the null space is of dimension $1$, implying that there is only one Jordan block corresponding to $1$ in the Jordan form of $A$. Thus, the Jordan form of $A$ is
+\begin{align*}
+    J = \begin{pmatrix}
+    0 & 0 &  0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+    \end{pmatrix}.
+\end{align*}
+\end{example}
+
+\medskip
+
+\begin{example}
+Consider 
+\begin{align*}
+    A = \begin{pmatrix}
+    5 & -1 & 0 & 0 \\
+    9 & -1 & 0 & 0 \\
+    0 & 0 & 7 & -2 \\
+    0 & 0 & 12 & -3
+    \end{pmatrix}.
+\end{align*}
+The characteristic polynomial of $A$ is 
+$$(\lambda - 2)^2(\lambda - 3)(\lambda - 1)$$
+From the multiplicities, the generalized eigenspaces corresponding to $\lambda = 3$ and $\lambda = 1$ are the ordinary eigenspaces, so each of these give blocks of size $1$ in the Jordan form.
+
+The eigenspace corresponding to $\lambda = 2$ is the null space of 
+\begin{align*}
+    A - 2I = \begin{pmatrix}
+    3 & -1 & 0 & 0 \\
+    9 & -3 & 0 & 0 \\
+    0 & 0 & 5 & -2 \\
+    0 & 0 & 12 & -5
+    \end{pmatrix}
+\end{align*}
+and row-reducing gives
+\begin{align*}
+    \begin{pmatrix}
+    3 & -1 & 0 & 0 \\
+    9 & -3 & 0 & 0 \\
+    0 & 0 & 5 & -2 \\
+    0 & 0 & 12 & -5
+    \end{pmatrix} \to
+    \begin{pmatrix}
+    3 & -1 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 5 & -2 \\
+    0 & 0 & 0 & -1
+    \end{pmatrix}.
+\end{align*}
+Thus, the eigenspace is of dimension $1$, which implies there is only one Jordan block in the Jordan form of $A$, with size $2\times 2$. Hence, the Jordan form of $A$ is
+\begin{align*}
+    J = \begin{pmatrix}
+    2 & 1 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 3 & 0 \\
+    0 & 0 & 0 & 1
+    \end{pmatrix}.
+\end{align*}
+
+Next, we find the \emph{Jordan basis} which puts $A$ into its Jordan form. Recall that this should be a basis consisting of \emph{Jordan chains}. For the block of size $1$, the chain will be of length $1$ and consists of exactly one eigenvector for the corresponding eigenvalue. For $\lambda = 3$ and $\lambda = 1$, the corresponding eigenvectors are 
+\begin{align*}
+    \begin{pmatrix}
+    0 \\
+    0 \\
+    -1 \\
+    2
+    \end{pmatrix}, \begin{pmatrix}
+    0 \\
+    0 \\
+    -1 \\
+    3
+    \end{pmatrix}.
+\end{align*}
+Then we can find a eigenvector for $\lambda = 2$, which is 
+\begin{align*}
+    v_1 = \begin{pmatrix}
+    1 \\
+    3 \\
+    0 \\
+    0
+    \end{pmatrix}
+\end{align*}
+and we need to find the final vector in the Jordan chain for $\lambda = 2$. And the Jordan chain has the form of $(v, (A-2I)v)$. Then we can pick 
+\begin{align*}
+    \begin{pmatrix}
+    3 & -1 & 0 & 0 \\
+    9 & -3 & 0 & 0 \\
+    0 & 0 & 5 & -2 \\
+    0 & 0 & 12 & -5
+    \end{pmatrix} v = \begin{pmatrix}
+    1 \\
+    3 \\
+    0 \\
+    0
+    \end{pmatrix}
+\end{align*}
+which implies 
+\begin{align*}
+    v = \begin{pmatrix}
+    1 \\
+    2 \\
+    0 \\
+    0
+    \end{pmatrix}.
+\end{align*}
+Thus, the Jordan basis corresponding to $A$ is
+\begin{align*}
+    \begin{pmatrix}
+    1 \\
+    2 \\
+    0 \\
+    0
+    \end{pmatrix}, \begin{pmatrix}
+    1 \\
+    3 \\
+    0 \\
+    0
+    \end{pmatrix}, 
+    \begin{pmatrix}
+    0 \\
+    0 \\
+    -1 \\
+    2
+    \end{pmatrix}, \begin{pmatrix}
+    0 \\
+    0 \\
+    -1 \\
+    3
+    \end{pmatrix}.
+\end{align*}
+\end{example}
+
+\medskip
+
+\begin{example}
+Consider
+\begin{align*}
+    A = \begin{pmatrix}
+    1 & -1 & -2 & 3 \\
+    0 & 0 & -2 & 3 \\
+    0 & 1 & 1 & -1 \\
+    0 & 0 & -1 & 2
+    \end{pmatrix}.
+\end{align*}
+The characteristic polynomial of $A$ is 
+$$(\lambda - 1)^4$$
+and we need to determine the dimension of the eigenspace corresponding to $1$. And, $A - I$ can reduce as following
+\begin{align*}
+    \begin{pmatrix}
+    0 & -1 & -2 & 3 \\
+    0 & -1 & -2 & 3 \\
+    0 & 1 & 0 & -1 \\
+    0 & 0 & -1 & 1
+    \end{pmatrix} \to \begin{pmatrix}
+    1 & -1 & -2 & 3 \\
+    0 & 0 & -2 & 2 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+which implies there are two Jordan blocks corresponding to $1$ in the Jordan form of $A$. Then, there are two possibilities:
+\begin{align*}
+    \begin{pmatrix}
+    1 & 1 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 1 \\
+    0 & 0 & 0 & 1
+    \end{pmatrix}\,\, {\rm or}\,\, \begin{pmatrix}
+    1 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{pmatrix}
+\end{align*}
+with corresponding minimal polynomial $(\lambda - 1)^2$ or $(\lambda - 1)^3$.
+
+To determine which it is, we need to determine the length of the Jordan chains. We start with ordinary eigenvectors
+\begin{align*}
+    \begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    0
+    \end{pmatrix}, \begin{pmatrix}
+    1 \\
+    1 \\
+    1 \\
+    1
+    \end{pmatrix}
+\end{align*}
+and each will give a Jordan chain. Consider $v$ such that
+\begin{align*}
+    (A - I)v = \begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    0
+    \end{pmatrix}
+\end{align*}
+and we cannot find a solution for $v$, which implies this eigenvector is its own Jordan chain. Now we consider $w$ such that
+\begin{align*}
+    (A - I)w = \begin{pmatrix}
+    1 \\
+    1 \\
+    1 \\
+    1
+    \end{pmatrix}
+\end{align*}
+and it gives us 
+\begin{align*}
+    w = \begin{pmatrix}
+    1 \\
+    1 \\
+    -1 \\
+    0
+    \end{pmatrix}.
+\end{align*}
+Then we try to find $u$ such that
+\begin{align*}
+    (A - I)u = \begin{pmatrix}
+    1 \\
+    1 \\
+    -1 \\
+    0
+    \end{pmatrix}
+\end{align*}
+and it gives us
+\begin{align*}
+    u = \begin{pmatrix}
+    1 \\
+    -1 \\
+    0 \\
+    0
+    \end{pmatrix}.
+\end{align*}
+Thus, we can find a Jordan chain of length $3$:
+\begin{align*}
+    (u, (A-I)u,(A-I)^2u) = 
+    \begin{pmatrix}
+        \begin{pmatrix}1 \\ -1 \\ 0 \\ 0 \end{pmatrix}, & 
+        \begin{pmatrix}1 \\ 1 \\ -1 \\ 0 \end{pmatrix}, & 
+        \begin{pmatrix}1 \\ 1 \\ 1 \\ 1 \end{pmatrix}
+    \end{pmatrix}.
+\end{align*}
+Thus, the Jordan form of $A$ is 
+\begin{align*}
+    J = \begin{pmatrix}
+    1 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{pmatrix}.
+\end{align*}
+\end{example}
 
 
 
