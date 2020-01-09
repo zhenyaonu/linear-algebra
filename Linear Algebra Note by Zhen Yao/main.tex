@@ -48,7 +48,7 @@
 
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}{Proposition}[section]
 \newtheorem{exercise}{Exercise}[section]
@@ -1146,6 +1146,63 @@ Let $T:X\to U$ be a linear map, then
     \item Since ${\rm dim}\,R_T \leq {\rm dim}\, U < {\rm dim}\, X$, then we have ${\rm dim}\, N_T = {\rm dim}\,X - {\rm dim}\,R_T > 0$. Then there exists $x \neq 0, x\in N_T$ such that $T x = 0$.
     \item Since ${\rm dim}\,U = {\rm dim}\, X$, we have ${\rm dim}\,N_T = 0$. Then we have ${\rm dim}\,R_T = {\rm dim}\,U$. Thus $R_T = U$ and $T$ is an isomorphism.
 \end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Injectivity and Surjectivity}
+\begin{definition}
+A linear mapping $T:X\to U$ is called injective (or one-to-one) if $Tu = Tv$ implies $u = v$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+Injectivity is equivalent to null space equals $\{0\}$, i.e., if $T:X\to U$, then $T$ is injective if and only if $N_T = \{0\}$.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) Suppose $T$ is injective, and we need to prove that $N_T = \{0\}$. We already know that $\{0\}\subset N_T$. 
+    
+    Let $v\in N_T$, then we have $Tv = 0 = T(0)$. Since $T$ is injective, then we have $v = 0$. Thus, $N_T = \{0\}$.
+    \item ($\Leftarrow$) Suppose $N_T = \{0\}$. Let $u,v\in X$ such that $Tu = Tv$. Then we have $Tu - Tv = T(u - v) = 0$, which implies $u = v$. Thus, $T$ is injective.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{definition}
+A linear mapping $T:X\to U$ is called surjective (or onto) if its range equals $U$, i.e., $R_T = U$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+Suppose $X$ and $U$ are finite-dimensional vector spaces such that $\dim X > \dim U$, then no linear map from $X$ to $U$ is injective.
+\end{theorem}
+\begin{proof}
+Let $T:\mathcal{L}(X,U)$, then with Rank-Nullity theorem, we have
+\begin{align*}
+    \dim N_T & = \dim X - \dim R_T \\
+    & \geq \dim X - \dim U \\
+    & > 0
+\end{align*}
+Thus, $T$ is not injective.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Suppose $X$ and $U$ are finite-dimensional vector spaces such that $\dim X < \dim U$, then no linear map from $X$ to $U$ is surjective.
+\end{theorem}
+\begin{proof}
+Let $T:\mathcal{L}(X,U)$, then with Rank-Nullity theorem, we have
+\begin{align*}
+    \dim R_T & = \dim X - \dim R_T \\
+    & \leq \dim X \\
+    & < \dim U
+\end{align*}
+Thus, $T$ is not surjective.
 \end{proof}
 
 \medskip
@@ -2753,7 +2810,7 @@ Then, substituting by $A$, we have
 \medskip
 
 \section{Generalized Eigenvectors and Spectral Theorem}
-\begin{definition}
+\begin{definition}\label{spectral_theorem}
 A nonzero vector $u$ is said to be a generalized eigenvector of $A$ corresponding to eigenvalue $\lambda$ if 
 $$\left(A - \lambda I\right)^m u = 0$$
 for some $m\in\mathbb{N}$.
@@ -3403,6 +3460,254 @@ Thus, the Jordan form of $A$ is
     \end{pmatrix}.
 \end{align*}
 \end{example}
+
+\medskip
+
+\section{Commuting Maps}
+\begin{lemma}
+If $A,B$ have same eigenvalues $\{\lambda_j\}$ and if for each $\lambda_j$, we have
+$$\dim N_m(\lambda_j) = \dim M_m(\lambda_j),$$
+where $N_m(\lambda_j) = N_{(A - \lambda_j I)^m}$ and $M_m(\lambda_j) = N_{(B - \lambda_j I)^m}$, then $A, B$ are similar.
+\end{lemma}
+\begin{proof}
+By the construction of Jordan canonical form.
+\end{proof}
+\begin{remark}
+The inverse of this lemma is also true.
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+Suppose $A, B$ are $n\times n$ matrices, such that $AB = BA$, then there is a basis of $\mathbb{C}^n$ which consists of eigenvectors and generalized eigenvectors of both $A$ and $B$.
+\end{theorem}
+\begin{proof}
+Let $\{\lambda_j\}^K_{j=1}$ be $K$ distinct eigenvalues of $A$, then 
+\begin{align*}
+    \mathbb{C}^n = \oplus^K_{j=1} N_j
+\end{align*}
+where $N_j = N_{(A - \lambda_j I)^{d(\lambda_j)}}$. For any $x\in\mathbb{C}^n$, since $AB = BA$, then we have
+\begin{align*}
+    (A - \lambda_j I)^{d(\lambda_j)} B x = B (A - \lambda_j I)^{d(\lambda_j)} x.
+\end{align*}
+If $x\in N_j$, then $ (A - \lambda_j I)^{d(\lambda_j)} x = 0$, which implies $Bx\in N_j$. Then, $B$ is a map from $N_j$ into $N_j$. Applying Spectral theorem (\ref{spectral_theorem}) to $B|_{N_j}$, then we obtain a spectral decomposition of each $N_j$, i.e., $N_j$ has a basis consisting of eigenvectors and generalized eigenvectors of $B$. Thus, we obtain a basis of $\mathbb{C}^n$. 
+\end{proof}
+
+\begin{remark}
+If $A,B$ are both diagonalizable and $AB = BA$, then $A,B$ can be diagonalized at the same time, i.e., there exists nonsingular matrix $S$ such that $S^{-1}AS$ and $S^{-1}BS$ are both diagonal.
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+Every square matrix $A$ is similar to its transpose $A^T$.
+\end{theorem}
+\begin{proof}
+Since $\dim N_A = \dim N_{A^T}$, then $\dim N_{(A-\lambda I)^m} = \dim N_{(A^T-\lambda I)^m}$. Then, $A$ and $A^T$ have the same Jordan canonical form. Thus, $A$ and $A^T$ are similar.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $\lambda, \mu$ be distinct eigenvalues of $A$. Suppose $u$ is an eigenvector with respect to $\lambda$ and $v$ is an eigenvector with respect to $\mu$, i.e., $Au = \lambda u, Av = \mu v$. Then $u^Tv = 0$.
+\end{theorem}
+\begin{proof}
+We have 
+\begin{align*}
+    v^T A u & = u^T A^T v \\
+    \Rightarrow \lambda v^T u & = \mu u^T v.
+\end{align*}
+Since $\lambda \neq \mu$, we have $u^T v = 0$.
+\end{proof}
+
+\medskip
+
+\chapter{Euclidean Structure}
+\section{Scalar Product and Distance}
+\begin{definition}
+An Euclidean structure in a linear space $X$ over $\mathbb{R}$ is furnished by a real-valued function of two vector arguments called a scalar product and denoted by $(x,y)$, which has the following properties:
+\begin{enumerate}[label=(\roman*)]
+    \item $(x,y)$ is a bilinear function.
+    \item Symmetricity: $(x,y) = (y,x)$.
+    \item Positivity: $(x,x) > 0$ except for $x = 0$. 
+\end{enumerate}
+\end{definition}
+\begin{remark}
+Scalar product is also called inner product or dot product.
+\end{remark}
+
+\medskip
+
+\begin{definition}
+The Euclidean length (or the norm) of $x$ is defined by 
+\begin{align*}
+    \|x\| = \sqrt{(x,x)}.
+\end{align*}
+For any $x,y\in X$, $\|x- y\|$ is called the distance of these two vectors.
+\end{definition}
+
+\medskip
+
+\begin{theorem}[Schwarz Inequality]
+For any $x,y\in X$, $\left|(x,y)\right| \leq \|x\| \|y\|$.
+\end{theorem}
+\begin{proof}
+Consider, for all $t$, we have
+\begin{align*}
+    q(t) & = \|x+ty\|^2 \\
+    & = (x+ty,x+ty) \\
+    & = (x,x) + (x,ty) + (ty,x) + (ty,ty) \\
+    & = \|x\|^2 + 2t (x,y) + t^2 \|y\|^2  \geq 0
+\end{align*}
+Thus, we have 
+\begin{align*}
+    4\left|(x,y)\right|^2 - & 4 \|x\|^2 \|y\|^2 \leq 0 \\
+    \Rightarrow \left|(x,y)\right| & \leq \|x\| \|y\|.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{definition}
+Suppose $x,y\neq 0$, we define the angle $\theta$ between $x$ and $y$ by
+\begin{align*}
+    \cos \theta = \frac{(x,y)}{\|x\| \|y\|}.
+\end{align*}
+\end{definition}
+
+\medskip
+
+\begin{corollary}
+$$\|x\| = \max_{\|y\| = 1} (x,y).$$
+\end{corollary}
+\begin{proof}
+Let $y = \frac{x}{\|x\|}$, then $\|x\| = \left(x, \frac{x}{\|x\|}\right) \leq \max_{\|y\| = 1} (x,y)$. With Schwarz inequality, we have $\max_{\|y\| = 1} (x,y) \leq \|x\|$. Thus, we have the desired result.
+\end{proof}
+
+\medskip
+
+\begin{theorem}[Triangle Inequality]
+$$\|x+y\|\leq \|x\| + \|y\|.$$
+\end{theorem}
+\begin{proof}
+$$\|x+y\|^2 = (x+y, x+y) = \|x\|^2 + 2(x,y) + \|y\|^2 \leq (\|x\| + \|y\|)^2.$$
+\end{proof}
+
+\medskip
+
+\begin{definition}
+Two vectors $x$ and $y$ are called orthogonal (perpendicular) if $(x,y) = 0$, denoted by $x \perp y$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}[Pythagorean Theorem]
+$\|x-y\|^2 = \|x\|^2 + \|y\|^2$ holds if $x \perp y$.
+\end{theorem}
+
+\medskip
+
+\begin{definition}
+Let $X$ be a finite-dimensional linear space with an Euclidean structure. A basis $x_1, \cdots, x_n$ is called orthonormal if 
+$$(x_i, x_j) = \delta_{ij}, \forall 1\leq i,j\leq n.$$
+\end{definition}
+
+\medskip
+
+\begin{theorem}[Gram-Schmidt]
+Given a basis $y_1,\cdots,y_n$ of a finite-dimensional linear space $X$, then there is an orthonormal basis $x_1,\cdots,x_n$ such that $x_k$ is a linear combination of $y_1,\cdots,y_n, 1\leq k \leq n$.
+\end{theorem}
+\begin{proof}
+Define
+\begin{align*}
+    x_1 & = \frac{y_1}{\|y_1\|} \\
+    x_2 & = \frac{y_2 - (y_2,x_1)x_1}{\|y_2 - (y_2,x_1)x_1\|} \\
+    & \vdots \\
+    x_k & = \frac{y_{k+1} - \sum^k_{j=1}(y_{k+1},x_j)x_j}{\|y_{k+1} - \sum^k_{j=1}(y_{k+1},x_j)x_j\|}.
+\end{align*}
+We claim that $x_1,\cdots,x_n$ form an orthonormal basis of $X$.
+\end{proof}
+
+\medskip
+
+Let $x_1,\cdots,x_n$ be an orthonormal basis of $X$ and assume 
+\begin{align*}
+    x = \sum^n_{j=1} a_j x_j, y = \sum^n_{j=1} b_j y_j,
+\end{align*}
+then $(x,y) = \sum^n_{j=1} a_jb_j$ and $\|x\|^2 = \sum^n_{j=1} a_j^2$.  The mapping $x\mapsto (x_1,\cdots,x_n)$ carries Euclidean structure of $X$ into $\mathbb{R}^n$, and we could identify $x$ with $\mathbb{R}^n$.
+
+Consider inner product $(x,y)$, for $\forall x\in X$, we fix $y$, then $(x,y)$ is a linear functional on $X$. We can write it as 
+\begin{align*}
+    y \mapsto l_y \in X'
+\end{align*}
+then $y$ is in dual space of $X$.
+
+\medskip
+
+\begin{theorem}
+Every linear functional $l\in X'$ can be written in the form $l(x) = (x,y)$ for some $y\in X$. The mapping $l \mapsto y$ is an isomorphism of $X$ and $X'$.
+\end{theorem}
+\begin{proof}
+Let $x_1,\cdots,x_n$ be an orthonormal basis of $X'$. Let $y = \sum^n_{j=1}l(x_j)x_j$, then for any $x = \sum^n_{j=1}a_jx_j$, we have
+\begin{align*}
+    l(x) = \sum^n_{j=1}l(a_j) x_j = \sum^n_{j=1}\sum^n_{i=1} l(x_j) a_i (x_j, x_i) = (x,y).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\section{Orthogonal Complement and Projection}
+\begin{definition}
+Let $Y$ be a subspace of $X$. The orthogonal complement of $Y$ is $$Y^\perp = \{x\in X | (x,y) = 0, \forall y \in Y\}.$$
+Recall that we defined before $Y^\perp = \{l\in X' | l(y) = 0, \forall y \in Y\}$, these two definitions match if we identify $X'$ with $X$.
+\end{definition}
+
+
+\medskip
+
+\begin{theorem}
+For any subspace $Y\subset X$, we have
+\begin{align*}
+    X = Y \oplus Y^\perp.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Let $y_1,\cdots,y_k$ be an orthogonal basis of $Y$. We can expend it to a basis of $X$: $y_1,\cdots,y_k, \widetilde{y_{k+1}}, \cdots, \widetilde{y_{n}}$. With Gram-Schmidt theorem, we obtain an orthonormal basis $y_1,\cdots,y_k,y_{k+1},\cdots,y_n$ of $X$. 
+
+We claim that $Y^\perp = {\rm span}\{y_{k+1},\cdots,y_n\}$. Indeed, ${\rm span}\{y_{k+1},\cdots,y_n\}\subset Y^\perp$ and $\dim Y^\perp = n-k$, and then they are equal.
+\end{proof}
+
+\medskip
+
+\begin{definition}
+Given a subspace $Y$ of $X$, $X = Y \oplus Y^\perp$, and for any $x\in X$, $x = y + y^\perp$, where $y\in Y, y^\perp$. The component $y$ is called the orthogonal projection of $x$ into $Y$, denoted by $$y = P_Y x.$$ 
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+$P_Y$ is linear and $P_Y^2 = P_Y$, i.e., $P_Y$ is a projection.
+\end{theorem}
+\begin{proof}
+Let $y_1,\cdots,y_n$ be an orthonormal basis of $X$, $Y = {\rm span}\{y_1,\cdots,y_k\}$ and $Y^\perp = {\rm span}\{y_{k+1},\cdots,y_n\}$. Then for any $x\in X$, $x = \sum^n_{j=1}a_j y_j$, and we have
+\begin{align*}
+    P_Y(x) = \sum^k_{j=1} a_j y_j.
+\end{align*}
+Thus, $P_Y^2 = P_Y$ follows naturally.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $Y$ be a linear subspace of Euclidean space $X$, and $x\in X$, then 
+\begin{align*}
+    \|x - P_Y x\| = \min_{z\in Y} \|x - z\|.
+\end{align*}
+\end{theorem}
+
+
+
+
 
 
 
