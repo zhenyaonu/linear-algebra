@@ -27,6 +27,8 @@
 \usepackage{stackengine,wasysym}
 \usepackage{aligned-overset}
 \usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
 \graphicspath{ {images/} }
 
 
@@ -3522,6 +3524,417 @@ Since $\lambda \neq \mu$, we have $u^T v = 0$.
 
 \medskip
 
+\section{Exercises}
+\begin{exercise}
+Let $A$ be an invertible $n\times n$ matrix, show that there exists a
+polynomial $g$ such that
+$$
+A^{-1}=g\left(A\right).
+$$
+\end{exercise}
+\begin{proof}
+Since $A$ is invertible, then $A$ has no zero engenvalues. Thus, the characteristic polynomial $P(x)$ for $A$ has constant terms, which can be written as $P(x)= x^n + a_{n-1} x^{n-1} + \cdots + a_0$. Also, we know that $P(A)=0$, thus we have
+\begin{align*}
+    & A^n + a_{n-1} A^{n-1} + \cdots + a_0 = 0 \\
+    \Rightarrow & A^{-1} = -\frac{1}{a_0}(A^{n-1}+a_{n-1}A^{n-2}+\cdots+a_1) = g(A)
+\end{align*}
+Then $A^{-1}=g(A)$, the proof is complete. 
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let
+\begin{align*}
+  A=\left(
+    \begin{array}
+    [c]{cc}%
+    A_{1} & \\
+    & A_{2}%
+    \end{array}
+    \right).  
+\end{align*}
+Show that the minimal polynomial $m_{A}$ is the least common multiple of
+$m_{A_{1}}$ and $m_{A_{2}}$.
+\end{exercise}
+\begin{proof}
+From the form of $A$, we can know that $\det(\lambda-IA)=\det(\lambda-IA_1)\det(\lambda-IA_1)$. Then, for any polynomial $T(x)$ such that $T(A)=0$, then we have $T(A_1)=0$ and $T(A_2)=0$. And since $m_A$, $m_{A_1}$ and $m_{A_2}$ are minimal polynomials corresponding to $A$, $A_1$ and $A_2$, then we have $T(x)=m_1 m_{A_1}(x)$ and $T(x)=m_2 m_{A_1}(x)$ for some $m_1, m_2$. Also, we have $m_A(x)|T(x)$, then we have $m_{A_1}(x)|m_A(x)$ and $m_{A_1}(x)|m_A(x)$, then $m_A$ is the least common multiple of $m_{A_{1}}$ and $m_{A_{2}}$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Find the minimal polynomial $m_{A}$ for%
+$$
+A=\left(
+\begin{array}
+[c]{ccc}%
+1 & -1 & 1\\
+0 & 2 & 0\\
+0 & 0 & 2
+\end{array}
+\right)  .
+$$
+\end{exercise}
+\begin{proof}
+The characteristic polynomial for $A$ is that $P(\lambda)=(\lambda-1)(\lambda-2)^2$. Then the minimal polynomial is $m_A=(\lambda-1)(\lambda-2)$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be an $n\times n$ matrix where $n\geq2$ satisfying
+$\operatorname*{rank}A=1$.
+\begin{enumerate}[label=(\arabic*)]
+    \item Show that there exists two column vectors $a,b$ such that $A=ab^{T}$.
+    \item Show that the minimal polynomial
+    $$m_{A}=\lambda^{2}-\left(  a^{T}b\right)  \lambda.$$
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Since $\text{rank}A=1$, then the image of $A$ is one-dimensional. Thus, there exist $u,v\in \mathbb{R}^n$ such that $Au=kv$ for a fixed $v$. It also holds for a basis for $\mathbb{R}^n$, then every column of $A$ is a multiple of $v$. Then there exists $(w_1, w_2,\cdots,w_n)\in\mathbb{R}^n$, such that
+    \begin{align*}
+        A=v(w_1, w_2,\cdots,w_n)
+    \end{align*}
+    then we denote $v=a$, and $(w_1, w_2, \cdots, w_n) = b^T$, where $a,b\in\mathbb{R}^n$.Then $A=ab^T$.
+    \item We have $A^2 = ab^Tab^T = a(b^Ta)b^T = (b^Ta)ab^T = (b^Ta)A$, which implies $q(A)=A^2-(b^Ta)A=0$. This polynomial satisfies that $q(A)=0$, then $m_a|q(\lambda) = \lambda^2-(b^Ta)\lambda$. Also, $m_A$ cannot be $\lambda$ or $\lambda-(b^Ta)$, since this means $A$ is a scalar. Thus, $m_A = \lambda^2-(b^Ta)\lambda$. The proof is complete.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A_{k}$, $1\leq k\leq K$ be $n\times n$ matrices satisfying%
+$$
+A_{i}A_{j}=A_{j}A_{i}\text{ for any }1\leq i,j\leq k.
+$$
+Show the existence of a basis of $\mathbb{C}^{n}$ which consists of
+eigenvector and generalized eigenvectors of $A_{k}$ for each $1\leq k\leq K$.
+\end{exercise}
+\begin{proof}
+Let $\{\lambda_j\}^J_{j=1}$ be $J$ distinct eigenvalues of $A_1$, and then we have
+\begin{align*}
+    \mathbb{C}^n = \bigoplus^J_{j=1}N_j
+\end{align*}
+where $N_j=N_{(A_1-\lambda_j I)^{d_j}}$, $d_j$ is index of $j$th eigenvalue $\lambda_j$. For $\forall x\in\mathbb{C}^n$, since $A_1 A_i=A_i A_1,2\leq i \leq K$, then we have $(A_1-\lambda_j I)^{d_j}A_i=A_i(A_1-\lambda_j I)^{d_j}$. Thus, if $x\in N_k$
+\begin{align*}
+    (A_1-\lambda_j I)^{d_j}A_ix =A_i(A_1-\lambda_j I)^{d_j}x = 0
+\end{align*}
+which means $A_i x\in N_j$. Thus, $A_i$ is a mapping from $N_j$ to $N_j$. Now we apply Spectral Theorem to the linear mapping $A_i$ and we know that $N_j$ has a basis consisting of eigenvevtors and generalized eigenvevtors of $A_i$. And it is true for all $A_i, 2\leq i \leq K$. Thus, a basis of $\mathbb{C}^{n}$ consists of
+eigenvectors and generalized eigenvectors of $A_{j}$ for each $1\leq j\leq K$. The proof is complete.
+\end{proof}
+
+\noindent \textbf{Method II of proof}
+\begin{proof}
+We will prove it by induction on $\dim V$ and $1\leq k\leq K$. And assume we have pairwise commuting operators $A_1, A_2,\cdots, A_K$ on $V$. 
+
+When $\dim V = 1$, and in this case, all $A_i$ are scalars. Take $B = \{1\}$, and $k$ be arbitrary. Assume the result is true whenever $\dim V < l$, and $A_1, A_2, \cdots, A_k$ are pairwise commuting operators on $V$ if $\dim V < l$. And we want to show that if $\dim V = l$, and $A_1, \cdots, A_{k+1}$ are pairwise commuting operators on $V$, then there exists a basis of generalized eigenvectors. 
+
+For $A_1$, we have 
+\begin{align*}
+    \mathbb{C}^l = \bigoplus^m_{j=1}N_{\lambda_j}(A_1)
+\end{align*}
+since $A_1A_i = A_iA_1, 2 \leq i \leq k+1$, we have $A_i:N_{\lambda_j}(A_1)\rightarrow N_{\lambda_j}(A_1), \forall j = 1,\cdots, m$ and $\forall i = 1,2,\cdots, k+1$. 
+\begin{enumerate}[label=(\arabic*)]
+    \item If $m = 1$, then there exists a basis $B$ of $\mathbb{C}^1$ consisting of generalized eigenvectors for $A_2, \cdots, A_k,A_{k+1}$. Any vectors in $\mathbb{C}^l$ is a generalized eigenvectors for $A_1$ because $\mathbb{C}^l = N_{\lambda_1}(A_1)$, then any vectors in $B$ is a a generalized eigenvectors for $A_1, A_2, \cdots, A_{k+1}$.
+    \item If $m > 1$, then $N_{\lambda_j}(A_1)\neq \mathbb{C}^l, \forall j = 1,\cdots, k+1$. On $N_{\lambda_j}(A_1)$, we have $A_1|_{N_{\lambda_j}(A_1)}, A_2|_N_{\lambda_j}(A_1), \cdots, A_{k+1}|_N_{\lambda_j}(A_1)$. By induction, there exists a basis $\beta_j, j=1,2,\cdots, m$ of $N_{\lambda_j}(A_1)$, which are generalized eigenvectors for $A_1|_{N_{\lambda_j}(A_1)}, \cdots, A_{k+1}|_N_{\lambda_j}(A_1)$. Take 
+    \begin{align*}
+        \beta = \bigcup^m_{j=1}\beta_j
+    \end{align*}
+    then $\beta$ is a basis for $\mathbb{C}^l$ consisting of generalized eigenvectors for $A_1, A_2, \cdots, A_{k+1}$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $\lambda$ be an eigenvalue of an $n\times n$ matrix $A$. Suppose
+that%
+\begin{align*}
+    \dim N_{1}\left(\lambda\right) & = 2, \dim N_{2}\left(\lambda\right) = 4\\
+    \text{ and }\dim N_{3}\left(\lambda\right) & = \dim N_{4}\left(\lambda\right) = 5,
+\end{align*}
+Find the Jordan blocks of $A$ corresponding to $\lambda$.
+\end{exercise}
+\begin{proof}
+Since $\dim N_{3}\left(\lambda\right) = \dim N_{4}\left(\lambda\right) = 5$, then we can know that the index $d(\lambda) = 3$, then we can know the Jordan blocks of $A$ corresponding to $\lambda$ is 
+\begin{align*}
+    J = \left(\begin{array}
+    [c]{ccccc}%
+    \lambda & 1 & 0 & 0 & 0\\
+    0 & \lambda & 1 & 0 & 0\\
+    0 & 0 & \lambda & 0 & 0\\
+    0 & 0 & 0 & \lambda & 1\\
+    0 & 0 & 0 & 0 & \lambda
+    \end{array}\right).
+\end{align*}
+We can verify that this is the Jordan blocks we want. We can compute $N_{(J-\lambda I)}$, $N_{(J-\lambda I)^2}$, $N_{(J-\lambda I)^3}$ and $N_{(J-\lambda I)^4}$. We have
+\begin{align*}
+    J-\lambda I = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right)
+\end{align*}
+and it is obvious that $\dim N_{(J-\lambda I)} = 2$, since there are two $0$ column vectors. Similarly, we have 
+\begin{align*}
+    (J-\lambda I)^2 = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right), 
+    (J-\lambda I)^3 = (J-\lambda I)^4 = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right)
+\end{align*}
+and we can know that $\dim N_{(J-\lambda I)^2} = 4$ and $\dim N_{(J-\lambda I)^3} = \dim N_{(J-\lambda I)^3} = 5$. The proof is complete.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be a $5\times5$ rank one matrix, find all possible Jordan canonical forms of $A$. The order of Jordan blocks should be ignored.
+\end{exercise}
+\begin{proof}
+Since $A$ is rank one matrix, then there exists two column vectors $a,b$ such that $A=ab^T$, also we know that the minimal polynomial for $A$ is $m_A(\lambda) = \lambda^2 - \alpha \lambda$. So $A$ has eigenvalue $0$ with multiplicity $4$ and $\alpha$ with multiplicity $1$. There are several possible Jordan forms for eigenvalue $0$, which are
+\begin{align*}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right)
+\end{align*}
+and $$
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right).$$
+Since the null space of $A-0I$ has dimension $4$ and one of them is generated by eigenvalue $\alpha$. Thus, $\dim N_{A-0I}=3$, which means that there are $3$ blocks corresponding to eigenvalue $0$. Thus, we can know that all possible Jordan canonical forms of $A$ are
+\begin{align*}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right), \text{and}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let%
+$$
+A=\left(
+\begin{array}
+[c]{ccc}%
+1 & 1 & 1\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{array}
+\right)  .
+$$
+Find its eigenvectors and generalized eigenvectors. Find its Jordan canonical
+form $J$ and the corresponding matrix $S$ so that%
+$$
+A=SJS^{-1}\text{.}%
+$$
+\end{exercise}
+\begin{proof}
+Taking $A-\lambda I = 0$, we can have characteristic polynomial $p_A(\lambda) = (1-\lambda)^3$, which gives us eigenvalues $1$. Now we determine the null space of $A-1\dots I$
+\begin{align*}
+    A-I =\left(\begin{array}
+    [c]{ccc}%
+    0 & 1 & 1\\
+    0 & 0 & 0\\
+    0 & 0 & 0
+    \end{array}\right).
+\end{align*}
+So this eigenspace is dimensional-$2$. Hence there are two Jordan blocks corresponding to the eigenvalue 1 in the Jordan form. So we have its Jordan canonical form
+\begin{align*}
+    J = \left(\begin{array}
+    [c]{ccc}%
+    1 & 1 & 0\\
+    0 & 1 & 0\\
+    0 & 0 & 1
+    \end{array}\right).
+\end{align*}
+Then we can know the eigenvectors corresponding to $1$ are 
+\begin{align*}
+    v_1 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    0 \\
+    0 
+    \end{array}\right) 
+    \text{and}\,\,
+    v_2 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    -1 
+    \end{array}\right).
+\end{align*}
+Each of these will give Jordan chain and we compute $(A-I)w_1 = v_1$ and $(A-I)w_2 = v_2$. The second equation does not have solution, so we can know that
+\begin{align*}
+    w_1 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    0 
+    \end{array}\right).
+\end{align*}
+Then we have the engenvectors and generalized engenvectors, which are 
+\begin{align*}
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    0 
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    0 \\
+    0 
+    \end{array}\right),
+    \text{and}\,\,
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    -1 
+    \end{array}\right).
+\end{align*}
+Thus, we can find $S$, such that $AS=JS$, and we have
+\begin{align*}
+    S = \left(\begin{array}
+    [c]{ccc}%
+    1 & 1 & 1\\
+    0 & 1 & 1\\
+    0 & 0 & -1
+    \end{array}\right).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $P$ be the linear space of polynomials with real coefficients
+equipped with the scalar product%
+$$
+\left(  f,g\right)  =\int_{0}^{1}f\left(  x\right)  g\left(  x\right)  dx.
+$$
+\begin{enumerate}[label=(\arabic*)]
+    \item Using Gram-Schmidt process to generate an orthonormal basis of the span of vectors $\left\{  1,x^{2}\right\}$.
+    \item Find the projection of polynomial $x$ on the span of vectors $\left\{  1,x^{2}\right\}$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Set $y_1 = 1$ and $y_2 = x^2$, using Gram-Schmidt process, we can have 
+    \begin{align*}
+        x_1 & = \frac{y_1}{\left \|y_1\right \|} = \frac{1}{\sqrt{\int^1_0 1dx}} = 1 \\
+        x_2 & = \frac{y_2-(y_2,x_1)x_1}{\left \|y_2-(y_2,x_1)x_1\right \|} = \frac{x^2 - \frac{1}{3}}{\sqrt{\int^1_0 (x^2 - 1/3)^2}dx} = \frac{3\sqrt{5}x^2 - \sqrt{5}}{2}.
+    \end{align*}
+    \item Finding the projection of polynomial $x$ on the span of vectors $\left\{  1,x^{2}\right\}$ is equivalent to findind the solution for $a,b$ in the equations
+    \begin{align*}
+        (1,x-(a+bx^2)) & = 0 \\
+        (x^2,x-(a+bx^2)) & = 0 
+    \end{align*}
+    which gives us $b = \frac{15}{16}, a = \frac{3}{16}$. Thus, the projection is $\left(\frac{3}{16},\frac{15}{16}\right)$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Find the least squares solution to the over-determined system%
+\begin{align*}
+3x-y  &  =1,\\
+x+y  &  =1,\\
+2x+3y  &  =2.
+\end{align*}
+\end{exercise}
+\begin{proof}
+Writting these equations into $AX=b$, where $A = \left(\begin{array}
+    [c]{cc}%
+    3 & -1\\
+    1 & 1\\
+    2 & 3
+    \end{array}\right), X = \left(\begin{array}
+    [c]{c}%
+    x\\
+    y\\
+    \end{array}\right)$, and $b = \left(\begin{array}
+    [c]{c}%
+    1\\
+    1\\
+    2
+    \end{array}\right)$, then the least square least solution can be determined by $z = (A^TA)^{-1}A^T b = \left(\begin{array}
+    [c]{c}%
+    0.4638\\
+    0.3768\\
+    \end{array}\right)
+    $.
+\end{proof}
+
+
+\medskip
+
 \chapter{Euclidean Structure}
 \section{Scalar Product and Distance}
 \begin{definition}
@@ -3704,6 +4117,1005 @@ Let $Y$ be a linear subspace of Euclidean space $X$, and $x\in X$, then
     \|x - P_Y x\| = \min_{z\in Y} \|x - z\|.
 \end{align*}
 \end{theorem}
+\begin{proof}
+For any $x\in X$, we can write $x = x_1 + x_2$, where $x_1\in P_Y x, x_2\in Y^\perp$. Then, for any $z\in Y$, we have
+\begin{align*}
+    \|z - x\| = \|z - x_1\|^2 + \|x_2\| \geq \|x_2\|^2
+\end{align*}
+and the equation obtain equal sign only when $z = x_1 = P_Y x$.
+\end{proof}
+
+\medskip
+
+\section{Adjoint}
+
+Let $X,U$ be two Euclidean spaces and $A:X\to U$ is a linear map, then we can define its transpose $A':U'\to X'$ defined as follows, for any $l\in U'$:
+$$(A' l, x) = (l, Ax).$$
+We can identify $U'$ with $U$, $X'$ with $X$.
+
+\begin{definition}
+The transpose of a map $A$ of Euclidean space $X$ into $U$ is called the adjoint of $A$, denoted by $A^*:U\to X$, which is defined as follows:
+$$(A^* y, x) = (y, Ax).$$
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\roman*)]
+    \item If $A,B$ are two linear maps of $X$ into $U$, then $(A+B)^* = A^* + B^*$.
+    \item If $A:X\to U, C:U\to V$, then $(CA)^* = A^* C^*$.
+    \item If $A$ is a bijection from $X$ onto $U$, then $\left(A^{-1}\right)^* = \left(A^*\right)^{-1}$.
+    \item $\left(A^*\right)^* = A$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item For $\forall x\in X, \forall y\in U$, we have
+    \begin{align*}
+        \left((A+B)^*y, x\right) & = (y, (A+B)x) \\
+        & = (y, Ax + Bx) \\
+        & = (y, Ax) + (y, Bx) \\
+        & = (A^*y, x) + (B^*y, x) \\
+        & = ((A^* + B^*)y, x).
+    \end{align*}
+    \item We have $CA:X\to V, (CA)^*:V\to X$, and then for $\forall z\in V, \forall x\in X$,
+    \begin{align*}
+        \left((CA)^*z, x\right) & = (z, (CA)x) \\
+        & = (z, C(Ax)) \\
+        & = (C^* z, Ax) \\
+        & = (A^* C^* z, x).
+    \end{align*}
+    \item Claim $I^* = I$, and $I = A^{-1}A: X\to X$. Indeed,  for $\forall x_1, x_2\in X$,
+    \begin{align*}
+        (I^* x_1, x_2) & = (x_1, Ix_2) = (x_1, x_2) = (Ix_1, x_2).
+    \end{align*}
+    Then we have 
+    \begin{align*}
+        \left(A^{-1}A\right)^* & = A^* \left(A^{-1}\right)^* = I \\
+        \Rightarrow \left(A^*\right)^{-1} & = \left(A^{-1}\right)^*. 
+    \end{align*}
+    \item For $\forall x\in X$, we have
+    \begin{align*}
+        \left(A^{**}x, y\right) & = (x, A^*y) \\
+        & = (A^*y, x) \\
+        & = (y, Ax) \\
+        & = (Ax, y).
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+If we choose an orthogonal basis of $X$ and $U$, then $X$ and $U$ can be identified as $\mathbb{R}^m$ and $\mathbb{R}^n$. And $A:X\to U$ can be represented by a matrix $A:\mathbb{R}^m\to \mathbb{R}^n$, also $A^*:U\to A$ is represented by the transpose of $A$, denoted by $A'$.
+\end{remark}
+
+\section{Overdetermined Systems}
+
+Consider a matrix equation
+\begin{align*}
+    Ax = p,
+\end{align*}
+where $p_1,\cdots.p_m$ are the measured values, and $A$ is an $m\times n$ matrix. We shall
+consider the case where the number $m$ of measurements exceeds the number $n$ of quantities. 
+
+\medskip
+
+\begin{theorem}
+Let $A$ be $m\times n$ matrix, $m > n$, and suppose that $A$ has only the trivial nullvector $0$. Then the vector $x$ that mninimizes $\|Ax - p\|$ is the unique solution $z$ to the equation
+$$A^* A z = A^* p.$$
+\end{theorem}
+\begin{proof}
+The equation $A^* A z = A^* p$ has a unique solution if and only if $A^* A$ is invertible. Indeed, suppose $A^* Ay = 0$ for some $y \in \mathbb{R}^n$, then 
+\begin{align*}
+    (A^* A y, y) & = 0 \\
+    \Rightarrow (Ay, Ay) & = 0 \\
+    \Rightarrow Ay & = 0.
+\end{align*}
+Since $A$ has only trivial nullvector, then $y = 0$, then the solution is unique.
+
+Let $z$ be the minimizer, then we have
+\begin{align*}
+    Az - p \perp R_A,
+\end{align*}
+and for $\forall x\in\mathbb{R}^n$, $(Az - p, Ax) = 0$, which implies $(A^*Az - A^*p, x) = 0$. Thus, since it holds for all $x$, then we have $A^*Az = A^*p$.
+\end{proof}
+
+\begin{remark}
+If $A$ has a nontrivial nullvector, then the minimizer cannot be unique.
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+For any subspace $Y$ of $X$, $P_Y^* = P_Y$.
+\end{theorem}
+\begin{proof}
+For $\forall x_1, x_2\in X$, we have
+\begin{align*}
+    (x_1, P_Y x_2) = (P_Y x_1, P_Y x_2) = (P_Y x_1, x_2).
+\end{align*}
+which implies $P_Y^* = P_Y$.
+\end{proof}
+
+\medskip
+
+\section{Isometry and Orthogonal Group}
+
+\begin{definition}
+A mapping of a Euclidean space into itself is called an isometry if it preserves the distance of any paired points, i.e., for any $x, y\in X$, then 
+\begin{align*}
+    \|M(x) - M(y)\| = \|x - y\|.
+\end{align*}
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+Let $M$ be an isometry from $X$ into itself and $M(0) = 0$. Then:
+\begin{enumerate}[label=(\roman*)]
+    \item $M$ is linear.
+    \item $M^* M = I$ and $\det M = \pm 1$.
+    \item $M$ is invertible and its inverse is an isometry.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item For all $x\in X$, write $Mx = x'$, and then $\|x\| = \|x'\|$. And for any $x,y\in X$, we have $\|x' - y'\|^2 = \|x - y\|^2$. Then we have
+    \begin{align*}
+        \|x'\|^2 - 2(x', y') + \|y'\|^2 & = \|x\|^2 - 2(x, y) + \|y\|^2 \\
+        \Rightarrow (x', y') & = (x, y).
+    \end{align*}
+    
+    Let $z = x + y$, then we have $\|z'-(x'+y')\| - \|z-(x+y)\| = 0$, which implies $z' = x' + y'$. Also, let $z = cy$, then we have
+    \begin{align*}
+        \|z' - cy'\|^2 & = (z' - cy', z' - cy') \\
+        & = \|z'\|^2 - 2c (z', y') + c^2 \|y'\|^2 \\
+        & = \|z\|^2 - 2c (z, y) + c^2 \|y\|^2 \\
+        & = \|z - cy\| = 0
+    \end{align*}
+    then $z' = cy$. Combined, we have $M$ is linear.
+    \item For all $x,y\in X$, $(x,y) = (Mx, My) = (M^* M x, y)$, which implies $M^* M = I$.
+    \item $M$ is an isometry, implying $M$ is invertible. And since it one-to-one, also it is onto. Then $M^{-1}$ is also isometry. Indeed, 
+    \begin{align*}
+        \|M^{-1}x - M^{-1}y\| = \|M M^{-1}x - M M^{-1}y\| = \|x - y\|.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+Conversely, if $M:X\to X$ is a linear map such that $M^* M = I$, then $M$ preserves the distance.
+\end{remark}
+\begin{proof}
+$\|Mx\|^2 = (Mx, Mx) = (M^* M x, x) = (x, x) = \|x\|^2$.
+\end{proof}
+
+\medskip
+
+\begin{definition}
+A matrix that maps $\mathbb{R}^n$ onto itself isometrically is called orthogonal.
+\end{definition}
+
+\medskip
+
+\begin{proposition}[Properties of orthogonal]
+A matrix $M$ is orthogonal if and only if its columns are pairwise orthogonal unit vectors.
+\end{proposition}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) If $M$ is orthogonal, then $M$ preserves the product $$(Me_i, Me_j) = (c_i, c_j) = (e_i,e_j) = \delta_{ij}$$ 
+    where $M = (c_1,\cdots,c_n)$. Then $(c_i, c_j) = \delta_{ij}$ implies its columns are pairwise orthogonal unit vectors.
+    \item ($\Leftarrow$) If $(c_i, c_j) = \delta_{ij}$ for all $1\leq i, j\leq n$, then we have $M^* M = I$ naturally. Thus, $M$ is isometry.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{proposition}
+A matrix $M$ is orthogonal if and only if its rows are pairwise orthogonal unit vectors.
+\end{proposition}
+\begin{proof}
+It is obvious since $M^* = M^{-1}$.
+\end{proof}
+
+\begin{remark}
+If $M$ is orthogonal, then $M$ maps any orthogonal basis into another orthogonal basis. The inverse is also true.
+\end{remark}
+\begin{proof}
+Suppose $u_1,\cdots,u_n$ is orthogonal basis and $v_1,\cdots,v_n$ is also orthogonal basis, and $v_k = Mu_k, 1\leq k \leq n$. Then we have
+$V = (v_1,\cdots,v_n) = M (u_1,\cdots,u_n) = MU$. Thus we have $M = VU^{-1}$. Hence, $M$ is orthogonal.
+\end{proof}
+
+\medskip
+
+\section{Norm of a Linear Map}
+
+\begin{definition}
+The norm of a linear map $A:X\to U$ is defined by
+\begin{align*}
+    \|A\| = \sup_{\|x\| = 1} \|Ax\| = \sup_{\|x\| \leq 1} \|Ax\|.
+\end{align*}
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+Let $A$ be a linear mapping from the Euclidean space $X$ into the
+Euclidean space $U$, where $\|A\|$ is its norm. Then, 
+\begin{enumerate}[label=(\roman*)]
+    \item For any $z\in X$, $\|Az\|\leq \|A\|\cdot \|z\|$.
+    \item $\|A\| = \sup_{\|x\| = \|z\| = 1} (x, Az)$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item If $z = 0$, then it holds. If $z\neq 0$, then we have 
+    \begin{align*}
+        \|Az\| = \left\|A \frac{z}{\|z\|}\|z\|\right\| = \|z\|\cdot \left\|A \frac{z}{\|z\|}\right\| \leq \|A\|\cdot \|z\|.
+    \end{align*}
+    \item For any $x,z\in X$, and $\|x\| = \|z\| = 1$, then 
+    \begin{align*}
+        (x, Az) \leq \|x\| \cdot \|Az\| \leq \|Az\| \\
+        \Rightarrow \sup_{\|x\| = \|z\| = 1} (x, Az) \leq \|Az\|.
+    \end{align*}
+    
+    If $\|A\| = 0$, then $\sup (x, Az) = 0$, which implies $\|A\| \leq \sup (x, Az)$. If $\|A\| \neq 0$, then for all $\varepsilon > 0$, there exists $z \in X$ and $\|z\| = 1$ such that 
+    \begin{align*}
+        \|Az\| \geq \|A\| - \varepsilon.
+    \end{align*}
+    Take $x = \frac{Az}{\|Az\|}$, then we have 
+    \begin{align*}
+        (x, Az) = \frac{\|Az\|^2}{\|Az\|} & = \|Az\| \geq \|A\| - \varepsilon \\
+        \Rightarrow \|A\| - \varepsilon & \leq \sup_{\|x\| = \|z\| = 1} (x, Az) \\
+        \xrightarrow{\varepsilon \to 0} \|A\| & \leq \sup_{\|x\| = \|z\| = 1} (x, Az).
+    \end{align*}
+    Thus, we have $\|A\| = \sup_{\|x\| = \|z\| = 1} (x, Az)$.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+For any $1\leq i,j\leq n$, $\left|a_{ij}\right| \leq \|A\|$.
+\end{remark}
+\begin{proof}
+With the second argument in the previous theorem, $a_{ij} = (e_i,Ae_j) \leq \|A\|$.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\roman*)]
+    \item For all $k\in\mathbb{R}$, $\|kA\| = |k|\cdot \|A\|$.
+    \item $A,B:X\to U$, then $\|A + B\|\leq \|A\| + \|B\|$.
+    \item $A:X\to U, B:U\to V$, then $\|BA\| \leq \|B\|\cdot \|A\|$.
+    \item $\left\|A^*\right\| = \|A\|$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item If $k = 0$, then it holds. If $k\neq 0$, then $\|kAx\| = |k| \cdot \|Ax\|$, which implies
+    \begin{align*}
+        \|kA\| = \sup_{\|x\|=1} \|kAx\| = \sup_{\|x\|=1} |k| \cdot \|Ax\| = |k|\cdot \|A\|.
+    \end{align*}
+    \item For any $x\in X$, and $\|x\| = 1$, we have 
+    \begin{align*}
+        \|A + B\| \leq \sup \|(A+b)x\|  = \sup \|Ax + Bx\| \leq \sup  \|Ax\| + \sup \|Bx\| = \|A\| + \|B\|.
+    \end{align*}
+    \item For any $x\in X$, and $\|x\| = 1$, we have 
+    \begin{align*}
+        \|BA\| \leq \sup\|BAx\|\leq \|B\|\cdot \|Ax\| \leq \|B\|\cdot \|A\|.
+    \end{align*}
+    \item $A^*:U\to X$, for all $x\in X$ and all $u\in U$, we have $(A^* u, x) = (u, Ax) = (Ax, u)$. Thus, 
+    \begin{align*}
+        \left\|A^*\right\| = \sup_{\|x\| = \|u\| = 1} (A^*u,x) = \sup_{\|x\| = \|u\| = 1} (Ax,u) = \|A\|.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $X$ be a finite-dimensional Euclidean space and $A:X\to X$ is an invertible linear map. Let $B:X\to X$ be linear map such that 
+\begin{align*}
+    \|B - A\| \leq \frac{1}{\|A^{-1}\|}
+\end{align*}
+then $B$ is invertible.
+\end{theorem}
+\begin{proof}
+Let $C = A - B$, then $B = A - C = A\left(I - A^{-1}C\right)$. 
+
+It suffices to show that $I - A^{-1}C$ is invertible. Suppose by contradiction that for some $x\neq 0$, $\left(I - A^{-1}C\right)x = 0$. Then we have
+\begin{align*}
+    \|x\| & = \|A^{-1}C x\| \\
+    & \leq \|A^{-1}C\| \|x\| \\
+    & \leq \|A^{-1}\| \|C\| \|x\|.
+\end{align*}
+Since $\|C\| \leq \frac{1}{\|A^{-1}\|}$, then we have $\|x\| < \|x\|$, which is a contradiction. 
+
+Then, $I - A^{-1}C$ is invertible, so is $B$.
+\end{proof}
+
+\begin{remark}
+Invertible matrices form an open and dense set.
+\end{remark}
+
+\medskip
+
+\section{Completeness and Local Compactness}
+
+\begin{definition}
+A sequence of vectors $\{x_n\}$ in Euclidean space $X$ converges to $x\in X$ if $\|x_k - x\| \to 0$ if $k\to \infty$. We write $\lim_{k\to\infty}x_k = x$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+A sequence $\{x_n\}\subset X$ is called a Cauchy sequence if $\forall \varepsilon > 0$, there exists $N > 0$,  such that for all $k, j \geq N$, $\|x_k - x_j\| < \varepsilon$. 
+\begin{enumerate}[label=(\roman*)]
+    \item Completeness: every Cauchy sequence in a finite-dimensional Euclidean space is convergent.
+    \item Locally compactness: any bounded sequence in a finite-dimensional Euclidean space contains a convergent subsequence. 
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item Let $x,y$ be two vectors in $X$, and $a_j, b_j$ are their $j$th component respectively, then 
+    \begin{align*}
+        |a_j - b_j| \leq \|x - y\|.
+    \end{align*}
+    Denote by $a_{k,j}$ the $j$th component of $x_k$. Since $\{x_k\}$ is Cauchy sequence, then the sequence $\{a_{k,j}\}$ is also a Cauchy sequence. Then $\{a_{k,j}\}$ converges to a real number $a_j$. Denote $x = (a_1, \cdots, a_n)$, then we have 
+    \begin{align*}
+        \|x_k - x\| = \sum^n_{j=1} |a_{k,j} - a_j|^2
+    \end{align*}
+    it foolows that $\lim_{k\to\infty} x_k = x$.
+    \item Since $|a_{k,j}| \leq \|x_k\|$, then $|a_{k,j}| \leq M \in\mathbb{R}$ for all $k$. Since real numbers are locally compactness, then the theorem follows.
+\end{enumerate}
+
+\end{proof}
+
+\medskip
+
+\begin{corollary}
+$$\|A\| = \max_{\|x\| = 1} \|Ax\|.$$
+\end{corollary}
+\begin{proof}
+We know that $\|A\| = \sup_{\|x\| = 1} \|Ax\|$, then there exists a sequence $\{x_k\}$ such that $\|x_k\| = 1$ and $\lim_{k\to\infty} \|Ax_k\| = \|A\|$. Also there exists convergent subsequence $\|x_{n_k}\|$ of $\{x_k\}$, and denote by $\lim_{k\to\infty} x_{n_k} = x$. Then, we have $\|x\| = \lim_{k\to\infty} \|x_{n_k}\| = 1$. 
+
+Since $\lim_{k\to\infty} Ax_{n_k} = Ax$, indeed, we have
+\begin{align*}
+    \|Ax_{n_k} - Ax\| \leq \|A\| \cdot \|x_{n_k} - x\| \to 0,
+\end{align*}
+then we have 
+\begin{align*}
+    \|A\| = \lim_{k\to\infty} \|Ax_{n_k}\| = \|Ax\|.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $X$ be an Euclidean space and suppose $X$ is locally compact in the sense that any bounded sequence has a convergent subsequence. Then $X$ is of finite dimension.
+\end{theorem}
+\begin{proof}
+Assume $\dim X = \infty$, then there exists a sequence $\{x_k\}^\infty_{k=1}$ and any finite set of vectors are linearly independent (otherwise $X$ will be finite-dimensional). Then there exists $\{e_k\}^\infty_{k=1}$ such that $(e_i, e_j) = \delta_{ij}$. And for any $i\neq j$, we have $\|e_i - e_j\|^2  = 2$. 
+
+Thus, $\{e_k\}^\infty_{k=1}$ has no convergent subsequence, which is a contradiction.
+\end{proof}
+
+\medskip
+
+\begin{definition}
+A sequence of linear mappings $\{A_n\}$ from $X$ to $Y$ converges to $A:X\to Y$ if $\lim_{n\to\infty} \|A_n - A\| = 0$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+In finite-dimensional spaces, then $\lim_{n\to\infty}A_n = A$ if and only if, for all $x\in X$, $\lim_{n\to\infty} A_n x = Ax$, which is called weak convergence.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) If $\lim_{n\to\infty}A_n = A$, then 
+    \begin{align*}
+        \|A_n x - Ax\| \leq \|A_n - A\|\cdot \|x\| \xrightarrow{n \to 0} 0.
+    \end{align*}
+    \item ($\Leftarrow$) 
+    \begin{enumerate}[label=(\alph*)]
+        \item First, we show that $\{A_n\}$ is bounded. Let $\{e_i\}$ be an orthogonal basis of $X$. For each $e_i, 1\leq i\leq \dim X = N$, we have
+        \begin{align*}
+            \lim_{n\to\infty} A_n e_i = A e_i,
+        \end{align*}
+        then $\|A_n e_i\| \leq a_i$ for all $n$ and some $a_i \geq 0$. For any $x\in X$, $x = \sum^N_{i=1}x_i e_i$, then
+        \begin{align*}
+            \|A_n x\| & = \left\|\sum^N_{i=1}x_i A_n e_i\right\| \\
+            & \leq \sum^N_{i=1}a_i \|x_i\| \\
+            & \leq \left(\sum^N_{i=1}a_i^2\right)^{\frac{1}{2}} \cdot \left(\sum^N_{i=1}\|x_i\|^2\right)^{\frac{1}{2}} \\
+            &  = \left(\sum^N_{i=1}a_i^2\right)^{\frac{1}{2}} \|x\|.
+        \end{align*}
+        Thus, $\|A_n\| \leq \left(\sum^N_{i=1}a_i^2\right)^{\frac{1}{2}}$, which implies $\{A_n\}$ is bounded.
+        \item Second, we prove the convergence.
+        
+        Let $A:X\to Y$ be defined as $Ax = \lim_{n\to\infty}A_n x$. We claim $A$ is linear. For any $x\in X, \|x\| = 1$ and $\forall \varepsilon > 0$, there exists a sequence $\{x_k\}^{N_\varepsilon}_{k=1}$ such that $\|x_k\| = 1$ and for $1\leq k \leq N_\varepsilon$, $\|x_k - x\| \leq \varepsilon$. Thus, we have
+        \begin{align*}
+            \|A_n x_k  - Ax_k\| & \leq \|A_n x - A_n x_k\| + \|A_n x - A x\| + \|Ax_k - Ax\| \\
+            & \leq a\|x - x_k\| + \|A_n x - A x\| + \|A\|\cdot \|x_k - x\| \\
+            & \leq (a + \|A\|)\|x_k - x\| + \|A_n x - A x\| \xrightarrow{n\to\infty} 0. 
+        \end{align*}
+        Hence, $\lim_{n\to\infty}A_n = A$.
+    \end{enumerate}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Complex Euclidean Structure}
+
+\begin{definition}
+A complex Euclidean structure over a linear space $X$ over $\mathbb{C}$ is furnished by a complex valued function, called a scalar product or inner product, denoted by $(x,y)$, such that
+\begin{enumerate}[label=(\arabic*)]
+    \item $(x,y)$ is linear in $x$ when $y$ is fixed.
+    \item Conjuate: $(x,y) = \overline{(y,x)}$ for all $x,y\in X$.
+    \item Positivity: $(x,x) > 0$ for all $x\neq 0$.
+\end{enumerate}
+\end{definition}
+\begin{remark}
+For $x$ fixed, $(x, y)$ is a skew linear function of $y$, i.e.,
+\begin{align*}
+    (x, \alpha y_1 + \beta y_2) & = \overline{(\alpha y_1 + \beta y_2,x)} \\
+    & = \overline{(\alpha y_1,x) + (\beta y_2,x)} \\
+    & = \overline{\alpha} \overline{(y_1,x)} + \overline{\beta} \overline{(y_2,x)} \\
+    & = \overline{\alpha}(x, y_1) + \overline{\beta}(x, y_2).
+\end{align*}
+\end{remark}
+
+\medskip
+
+\begin{definition}
+The norm of $x\in X$ is defined as: $\|x\| = \sqrt{(x,x)}$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}[Schwarz Inequality]
+$$|(x,y)|\leq \|x\|\cdot \|y\|.$$
+\end{theorem}
+\begin{proof}
+We have 
+\begin{align*}
+    \|x+y\|^2 & = \|x\| + (x,y) + (y,x) + \|y\|^2 \\
+    & = \|x\| + 2\Re (x,y) + \|y\|^2.
+\end{align*}
+For any $\lambda$, $\|\lambda x + y\|^2 = \lambda^2 \|x\|^2 + 2\lambda \Re (x,y) + \|y\|^2 \geq 0$, then we have
+\begin{align*}
+    4\left|\Re (x,y)\right|^2 & - a\|x\|^2 \|y\|^2 \leq 0 \\
+    \Rightarrow \left|\Re (x,y)\right| & \leq \|x\|\cdot \|y\|. 
+\end{align*}
+Since $\left(e^{i\theta}x,y\right) = e^{i\theta}(x,y)$, then we pick $\theta$ such that $e^{i\theta}(x,y) > 0$. Thus, we have
+\begin{align*}
+    \left|(x,y)\right| = \left|\Re (e^{i\theta}x,y)\right| \leq \|x\|\cdot \|y\|.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{theorem}[Triangle Inequality]
+$$\|x+y\| \leq \|x\| + \|y\|.$$
+\end{theorem}
+\begin{proof}
+We have
+\begin{align*}
+    \|x+y\|^2 & = \|x\| + 2 \Re(x,y) + \|y\|^2 \\
+    & \leq \|x\| + 2\left|(x,y)\right| + \|y\|^2 \\
+    & \leq \|x\| + 2 \|x\| \cdot \|y\| + \|y\|^2 \\
+    & = (\|x\| + \|y\|)^2.
+\end{align*}
+\end{proof}
+
+\medskip
+
+Let $X, Y$ be two complex Euclidean spaces and $AX\to Y$. The adjoint $A^*$ of $A$ is defined as follows 
+\begin{align*}
+    (x, A^* y) = (Ax, y)
+\end{align*}
+then $A^* = \overline{A^T}$ as matrix. Fix $y$, $(Ax, y)$ is linear in $X$. We claim that there exists $z\in X$ such that $(x,z) = (Ax, y)$, then $A^* y = z$. Indeed, we define in $\mathbb{C}^n$:
+\begin{align*}
+    (x,y) = \left((x_1,\cdots,x_n), (y_1,\cdots,y_n)\right) = \sum^n_{i=1}x_i \overline{y_i}.
+\end{align*}
+Then, for $A = (a_{ij})_{n\times n}:\mathbb{C}^n \to \mathbb{C}^n$, we have
+\begin{align*}
+    (Ax, y) & = \sum_{1\leq i,j\leq n}a_{ij} x_j \overline{y_j} \\
+    & = \sum_{1\leq i,j\leq n}a_{ij} \overline{\overline{a_{ij}} y_i} \\
+    & = (x, A^* y).
+\end{align*}
+
+\medskip
+
+\begin{definition}
+A linear mapping of a complex Euclidean space into itself is called unitary if it is isometry.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+$M$ is unitary if and only if $M^*M = 1$. Hence, for a unitary map $M$, $|\det M| = 1$.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) Since $M$ is isometric, then we have $(x,y) = (Mx, My) = (M^* M x, y)$, which implies $M^* M = I$.
+    
+    Also, $\det M \det M^* = 1$ and $\det M = \det \overline{M}^T = \overline{\dim M}$. Thus, we have $|\det M| = 1$.
+    \item ($\Leftarrow$) If $M^*M = 1$, then we have
+    \begin{align*}
+        (x,y) = (M^* M x, y) = (Mx, My)
+    \end{align*}
+    which implies $M$ is isometric.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $A:\mathbb{R}^n \to \mathbb{R}^n$ or $A:\mathbb{C}^n \to \mathbb{C}^n$, then 
+\begin{align*}
+    \|A\| = \left(\sum_{1\leq i,j\leq n} \left|a_{ij}\right|^2\right)^{\frac{1}{2}}.
+\end{align*}
+\end{theorem}
+\begin{proof}
+For any $x\in \mathbb{C}^n$, we have
+\begin{align*}
+    \|Ax\|^2 & = \sum^n_{i=1} \left|\sum^n_{j=1}a_{ij} x_j\right|^2 \\
+    & \leq \sum^n_{i=1} \left(\sum^n_{j=1}\left|a_{ij}\right|^2 \right) \left(\sum^n_{j=1} x_j^2 \right) \\
+    & = \|x\| \left(\sum^n_{i=1}\sum^n_{j=1}\left|a_{ij}\right|^2 \right),
+\end{align*}
+then we have $\|A\|\leq \left(\sum^n_{i=1}\sum^n_{j=1}\left|a_{ij}\right|^2 \right)$.
+\end{proof}
+
+\begin{definition}
+The quantity $\left(\sum^n_{i,j=1}\left|a_{ij}\right|^2 \right)^{\frac{1}{2}}$ is called the Hilbert-Schmidt norm of the matrix $A$, denoted by $\|A\|_{HS}$. 
+\end{definition}
+
+\begin{remark}
+$\sum^n_{i,j=1}\left|a_{ij}\right|^2 = \tr A^*A = \tr AA^*$.
+\end{remark}
+
+\medskip
+
+\section{Spectral Radius}
+
+\begin{definition}
+The spectral radius $r(A)$ of a linear mapping $A:X\to X$ is defined as
+\begin{align*}
+    r(A) = \max_{j} \left|\lambda_j \right|
+\end{align*}
+where $\lambda_j$ are all possible eigenvalues.
+\end{definition}
+
+\begin{remark}
+$r(A), \|A\|, \|A\|_{HS}$ are measures of the sign of $A$.
+\end{remark}
+
+\medskip
+
+\begin{proposition}
+$\|A\| \geq r(A)$.
+\end{proposition}
+\begin{proof}
+Let $\lambda$ be an eigenvalue of $A$ such that $r(a) = \left|\lambda\right|$. Assume $x\neq 0$, $Ax = \lambda x$, then we have $\|A\|\cdot \|x\| \geq \|Ax\| = |\lambda|\cdot \|x\|$. Thus, $\|A\| \geq r(A)$.
+\end{proof}
+
+\begin{remark}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Take $A = \begin{pmatrix}
+    0 & 1  \\
+    0 & 0  
+    \end{pmatrix}$, then $r(A) = 0$ and $\|A\| \neq 0$. Then we can have strictly inequality.
+    \item If there exists orthogonal basis formed by eigenvectors, then $\|A\| = r(A)$.
+    \begin{proof}
+    Suppose $\{x_k\}$ is the orthogonal basis and $Ax_k = \lambda_k x_k$. And for any $x\in X$, $x = \sum^n_{k=1}x_k e_k$, then 
+    \begin{align*}
+        Ax = \sum^n_{k=1} x_k \lambda_k e_k
+    \end{align*}
+    where $\|x\|^2 = \sum^n_{i=1}|x_k|^2$. Then we have 
+    \begin{align*}
+        \|Ax\|^2 = \sum^n_{k=1} |x_k \lambda_k|^2 \leq r(A)^2 \|x\|^2. 
+    \end{align*} 
+    which implies 
+    \begin{align*}
+        \frac{\|Ax\|}{\|x\|} = \left\|A \frac{x}{\|x\|}\right\| \leq r(A).
+    \end{align*}
+    Since this is true for any $x$, and $\|A\| = \max_{\|x\|=1}\|Ax\|$, therefore $\|A\|\leq r(A)$. With previous proposition, we have $\|A\| = r(A)$.
+    \end{proof}
+\end{enumerate}
+\end{remark}
+
+\medskip
+
+\begin{theorem}[Gelfand's Formula]
+$$r(A) = \lim_{k\to\infty} \left(\left\|A^k\right\|\right)^{1/k}. $$
+\end{theorem}
+\begin{proof}
+First, we need a lemma.
+\begin{lemma}
+If $r(A) < 1$, then $\lim_{k\to\infty}A^k = 0$.
+\end{lemma}
+\begin{proof}
+Let $J$ be the Jordan canonical form of $A$, then $r(A) = r(J) < 1$. And we have 
+\begin{align*}
+    J =  \begin{pmatrix}
+    J_1 &  &  \\
+     & \ddots  &  \\
+     &   & J_l
+    \end{pmatrix}
+\end{align*}
+where $$J_s = \left(\begin{smallmatrix}
+    \lambda & 1 &  & \\
+     & \ddots  & \ddots & \\
+     &   & \ddots &  \\
+     &   &   & \lambda
+\end{smallmatrix}\right)_{n_s\times n_s}, 1\leq s\leq l.$$
+Then we have 
+\begin{align*}
+    J_s^k = \begin{pmatrix}
+    \lambda^k & \binom{k}{1}\lambda^{k-1} & \binom{k}{2}\lambda^{k-2} & \cdots & \binom{k}{n_s-1} \lambda^{k - n_s +1} \\
+     & \ddots  & \ddots &  & \vdots \\
+     &         & \ddots &  \ddots & \vdots \\
+     &         &        &  \ddots & \binom{k}{1}\lambda^{k-1} \\
+     &         &        &         & \lambda^k
+    \end{pmatrix}.
+\end{align*}
+We claim $\lim_{k\to\infty}\binom{k}{j}\lambda^{k-j} = 0, 0\leq j\leq n_s-1$ for $|\lambda| < 1$. Then we have $\lim_{k\to\infty} J_s^k = 0$, which implies $\lim_{k\to\infty} J^k = 0$. Since $A = MJM^{-1}$, then $\lim_{k\to\infty} A^k = 0$.
+\end{proof}
+
+Now we complete the proof of the theorem.
+\begin{enumerate}[label=(\arabic*)]
+    \item Since $\|A\|\geq r(A)$, then we have $\left\|A^k\right\| \geq \left(r\left(A^k\right) \right)^{\frac{1}{k}} = \left(r(A)^k \right)^{\frac{1}{k}}  = r(A)$. Then,
+    \begin{align*}
+        \liminf_{k\to\infty} \left(\left\|A^k\right\|\right)^{1/k} \geq r(A).
+    \end{align*}
+    \item Consider for any $\varepsilon > 0$ and let $A_\varepsilon = \frac{A}{\varepsilon + r(A)}$. Since $r(A_\varepsilon) < 1$, the above lemma implies that $\lim_{k\to\infty}A_\varepsilon^k = 0$ and hence $\lim_{k\to\infty}\left\|A_\varepsilon^k\right\| = 0$. In particular, there exists $K > 0$ such that for all $k \geq K$, $\left\|A_\varepsilon^k\right\| < 1$. Then, 
+    \begin{align*}
+        \left(\left\|A_\varepsilon^k\right\| \right)^{\frac{1}{k}} & < 1 \\
+        \Rightarrow \left\|A_\varepsilon^k\right\|^{\frac{1}{k}} & < \varepsilon + r(A) \\
+        \Rightarrow \limsup_{k\to\infty} \left\|A_\varepsilon^k\right\|^{\frac{1}{k}} & \leq \varepsilon + r(A)
+    \end{align*}
+    Thus, as $\varepsilon \to 0$, we have $\limsup_{k\to\infty} \left\|A_\varepsilon^k\right\|^{\frac{1}{k}} \leq r(A)$.
+\end{enumerate}
+Combined results above gives us $r(A) = \lim_{k\to\infty} \left(\left\|A^k\right\|\right)^{1/k}$.
+\end{proof}
+
+\medskip
+
+\begin{corollary}
+Suppose $A_1 A_2 = A_2 A_1$, then $r(A_1 A_2) \leq r(A_1) r(A_2)$.
+\end{corollary}
+\begin{proof}
+We can have $r(A_1 A_2) = \lim_{k\to\infty} \left\|(A_1 A_2)^k\right\|^{1/k}$, and $(A_1 A_2)^k = A_1^k A_2^k$ since they commute. Thus, 
+\begin{align*}
+    \left\|(A_1 A_2)^k\right\|^{1/k} \leq \left(\left\|A_1^k\right\|^{1/k} \right) \left(\left\|A_2^k\right\|^{1/k} \right)
+\end{align*}
+which implies $r(A_1 A_2) \leq r(A_1) r(A_2)$.
+\end{proof}
+
+\medskip
+
+\section{Exercises}
+\begin{exercise}
+Suppose $1\leq k\leq n$ and $x_{1},x_{2},\cdots x_{k}$ are $k$ vectors
+in $\mathbb{R}^{n}$ satisfying for any $1\leq i,j\leq k$,%
+$$
+\left(  x_{i},x_{j}\right)  =\delta_{ij}.
+$$
+For each $1\leq j\leq k$, let $a_{j}$ be the first component of $x_{j}$. Show
+that%
+$$
+\sum_{j=1}^{k}a_{j}^{2}\leq1.
+$$
+\end{exercise}
+\begin{proof}
+Since $(x_i,x_j) = \delta_{ij}, 1\leq i,j\leq n$, then we can arrange $x_1, x_2,\cdots, x_n$ into a matrix and denote it by $A = (x_1, x_2,\cdots, x_n)$, then we have $A$ is an orthogonal matrix with determinant $1$. Then $\det A^* = 1$. 
+
+Now we pick a vector $z = (1,0,\cdots,0)^T \in \mathbb{R}^{n}$. Then we have $A^*z = (a_1, a_2, \cdots, a_n)^T$, and therefore the first component of the vector $AA^*z$ is $\sum_{j=1}^{k}a_{j}^{2}$, which means $AA^*z = \left(\sum_{j=1}^{k}a_{j}^{2}, \cdots \right)^T$. Also, we have $\left\|AA^*z \right\| \leq \left\| I z \right\| = 1$. We denote other components of $AA^*z$ as $w_2, w_3, \cdots, w_n$, then we have 
+\begin{align*}
+    \sum_{j=1}^{k}a_{j}^{2} \leq \left\|AA^*z \right\|^{1/2} & = \sqrt{\sum_{j=1}^{k}a_{j}^{2} + w_2^2 + \cdots + w_n^2} = 1 \\
+    \Rightarrow \sum_{j=1}^{k}a_{j}^{2} & \leq 1.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be an $m\times n$ matrix, $c_{j}$ $1\leq j\leq n$ be column
+vectors of $A$ and $r_{i}$, $1\leq i\leq m$ be row vectors of $A$, show that%
+$$
+\left\Vert A\right\Vert \geq\max_{1\leq j\leq n}\left\Vert c_{j}\right\Vert
+\text{ and }\left\Vert A\right\Vert \geq\max_{1\leq i\leq m}\left\Vert
+r_{i}\right\Vert .
+$$
+Here we view $A$ as a linear map from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
+\end{exercise}
+\begin{proof}
+For $j$th column $c_j$ of $A$, we pick a unit vector $e_j = (0,\cdots, 0,1,0,\cdots,0)^T \in \mathbb{R}^n$, where $j$th entry is $1$, others are all zero. Then we can have $Ae_j = c_j$. Thus, we have 
+\begin{align*}
+    \left\|c_j \right\| \leq \left\|A \right\| \left\|e_j  \right\| = \left\|A \right\|
+\end{align*}
+since this is true for all $1\leq j \leq n$, then we have $\max_{1\leq j \leq n}\left\|c_j \right\| \leq \left\|A \right\|$. 
+
+For $i$th row $r_i$ of $A$, we can consider $A^* = (r_1, r_2,\cdots, r_m)$. And still, we pick a vector $e_i' = (0,\cdots, 0,1,0,\cdots,0)^T \in \mathbb{R}^m$, where $i$th entry is $1$, others are all zero. And then we take $A^* e_i' = r_i$, which gives us 
+\begin{align*}
+    \left\|r_i \right\| \leq \left\|A^* \right\| \left\|e_i'  \right\| = \left\|A^* \right\| = \left\|A \right\|
+\end{align*}
+in the last step we used the fact that $\left\|A^* \right\| = \left\|A \right\|$ . This is true for all $1\leq i \leq m$, then we have $\max_{1\leq i \leq m}\left\|r_i \right\| \leq \left\|A \right\|$. The proof is complete.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let
+$$
+A=\left(
+\begin{array}
+[c]{cc}%
+1 & 2\\
+0 & 3
+\end{array}
+\right)  .
+$$
+Find the spectral radius, operator norm and Hilbert-Schmidt norm of
+$A:\mathbb{R}^{n}\rightarrow\mathbb{R}^{n}$.
+\end{exercise}
+\begin{proof}
+The eigenvalues of $A$ are $1$ and $3$, and then we can know that the spectral radius is $r(a) = \max |\lambda| = 3$. The operator norm of $A$ is  the largest eigenvalues of $AA^T$, which is 
+$$
+AA^T=\left(
+\begin{array}
+[c]{cc}%
+5 & 6\\
+6 & 9
+\end{array}
+\right).
+$$
+And the charasteristic polynomial is $\lambda^2 - 14\lambda + 9 = 0$, which gives us norm of $A$ is $\max_{j=1,2} \lambda_j = 7+2\sqrt{10}$. The Hilbert-Schmidt norm of $A$ is $\left\| A\right\| = \left(\sum_{i,j}|a_{ij}^2| \right)^{1/2} = \sqrt{14}$.
+\end{proof}
+
+
+\chapter{Spectral Theory of Self-Adjoint Mappings}
+\section{Self-Adjoint Mapping}
+\begin{definition}
+A linear mapping $A$ of a linear or complex Euclidean space into itself is said to be self-adjoint if $A^* = A$. 
+\end{definition}
+\begin{remark}
+If we pick an orthogonal basis of Euclidean space, we can view $A$ as a matrix $A = (a_{ij})_{n\times n}$, then 
+\begin{enumerate}[label=(\roman*)]
+    \item In real case, $A^* = A \iff A^T = A \iff A$ is real symmetric, i.e., $a_{ij} = a_{ji}$. 
+    \item In complex case, $A^* = A \iff \overline{A^T} = A$, i.e., $a_{ij} = \overline{a_{ji}}$. We say $A$ is Hermitian matrix.
+\end{enumerate}
+\end{remark}
+
+\medskip
+
+\begin{theorem}\label{theorem_hermitian}
+A self-adjoint map $H$ of complex Euclidean space $X$ into itself has real eigenvalues and the set of eigenvectors which is formed by orthogonal basis of $X$.
+\end{theorem}
+\begin{proof}
+We can view $H$ as a matrix. Then,
+\begin{enumerate}[label=(\roman*)]
+    \item All eigenvalues are real. Assume $\lambda$ is eigenvalue, such that $Hx = \lambda x$. Then we have
+    \begin{align*}
+        (Hx, x) & = (x, Hx) \\
+        \Rightarrow (\lambda x, x) & = (x, \lambda x) \\
+        \Rightarrow \lambda (x, x) & = \overline{\lambda} (x, x)
+    \end{align*}
+    and since $\|x\|\neq 0$, we have $\lambda = \overline{\lambda}$. Thus, $\Im \lambda = 0$, which implies $\lambda$ is real.
+    \item There are no generalized eigenvectors. Suppose $x\in N_{(N - \lambda_i I)^2}$ and $\lambda = 0$ for simplicity, then $H^2 x = 0$, which implies
+    \begin{align*}
+        (H^2 x, x) & = 0 \\
+        \Rightarrow (Hx, Hx) & = 0 \\
+        \Rightarrow \|Hx\|^2 & = 0 \\
+        \Rightarrow Hx & = 0.
+    \end{align*}
+    Hence, $x\in N_{(N - \lambda_i I)}$, and the index of $\lambda_i$ is $1$. Thus, there are no generalized eigenvectors.
+    \item Eigenvectors of $H$ are orthogonal. Suppose $\lambda \neq \mu$ are two eigenvalues such that $Hx = \lambda x, Hy = \mu y$. Then we have
+    \begin{align*}
+        (Hx, y) & = (x, Hy) \\
+        \Rightarrow (\lambda x, y) & = (x, \mu y) \\
+        \Rightarrow \lambda(x, y) & = \overline{\mu} (x, y) = \mu (x, y),
+    \end{align*}
+    which implies $(x,y) = 0$. 
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+With the theorem abovem, $X = \oplus_{\lambda_i}N_{(H-\lambda_i I)}$. We can pick orthogonal basis for $N_{(H-\lambda_i I)}$ for each $\lambda_i$, then we get orthogonal basis.
+\end{remark}
+
+
+\medskip
+
+\begin{corollary}
+Any Hermitian matrix can be diagonalized by a unitary matrix.
+\end{corollary}
+\begin{proof}
+Let $\{x_k\}^n_{k=1}$ be the orthogonal basis consisting of eigenvectors of $A$, such that $Ax_k = \lambda_k x_k$, and $\lambda_k$ is real. Let $U = (x_1, x_2,\cdots, x_n)$, which is unitary, then we have 
+\begin{align*}
+    AU = U \begin{pmatrix}
+    \lambda_1 &  &  \\
+     & \ddots  &  \\
+     &   & \lambda_n
+    \end{pmatrix},
+\end{align*}
+which implies $A = U\Lambda U^{-1}$.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+A self-adjoint map $H$ of real Euclidean space $X$ into itself has real eigenvalues and a set of eigenvectors which is formed by orthogonal basis of $X$.
+\end{theorem}
+\begin{proof}
+We pick an orthogonal basis of $X$ and $H$ can be represented by a matrix $A$ if we identify $X$ as $\mathbb{R}^n$, then we have $A^T = A$. We can extend $A$ to a map from $\mathbb{C}^n$ to $\mathbb{C}^n$, denoted by $\widetilde{A}$, then $\widetilde{A}^* = \widetilde{A}$. Then $\widetilde{A}$ is Hermitian matrix and we can apply the theorem (\ref{theorem_hermitian}). 
+
+We claim $\sigma(A) = \sigma \left(\widetilde{A}\right)$ and $$N_{(A - \lambda I)} = \Re N_{\left(\widetilde{A} - \lambda I\right)}.$$
+Indeed, $\widetilde{A}$ can be diagonalized by a unitary matrix $U$ such that $A = U\Lambda U^{-1}$, where $\Lambda$ is a real diagonal matrix. Then, $A$ can be diagonalized by a real matrix $M$ such that $A = M\Lambda M^{-1}$. Thus, the eigenvalues of $A$ are all real. Ans since
+\begin{align*}
+    \dim_{\mathbb{R}} N_{(A - \lambda I)} = \dim_{\mathbb{C}} N_{\left(\widetilde{A} - \lambda I\right)},
+\end{align*}
+we have 
+\begin{align*}
+    \mathbb{R}^n = \oplus_{\lambda \in \sigma(A)} N_{(A - \lambda I)}.
+\end{align*}
+Thus, we can find a set of eigenvectors that form an orthogonal basis of $\mathbb{R}^n$.
+\end{proof}
+
+\medskip
+
+\begin{corollary}
+Any symmetric matrix can be diagonalized by an orthogonal matrix.
+\end{corollary}
+
+\medskip
+
+\section{Quadratic Forms}
+Consider a quadratic form
+\begin{align*}
+    q(y) = \sum^n_{i,j=1} h_{ij} y_i y_j = (y, Hy),
+\end{align*}
+where $y = (y_1, \cdots, y_n)^T \in \mathbb{R}^n$, and $H = (h_{ij})_{n\times n}$ is symmetric. Let $x = Ly$, then $y = L^{-1}x$ and
+\begin{align*}
+    q(y) & = \left(L^{-1}x, H L^{-1}x\right) \\
+    & = \left(x, \left(L^{-1}\right)^T H L^{-1}x\right) \\
+    & = (x, Mx).
+\end{align*}
+
+\medskip
+
+\begin{definition}
+Two symmetric matrices $A$ and $B$ are called congruent if there exists an invertible matrix $S$ such that $A = S^T B S$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+Given $q(x) = (x, Ax)$, there exists an invertible matrix $L$, such that
+\begin{align*}
+    q\left(L^{-1}x\right) = \sum^n_{i=1} d_i x_i^2
+\end{align*}
+for some constants $d_i$, and we can make $d_i = 0$ or $d_i = \pm 1$.
+\end{theorem}
+\begin{proof}
+Since $A$ is self-adjoint, then there exists a unitary matrix $Q$ such that $A = Q\Lambda Q^*$, where 
+\begin{align*}
+    \Lambda = \begin{pmatrix}
+    \lambda_1 &  &  \\
+     & \ddots  &  \\
+     &   & \lambda_n
+    \end{pmatrix},
+\end{align*}
+where $\lambda_k, 1\leq k \leq n$ are real eigenvalues of $A$. Then, we have
+\begin{align*}
+    q(x) & = (x, Ax) \\
+    & = (x, Q\Lambda Q^* x) \\
+    & = (Q^* x, \Lambda Q^* x) \\
+    \Rightarrow q(Qx) & = (Q^* Q x, \Lambda Q^* Q x) \\
+    & = (Ix, \Lambda I x) \\
+    & = (x, \Lambda x) = \sum^n_{i=1} \lambda_i x_i^2
+\end{align*}
+and we can pick $L = Q^{-1} = Q^*$. Thus the proof is complete.
+\end{proof}
+
+\medskip
+
+\section{Law of Inertia}
+\begin{theorem}[Sylvester’s Law of Inertia]
+Let $H$ be symmetric, $q(x) = (x, Hx)$ and $L$ be an invertible matrix such that
+\begin{align*}
+    q\left(L^{-1}x\right) = \sum^n_{i=1} d_i x_i^2
+\end{align*}
+for some constants $d_i$. Then the numbers of positive, negative and zero terms of $d_i$ equal to the numbers of positive, negative and zero eigenvalues of $H$.
+\end{theorem}
+\begin{proof}
+Let $p_+, p_-$ and $p_0$ be the numbers of positive, negative and zero terms of $d_i$. Let $S$ be a subspace of $\mathbb{R}^n$, we say $q > 0$ on $S$ if for all $u\in S, u\neq 0$, $q(u) > 0$.
+
+We claim that $$p_+ = \max_{q > 0\,\, {\rm on}\,\, S} \dim S. $$
+Let $S = L^{-1}\left({\rm span}\{e_i, d_i > 0\} \right)$, then $
+\dim S = p_+, q > 0\,\, {\rm on}\,\, S$. 
+\begin{enumerate}[label=(\arabic*)]
+    \item For $y\in S$, $y = L^{-1}x$, where $x = \sum_{d_i > 0} d_i c_i^2$, then 
+    \begin{align*}
+        q(y) = q\left(L^{-1}x\right) = \sum^n_{i=1} d_i x_i^2 = \sum_{d_i > 0} d_i c_i^2 \geq 0.
+    \end{align*}
+    Thus, we have $p_+ \leq \max \dim S$.
+    \item Let $S$ be any subspace with $\dim S > p_+$, we claim that $q$ cannot be positive on $S$. For all $u\in S$, we have $Lu = \sum^n_{i=1}u_i e_i$. 
+    
+    Define $pu = L^{-1}\left(\sum_{d_i>0}u_i e_i \right)$, which is a projection. Then we have
+    \begin{align*}
+        \dim ps \leq p_+ < \dim S.
+    \end{align*}
+    Then there exists $y\in S, y\neq 0$, such that $Lpy = 0$. Assume $L = I$, then $py = 0$, which implies $q(y) = 0$. 
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+Two symmetric square matrices of the same size have the same
+numbers of positive, negative and zero eigenvalues if and only if they are congruent.
+\end{remark}
+
+\medskip
+
+\section{Spectral Resolution}
+
+\begin{definition}
+The set of eigenvalues of $H$ is called the spectral of $H$.
+\end{definition}
+
+\medskip
+
+Let $H$ be a self-adjoint map from $X$ into $X$, then we have 
+\begin{align*}
+    X = \oplus_{\lambda_j \in \sigma(H)}N_{H - \lambda_j I}.
+\end{align*}
+Hence, $N(\lambda_j) = N_{H - \lambda_j I}$ are orthogonal subspaces. Let $\lambda_j, 1\leq j\leq k$ be distinct eigenvalues. For any $x\in X$, then $x$ can be represented as $x = \sum^k_{j=1}x_j$, where $x_j\in N(\lambda_j)$. We say $x_j$ is orthogonal projection of $X$ to $N(\lambda_j)$, i.e., 
+\begin{align*}
+    x_j = P_{N(\lambda_j)}(x).
+\end{align*}
+Applying $H$, we have
+\begin{align*}
+    Hx = \sum^k_{j=1} \lambda_j x_j.
+\end{align*}
+Let $P_j$ be the orthogonal projection of $X$ onto $N(\lambda_j)$, we have
+\begin{align*}
+    I = \sum^k_{j=1} P_j,
+\end{align*}
+which follows $x = \sum^k_{j=1}x_j$ and hence 
+\begin{align*}
+    H = \sum^k_{j=1} \lambda_j P_j.
+\end{align*}
+
+\medskip
+
+\begin{theorem}
+The operators $P_j$ have the following properties:
+\begin{enumerate}[label=(\roman*)]
+    \item $P_j P_k = 0$ for $j\neq k, P_j^2 = P_j$.
+    \item Each $P_j$ is self-adjoint, i.e., $P_j^* = P_j$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item For any $x\in X$, $x = \sum^k_{j=1}x_j$, where $x_j\in N(\lambda_j)$, we have $P_j P_k x = P_j x_k = 0$. Thus, $P_j P_k = 0$ for $j\neq k$.
+    \item For any $x = \sum^k_{j=1}x_j \in X$ and $y = \sum^k_{j=1}y_j \in X$, where $x_j, y_j \in N(\lambda_j)$, we have
+    \begin{align*}
+        \left(P_j x, y\right) = \left(x_j, y\right) = \left(x_j, \sum^k_{j=1}y_j\right) = \left(x_j, y_j\right)
+    \end{align*}
+    where in the last step we used the fact that $N_i$ is orthogonal to $x_j$ for $i\neq j$. Similarly, we have
+    \begin{align*}
+        \left(x, P_j y\right) = \left(x_j, y_j\right).
+    \end{align*}
+    Thus, we have $P_j^* = P_j$.
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
 
 
 
