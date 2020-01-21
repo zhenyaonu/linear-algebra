@@ -5110,15 +5110,421 @@ The operators $P_j$ have the following properties:
 \end{enumerate}
 \end{proof}
 
+\medskip
+
+\begin{definition}
+A decomposition of the form:
+\begin{align*}
+    I = \sum^k_{j=1} P_j
+\end{align*}
+where $P_j$ is a projection, i.e., satisfies $P_j P_k = 0$ for $j\neq k, P_j^2 = P_j$ and $P_j^* = P_j$, is called a resolution of the identity. Any self-adjoint map $H$ defineds a resolution of identity.
+\end{definition}
+
+\medskip
+
+\begin{definition}
+Let $H$ be a self-adjoint map, then 
+\begin{align*}
+    H = \sum^k_{j=1} \lambda_j P_j
+\end{align*}
+is called the spectral resolution of $H$.
+\end{definition}
+
+\medskip
+
+Given any polynomial $p$, we have
+\begin{align*}
+    p(H) = \sum^k_{j=1} p\left(\lambda_j\right) P_j,
+\end{align*}
+since $H^m = \left(\sum^k_{j=1} \lambda_j P_j\right)^m = \sum^k_{j=1} \lambda_j^m P_j^m = \sum^k_{j=1} \lambda_j^m P_j$. Move generally, given a convergent series $f(t) = \sum^\infty_{k=0} a_k t^k$, we have 
+\begin{align*}
+    f(H) = \sum^k_{j=1} f\left(\lambda_j\right) P_j.
+\end{align*}
+In particular, 
+$$e^H = \sum^\infty_{m=0}\frac{H^m}{m!} = \sum^\infty_{j=1} e^{\lambda_j} P_j.$$
+
+\medskip
+
+\begin{theorem}
+Let $H, K$ be two self-adjoint matrices that commute. Then they have a common resolution of identity $I = \sum^k_{j=1} P_j$, such that
+\begin{align*}
+    H = \sum^k_{j=1} \lambda_j P_j, K = \sum^k_{j=1} \mu_j P_j
+\end{align*}
+where $\lambda_j\in\sigma(H), \mu_j\in\sigma(K)$.
+\end{theorem}
+\begin{proof}
+Since $X = \oplus^l_{j=1} N\left(\lambda_j\right)$, where $\lambda_j, 1\leq j\leq l$ are distinct eigenvalue of $H$. We claim $N\left(\lambda_j\right)$ is invariant under $K$, i.e., $K: N\left(\lambda_j\right) \to N\left(\lambda_j\right)$. 
+
+Indeed, for any $x\in N\left(\lambda_j\right)$, $HKx = KH x = \lambda_j Kx$, which implies $Kx$ is also an eigenvector of $H$. So $k$ maps $N\left(\lambda_j\right)$ into $N\left(\lambda_j\right)$, we now apply spectral resolution of $K$ over $N\left(\lambda_j\right)$, which gives us the theorem.
+\end{proof}
+
+\medskip
+
+\section{Anti-Self Adjoint Mappings}
+\begin{definition}
+A linear mapping $A$ of Euclidean space into itself is called anti-self-adjoint if $A^* = -A$.
+\end{definition}
+\begin{remark}
+If $A$ is anti-self adjoint, then $(iA)^* = iA$. Thus $A$ can be unitary diagonalized. Also, if $A$ is anti-self adjoint, then $AA^* = A^* A$.
+\end{remark}
+
+\medskip
+
+\begin{definition}
+A mapping $A$ from a compact Euclidean space into itself is normal if it commutes with its adjoint operator, i.e., $AA^* = A^* A$.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+A normal map $N$ has an orthonormal basis consists of eigenvectors.
+\end{theorem}
+\begin{proof}
+Define $H = \frac{N+N^*}{2}$ and $A = \frac{N-N^*}{2}$, then both $H$ and $A$ are self-adjoint. Then we have
+\begin{align*}
+    HA & = \frac{1}{4}\left(N^2 + N^*N - NN^* - \left(N^*\right)^2 \right) \\
+    & = \frac{1}{4}\left(N^2 - \left(N^*\right)^2 \right)\\
+    & = AH.
+\end{align*}
+Then there exists a basis consisting of eigenvectors for both $A$ and $H$. Then we claim that the eigenvectors of $A+H$ are equal to that of $N$, since if we have $Av = \lambda v$ and $Hv = \mu v$, then $(A+H)v = N v = (\lambda + \mu)v$.
+\end{proof}
+
+\medskip
+
+\begin{corollary}
+If $N$ is a normal matrix, then $N$ can be unitary diagonalized.
+\end{corollary}
+
+\medskip
+
+\begin{theorem}
+Let $U$ be a unitary map of a complex Euclidean space into itself, that is an isometry linear map. Then,
+\begin{enumerate}[label=(\roman*)]
+    \item There is an orthogonal basis consisting of genuine eigenvectors of $U$.
+    \item The eigenvalues of $U$ are complex numbers with absolute value $1$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item Since $U$ is unitray, i.e., $UU^* = U^*U = I$, then $U$ is self-adjoint, which implies $U$ is normal. Thus,  the previous theorem indicates the argument.
+    \item Isometry preserves the distance, then 
+    \begin{align*}
+        \|Ux\| = |\lambda| \|x\| = \|x\|.
+    \end{align*}
+    Thus, $|\lambda| = 1$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Rayleigh Quotient}
+
+\begin{definition}
+Let $H$ be self-adjoint, then the quotient
+\begin{align*}
+    R_H(x) = \frac{(x,Hx)}{(x,x)}
+\end{align*}
+is called the Rayleigh quotient of $H$.
+\end{definition}
+
+\begin{remark}
+~\begin{enumerate}[label=(\arabic*)]
+    \item $R_H(kx) = R_H(x)$.
+    \item $R_H(x)$ is continuous and real valued, thus it has maximum and minimum.
+\end{enumerate}
+\end{remark}
+
+\medskip
+
+\begin{theorem}
+Maximum and minimum of $R_H(x)$ are eigenvalues of $H$.
+\end{theorem}
+\begin{proof}
+We can view $R_H$ as a real continuous map on the unit sphere. Hence, $R_H$ has a maximum and a minimum. Let $\|x\|=1$, then for any $y$, we have 
+\begin{align*}
+    R_H(x) = \max_{\|y\|=1} \frac{(y,Hy)}{(y,y)}.
+\end{align*}
+then we have $\dv{R_H(x+ty)}{t}\bigg|_{t = 0} = 0$. Also, we have
+\begin{align*}
+    \dv{R_H(x+ty)}{t}\bigg|_{t = 0} & = \dv{}{t}\bigg|_{t = 0} \frac{(x,Hx) + 2t\Re (x,Hy) + t^2 (y,Hy)}{\|x\|^2 + 2t \Re (x,y) + t^2 \|y\|^2} \\
+    & = \frac{2\Re (x,Hy)}{\|x\|^2} - \frac{(x,Hx) 2 \Re (x,y)}{\|x\|^4} \\
+    & = 2\Re (x,Hy) - (x,Hx) 2 \Re (x,y) \\
+    \Rightarrow \Re (Hx,y) & =  \Re ((x,Hx)x,y)
+\end{align*}
+which implies $Hx = (x,Hx)x$. Thus, $x$ is an eigenvector, and $(x,Hx) = R_H(x), \|x\|=1$ is an eigenvalue.
+\end{proof}
+
+\medskip
+
+\begin{corollary}
+\begin{align*}
+    \max_{x\neq 0}R_H(x) & = \max_{\lambda\in \sigma(H)}\lambda \\
+    \min_{x\neq 0}R_H(x) & = \min_{\lambda\in \sigma(H)}\lambda.
+\end{align*}
+\end{corollary}
+
+\begin{remark}
+Every eigenvector $x$ of $H$ is a critical point of $R_H$, that is, the first derivative of $R_H$ are zero when $x$ is an eigenvector of $H$. Conversely, the eigenvectors are the only critical points of $R_H(x)$. The value of the Rayleigh quotient at an eigenvector is the corresponding eigenvalue of $H$.
+\end{remark}
+
+\medskip
+
+\section{Minimax Principle}
+
+\begin{theorem}
+Let $H$ be a self-adjoint map of a Euclidean space $X$ of finite dimension. Denote the eigenvalues of $H$, arranged in increasing order by $\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n$. Then,
+\begin{align*}
+    \lambda_j = \min_{\dim S=j} \max_{x\in S, x\neq 0} R_H(x),
+\end{align*}
+where $S$ is a linear subspace of $X$.
+\end{theorem}
+\begin{proof}
+Let $\{x_j\}^n_{j=1}$ be the orthogonal basis of $X$ such that $Hx_j = \lambda_j x_j$. For any $x\in X$ and $x = \sum^n_{j=1}c_j x_j$, then 
+\begin{align*}
+    R_H(x) = \frac{\sum^n_{j=1}\lambda_j |c_j|^2}{\sum^n_{j=1} |c_j|^2}.
+\end{align*}
+Let $S_j = {\rm span} \{x_1,\cdots,x_j\}$, then 
+\begin{align*}
+    \max_{x\in S_j, x\neq 0} R_H(x) = \max \frac{\sum^j_{k=1}\lambda_k |c_k|^2}{\sum^j_{k=1} |c_k|^2} = \lambda_j,
+\end{align*}
+which implies 
+\begin{align*}
+    \min_{\dim S=j} \max_{x\in S, x\neq 0} R_H(x) \leq \lambda_j.
+\end{align*}
+
+Next, given any $S$ with $\dim S = j$, we need to show $\max_{x\in S, x\neq 0} R_H(x) \geq \lambda_j$. It suffices to show that there exists $x\in S$, such that the projection of $x$ on $S_{j-1}$ is zero. Denote the projection by $P:S_j\to S_{j-1}$, with Rank-Nullity theorem, there exists $x^* = \sum_{k\geq j}c_k x_k \in S, x^*\neq 0$ such that $Px^* = 0$. Hence, we have
+\begin{align*}
+    \max_{x\in S, x\neq 0} \frac{(x,Hx)}{(x,x)} \geq \frac{(x^*, Hx^*)}{(x^*,x^*)} = \frac{\sum_{k\geq j}\lambda_k |c_k|^2}{\sum_{k\geq j} |c_k|^2} \geq \lambda_j.
+\end{align*}
+since $S$ is arbitrary subspace of dimension $j$, then we have
+\begin{align*}
+    \min_{\dim S=j} \max_{x\in S, x\neq 0} R_H(x) \geq \lambda_j.
+\end{align*}
+Thus we complete the theorem.
+\end{proof}
+
+\medskip
+
+\section{Generalized Rayleigh Quotient}
+
+\begin{definition}
+A self-adjoint map $M$ is called positive if for all nonzero $x\in X$, $(x, Mx) > 0$.
+\end{definition}
+
+\begin{remark}
+With Minimax principle, we can know that $M$ being positive is equivalent to that all eigenvalues of $M$ are positive.
+\end{remark}
+
+Now we consider a generalization of the Rayleigh quotient: for $H^* = H, M^* = M$ and $M > 0$, 
+\begin{align*}
+    R_{H,M}(x) = \frac{(x,Hx)}{(x,Mx)}.
+\end{align*}
+Let $M = \left(\sqrt{M}\right)^2$, $\sqrt{M} > 0$ and $y = \sqrt{M} x$, then we have
+\begin{align*}
+    R_{H,M}(x) = \frac{(x,Hx)}{(x,Mx)} & = \frac{\left(\sqrt{M}^{-1}y, H\sqrt{M}^{-1}y\right)}{\left(\sqrt{M}^{-1}y, M\sqrt{M}^{-1}y\right)} \\
+    & = \frac{\left(y,\left(\sqrt{M}^*\right)^{-1}H \sqrt{M}^{-1} y \right)}{(y,y)} = R_{\widetilde{H}}(y).
+\end{align*}
+Now we consider
+\begin{align*}
+    \dv{}{t}\bigg|_{t = 0} \frac{\left(x+ty,H(x+ty)\right)}{\left(x+ty,M(x+ty)\right)} = \frac{2\Re(x,Hy)}{(x,Mx)} - \frac{2(x,Hx)\Re(x,My)}{(x,Mx)^2} = 0,
+\end{align*}
+which implies 
+\begin{align*}
+    \Re(x,Mx)(x,Hy) & = \Re(x,Hx)(x,My) \\
+    \Rightarrow \Re(x,Hy) & = \Re R_{H,M}(x) (Mx,y).
+\end{align*}
+If $x$ is a critical point of $R_{H,M}(x)$, then $\Re(x,Hy)  = \Re R_{H,M}(x) (Mx,y)$ for all $y\in X$. Thus, we have
+\begin{align*}
+    (Hx, y) = R_{H,M}(x) (Mx,y) \iff Hx = R_{H,M}(x) Mx.
+\end{align*}
+
+\medskip
+
+\begin{theorem}
+There exists a basis $\{x_1,\cdots,x_n\}$ of $X$ such that 
+\begin{align*}
+    Hx_j = \lambda_j M x_j, 
+\end{align*}
+where $\lambda_j$ is real and $\lambda_j = R_{H,M}(x_j)$. Moreover, $\left(x_i, Mx_j\right) = 0$ for $i\neq j$.
+\end{theorem}
+
+\medskip
+
+\begin{corollary}
+If $M,H$ are self-adjoint, all the eigenvalues of $M^{-1}H$ are real and $M^{-1}H$ is diagonalizable. If $H > 0$, then all the eigenvalues of $M^{-1}H$ are positive.
+\end{corollary}
+
+\medskip
+
+\section{Norm and eigenvalues}
+
+We recall that $\|A\| = \max \|Ax\|, \|x\|=1$ or $\|A\| = \sup\frac{\|Ax\|}{\|x\|}$. Then we have the following theorem.
+
+\begin{theorem}
+Suppose $N$ is a normal mapping of an Euclidean space $X$ into itself, then $\|N\| \leq r(A)$.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item $r(N)\leq \|N\|$. Indeed, for any eigenvalue $\lambda_j$ and its corresponding eigenvector $x_j$, we have \begin{align*}
+        \|Nx_j\| = |\lambda_j|\cdot \|x_j\|\leq \|N\|\cdot \|x_j\|
+    \end{align*}
+    which implies $\max \lambda_j = r(N) \leq \|N\|$.
+    \item Now we prove the other direction. If $N$ is normal, then there exists orthogonal basis $\{x_1,\cdots, x_n\}$ of $X$ consisting of eigenvectors of $N$, such that $Nx_j = \lambda_j x_j, 1\leq j\leq n$. For any $x\in X$, $x = \sum^n_{j=1}c_j x_j$, then we have
+    \begin{align*}
+        Nx = \sum^n_{j=1}c_j\lambda_j x_j.
+    \end{align*}
+    Thus, we have
+    \begin{align*}
+        \frac{\|Nx\|}{\|x\|} = \left(\frac{\sum^n_{j=1} |c_j|^2 |\lambda_j|^2}{\sum^n_{j=1} |c_j|^2}\right)^{\frac{1}{2}} \leq \max \lambda_j = r(N).
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $A:X\to Y$, then $\|A\| = \sqrt{r(A^*A)}$.
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item $A^*A$ is normal and we have
+    \begin{align*}
+        \|Ax\|^2 & = (Ax, Ax) \\
+        & = (x, A^*Ax) \\
+        & \leq \|A^*A\|\cdot \|x\|^2 = r(A^*A) \|x\|^2
+    \end{align*}
+    which implies $\|A\| \leq \sqrt{r(A^*A)}$.
+    \item Let $\lambda$ be an eigenvalue of $A^*A$ such that $\lambda = r(A^*A) \geq 0$ and $A^*Ax = \lambda x, x\neq 0$. Then, for eigenvector $x$, we have
+    \begin{align*}
+        \|Ax\|^2 & = (Ax,Ax) \\
+        & = (x,A^*Ax) \\
+        & = \lambda \|x\|^2 \\
+        & = r(A^*A) \|x\|^2 
+    \end{align*}
+    which implies $\|A\| \geq r(A^*A)$. Indeed, 
+    \begin{align*}
+        \sqrt{r(A^*A)} = \frac{\|Ax\|}{\|x\|} \leq \|A\| = \max \frac{\|Ay\|}{\|y\|}.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Schur Decomposition}
+
+\begin{theorem}
+Let $A$ be an $n\times n$ matrix. There exists unitary matrix $U$ such that
+$$A = UTU^*$$
+for some upper triangular matrix $T$.
+\end{theorem}
+\begin{proof}
+First we pick $\lambda_1\in\sigma(A)$ and let $N_1 = N_{(A - \lambda_1 I)}$. Assume $k_1 = \dim N_1 \geq 1$, then there exists orthogonal basis $\{x_1,\cdots,x_{k_1}\}$ for $N_1$. We can complete this basis to an orthogonal basis $\{x_1,\cdots,x_{k_1},x_{k_1+1},\cdots,x_n\}$ of $\mathbb{C}^n$. Let $U_1 = (x_1,\cdots,x_n)$, where $x_j$ is $j$th column of the matrix $U_1$, and 
+\begin{align*}
+    Ax_j & = \lambda_1 x_j, 1\leq j\leq k_1 \\
+    Ax_j & = \sum^n_{k=1}b_{kj} \lambda_k, k_1+1\leq j\leq n. 
+\end{align*}
+Then we have 
+\begin{align*}
+    A(x_1,\cdots,x_n) & = (x_1,\cdots,x_n) \begin{pmatrix}
+    \lambda_1 I_{k_1} & B_{12} \\
+     & B_{22}
+    \end{pmatrix},
+\end{align*}
+where
+\begin{align*}
+    \begin{pmatrix}
+     B_{12} \\
+     B_{22}
+    \end{pmatrix} = \begin{pmatrix}
+    b_{1,k_1+1} & \cdots & b_{1,n} \\
+    \vdots & \ddots & \vdots \\
+    b_{n,k_1+1} & \cdots & b_{n,n}
+    \end{pmatrix}.
+\end{align*}
+Then we have 
+\begin{align*}
+    A = U_1 
+    \begin{pmatrix}
+    \lambda_1 I_{k_1} & B_{12} \\
+     & B_{22}
+    \end{pmatrix} U_1^*.
+\end{align*}
+
+Second, let $\lambda_2\in \sigma(B_{22})$, and $k_2 = \dim N_2$, where $N_2 = N_{(B_{22}-\lambda_2 I)}$. Then there exists unitary matrix $U_2$ such that 
+\begin{align*}
+    B_{22} = U_2 \begin{pmatrix}
+    \lambda_2 I_{k_2} & C_{12} \\
+     & C_{22}
+    \end{pmatrix} U_2^*.
+\end{align*}
+Continue this process and we can obtain an upper triangular matrix.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $Ab = BA$, then $A$ and $B$ can be simultaneously upper diagonalized by a unitary matrix.
+\end{theorem}
+\begin{proof}
+Let $\lambda_1\in\sigma(A), N_1 = N_{(A - \lambda_1 I)}$, then we can know $B$ is invariant under $N_1$, i.e., $B:N_1\to N_1$. Then we have 
+\begin{align*}
+    A & = U_1 \begin{pmatrix}
+    \lambda_1 I_{k_1} & A_{12} \\
+     & A_{22}
+    \end{pmatrix} U_1^* \\
+    B & = U_1 \begin{pmatrix}
+    \mu_1 I_{k_1} & B_{12} \\
+     & B_{22}
+    \end{pmatrix} U_1^*,
+\end{align*}
+and we claim $A_{22}B_{22} = B_{22}A_{22}$. Then this process can continue.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+If $AB = BA$, then $r(A+B)\leq r(A)+r(B)$.
+\end{theorem}
+\begin{proof}
+With previous theorem, $A,B$ can be simultaneously upper diagonalized by a unitary matrix, then $A = UT_1U^*, B = UT_2U^*$, where $U_1, U_2$ are upper triangular matrix where the diagonal components are eigenvalues of $A$ and $B$. Then we have
+$A+b = U(T_1+T_2)U^*$, and 
+\begin{align*}
+    T_1+T_2 = \begin{pmatrix}
+    \lambda_1 + \mu_1 &  &  \\
+     & \ddots &  \\
+     &  & \lambda_n + \mu_n
+    \end{pmatrix}
+\end{align*}
+where $\lambda_j\in\sigma(A), \mu_j\in\sigma(B)$. Thus we have
+\begin{align*}
+    r(A+B) = \max (\lambda_j + \mu_j) \leq \max \lambda_j + \max \mu_j = r(A)+r(B).
+\end{align*}
+\end{proof}
 
 
 
 
+\chapter{Calculus of Vector and Matrix valued Functions}
 
+\section{Convergence in Norm}
 
+Let $A(t)$ be a matrix valued function, $t\in\mathbb{R}$ and $A(t)$ is an $m\times n$ matrix. 
 
+\begin{definition}
+We say $A(t)$ is continuous at $t_0\in I$, where $I$ is an open interval, if 
+$$\lim_{t\to t_0}\left\|A(t) - A(t_0)\right\| = 0.$$
+We say $A(t)$ is differentiable at $t_0\in I$, with derivative $\dot{A}(t_0) = \dv{A(t)}{t}\bigg|_{t=t_0}$, if 
+$$\lim_{h\to 0}\left\|\frac{A(t_0+h) - A(t_0)}{h} - \dot{A}(t_0)\right\| = 0.$$
+\end{definition}
 
+\begin{remark}
+Different norms for finite-dimensional spaces are equivalent. So
+the above definition will not depend on the norm we use.
+\end{remark}
 
+\begin{remark}
+Continuity and differentiability is equivalent to those of every element of $A(t)$. If $A(t) = \left(a_{ij}(t) \right)$, then $\dot{A}(t) = \left(\dv{}{t}a_{ij}(t)\right)$.
+\end{remark}
 
 
 
