@@ -5526,6 +5526,122 @@ the above definition will not depend on the norm we use.
 Continuity and differentiability is equivalent to those of every element of $A(t)$. If $A(t) = \left(a_{ij}(t) \right)$, then $\dot{A}(t) = \left(\dv{}{t}a_{ij}(t)\right)$.
 \end{remark}
 
+\medskip
+
+\begin{theorem}[Basic Rules of Differentiation]
+~\begin{enumerate}[label=(\roman*)]
+    \item $\dv{}{t}(A(t)+B(t)) = \dv{}{t}A(t) + \dv{}{t}B(t)$.
+    \item $\dv{}{t} A(t)B(t) = \left(\dv{}{t} A(t)\right) B(t) + A(t) \dv{}{t} B(t)$.
+    \item For $x(t),y(t) \in \mathbb{C}^n$, $\dv{}{t}(x(t), y(t)) = \left(\dv{}{t}x(t), y(t)\right) + \left(x(t), \dv{}{t} y(t) \right)$.
+\end{enumerate}
+\end{theorem}
+
+\medskip
+
+\begin{theorem}
+Suppose $A(t)$ is differentiable square matrix valued function and $A(t)$ is invertible, then
+\begin{align*}
+    \dv{}{t}A^{-1}(t) = - A^{-1} \dot{A} A^{-1}.
+\end{align*}
+\end{theorem}
+\begin{proof}
+$A(t)$ is differentiable, and $AA^{-1} = I$. Then we have
+\begin{align*}
+    A \dv{}{t}A^{-1} + \dot{A} A^{-1} = 0 \\
+    \Rightarrow \dv{}{t}A^{-1} = - A^{-1} \dot{A} A^{-1}.
+\end{align*}
+\end{proof}
+
+Let $A$ be a square matrix valued function, then in general, the chain rule does not hold, i.e., $\dv{}{t}A^2(t) = \dot{A}A + A\dot{A} \neq 2 A\dot{A}$. For $k\in \mathbb{N}$, 
+\begin{align*}
+    \dv{}{t}A^k(t) = \sum^k_{j=1} A^{j-1}\dot{A}A^{k-j}.
+\end{align*}
+If $A\dot{A} = \dot{A}A$, then 
+\begin{align*}
+    \dv{}{t}A^k(t) = k A^{k-1}(t)\dot{A}.
+\end{align*}
+
+\medskip
+
+\begin{theorem}
+Let $p$ be any polynomial, and $A$ be a square matrix valued function that is differentiable. 
+\begin{enumerate}[label=(\roman*)]
+    \item If for a particular value of $t$, $A(t)\dot{A}(t) = \dot{A}(t)A(t)$, then $$\dv{}{t}p(A) = p'(A)\dot{A}.$$
+    \item Even if $A(t)$ and $\dot{A}(t)$ do not commute, chain rule of the trace remains,
+    $$\dv{}{t}\tr p(A) = \tr \left(p'(A)\dot{A}\right).$$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item Suppose $A(t)\dot{A}(t) = \dot{A}(t)A(t)$, then we have
+    \begin{align*}
+        \dv{}{t}A^k(t) = k A^{k-1}(t)\dot{A}.
+    \end{align*}
+    then the argument is proved since all polynomials are combinations of powers.
+    \item For nomcommuting $A$ and $\dot{A}$, we take the trace of 
+    \begin{align*}
+        \dv{}{t}A^k(t) = \sum^k_{j=1} A^{j-1}\dot{A}A^{k-j},
+    \end{align*}
+    and the trace is commutative, then we have
+    \begin{align*}
+        \tr \left(A^{j-1}\dot{A}A^{k-j} \right) = \tr \left(A^{k-1}\dot{A} \right).
+    \end{align*}
+    Thus, we have
+    \begin{align*}
+        \dv{}{t}\tr p(A) = \tr \left(p'(A)\dot{A}\right).
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+Now we extend the product rule to multilinear function $M(x_1,\cdots, x_k): \left(\mathbb{C}^n\right)^k \to \mathbb{C}$. Suppose $x_j(t), 1\leq j \leq k$ are differentiable, then 
+\begin{align*}
+    \dv{}{t}M(x_1,\cdots, x_k) = M(\dot{x}_1,\cdots, x_k) + \cdots + M(x_1,\cdots, \dot{x}_k).
+\end{align*}
+\begin{proof}
+For $k=2$, we have
+\begin{align*}
+    & \frac{M(x_1(t+h), x_2(t+h)) - M(x_1(t), x_2(t))}{h} \\
+    = & M\left(\frac{x_1(t+h)-x_1(t+h)}{h}, x_2(t)\right) + M\left(x_1(t),\frac{x_2(t+h)-x_2(t+h)}{h} \right) \\
+    \overset{n\to 0}{=} & M(\dot{x}_1(t), x_2(t)) + M(x_1(t), \dot{x}_2(t)).
+\end{align*}
+\end{proof}
+
+We can apply the above result to the determinant function $D(x_1,\cdots,x_n)$ defined before and we have
+\begin{align*}
+    \dv{}{t}D(x_1,\cdots,x_n) = D(\dot{x}_1,\cdots, x_k) + \cdots + D(x_1,\cdots, \dot{x}_k).
+\end{align*}
+
+\medskip
+
+\begin{theorem}
+Let $Y(t)$ be a differentiable matrix valued function, then for those $t$ such that $Y$ is invertible, then
+\begin{align*}
+    \dv{}{t} \ln |\det Y(t)| = \tr \left(Y^{-1} \dot{Y}\right),
+\end{align*}
+which is equivalent to 
+\begin{align*}
+    \frac{\dv{}{t}\det Y(t)}{\det Y(t)} = \tr \left(Y^{-1} \dot{Y}\right).
+\end{align*}
+\end{theorem}
+\begin{proof}
+Fix $t_0$, and we have $Y(t) = Y(t_0) Y^{-1}(t_0) Y(t)$, which implies
+\begin{align*}
+    \det Y(t) = \det Y(t_0) \det (Y^{-1}(t_0) Y(t)).
+\end{align*}
+Thus, we have
+\begin{align*}
+    \dv{}{t}\det Y(t)\bigg|_{t=t_0} = \det Y(t_0) \tr \left(Y^{-1}(t_0) \dot{Y}(t) \right)\bigg|_{t=t_0}
+\end{align*}
+which proved the theorem.
+\end{proof}
+
+
+
+
+
+
+
+
 
 
 
