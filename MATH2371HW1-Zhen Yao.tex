@@ -1,0 +1,113 @@
+\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage{latexsym,amsmath,amssymb}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 1 for Math 2371}
+\centerline{Zhen Yao}
+
+
+
+\noindent{\bf Problem 1.} Let $A > 0$. Show that 
+$$A + A^{-1} \geq 2I.$$
+\begin{proof}
+Since $A > 0$, then there exists a unique matrix $U$ such that $A = U \Lambda U^*$, where 
+\begin{align*}
+    \Lambda = \begin{pmatrix}
+    \lambda_1 & 0 & 0  \\
+    0 & \ddots & 0  \\
+    0 & 0 & \lambda_n 
+    \end{pmatrix}.
+\end{align*}
+and $\lambda_j > 0, 1\leq j \leq n$. Then, we have
+\begin{align*}
+    A + A^{-1} - 2I & = U \Lambda U^* + U \Lambda^{-1} U^* - 2 U I U^* \\
+    & = U\left(\Lambda + \Lambda^{-1} - 2I \right)U^* \\
+    & = U \begin{pmatrix}
+    \lambda_1+\lambda_1^{-1}-2 & 0 & 0  \\
+    0 & \ddots & 0  \\
+    0 & 0 & \lambda_n+\lambda_n^{-1}-2 
+    \end{pmatrix} U^* \\
+    & = U \overline{\Lambda} U^*.
+\end{align*}
+and we can use the function $f(x) = x + \frac{1}{x} - 2$ to obtain that if $x > 0$, then $f(x) \geq 0$. Thus, we can know every diagonal entry of $\overline{\Lambda}$ is greater or equal to $0$, which implies $A + A^{-1} - 2I = U \overline{\Lambda} U^* \geq 0$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.} Suppose $A,B > 0$. Show that $$\det (A+B) \geq 2\sqrt{\det A \det B}.$$
+\begin{proof}
+With inequality $\det (tA + (1-t)B) \geq (\det A)^t (\det B)^{1-t}$, we can substitute $A, B$ by $2A, 2B$, which also satisfy $2A, 2B > 0$ and choose $t = 1/2$, then we have
+\begin{align*}
+    \det (A+B) & = \det \left(\frac{1}{2} (2A) + \frac{1}{2} (2B)\right) \\
+    & \geq (\det 2A)^{\frac{1}{2}} (\det 2B)^{\frac{1}{2}} \\
+    & = \sqrt{2^{n+1} \det A \det B} \\
+    & = 2^n \sqrt{\det A \det B} \\
+    & \geq 2 \sqrt{\det A \det B}, \,\,{\rm for}\,\, n \geq 1.
+\end{align*}
+where in the third step we assume $A, B$ are $n\times n$ matrices. Thus the proof is complelte.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.} Let $A,B$ be two real positive matrices. Suppose that $AB = BA$, show that $AB > 0$. 
+\begin{proof}
+Since $Ab = BA$, we can know that $A,B$ have the same eigensystem, i.e., if $x_j$ is an eigenvector of $A$ corresponding to eigenvalue $\lambda_j$, then $Bx_j$ is also an eigenvector of $A$ and $x_j$ is also an eigenvector of $B$. 
+
+Let $x_1, \cdots, x_n$ be a basis consisting of eigenvectors of $B$ corresponding to eigenvalues $\mu_1,\cdots,\mu_n$. Then we have
+\begin{align*}
+    \left(x_j, ABx_j\right) = \left(x_j, A\mu_j x_j\right) = \left(x_j, \mu_j Ax_j\right)
+\end{align*}
+also, since $A,B > 0$, then all $\mu_j > 0$, which imlpies $\left(x_j, \mu_j Ax_j\right) > 0$ for all $x_j$. Thus, $AB > 0$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 4.} Given $m$ positive numbers $r_j, 1\leq j \leq m$. Show that 
+\begin{align*}
+    G = \left(\frac{1}{r_i + r_j + 1}\right)_{m\times m}
+\end{align*}
+is positive definite.
+\begin{proof}
+Let $f_j = x^{r_j}, 1\leq j \leq m$, and we define $(f,g) = \int^1_0 f(x)g(x)dx$, then we have 
+\begin{align*}
+    (f_i, f_j) = \int^1_0 x^{r_i}x^{r_j}dx = \frac{1}{r_i + r_j + 1}.
+\end{align*}
+Thus, $G$ is a Gram matrix, then $G$ is positive definite.
+\end{proof}
+
+
+
+\end{document}
+
