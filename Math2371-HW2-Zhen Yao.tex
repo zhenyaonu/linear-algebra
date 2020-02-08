@@ -39,51 +39,87 @@
 
 \medskip
 
-\noindent{\bf Problem 1.} Let 
+\noindent{\bf Problem 1.} Let $Y$ be a subspace of a finite dimensional linear space $X$ such that 
 \begin{align*}
-    A = \begin{pmatrix}
-    1 & 2 & 0 \\
-    0 & 1 & 2
-    \end{pmatrix}.
+    \dim Y = \dim X - k.
 \end{align*}
-Find all of its positive singular values.
+Let $Z$ be a subspace of $X$. Show that 
+\begin{align*}
+    \dim (Z\cap Y) \geq \dim Z - k.
+\end{align*}
 \begin{proof}
-Singular values of $A$ are eigenvalues of $AA^* = \begin{pmatrix}
-    5 & 2  \\
-    2 & 5 
-    \end{pmatrix}$, which are $\lambda_1 = 7$ and $\lambda_2 = 3$.
+With $\dim (Y+Z) = \dim Y + \dim Z - \dim (Y\cap Z)$ and $\dim(Y+Z) \leq \dim X$, then we have
+\begin{align*}
+    \dim (Y\cap Z) & = \dim Y + \dim Z - \dim (Y+Z) \\
+    & \geq \dim Z + \dim X - k - \dim X \\
+    & \geq \dim Z - k.
+\end{align*}
 \end{proof}
 
 \medskip
 
-\noindent{\bf Problem 2.} Let $m \geq n \geq 2$ and $A$ be an $m\times n$ matrix. Suppose $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n \geq 0$ are singular values of $A$. Suppose $u_1\in \mathbf{R}^m, v_1 \in \mathbf{R}^n$  are unit vectors such that 
+\noindent{\bf Problem 2.} Let $v_1,v_2,\cdots, v_k, k\geq 2$, be vectors in $\mathbf{R}^n$ and $1\leq s < k$. Show that
 \begin{align*}
-    (u_1, Av_1) = \sigma_1.
+    \det G(v_1,\cdots, v_k) \leq \det G(v_1,\cdots, v_s) \det G(v_{s+1},\cdots, v_k).
 \end{align*}
-Show that 
+where $G(v_1,\cdots, v_k)$ is the Gram matrix of vectors $v_1,\cdots, v_k$ with the standard inner product.
+\begin{proof}
+We denote 
+$G(v_1,\cdots, v_k) = \begin{pmatrix}
+    G(v_1,\cdots, v_s) & B \\
+    B^* & G(v_{s+1},\cdots, v_k)
+    \end{pmatrix} = \begin{pmatrix}
+    A & B \\
+    B^* & D
+    \end{pmatrix}$. We assume $D > 0$, and
+with Schur complement, we have
 \begin{align*}
-    \sigma_2 = \max_{ \substack{\|u\| = \|v\| = 1\\
-                     (u,u_1) = (v, v_1) = 0}}
-    (u, Av).
+    \frac{G(v_1,\cdots, v_k)}{D} = A - B D^{-1} B^*.
+\end{align*}
+Then we have $\det G(v_1,\cdots, v_k) = \det D \det (A - B D^{-1} B^*)$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.} Find the polar decomposition of 
+\begin{align*}
+    A = \begin{pmatrix}
+    1 & 2 \\
+    2 & 3
+    \end{pmatrix}.
 \end{align*}
 \begin{proof}
-Suppose $\sigma_2 = (u_2, Av_2)$ and $\|u_2\| = \|v_2\| = 1$. Define for any vector $g,h$:
-\begin{align*}
-    f(s,t) = \frac{(u_2+sg, A(v_2+th))}{\|u_2+sg\|\cdot \|v_2+th\|},
-\end{align*}
-and we have
-\begin{align*}
-    \frac{\partial f}{\partial s}\bigg|_{(0,0)} & = \frac{(g, Av_2) - (u_2, Av_2)(u_2, g)}{\|u_2+sg\|^2\cdot \|v_2+th\|^2} \\
-    & = \frac{(g, Av_2) - \sigma_2(u_2, g)}{\|u_2+sg\|^2\cdot \|v_2+th\|^2}.
-\end{align*}
-Since $\sigma_2 = (u_2, Av_2)$, then we have $(u_2,\sigma_2 u_2) = (u_2, Av_2)$, which implies $\sigma_2 u_2 = Av_2$. Then, $\frac{\partial f}{\partial s}\bigg|_{(0,0)} = 0$. Similarly, we have $\frac{\partial f}{\partial t}\bigg|_{(0,0)} = 0$. Thus, $f(x,t)$ obtain its maximum at $(0,0)$ if $\sigma_2 = (u_2, Av_2)$. And with $(u_1, Av_1) = \sigma_1$, we have $Av_1 = \sigma_1 u_1$ and if $(u_2,u_1) = (v_2, v_1) = 0$, we can have 
-\begin{align*}
-    (Av_1, v_2) = (\sigma_1 u_1, v_2) = 0,
-\end{align*}
-which implies $(u_1, v_2) = 0$. Thus, we have $\sigma_2 = \max_{ \substack{\|u\| = \|v\| = 1\\
-                     (u,u_1) = (v, v_1) = 0}}
-    (u, Av)$.
+We have $A^T A = \begin{pmatrix}
+    10 & 8 \\
+    8 & 8
+    \end{pmatrix}$, and the eigenvalues are $9+\sqrt{65}, 9-\sqrt{65}$. In polar decomposition, $A = QS$, and we have $S = \begin{pmatrix}
+    \sqrt{9+\sqrt{65}} & 0 \\
+    0 & \sqrt{9+\sqrt{65}}
+    \end{pmatrix}$. Thus, we have $Q = AS^{-1} = \begin{pmatrix}
+    \frac{1}{\sqrt{9+\sqrt{65}}} & \frac{2}{\sqrt{9-\sqrt{65}}} \\
+    \frac{2}{\sqrt{9+\sqrt{65}}} & \frac{3}{\sqrt{9-\sqrt{65}}}
+    \end{pmatrix}$.
 \end{proof}
+
+\medskip
+
+\noindent{\bf Problem 4.} Let $A$ be self-adjoint. Show that the singular values of $A$ are absolute values of eigenvalues of $A$.
+\begin{proof}
+In singular value decomposition, we have $A = WDV$, where $W,V$ are unitary, and $D\geq 0$ is diagonal. Then we have
+\begin{align*}
+    AA^* = W D V V^* D W^* = W D^2 W^*,
+\end{align*}
+which implies the singular values are eigenvalues of $AA^*$, i.e., $\sigma\left(D^2\right) = \sigma(AA^*)$. 
+
+Also, $A$ is self-adjoint, and suppose $\lambda$ is an eigenvalue of $A$ with corresponding eigenvector $v$. Then $\overline{\lambda}$ is an eigenvalue of $A^*$ with the same eigenvector $v$. Suppose $\lambda_1,\cdots,\lambda_n$ are eigenvalues of $A$ with eigenvectors $v_1,\cdots,v_n$, then we have
+\begin{align*}
+    AA^*v_j = A \overline{\lambda_j}v_j = \lambda_j \overline{\lambda_j}v_j = |\lambda_j|^2 v_j,
+\end{align*}
+which implies that the eigenvalues of $AA^*$ are $|\lambda_1|^2,\cdots,|\lambda_n|^2$, then we have $\sigma(D) = |\lambda_j|, 1\leq j \leq n$.
+\end{proof}
+
+
+
 
 
 
