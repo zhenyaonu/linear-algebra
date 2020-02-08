@@ -1,0 +1,152 @@
+\documentclass[12pt]{article}
+\pagestyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 4 for Math 2371}
+\centerline{Zhen Yao}
+
+\medskip
+
+\noindent{\bf Problem 1.}
+Suppose $A$ and $B$ are $2 \times 2$ nilpotent matrices. Prove that $AB$ is diagonalizable.
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item If $A$ or $B$ is zero, then it is trivial.
+    \item If $A,B \neq 0$, since $A, B$ are nilpotent, then $\text{tr}(A) = \text{tr}(B) = 0$ and the characteristic polynomials of $A, B$ are $\lambda^2$. Then let $A = \begin{pmatrix} 
+        a & b  \\
+        c & -a 
+    \end{pmatrix}$ and $B = \begin{pmatrix} 
+        d & e  \\
+        f & -d 
+    \end{pmatrix}$, where $-a^2 = bc, -d^2 = ef$ and $a,b,c,d,e,f \neq 0$. Then we have $AB = \begin{pmatrix} 
+        ad+bf & ae-bd  \\
+        cd-afc & ce+ad 
+    \end{pmatrix}$, and we can have its characteristic polynomial
+    \begin{align*}
+        P_{AB}(\lambda) = \lambda^2  - \left(\sqrt{bf} + \frac{ad}{\sqrt{bf}} \right)\lambda.
+    \end{align*}
+    Hence, $AB$ has two different eigenvalues. Thus, $AB$ is diagonalizable.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.}
+Let $Q$ be a reflection clockwise rotation with angel $\theta$ about the origin in $\mathbb{R}^2$. Find the matrix representation of $Q$ in the standard basis and express $Q$ as a composition of two reflections.
+\begin{proof}
+For any $u\in\mathbb{R}^2$, it can be represented as $u = \begin{pmatrix} 
+    r \cos \alpha \\
+    r \sin\alpha  
+\end{pmatrix}$, and we can have $Qr = \begin{pmatrix} 
+    r \cos (\alpha+\theta) \\
+    r \sin (\alpha+\theta)  
+\end{pmatrix}$, then we have 
+$$Q = \begin{pmatrix} 
+    \cos \theta & - \sin \theta \\
+    \sin \theta & \cos \theta  
+\end{pmatrix}.$$
+
+Now consider the reflection about the line $y = \tan \frac{\theta}{2} x$ and it can be represented as 
+$$R_{\frac{\theta}{2}} = \begin{pmatrix} 
+    \cos \theta & \sin \theta \\
+    \sin \theta & - \cos \theta  
+\end{pmatrix}.$$
+then we have 
+\begin{align*}
+    R_{\frac{\alpha}{2}} R_{\frac{\beta}{2}} = \begin{pmatrix} 
+    \cos (\alpha - \beta) & \sin (\alpha - \beta) \\
+    \sin (\alpha - \beta) & - \cos (\alpha - \beta)  
+\end{pmatrix}.
+\end{align*}
+Let $\alpha = \theta - \beta$, then we can have $Q = R_{\frac{\alpha}{2}} R_{\frac{\beta}{2}}$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.}
+Let $R$ be a reflection and $Q$ be an orthogonal matrix in $\mathbb{R}^n$, show that $QRQ^T$ is also a reflection. Explain the connection of two reflections geometrically.
+\begin{proof}
+Since $Q$ is orthogonal matrix, then $Q$ can be written as a composition of at most $n$ reflections. Then the composition $QRQ^T$ is also reflection.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 4.}
+Show that every orthogonal map $Q$ is the composition of at most $k$ hyperplane reflections, where
+\begin{align*}
+    k = n - \dim (\ker(Q - I)).
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
