@@ -1,0 +1,96 @@
+\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage{latexsym,amsmath,amssymb}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 2 for Math 2371}
+\centerline{Zhen Yao}
+
+\medskip
+
+\noindent{\bf Problem 1.} Let 
+\begin{align*}
+    A = \begin{pmatrix}
+    1 & 2 & 0 \\
+    0 & 1 & 2
+    \end{pmatrix}.
+\end{align*}
+Find all of its positive singular values.
+\begin{proof}
+Singular values of $A$ are eigenvalues of $AA^* = \begin{pmatrix}
+    5 & 2  \\
+    2 & 5 
+    \end{pmatrix}$, which are $\lambda_1 = 7$ and $\lambda_2 = 3$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.} Let $m \geq n \geq 2$ and $A$ be an $m\times n$ matrix. Suppose $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n \geq 0$ are singular values of $A$. Suppose $u_1\in \mathbf{R}^m, v_1 \in \mathbf{R}^n$  are unit vectors such that 
+\begin{align*}
+    (u_1, Av_1) = \sigma_1.
+\end{align*}
+Show that 
+\begin{align*}
+    \sigma_2 = \max_{ \substack{\|u\| = \|v\| = 1\\
+                     (u,u_1) = (v, v_1) = 0}}
+    (u, Av).
+\end{align*}
+\begin{proof}
+Suppose $\sigma_2 = (u_2, Av_2)$ and $\|u_2\| = \|v_2\| = 1$. Define for any vector $g,h$:
+\begin{align*}
+    f(s,t) = \frac{(u_2+sg, A(v_2+th))}{\|u_2+sg\|\cdot \|v_2+th\|},
+\end{align*}
+and we have
+\begin{align*}
+    \frac{\partial f}{\partial s}\bigg|_{(0,0)} & = \frac{(g, Av_2) - (u_2, Av_2)(u_2, g)}{\|u_2+sg\|^2\cdot \|v_2+th\|^2} \\
+    & = \frac{(g, Av_2) - \sigma_2(u_2, g)}{\|u_2+sg\|^2\cdot \|v_2+th\|^2}.
+\end{align*}
+Since $\sigma_2 = (u_2, Av_2)$, then we have $(u_2,\sigma_2 u_2) = (u_2, Av_2)$, which implies $\sigma_2 u_2 = Av_2$. Then, $\frac{\partial f}{\partial s}\bigg|_{(0,0)} = 0$. Similarly, we have $\frac{\partial f}{\partial t}\bigg|_{(0,0)} = 0$. Thus, $f(x,t)$ obtain its maximum at $(0,0)$ if $\sigma_2 = (u_2, Av_2)$. And with $(u_1, Av_1) = \sigma_1$, we have $Av_1 = \sigma_1 u_1$ and if $(u_2,u_1) = (v_2, v_1) = 0$, we can have 
+\begin{align*}
+    (Av_1, v_2) = (\sigma_1 u_1, v_2) = 0,
+\end{align*}
+which implies $(u_1, v_2) = 0$. Thus, we have $\sigma_2 = \max_{ \substack{\|u\| = \|v\| = 1\\
+                     (u,u_1) = (v, v_1) = 0}}
+    (u, Av)$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\end{document}
