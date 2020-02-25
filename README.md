@@ -6,7 +6,8 @@ Some exercies and homework I have during this Linear Analysis graduate course to
 
 ### HW2
 - Dual Spaces
-- Other material: *Note on Dual Spaces*
+- Other material: 
+  - *Note on Dual Spaces*
 
 ### HW3
 - Linear Mappings
@@ -20,12 +21,16 @@ Some exercies and homework I have during this Linear Analysis graduate course to
 ### HW6
 - Determinant of Special Matrices
 - Spectral Theory
-- Other material: *Note on Jordan Form 1*, *Note on Jordan Form 2*,
-*Note on Minimal Polynomials and Jordan Normal Forms*
+- Other material: 
+  - *Note on Jordan Form 1*
+  - *Note on Jordan Form 2*,
+  - *Note on Minimal Polynomials and Jordan Normal Forms*
 
 ### HW7
 - Jordan Canonical Forms
 
 ### HW8
 - Euclidean Space and Norm
-- Other materials: *Notes on Orthogonal and Symmetric Matrices*, *Notes on The Norm of A Matrix*
+- Other materials: 
+  - *Notes on Orthogonal and Symmetric Matrices*
+  - otes on The Norm of A Matrix*
