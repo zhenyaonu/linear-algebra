@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+\pagestyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 8 for Math 2371}
+\centerline{Zhen Yao}
+
+\medskip
+
+\noindent{\bf Problem 1.}
+Let $K$ be the collection of all $n\times n$ stochastic matrices. Show that $K$ is convex in the $n^2$ dimensional linear space of $n\times n$ real matrices. Find all extreme points of $K$.
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Suppose $A = \left(a_{ij}\right)_{n\times n}$ and $B = \left(b_{ij}\right)_{n\times n}$ are stochastic matrices. Then for any $t\in (0,1)$, we can have 
+    \begin{align*}
+        \sum^n_{i=1} t a_{ij} + (1-t)b_{ij} = t \sum^n_{i=1} a_{ij} + (1-t) \sum^n_{i=1} b_{ij} = 1.
+    \end{align*}
+    Then, $tA + (1-t) B$ is also stochastic matrix. Hence, $K$ is a convex set.
+    
+    \item The permutation matrices are extreme points of $K$. Suppose permutation matrix $P = \frac{A + B}{2}$, where $A$ and $B$ are stochastic matrices. Since $a_{ij}, b_{ij} \in [0,1]$ and $P_{ij} = \frac{a_{ij} + b_{ij}}{2}$, then we have $A = B = P$. Thus, $P$ is an extreme point. 
+    
+    Also, for any matrix $M = \left(m_{ij}\right)_{n\times n}$ that is not a permutation matrix, it is not an extreme point. Indeed, there exist $i, j$ such that $m_{ij} \in (0,1)$. Then there exist stochastic matrices $A, B$ where $m_{ij} = \frac{a_{ij} + b_{ij}}{2}$. Thus, $M$ is not an extreme point.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.}
+Let $P = \left(P_{ij}\right)_{n\times n}$ be an entrywise positive matrix and $\lambda$ be its dominant eigenvalue. Show that 
+\begin{align*}
+    \min_{i} \sum^n_{j=1} P_{ij} \leq \lambda(P) \leq \max_{i} \sum^n_{j=1} P_{ij}.
+\end{align*}
+\begin{proof}
+Suppose $\lambda$ be its dominant eigenvalue, then $\lambda > 0$ and there exists eigenvector $h$ with $h_i > 0$. Then, we have $Ph = \lambda h$ and 
+\begin{align*}
+    \sum^n_{i=1}\sum^n_{j=1} P_{ij} h_j = \sum^n_{i=1} \lambda h_j.
+\end{align*}
+Then, with the change of order of the summation, we have 
+\begin{align*}
+    \left(\min_{i} \sum^n_{j=1} P_{ij} \right) \left(\sum^n_{j=1}h_j\right) \leq \lambda \sum^n_{j=1}h_j \leq \left(\max_{i} \sum^n_{j=1} P_{ij} \right) \left(\sum^n_{j=1}h_j\right),
+\end{align*}
+and hence
+\begin{align*}
+    \min_{i} \sum^n_{j=1} P_{ij} \leq \lambda(P) \leq \max_{i} \sum^n_{j=1} P_{ij}.
+\end{align*}
+\end{proof}
+
+
+\medskip
+
+\noindent{\bf Problem 3.}
+Let $P = \left(P_{ij}\right)_{n\times n}$ be an entrywise positive matrix and $\lambda$ be its dominant eigenvalue. Suppose $u,v\in \mathbb{R}^n$ are two positive vector such that
+\begin{align*}
+    Pu = \lambda u, P^T v = \lambda v.
+\end{align*}
+Show that
+\begin{align*}
+    \lim_{k\to\infty} \frac{1}{\lambda^k} P^k = \frac{1}{(u,v)} u v^T.
+\end{align*}
+\begin{proof}
+For matrix $P/\lambda$, it has dominant eigenvalue $1$. Now suppose $w$ is a generalized eigenvector of $P$ with eigenvalue $\beta$. With Perron theorem, we have $|\beta| < \lambda$, then 
+\begin{align*}
+    \lim_{k\to\infty} \left(\frac{P}{\lambda}\right)^k w = 0.
+\end{align*}
+Then $\left(P/\lambda \right)^k$ converges to a matrix $M$ which fixes $u$ and $v$. We claim $M = \frac{1}{(u,v)} u v^T$. 
+
+First we note that $v^T M = \frac{1}{(u,v)} (v^T u) v^T = v^T$ and $Mu = u$. Then any other generalized eigenvector $w$ for eigenvalue $\beta \neq \lambda$, we have $Mw = 0$. If not, $Mw = \frac{1}{(u,v)} u v^T w \neq 0$, which implies $v^T w \neq 0$, and then for all $k > 0$, 
+\begin{align*}
+    \lambda^k v^T w = v^T P^k w = v^T \left(P^k w\right),
+\end{align*}
+and hence 
+\begin{align*}
+    v^T w = \frac{1}{\lambda^k} v^T \left(P^k w\right),
+\end{align*}
+which is a contradiction, since 
+\begin{align*}
+    \lim_{k\to\infty} \frac{1}{\lambda^k} P^k w = 0.
+\end{align*}
+Thus, we have
+\begin{align*}
+    \lim_{k\to\infty} \frac{1}{\lambda^k} P^k = \frac{1}{(u,v)} u v^T.
+\end{align*}
+\end{proof}
+
+
+
+
+
+
+\end{document}
