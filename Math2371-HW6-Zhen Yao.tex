@@ -1,0 +1,165 @@
+\documentclass[12pt]{article}
+\pagestyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 6 for Math 2371}
+\centerline{Zhen Yao}
+
+\medskip
+
+\noindent{\bf Problem 1.}
+Let $A$ be a $2\times 2$ complex matrix. Show that $\|A\| = r(A)$ if and only if $A$ is normal. Show that the statement is not true if $A$ is an $n\times n$ matrix with $n \geq 3$.
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Suppose $A_{2\times 2}$ is complex matrix and $AA^* = A^* A$.
+    \begin{enumerate}
+        \item[a)] $r(A) \leq \|A\|$. Indeed, for eigenvalue $\lambda_j$ and the corresponding eigenvector $x_j$, we have $Ax_j = \lambda_j x_j$ and 
+        \begin{align*}
+            \|Ax_j\| = \left|\lambda_j\right| \|x_j\| \leq \|A\| \|x_j\|.
+        \end{align*}
+        Hence, $\max|\lambda_j| = r(A) \leq \|A\|$.
+        
+        \item[b)]$A$ is normal, then there exists orthogonal basis of $X$ consisting of eigenvectors of $A$. For any $x\in X$, $x = \sum^n_{i=1} c_j x_j$, applying $A$ to $x$ gives
+        \begin{align*}
+            Ax = \sum^n_{i=1} c_j \lambda_j x_j.
+        \end{align*}
+        Then we have
+        \begin{align*}
+            \frac{\|Ax\|}{\|x\|} = \left(\frac{\sum^n_{i=1} c_j^2 \lambda_j^2 }{\sum^n_{i=1} c_j^2}\right)^{\frac{1}{2}} \leq \max \lambda_j = r(A).
+        \end{align*}
+        Hence, $\|A\| = \frac{\|Ax\|}{\|x\|} \leq r(A)$.
+    \end{enumerate}
+    Thus, $\|A\| = r(A)$.
+    
+    \item If $\|A\| = r(A)$, then we set $A = \begin{pmatrix}  
+        a & b \\
+        c & d
+    \end{pmatrix}$. Also, we have $\|A\| = \sqrt{A^*A}$. Then after computing, we have $b = c$, which implies $A$ is normal.
+    
+    \item Now take $A = \begin{pmatrix} 
+        1 & 1 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 2
+    \end{pmatrix}$, then $\|A\| = 2 = \sqrt{r(A^* A)}$. However, $AA^* - A^* A \neq 0$, which implies $A$ is not normal. 
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.}
+Construct a continuous matrix function $A(t)$ where $A(t)$ is an anti-symmetric real $3\times 3$ matrix for each $t$ such that the unique solution to
+\begin{align*}
+    \left\{ 
+    \begin{aligned}
+        & M_t = A(t)M,\\
+        & M(0) = I,
+    \end{aligned}
+    \right.
+\end{align*}
+is not give by $\exp\left(\int^t_0 A(s)\, ds \right)$.
+\begin{proof}
+We can set $A$ as 
+\begin{align*}
+    A = \begin{pmatrix}
+        0 & t & 0 \\
+        -t & 0 & 0 \\
+        0 & 0 & 0 
+    \end{pmatrix},
+\end{align*}
+and we can solve for $M$, which is
+\begin{align*}
+    M = \begin{pmatrix}
+        \sin \frac{t^2}{2} + \cos \frac{t^2}{2} &  \sin \frac{t^2}{2} & 0 \\
+        \cos \frac{t^2}{2} - \sin \frac{t^2}{2} &  \cos \frac{t^2}{2} & 0 \\
+        0 & 0 & 1 
+    \end{pmatrix}.
+\end{align*}
+Also, we have 
+\begin{align*}
+    e^{\int^t_0 A(s)\, ds} = \begin{pmatrix}
+        1 & \frac{1}{2} t^2 & 0 \\
+        -\frac{1}{2} t^2 & 1 & 0 \\
+        0 & 0 & 1 
+    \end{pmatrix}.
+\end{align*}
+Then when $A$ depends on $t$ and $A(t)$ does not commute with $\int^t_0 A(s)\, ds$, the solution cannot be represented by $e^{\int^t_0 A(s)\, ds}$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.}
+Let 
+\begin{align*}
+    K = \left\{(x,y)\in\mathbb{R}^2: |x| < 1, |y| < 1 \right\}.
+\end{align*}
+Show that $K$ is convex and find its gauge function $p_K$.
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item For any $x = (x_1, x_2), y = (y_1, y_2) \in K$ and $t\in (0,1)$, we define $z = (tx_1 + (1-t)y_1,tx_2 + (1-t)y_2)$. And we have
+    \begin{align*}
+        |tx_1 + (1-t)y_1| \leq t|x_1| + (1-t)|x_2| \leq \max \{x_1, x_2\} < 1,
+    \end{align*}
+    similarly, $|tx_2 + (1-t)y_2| < 1$. Thus we have $z\in K$, and hence $K$ is convex.
+    
+    \item $p_K = \max \{x,y\}$.
+\end{enumerate}
+
+\end{proof}
+
+
+\end{document}
