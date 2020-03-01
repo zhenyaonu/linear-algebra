@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+\pagestyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 5 for Math 2371}
+\centerline{Zhen Yao}
+
+\medskip
+
+\noindent{\bf Problem 1.}
+Let $U$ and $V$ be two real linear spaces with $\dim U, \dim V \geq 2$. Show that there exists $w\in U \otimes V$ such that for any $u\in U$ and $v\in V$, $w\neq u \otimes v$.
+\begin{proof}
+Consider $U = V = \mathbb{R}^2$ with standard basis $\{e_1, e_2\}$. Then the tensor product any two elements $u = (a_1, a_2),v = (b_1, b_2)$ of $\mathbb{R}^2$ is 
+\begin{align*}
+    (a_1e_1 + a_2e_2) \otimes (b_1e_1 + b_2e_2) = \sum_{i,j}a_i b_j (e_i \otimes e_j).
+\end{align*}
+Then we consider $w = e_1 \otimes e_1 + e_2 \otimes e_2$, and we can have $a_1b_1 = a_2b_2 = 1$, and $a_1b_2 = 0$. Then there is a contradiction, since we cannot find $u,v$ such that $a_1b_1 = a_2b_2 = 1, a_1b_2 = a_2b_1 = 0$. Then there exists $w \in U \otimes V$ such that for any $u\in U$ and $v\in V$, $w\neq u \otimes v$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.}
+Let $U$ and $V$ be two real linear spaces with $\dim U, \dim V \geq 2$. Suppose $u_1, u_2$ are linearly independent in $U$ and $u_1, u_2$ are linearly independent in $V$. Show that the four vectors $u_1\otimes v_1, u_1\otimes v_2, u_2\otimes v_1$ and $u_2\otimes v_2$ are linearly independent.
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item If $\dim U = \dim V = 2$, then we are done, since $\{u_1,u_2\}$ and $\{v_1,v_2\}$ are basis for $U$ and $V$ respectively. 
+    \item Otherwise, we assume $\dim U = m$ and $\dim V = n$. Then we can extend $\{u_1,u_2\}$ and $\{v_1,v_2\}$ into $\{u_1,\cdots,u_m\}$ and $\{v_1,\cdots,v_n\}$, which are basis for $U$ and $V$ respectively. Then it is obvious that $\{u_j\otimes v_j\}$ are linearly independent.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.}
+Let $A$ be an $n\times n$ matrix. Suppose that for any $1 \leq i \leq n$,
+\begin{align*}
+    |a_{ii}| > \sum_{1\leq j\leq n, j\neq i} |a_{ij}|.
+\end{align*}
+Show that $A$ is invertible.
+\begin{proof}
+Suppose there exists $x = (x_1,\cdots, x_n) \neq 0$ such that $Ax = 0$, then we have $\sum^n_{j=1} a_{ij}x_j = 0, i = 1,2,\cdots,n$. Let $x_k = \max_{j}|x_j|$, and we have
+\begin{align*}
+    a_{kk}x_k & = - \sum_{j\neq k}a_{kj} x_j \\
+    \Rightarrow a_{kk} & = - \sum_{j\neq k}a_{kj} \frac{x_k}{x_j} 
+\end{align*}
+which implies 
+\begin{align*}
+    |a_{kk}| = \left|\sum_{j\neq k}a_{kj} \frac{x_k}{x_j}\right| \leq \sum_{j\neq k} |a_{kj}| \left|\frac{x_k}{x_j}\right| < \sum_{j\neq k} |a_{kj}|,
+\end{align*}
+where we used the fact that $\left|\frac{x_k}{x_j}\right| \leq 1$. Then this is a contradiction to the assumption. Then $0$ is not an eigenvalue of $A$, hence $A$ is invertible.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 4.}
+Let $A = \left(a_{ij}\right)_{n\times n}$ be a matrix such that
+\begin{align*}
+    |a_{ij}| \leq 1, \quad \mbox{for all $1\leq i,j \leq n$.}
+\end{align*}
+Show that there exists a constant $\Lambda > 0$ such that 
+\begin{align*}
+    |\lambda| \leq \Lambda
+\end{align*}
+holds for any eigenvalue $\lambda$ of $A$. Find the smallest such $\Lambda$ and justify your answer.
+\begin{proof}
+With the norm of $A$ and the spectral radius $r(A)$, we have
+\begin{align*}
+    |\lambda| \leq |r(A)| \leq \|A\| \leq \|A\|_{HS} = \left(\sum_{i,j}|a_{ij}|^2\right)^{\frac{1}{2}} \leq n,
+\end{align*}
+which implies that there exists a constant $\Lambda > 0$ such that $|\lambda| \leq \Lambda$.  
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
