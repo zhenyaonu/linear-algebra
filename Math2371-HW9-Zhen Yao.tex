@@ -1,0 +1,155 @@
+\documentclass[12pt]{article} 
+%\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 9 for Math 2371}
+\centerline{Zhen Yao}
+
+\medskip
+
+\noindent{\bf Problem 1.}
+Let $S_n$ be the linear space consisting of $n\times n$ real symmetric matrices. For any $A \in M_n$, denoted by $r(A)$ the spectral radius of $A$. Is $r$ a norm for $S_n$?
+\begin{proof}
+$r$ is a norm for $S_n$. Suppose $A \in S_n$, then we have $A^T = A$. Also, we already knew that $\|A\|_2 = \sqrt{r(A^T A)}$. Symmetric matrix has real eigenvalues, then $r(A^T A) = r(A^2) = r(A)^2$, since 
+$$A^2 v = A(Av) = A (\lambda v) = \lambda^2 v$$ 
+for some eigenvalue $\lambda$ of $A$ and its corresponding eigenvector $v$. Thus, we have $\|A\|_2 = r(A)$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.}
+Let $X = \mathbb{R}^n$ be the normed linear space with $l^p$ norm for some $1\leq p \leq n$. Let $T \in X'$ be such that 
+\begin{align*}
+    Tx = \sum^n_{k=1}k x_k.
+\end{align*}
+Find the operator norm $\|T\|$.
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item First, if $\|x\|_p = 1$, with Hölder's inequality, we have
+    \begin{align*}
+        |Tx| & \leq \sum^n_{k=1} |k x_k| \\
+        & \leq \left(\sum^n_{k=1} k^q \right)^{\frac{1}{q}} \left(\sum^n_{k=1} |x_k|^p \right)^{\frac{1}{p}},
+    \end{align*}
+    where $\frac{1}{q} + \frac{1}{p} = 1$. Then we have 
+    \begin{align*}
+        \|T\|_{op} = \sup_{\|x\|_p = 1}|Tx| \leq \left(\sum^n_{k=1} k^q \right)^{\frac{1}{q}}.
+    \end{align*}
+    
+    \item Also, we can choose $x$ such that $\|x\|_p = 1$, then we have 
+    \begin{align*}
+        \|T\|_{op} \geq |Tx| = \left(\sum^n_{k=1} k^q \right)^{\frac{1}{q}}.
+    \end{align*}
+\end{enumerate}
+Thus, we have 
+\begin{align*}
+    \|T\|_{op} = \left(\sum^n_{k=1} k^q \right)^{\frac{1}{q}}.
+\end{align*}
+where $\frac{1}{q} + \frac{1}{p} = 1$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.}
+Let $X = \mathbb{R}^n$ and $Y = \mathbb{R}^m$ be normed linear spaces with $l^\infty$ norm. Let $T \in \mathcal{L}(X,Y)$ represented by the $m\times n$ matrix $\left(t_{ij}\right)_{m\times n}$, i.e.,
+\begin{align*}
+    y_i = \sum^n_{j=1} t_{ij} x_j.
+\end{align*}
+Find the operator norm $\|T\|$.
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item First, we have 
+    \begin{align*}
+        \left|y_i\right| & \leq \sum^n_{j=1} \left|t_{ij}\right| \left|tx_j\right| \\
+        & \leq \left(\sum^n_{j=1} \left|t_{ij}\right| \right) \|x\|_\infty.
+    \end{align*}
+    Then we have
+    \begin{align*}
+        \|T\|_{op} \leq \sup_{\|x\|_\infty = 1} \|Tx\|_\infty \leq \max_{1\leq i\leq m} \left\{\sum^n_{j=1} \left|t_{ij}\right| \right\}.
+    \end{align*}
+    
+    \item Second, suppose the maximum of the right hand side of the above equation is attained at $i = i_0$. Let $x$ be the vector such that $x_j = {\rm sgn}\,\, t_{i_0 j}$, where 
+    \begin{align*}
+        {\rm sgn}\,\, x = \begin{cases}
+            1, & x > 0, \\
+            0, & x = 0, \\
+            -1, & x < 0.
+        \end{cases}
+    \end{align*}
+    then we have $\|x\|_\infty = 1$ and 
+    \begin{align*}
+        \|Tx\|_\infty = \sum^n_{j=1} \left|t_{i_0 j}\right|.
+    \end{align*}
+    Since $\|T\|_{op} \geq \|Tx\|_\infty$, we have 
+    \begin{align*}
+        \|T\|_{op} \geq \max_{1\leq i\leq m} \left\{\sum^n_{j=1} \left|t_{ij}\right| \right\}.
+    \end{align*}
+\end{enumerate}
+Thus, we have 
+\begin{align*}
+    \|T\|_{op} = \max_{1\leq i\leq m} \left\{\sum^n_{j=1} \left|t_{ij}\right| \right\}.
+\end{align*}
+
+\end{proof}
+
+
+
+
+
+
+
+\end{document}
