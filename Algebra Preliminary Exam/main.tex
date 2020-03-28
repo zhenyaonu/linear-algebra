@@ -1,0 +1,373 @@
+\documentclass[12pt]{article}
+\pagestyle{plain}
+%\documentclass{article}
+%\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\usepackage{url}
+\graphicspath{ {images/} }
+
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\title{Sections and Chapters}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\numberwithin{equation}{subsection}
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\Large \bf Algebra Qualifying Exam}
+\centerline{Zhen Yao}
+
+\bigskip
+
+\section{May 2019 Exam}
+
+\noindent{\bf Problem 1*.}
+~\begin{enumerate}[label=(\alph*)]
+    \item Prove or give a counterexample: if $T: \mathbb{R}^3 \to \mathbb{R}^3$ is a linear transformation such that $N_T \cap R_T$ has dimension at least $1$, then $T$ is nilpotent. 
+    
+    \item Prove or give a counterexample: if $T: \mathbb{R}^4 \to \mathbb{R}^4$ is a linear transformation such that $N_T \cap R_T$ has dimension at least $2$, then $T$ is nilpotent. 
+\end{enumerate}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Consider $T(x,y,z) = (0,x,z)$\cite{1}. Then it is obvious that $T$ is linear. Also, $N_T = \{(0,y,0)| y \in \mathbb{R}\}$ and $R_T = \{(0,x,y)| x,y \in \mathbb{R}\}$. Then, $N_T \cap R_T = \{(0,y,0)| y \in \mathbb{R}\}$, which is at least dimension $1$. However, $T$ is not nilpotent, since 
+    \begin{align*}
+        T^3(x,y,z) = T^2(0,x,z) = T(0,0,z) = (0,0,z).
+    \end{align*}
+    
+    \item With the rank-nullity theorem, we have 
+    \begin{align*}
+        \dim N_T + \dim R_T = \dim \mathbb{R}^4 = 4,
+    \end{align*}
+    also, 
+    \begin{align*}
+        \dim (N_T + R_T) = \dim N_T + \dim R_T - \dim (N_T \cap R_T) \leq 2.
+    \end{align*}
+    Then the only possibility is that $\dim N_T = \dim R_T = 2$ and $\dim (N_T \cap R_T) = 2$, which implies $R_T = N_T$\cite{2}. Thus, $T^2(x) = T(T(x)) = 0$, since $T(x) \in R_T$. Hence, $T$ is nilpotent.
+\end{enumerate}
+\end{proof}
+
+We present another approach to prove part $(b)$.
+\begin{proof}
+Let $u,v \in N_T \cap R_T$ such that $u, v$ are linearly independent. Then, $Tu = 0$ and $Tv = 0$, and for some $u', v' \in \mathbb{R}^4$, $u = Tu'$ and $v = Tv'$. Define $S = \{u, v, u', v'\}$ and each element of $S$ is annihilated by some power of $T$, saying $T^2$. 
+
+We claim $u, v, u', v'$ are linearly independent. Suppose $c_1 u + c_2 v + c_3 u' + c_4 v' = 0$. We need to prove that $c_i = 0, i = 1,2,3,4$. Applying $T$ to the above equation gives
+\begin{align*}
+    c_1 T u + c_2 T v + c_3 T u' + c_4 T v' = 0,
+\end{align*}
+which implies
+\begin{align*}
+    c_3 u + c_4 v = 0
+\end{align*}
+and then $c_3 = c_4 = 0$. Thus, $c_1 = c_2 = 0$. Hence, $\{u, v, u', v'\}$ is also nilpotent.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.}
+Suppose that $\lambda$ is an eigenvalue of a matrix $A \in \mathbb{C}^{n \times n}$ with algebraic multiplicity $k$. Show that $(A - \lambda I)^k$ has rank $n - k$.
+\begin{proof}
+$A$ is similar to its Jordan Canonial form $J_A(\lambda)$, such that there exists an invertible matrix $S$ such that $A = S J_A S^{-1}$. Suppose under such $S$, $J_A$ has form
+\begin{align*}
+    J_A = \begin{pmatrix}
+        J(\lambda) & 0 & \cdots & 0 \\
+        0 & J(\lambda_1) & \cdots & 0 \\
+        \vdots & \ddots & \ddots & \vdots \\
+        0 & \cdots & \cdots & J(\lambda_l)
+    \end{pmatrix},
+\end{align*}
+where $\lambda, \lambda_1, \cdots, \lambda_l$ are $l+1$ eigenvalues of $A$ and
+\begin{align*}
+    J(\lambda) = \begin{pmatrix}
+        \lambda & 1 & \cdots & \cdots & 0 \\
+        0 & \lambda & \cdots & \cdots &  0 \\
+        \vdots & \ddots & \ddots & \vdots & 1 \\
+        0 & \cdots & \cdots & \cdots & \lambda
+    \end{pmatrix}_{k \times k}.
+\end{align*}
+Also, $(A - \lambda I)^k = S (J_A - \lambda I)^k S^{-1}$, and 
+\begin{align*}
+    (J(\lambda) - \lambda I) = \begin{pmatrix}
+        0 & 1 & \cdots & \cdots & 0 \\
+        0 & 0 & \cdots & \cdots &  0 \\
+        \vdots & \ddots & \ddots & \vdots & 1 \\
+        0 & \cdots & \cdots & \cdots & 0
+    \end{pmatrix}_{k \times k}, (J(\lambda) - \lambda I)^k = \begin{pmatrix}
+        0 & 0 & \cdots & \cdots & 0 \\
+        0 & 0 & \cdots & \cdots &  0 \\
+        \vdots & \ddots & \ddots & \vdots & 0 \\
+        0 & \cdots & \cdots & \cdots & 0
+    \end{pmatrix}_{k \times k}.
+\end{align*}
+Also, $(J(\lambda_i) - \lambda I)^k \neq 0$ for $i = 1, \cdots, l$, then we have $\dim N_{(J_A - \lambda I)^k} = k$ since there is a $k\times k$ zero matrix in $J_A$. Thus, $\dim R_{(J_A - \lambda I)^k} = n - k$. Since $A$ and $J_A(\lambda)$ are similar, then they has the same eigenvalues and furthermore, $\dim \dim N_{(A - \lambda I)^k} = \dim N_{(J_A - \lambda I)^k}$. The rest follows.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3*.}
+For any $n \geq 1$, classify the matrices $Q \in \mathbb{R}^{n \times n}$ that are both orthogonal and skew-symmetric, meaning $Q^T = -Q$, up to similarity, i.e., exhibit exactly one representative from each real similarity class. {\bf Hint:} {\em The answer is very different for odd versus even $n$.}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item For $n$ is odd, we have $Q^T  = -Q$ and $Q^T Q = I$, Then, $- Q^2 = I$, and then $\det (- Q^2) = 1$. Thus, $(-1)^n \det (Q^2) = 1$. And there is no such matrix.
+    
+    \item For $n = 2k, k \in \mathbb{N}$ is even, we have the same equaitons as before and $Q^2 + I = 0$. Then the minimal polynomial $m_Q$ of $Q$ satisfies $m_Q(x)|(x^2 + 1)$. 
+    
+    Also, we claim all eigenvalues of $Q$ are non-zero purely imaginary\cite{3}. Indeed, for $x$ being eigenvector of $Q$ corresponding to eigenvalue $\lambda$, we have 
+    \begin{align*}
+        \lambda \|x\|^2 = (Ax, x) = (x, A^T x) = (x, - A x) = - \overline{\lambda} \|x\|^2,
+    \end{align*}
+    thus, $\lambda = -\overline{\lambda}$, which implies $\lambda$ is purely imaginary.
+    
+    Then, eigenvalues of $Q$ are $i$ and $-i$ since $m_Q(x)|(x^2 + 1)$. Also, $Q$ is diagonalizable\footnote{For every normal matrix $A$, there is a unitary matrix $P$ such that $PAP^{-1}$ is a diagonal matrix. ({\em Linear Algebra}. K. Hoffman  and R.A. Kunze. P317)} in $\mathbb{C}$, since $Q^T Q = Q Q^T = I$, then $Q$ is a normal map and can be unitary diagonalized\cite{4}. Let $x_1, y_1 \in \mathbb{C}^n$ be linear independent, such that for eigenvalue $i$ and $-i$, we have \footnote{Let $Q$ be an orthogonal map on $\mathbb{R}^n$ and suppose $\lambda$ is nonzero eigenvalue of $Q$. Then there exist linearly independent $x,y \in \mathbb{R}^n$ such that for $\lambda = \alpha + i \beta$, we have $Qx = \alpha x - \beta y, Qy = \beta x - \alpha y$.} 
+    \begin{align*}
+        Q x_1 = y_1, Q y_1 = - x_1.
+    \end{align*}
+    Let $W_1 = {\rm span}\{x_1, y_1\}$ and $\dim W_1 = 2$. Also, $Q(W_1) \subset W$, and then we have $Q(W_1^\bot) \subset W_1^\bot$ \footnote{Let $Q$ be an orthogonal map on $\mathbb{R}^n$. Let $W \subset \mathbb{R}^n$ such that $Q(W) \subset W$ or $Q(W) = W$, then $Q(W^\bot) \subset W$ or $Q(W^\bot) = W$.}. Thus, $Q|_{W_1^\bot}$ is orthogonal and skew-symmetric since 
+    \begin{align*}
+        Q|_{W_1^\bot} = \begin{pmatrix}
+            \left[\begin{array}{cc}0 & 1\\-1 & 0\end{array}\right] & 0 \\
+            0 & Q_1
+        \end{pmatrix}.
+    \end{align*}
+    Then pick $x_2, y_2 \in \mathbb{C}^n$ be linear independent, such that 
+    \begin{align*}
+        Q x_2 = y_2, Q y_2 = - x_2,
+    \end{align*}
+    and $W_2 = {\rm span}\{x_2, y_2\}$. Then, $W_1^\bot = W_2 \oplus W_2^\bot$. Continue this process for $k$ times and we have $\mathbb{R}^n = W_1 \oplus W_2 \cdots \oplus W_k$, where $W_i = {\rm span}\{x_i, y_i\}$ and 
+    \begin{align*}
+        Q x_i = y_i, Q y_i = - x_i.
+    \end{align*}
+    Now, let $B = {\rm span}\{x_1, y_1, \cdots, x_k, y_k\}$, then $B$ is a basis of $\mathbb{R}^n$ and 
+    \begin{align*}
+        [Q]_B = 
+        \begin{pmatrix}
+            \begin{array}{cccc}
+                \left[\begin{array}{cc}0 & 1\\-1 & 0\end{array}\right] &  \\
+                 & \left[\begin{array}{cc}0 & 1\\-1 & 0\end{array}\right]
+            \end{array} & 0 \\
+            0 & \begin{array}{cccc}
+                \ddots &  \\
+                 & \left[\begin{array}{cc}0 & 1\\-1 & 0\end{array}\right]
+            \end{array}
+        \end{pmatrix}.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 4.}
+~\begin{enumerate}[label=(\alph*)]
+    \item For a diagonalizable $n \times n$ matrix $A$, show that $\det \left(e^A\right) = \det e^{{\rm trace}\,\, A}$, where $e^A$ is the matrix exponential of $A$: $e^A = \sum^\infty_{k = 0} \frac{1}{k!} A^k$.
+    
+    \item Now for an arbitrary $2 \times 2$ matrix $A$ with trace equal to $0$, show that $\det \left(e^A\right) = 1$.
+\end{enumerate}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Since $A$ is diagonalizable, then there exists an invertible matrix $S$ such that $A = S \Lambda S^{-1}$. Then, $e^A = S e^\Lambda S^{-1}$, and we have
+    \begin{align*}
+        \det e^A = \det e^\Lambda = \prod^J_{j=1} e^{\lambda_j} = \det e^{{\rm trace}\,\, A},
+    \end{align*}
+    where $\lambda_j$ is eigenvalue of $A$ and in the last step we usd $\sum^J_{i = 1} \lambda_j = {\rm trace}\,\, A$\cite{5}. \footnote{Suppose $A = S J_A S^{-1}$, where $J_A$ is Jordan form of $A$ with diagonal entries $\lambda_j$. Then, ${\rm tr} (A) = {\rm tr} \left(S J_A S^{-1} \right) = {\rm tr} \left(S S^{-1} J_A \right) = {\rm tr} \left(J_A \right) = \sum \lambda_j$.}
+    
+    \item \begin{enumerate}[label = \arabic*)]
+        \item For $A$ diagonalizable, then it follows from $(a)$. 
+        
+        \item For $A$ non-diagonalizable and ${\rm trace}\,\, A = 0$, then we suppose 
+        \begin{align*}
+            A = \begin{pmatrix}
+                - a &  b \\
+                c   &  a
+            \end{pmatrix}. 
+        \end{align*}
+        Since $A$ is non-diagonalizable, then $A$ has generalized eigenvector, which implies $\lambda^2 = a^2 + bc = 0$. Then, the Jordan Canonical form of $A$ has following two possibilities
+        \begin{align*}
+            J_A = \begin{pmatrix}
+                0 &  1 \\
+                0   &  0
+            \end{pmatrix}\,\, {\rm or} \,\, \begin{pmatrix}
+                0 &  0 \\
+                0   &  0
+            \end{pmatrix}.
+        \end{align*}
+        Thus, we have 
+        \begin{align*}
+            \det \left(e^A\right) = \det \left( \sum^\infty_{k = 0} \frac{1}{k!} A^k \right) = \det \left(A^0\right) = 1.
+        \end{align*}
+    \end{enumerate}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 5.}
+\begin{enumerate}[label=(\alph*)]
+    \item Show that if the self-adjoint part of a matrix $A$ is positive definite, then $A$ is invertible and the self-adjoint part of $A^{-1}$ is positive definite.
+    
+    \item Let $a$ be a fixed positive real number. Show that if a self-adjoint matrix $A$ is positive definite, then $\|W\| \leq 1$, where $W = (I - a A)(I + a A)^{-1}$ and $\|\cdot\|$ is the operator norm induced by Euclidean norm.
+\end{enumerate}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Since $A$ is self-adjoint, then $A$ can be unitary diagonalized, i.e., there exists orthogonal matrix $Q$ such that $A = Q \Lambda Q^T$, where \begin{align*}
+        \Lambda = \begin{pmatrix}
+            \lambda_1 &  & \\
+            & \ddots &     \\
+            & & \lambda_n
+        \end{pmatrix}.
+    \end{align*}
+    Since $A$ is positive definite, Then $\lambda_j > 0, 1 \leq j \leq n$. Thus, $\det A > 0$, and hence $A$ is invertible.
+    
+    Also, eigenvalues of $A^{-1}$ are $1/\lambda_j$, and thus $A^{-1}$ is also positive definite.
+    
+    \item $W = (I - a A)(I + a A)^{-1}$, then 
+    \begin{align*}
+        W & = Q(I - a \Lambda)Q^T \left(Q(I + a \Lambda)Q^T\right)^{-1} \\
+        & = Q (I - a \Lambda)(I + a \Lambda)^{-1} Q^T \\
+        & = Q \begin{pmatrix}
+            \frac{1 - a\lambda_1}{1 + a\lambda_1} &  & \\
+            & \ddots &     \\
+            & & \frac{1 - a\lambda_n}{1 + a\lambda_n}
+        \end{pmatrix} Q^T := Q \overline{\Lambda} Q^T.
+    \end{align*}
+    Thus, for any $x \in \mathbb{R}^n$, and then 
+    \begin{align*}
+        (x, W x) = \left(x, Q \overline{\Lambda} Q^T x\right) = \left(Q^Tx, \overline{\Lambda} Q^T x\right) \leq \|x\|,
+    \end{align*}
+    since $\left|\frac{1 - a\lambda_j}{1 + a\lambda_j}\right| < 1$, and hence $\|W\| = \sup \frac{(x, W x)}{\|x\|} < 1$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 6*.}
+Consider
+\begin{align*}
+    B = \begin{pmatrix}
+        L & M \\
+        O & N
+    \end{pmatrix} \in \mathbb{C}^{2n \times 2n},
+\end{align*}
+for $L,M,N,O \in \mathbb{C}^{n \times n}$ such that $O$ is the zero matrix.
+\begin{enumerate}[label=(\alph*)]
+    \item Show that if $B$ diagonalizable, then $L$ and $M$ must be diagonalizable.
+    
+    \item Show that if $L$ and $M$ are diagonalizable and does not share eigenvalues, then $B$ is also diagonalizable.
+\end{enumerate}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item $A$ is diagonalizable if and only if $m_A(x) = 0$ has distinct roots. We want to show $m_L(x) = 0$ and $m_N(x) = 0$ have distinct roots.
+    
+    Also, for any polynomial $P(x)$, we have
+    \begin{align*}
+        P(A) = \begin{pmatrix}
+            P(L) & * \\
+            O    & P(N)
+        \end{pmatrix},
+    \end{align*}
+    where the upper block $*$ denotes some polynomial of $L, M$ and $N$. Then, 
+    \begin{align*}
+        m_A(A) = \begin{pmatrix}
+            m_L(L) & * \\
+            O    & m_N(N)
+        \end{pmatrix} = 0,
+    \end{align*}
+    which implies $m_L(L) = 0$ and $m_N(N) = 0$\cite{6}. Also, we have $m_L(x)|m_A(x)$ and $m_N(x)|m_A(x)$. Then, $m_L(L) = 0$ and $m_N(N) = 0$ have distinct roots. Thus, $L$ and $M$ are diagonalizable.
+    
+    \item By assumption, $m_L(x) = 0$ and $m_N(x) = 0$ have distinct roots. And $m(x) = m_L(x) m_N(x)$ has distinct roots. 
+    
+    We want to show $m_A(A) = 0$ since then, with $m_A(x)|m(x)$, $m_A(A)$ has distinct roots. Indeed, we have
+    \begin{align*}
+        m_A(A) = m_L(A)m_N(A) = \begin{pmatrix}
+            m_L(L) & * \\
+            O      & m_L(N)
+        \end{pmatrix}
+        \begin{pmatrix}
+            m_N(L) & * \\
+            O      & m_N(N)
+        \end{pmatrix} = 0.
+    \end{align*}
+    Thus, $A$ is diagonalizable.
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\bibliographystyle{unsrt}
+\bibliography{bibliography}
+
+
+\end{document}
