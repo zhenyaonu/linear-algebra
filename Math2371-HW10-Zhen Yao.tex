@@ -1,0 +1,257 @@
+\documentclass[12pt]{article} 
+%\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 10 for Math 2371}
+\centerline{Zhen Yao}
+
+\medskip
+
+\noindent{\bf Problem 1.}
+Let $V$ be a finite dimensional vector space over $\mathbb{R}$ and $T: V \to V$ be linear. Show that for any subspace $W$ of $V$, 
+\begin{align*}
+    \dim T^{-1}(W) \leq \dim N_T + \dim W.
+\end{align*}
+\begin{proof}
+Suppose $U \subset V$ such that $T(U) = W$, then for $T|_U:U \to W$, we have
+\begin{align*}
+    \dim T(U) + \dim N_{T|_U} = \dim U = \dim T^{-1}(W).
+\end{align*}
+Also, with $\dim N_{T|_U} \leq \dim N_T$, we have 
+\begin{align*}
+    \dim T^{-1}(W) \leq \dim N_T + \dim T(U) = \dim N_T + \dim W.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.}
+Suppose $A$ and $B$ are $n \times n$ matrices, and $A + B$ is invertible. Prove that 
+\begin{align*}
+    \rank A + \rank B \geq n.
+\end{align*}
+Also, show that 
+\begin{align*}
+    \rank A + \rank B = n
+\end{align*}
+if and only if
+\begin{align*}
+    R_A \cap R_B = \{0\}.
+\end{align*}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Since $A + B$ is invertible, then $A + B$ is full rank, which implies $\rank (A+B) = n$ and $N_{A+B} = \{0\}$. Then, $\dim N_{A+B} = 0$, and we have 
+    \begin{align*}
+        \dim (N_A + N_B) = \dim N_A + \dim N_B - \dim (N_A \cap N_B).
+    \end{align*}
+    Also, for $x\in N_A \cap N_B$, then $(A + B)x = 0$, hence $N_A \cap N_B \subset N_{A+B}$. Then we have $\dim (N_A \cap N_B) = 0$, which yields
+    \begin{align*}
+        \dim N_A + \dim N_B = \dim (N_A + N_B) \leq n.
+    \end{align*}
+    With rank-nullity theorem, we have
+    \begin{align*}
+        \rank A + \rank B = n - \dim N_A + n - \dim N_B \geq n.
+    \end{align*}
+    
+    \item \begin{enumerate}[label=\arabic*)]
+        \item If $\rank A + \rank B = n$, with the fact that $R_{A+B} \subset R_A + R_B$, then, $\dim (R_A + R_B) = n$,
+        \begin{align*}
+            n = \dim (R_A + R_B) = \rank A + \rank B - \dim (R_A \cap R_B),
+        \end{align*}
+        which implies $\dim (R_A \cap R_B)$. Hence, $R_A \cap R_B = \{0\}$.
+        
+        \item If $R_A \cap R_B = \{0\}$, then $\dim (R_A \cap R_B)$. Thus,
+        \begin{align*}
+            \rank A + \rank B = \dim (R_A + R_B) - \dim (R_A \cap R_B) = n - 0 = n.
+        \end{align*}
+    \end{enumerate}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.}
+Suppose $A, B, C, D$ are $n \times n$ matrices satisfying
+\begin{align*}
+    AB = DB, AC = 2 DC.
+\end{align*}
+Show that 
+\begin{align*}
+    \rank A + \rank B + \rank C \leq 2n.
+\end{align*}
+\begin{proof}
+Since $AB = DB$, then we have $(A - D)B = 0$ and thus $R_B \subset N_{A-D}$. Similarly, we have $R_C \subset N_{A-2D}$. Then, 
+\begin{align*}
+    \rank B & \leq \dim N_{A - D} = n -  \rank (A - D), \\
+    \rank C & \leq \dim N_{A - 2D} = n - \rank (A - 2D).
+\end{align*}
+Then, we want to prove that $\rank A \leq \rank (A - D) + \rank (A - 2D)$.
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 4.}
+Suppose that $A_{n\times n}, B_{n\times m}, C_{m\times n}$ and $D_{m\times m}$ are matrices such that $\det A \neq 0$. Show that
+\begin{align*}
+    \det \begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix} = \det A \det \left( D - C A^{-1} B\right).
+\end{align*}
+\begin{proof}
+With elementary row operation, multiplying $- C A^{-1}$ with the first row and adding it to the second row yields
+\begin{align*}
+    \begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix} = \begin{pmatrix}
+        A & B \\
+        0 & D - C A^{-1} B,
+    \end{pmatrix}
+\end{align*}
+since $\det A \neq 0$, and hence $A^{-1}$ exists. And it is obviously that 
+\begin{align*}
+    \det \begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix} = \det A \det \left( D - C A^{-1} B\right).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 5.}
+Let $A, B, C, D$ be $n \times n$ matrices and 
+\begin{align*}
+    E = \begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix}.
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+    \item Prove that 
+    \begin{align*}
+        \det E = \det (AD - BC)
+    \end{align*}
+    when all matrices $A, B, C, D$ are diagonal.
+    
+    \item Prove that 
+    \begin{align*}
+        \det E = \det (AD - BC)
+    \end{align*}
+    when all matrices $A, B, C, D$ are upper triangular. 
+    
+    \item Prove that
+    \begin{align*}
+        \det E = \det (AD - BC)
+    \end{align*}
+    when all matrices $A, B, C, D$ commute. 
+\end{enumerate}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item
+    \begin{enumerate}[label=\arabic*)]
+        \item If $A$ is invertible, then, with Problem 4, we have 
+        \begin{align*}
+            \det E & = det A \det \left( D - C A^{-1} B\right) \\
+            & = \det \left(AD - A C A^{-1} B\right) \\
+            & = \det \left(AD - C A A^{-1} B\right) \\
+            & = \det \left(AD - CB\right)\\
+            & = \det \left(AD - BC\right),
+        \end{align*}
+        where in the last two step we used the fact that $AC = CA$ and $BC = CB$ since $A,C,B$ are diagonal.
+        \item If $A$ is not invertible, then there exist $\varepsilon_k \to 0$ such that 
+        \begin{align*}
+            \det A_k = \det (A + \varepsilon_k I) \neq 0.
+        \end{align*}
+        Then, we have $A_k C = CA_k$. Thus, with similar argument in $1)$, 
+        \begin{align*}
+            \det E = \lim_{k\to \infty} \begin{pmatrix}
+            A_k & B \\
+            C & D
+        \end{pmatrix} = \lim_{k\to\infty} \det \left(A_k D - BC\right) = \det \left(AD - BC\right).
+        \end{align*}
+    \end{enumerate}
+    
+    \item If $D$ is invertible, then similar to Problem 4, we have $\det E = \det (A-BD^{-1}C)\det(D)$. Since $D$ is upper triangular, then so is $D^{-1}$. Then, 
+    \begin{align*}
+        \det (A-BD^{-1}C) & = \prod \left(A_{ii} - B_{ii} D^{-1}_{ii} C_{ii}\right) \\
+        & = \prod \left(A_{ii} - B_{ii} C_{ii} D^{-1}_{ii} \right) \\
+        & = \det (A-BCD^{-1}).
+    \end{align*}
+    It follows that
+    \begin{align*}
+        \det E = \det (A-BCD^{-1})\det(D) = \det (AD - BC).
+    \end{align*}
+    If $D$ is not invertible, with the similar argument in $(a)\,\,2)$, the result follows easily.
+    
+    \item If $D$ is invertible, and $A, B, C, D$ commute, then 
+    \begin{align*}
+        \det E & = \det (A-BD^{-1}C) \det(D) \\
+        & = \det (A-BD^{-1}CD) \\
+        & = \det (A-BD^{-1}DC) \\
+        & = \det (A-BC).
+    \end{align*}
+    If $D$ is not invertible, with the similar argument in $(a)\,\,2)$, the result follows easily.
+\end{enumerate}
+\end{proof}
+
+
+
+
+\end{document}
