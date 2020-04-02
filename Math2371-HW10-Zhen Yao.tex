@@ -1,4 +1,4 @@
-\documentclass[12pt]{article} 
+\documentclass[12pt]{article}
 %\documentclass[12pt,leqno]{amsart}
 \pagestyle{plain}
 \usepackage[utf8]{inputenc}
@@ -63,7 +63,7 @@
 \medskip
 
 \noindent{\bf Problem 1.}
-Let $V$ be a finite dimensional vector space over $\mathbb{R}$ and $T: V \to V$ be linear. Show that for any subspace $W$ of $V$, 
+Let $V$ be a finite dimensional vector space over $\mathbb{R}$ and $T: V \to V$ be linear. Show that for any subspace $W$ of $V$,
 \begin{align*}
     \dim T^{-1}(W) \leq \dim N_T + \dim W.
 \end{align*}
@@ -72,7 +72,7 @@ Suppose $U \subset V$ such that $T(U) = W$, then for $T|_U:U \to W$, we have
 \begin{align*}
     \dim T(U) + \dim N_{T|_U} = \dim U = \dim T^{-1}(W).
 \end{align*}
-Also, with $\dim N_{T|_U} \leq \dim N_T$, we have 
+Also, with $\dim N_{T|_U} \leq \dim N_T$, we have
 \begin{align*}
     \dim T^{-1}(W) \leq \dim N_T + \dim T(U) = \dim N_T + \dim W.
 \end{align*}
@@ -81,11 +81,11 @@ Also, with $\dim N_{T|_U} \leq \dim N_T$, we have
 \medskip
 
 \noindent{\bf Problem 2.}
-Suppose $A$ and $B$ are $n \times n$ matrices, and $A + B$ is invertible. Prove that 
+Suppose $A$ and $B$ are $n \times n$ matrices, and $A + B$ is invertible. Prove that
 \begin{align*}
     \rank A + \rank B \geq n.
 \end{align*}
-Also, show that 
+Also, show that
 \begin{align*}
     \rank A + \rank B = n
 \end{align*}
@@ -95,7 +95,7 @@ if and only if
 \end{align*}
 \begin{proof}
 ~\begin{enumerate}[label=(\alph*)]
-    \item Since $A + B$ is invertible, then $A + B$ is full rank, which implies $\rank (A+B) = n$ and $N_{A+B} = \{0\}$. Then, $\dim N_{A+B} = 0$, and we have 
+    \item Since $A + B$ is invertible, then $A + B$ is full rank, which implies $\rank (A+B) = n$ and $N_{A+B} = \{0\}$. Then, $\dim N_{A+B} = 0$, and we have
     \begin{align*}
         \dim (N_A + N_B) = \dim N_A + \dim N_B - \dim (N_A \cap N_B).
     \end{align*}
@@ -107,14 +107,14 @@ if and only if
     \begin{align*}
         \rank A + \rank B = n - \dim N_A + n - \dim N_B \geq n.
     \end{align*}
-    
+
     \item \begin{enumerate}[label=\arabic*)]
         \item If $\rank A + \rank B = n$, with the fact that $R_{A+B} \subset R_A + R_B$, then, $\dim (R_A + R_B) = n$,
         \begin{align*}
             n = \dim (R_A + R_B) = \rank A + \rank B - \dim (R_A \cap R_B),
         \end{align*}
         which implies $\dim (R_A \cap R_B)$. Hence, $R_A \cap R_B = \{0\}$.
-        
+
         \item If $R_A \cap R_B = \{0\}$, then $\dim (R_A \cap R_B)$. Thus,
         \begin{align*}
             \rank A + \rank B = \dim (R_A + R_B) - \dim (R_A \cap R_B) = n - 0 = n.
@@ -130,17 +130,26 @@ Suppose $A, B, C, D$ are $n \times n$ matrices satisfying
 \begin{align*}
     AB = DB, AC = 2 DC.
 \end{align*}
-Show that 
+Show that
 \begin{align*}
     \rank A + \rank B + \rank C \leq 2n.
 \end{align*}
 \begin{proof}
-Since $AB = DB$, then we have $(A - D)B = 0$ and thus $R_B \subset N_{A-D}$. Similarly, we have $R_C \subset N_{A-2D}$. Then, 
+Since $AB = DB$, then we have $(A - D)B = 0$ and thus $R_B \subset N_{A-D}$. Similarly, we have $R_C \subset N_{A-2D}$. Then,
 \begin{align*}
     \rank B & \leq \dim N_{A - D} = n -  \rank (A - D), \\
     \rank C & \leq \dim N_{A - 2D} = n - \rank (A - 2D).
 \end{align*}
-Then, we want to prove that $\rank A \leq \rank (A - D) + \rank (A - 2D)$.
+Then, we want to prove that $\rank A \leq \rank (A - D) + \rank (A - 2D)$. Also, $2(A - D) + (-(A - 2D)) = A$, and
+\begin{align*}
+    \rank 2(A - D) & = \rank (A - D), \\
+    \rank -(A - 2D) & = \rank (A - 2D).
+\end{align*}
+Thus, we have
+\begin{align*}
+    \rank A \leq \rank 2(A - D) + \rank -(A - 2D) = \rank (A - D) + \rank (A - 2D).
+\end{align*}
+Hence, we have $\rank A + \rank B + \rank C \leq 2n$.
 \end{proof}
 
 \medskip
@@ -164,7 +173,7 @@ With elementary row operation, multiplying $- C A^{-1}$ with the first row and a
         0 & D - C A^{-1} B,
     \end{pmatrix}
 \end{align*}
-since $\det A \neq 0$, and hence $A^{-1}$ exists. And it is obviously that 
+since $\det A \neq 0$, and hence $A^{-1}$ exists. And it is obviously that
 \begin{align*}
     \det \begin{pmatrix}
         A & B \\
@@ -176,7 +185,7 @@ since $\det A \neq 0$, and hence $A^{-1}$ exists. And it is obviously that
 \medskip
 
 \noindent{\bf Problem 5.}
-Let $A, B, C, D$ be $n \times n$ matrices and 
+Let $A, B, C, D$ be $n \times n$ matrices and
 \begin{align*}
     E = \begin{pmatrix}
         A & B \\
@@ -184,29 +193,29 @@ Let $A, B, C, D$ be $n \times n$ matrices and
     \end{pmatrix}.
 \end{align*}
 \begin{enumerate}[label=(\alph*)]
-    \item Prove that 
-    \begin{align*}
-        \det E = \det (AD - BC)
-    \end{align*}
-    when all matrices $A, B, C, D$ are diagonal.
-    
-    \item Prove that 
-    \begin{align*}
-        \det E = \det (AD - BC)
-    \end{align*}
-    when all matrices $A, B, C, D$ are upper triangular. 
-    
     \item Prove that
     \begin{align*}
         \det E = \det (AD - BC)
     \end{align*}
-    when all matrices $A, B, C, D$ commute. 
+    when all matrices $A, B, C, D$ are diagonal.
+
+    \item Prove that
+    \begin{align*}
+        \det E = \det (AD - BC)
+    \end{align*}
+    when all matrices $A, B, C, D$ are upper triangular.
+
+    \item Prove that
+    \begin{align*}
+        \det E = \det (AD - BC)
+    \end{align*}
+    when all matrices $A, B, C, D$ commute.
 \end{enumerate}
 \begin{proof}
 ~\begin{enumerate}[label=(\alph*)]
     \item
     \begin{enumerate}[label=\arabic*)]
-        \item If $A$ is invertible, then, with Problem 4, we have 
+        \item If $A$ is invertible, then, with Problem 4, we have
         \begin{align*}
             \det E & = det A \det \left( D - C A^{-1} B\right) \\
             & = \det \left(AD - A C A^{-1} B\right) \\
@@ -215,11 +224,11 @@ Let $A, B, C, D$ be $n \times n$ matrices and
             & = \det \left(AD - BC\right),
         \end{align*}
         where in the last two step we used the fact that $AC = CA$ and $BC = CB$ since $A,C,B$ are diagonal.
-        \item If $A$ is not invertible, then there exist $\varepsilon_k \to 0$ such that 
+        \item If $A$ is not invertible, then there exist $\varepsilon_k \to 0$ such that
         \begin{align*}
             \det A_k = \det (A + \varepsilon_k I) \neq 0.
         \end{align*}
-        Then, we have $A_k C = CA_k$. Thus, with similar argument in $1)$, 
+        Then, we have $A_k C = CA_k$. Thus, with similar argument in $1)$,
         \begin{align*}
             \det E = \lim_{k\to \infty} \begin{pmatrix}
             A_k & B \\
@@ -227,8 +236,8 @@ Let $A, B, C, D$ be $n \times n$ matrices and
         \end{pmatrix} = \lim_{k\to\infty} \det \left(A_k D - BC\right) = \det \left(AD - BC\right).
         \end{align*}
     \end{enumerate}
-    
-    \item If $D$ is invertible, then similar to Problem 4, we have $\det E = \det (A-BD^{-1}C)\det(D)$. Since $D$ is upper triangular, then so is $D^{-1}$. Then, 
+
+    \item If $D$ is invertible, then similar to Problem 4, we have $\det E = \det (A-BD^{-1}C)\det(D)$. Since $D$ is upper triangular, then so is $D^{-1}$. Then,
     \begin{align*}
         \det (A-BD^{-1}C) & = \prod \left(A_{ii} - B_{ii} D^{-1}_{ii} C_{ii}\right) \\
         & = \prod \left(A_{ii} - B_{ii} C_{ii} D^{-1}_{ii} \right) \\
@@ -239,8 +248,8 @@ Let $A, B, C, D$ be $n \times n$ matrices and
         \det E = \det (A-BCD^{-1})\det(D) = \det (AD - BC).
     \end{align*}
     If $D$ is not invertible, with the similar argument in $(a)\,\,2)$, the result follows easily.
-    
-    \item If $D$ is invertible, and $A, B, C, D$ commute, then 
+
+    \item If $D$ is invertible, and $A, B, C, D$ commute, then
     \begin{align*}
         \det E & = \det (A-BD^{-1}C) \det(D) \\
         & = \det (A-BD^{-1}CD) \\
