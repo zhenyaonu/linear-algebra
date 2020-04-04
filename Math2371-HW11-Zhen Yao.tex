@@ -1,0 +1,190 @@
+\documentclass[12pt]{article} 
+%\documentclass[12pt,leqno]{amsart}
+\pagestyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{thmtools}
+\usepackage{wrapfig}
+\usepackage{extarrows}
+\usepackage{breqn}
+\usepackage{physics}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathrsfs}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+\usepackage{aligned-overset}
+\usepackage{stackengine}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\graphicspath{ {images/} }
+
+\setlength{\oddsidemargin}{1pt}
+\setlength{\evensidemargin}{1pt}
+\setlength{\marginparwidth}{30pt} % these gain 53pt width
+\setlength{\topmargin}{1pt}       % gains 26pt height
+\setlength{\headheight}{1pt}      % gains 11pt height
+\setlength{\headsep}{1pt}         % gains 24pt height
+%\setlength{\footheight}{12 pt} 	  % cannot be changed as number must fit
+\setlength{\footskip}{24pt}       % gains 6pt height
+\setlength{\textheight}{650pt}    % 528 + 26 + 11 + 24 + 6 + 55 for luck
+\setlength{\textwidth}{460pt}     % 360 + 53 + 47 for luck
+
+\newtheorem{theorem}{Theorem}
+
+
+\def\dsp{\def\baselinestretch{1.35}\large
+\normalsize}
+%%%%This makes a double spacing. Use this with 11pt style. If you
+%%%%want to use this just insert \dsp after the \begin{document}
+%%%%The correct baselinestretch for double spacing is 1.37. However
+%%%%you can use different parameter.
+
+
+\def\U{{\mathcal U}}
+
+\begin{document}
+
+\centerline{\bf Homework 11 for Math 2371}
+\centerline{Zhen Yao}
+
+\medskip
+
+\noindent{\bf Problem 1.}
+Suppose $V$ is the space of complex polynomials in $x$ and $y$ of total degree at most $3$, i.e.
+\begin{align*}
+    V = \left\{\sum_{i,j \geq 0,\,i+j \leq 3} a_{ij} x^i y^j \Bigg| a_{ij} \in \mathbb{C} \right\}.
+\end{align*}
+Consider $T: V \to V$ defined by 
+\begin{align*}
+    T: p \mapsto y \frac{\partial p}{\partial y}.
+\end{align*}
+Find the Jordan canonical form of $T$.
+\begin{proof}
+For any $p \in V$, we have
+\begin{align*}
+    p = a_{00} + a_{10}x + a_{01}y + a_{11}xy + a_{21}x^2y + a_{12}xy^2,
+\end{align*}
+and 
+\begin{align}
+    T(p) = a_{01}y + a_{11}xy + a_{21}x^2y + 2 a_{12}xy^2.
+\end{align}
+Thus, $T$ has the form 
+\begin{align*}
+    T = \begin{pmatrix}
+        0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 2
+    \end{pmatrix}.
+\end{align*}
+And the characteristic polynomial of $T$ is 
+\begin{align*}
+    (\lambda - 1)^3 (\lambda - 2) = 0,
+\end{align*}
+then the eigenvalues are $\lambda = 0, 1, 2$. For $\lambda = 0$, we know that $\dim N_{A} = 2$, then there are two Jordan blocks corresponding to $\lambda = 0$. For $\lambda = 1$, $\dim N_{A - I} = 3$, then there are three Jordan blocks corresponding to $\lambda = 1$. Thus, the Jordan canonical form of $T$ is 
+\begin{align*}
+    J_T = \begin{pmatrix}
+        0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 2
+    \end{pmatrix}.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 2.}
+Let $A$ be an $n \times n$ complex matrix with $\det A \neq 0$. Suppose $A^3$ is diagonalizable. Prove that $A^2$ is diagonalizable. Provide a counter example if $\det A = 0$.
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $\det A \neq 0$, then $\det A^3 \neq 0$. Also, $A^3$ is diagonalizable, then $A^3$ has $n$ nonzero distinct eigenvalues. Then the Jordan canonical form $J_{A^3}$ of $A^3$ has $n$ size one blocks, each corresponding to its eigenvalues $\lambda_j, 1\leq j \leq n$. 
+    
+    Now consider the Jordan canonical form $J_{A}$ of $A$, then there exists $P$ such that $A = P J_{A} P^{-1}$ and 
+    \begin{align*}
+        P J_A^3 P^{-1} = P J_{A^3} P^{-1} = A^3,
+    \end{align*}
+    which implies each block in $J_{A^3}$ is power to the block in $J_A$, making each block in $J_A$ a size one block. Indeed, for each $\lambda_j$, if the multiplicity of $\lambda_j$ is greater than one, then its corresponding Jordan block satisfies
+    \begin{align*}
+        \begin{pmatrix}
+            \lambda_j & 1         & \cdots & \cdots & 0 \\
+                      & \lambda_j & \cdots & \cdots & 0 \\
+                      &           & \ddots &        & \vdots \\
+                      &           &        & \ddots & 1 \\
+                      &           &        &        & \lambda_j
+        \end{pmatrix}^n = 
+        \begin{pmatrix}
+            \begin{array}{cc}\lambda_j & \\ & \ddots \end{array} & * \\
+            0 & \lambda_j
+        \end{pmatrix}.
+    \end{align*}
+    This shows that each Jordan block of $A$ is size one. And so is $A^2$, then $A^2$ also has $n$ nonzero eigenvalues. Hence $A^2$ is also diagonalizable. 
+    
+    \item Take $A = \begin{pmatrix} 1 & 1 \\ 1 & -1  \end{pmatrix}$, and then $\det A = 0$. Then, $A^2 = \begin{pmatrix} 2 & 0 \\ 0 & 2  \end{pmatrix}$, and hence $A^2$ is not diagonalizable since it has repeated eigenvalues $\lambda = 2$. Also, $A^3 = \begin{pmatrix} 2 & 2 \\ 2 & -2  \end{pmatrix}$, and its eigenvalues are $\lambda = 2\sqrt{2}, - 2 \sqrt{2}$, which implies $A^3$ is diagonalizable.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 3.}
+Let $A,B$ be $n \times n$ matrices. Suppose $A$ is a Hermitian matrix.
+\begin{enumerate}[label=(\alph*)]
+    \item Show that $A^{2015}B = B A^{2015}$ implies that $A^{2014}B = B A^{2014}$.
+    
+    \item Is it true that $A^{2014}B = B A^{2014}$ implies that $A^{2015}B = B A^{2015}$?
+\end{enumerate}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Since $A$ is a Hermitian matrix, then there exists invertible matrix $P$ such that $A = P \Lambda P^{-1}$, where
+    $\Lambda = \left[\lambda_1, \cdots, \lambda_n\right]$ is a diagonal matrix. Let $\widetilde{B} = P^{-1}\Lambda P$, then $$\Lambda^{2015} \widetilde{B} = \widetilde{B} \Lambda^{2015}.$$
+    Then for $ij$-th entry, we have $\lambda_i^{2015} b_{ij} = b_{ij} \lambda_j^{2015}$. Then $\lambda_i = \lambda_j$, and hence $\lambda_i^{2014} b_{ij} = b_{ij} \lambda_j^{2014}$. Hence, $A^{2014}B = B A^{2014}$.
+    
+    \item It is not true. Since similarly to argument in $(a)$, we have $\lambda_i^{2014} b_{ij} = b_{ij} \lambda_j^{2014}$, and then $\lambda_i = \lambda_j$ or $\lambda_i = - \lambda_j$. In the case $\lambda_i = - \lambda_j$, we have $\lambda_i^{2015} b_{ij} = - b_{ij} \lambda_j^{2015}$. Thus, $A^{2015}B \neq B A^{2015}$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\noindent{\bf Problem 4.}
+Let $A$ be a complex $n \times n$ matrix which commutes with all reflection matrices of the form
+\begin{align*}
+    R = I - 2 v v^T,
+\end{align*}
+where $v \in \mathbb{R}^n$ is a unit vector. Is it true that $A = kI$ for some scalar $k$?
+\begin{proof}
+For any $R$, we have $A \left(I - 2 v v^T\right) = \left(I - 2 v v^T\right) A$, then we have $A v v^T = v v^T A$. Then, $A$ maps $N_{v v^T - \lambda I} \to N_{v v^T - \lambda I}$, for some eigenvalue $\lambda$ of $v v^T$. Indeed, for any $x \in N_{v v^T - \lambda I}$, we have $A v v^T x - \lambda Ax = 0$, with $A v v^T = v v^T A$, we have $v v^T(Ax) = \lambda (Ax)$.
+
+Then for all $x\in N_{v v^T - \lambda I}$, there exists $\lambda \in \mathbb{C}$, we have $Ax = \lambda x$. Then, $A = kI$, otherwise, it cannot have above property.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
