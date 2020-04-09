@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[11pt]{book}
 \pagestyle{plain}
 %\documentclass{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,7 @@
 \usepackage{stackengine}
 \usepackage{mathtools}
 \usepackage{nccmath}
+\usepackage{url}
 \graphicspath{ {images/} }
 
 
@@ -81,7 +82,7 @@
 	\begin{center}
 	\textbf{\LARGE{}} \\
 	\vspace{40mm}
-    \textbf{\LARGE{Linear Algebra Note}} \\
+    \textbf{\LARGE{Linear Algebra}} \\
     \vspace{2mm} %5mm vertical space
     \large{\textsc{Zhen Yao, Department of Mathematics}}\\
     \large{\textsc{University of Pittsburgh}}
@@ -391,6 +392,26 @@ and $(\mathbb{R}^3,\times)$ is a Lie algebra over $\mathbb{R}$. Moreover, the cr
     \end{bmatrix}.
 \end{align*}
 
+\medskip
+
+\begin{exercise}\label{ex_6}\cite{1}
+Let $\mathbb{C},\mathbb{R}$, and $\mathbb{Q}$ be the fields of complex, real, and rational numbers, respectively. Determine whether each of the following is a vector space. Find the dimension and a basis for each that is a vector space.
+\begin{enumerate}[label=(\alph*)]
+    \item $\mathbb{C}$ over $\mathbb{C}$. Yes, the dimension is $1$, with a basis $\{1\}$.
+    \item $\mathbb{C}$ over $\mathbb{R}$. Yes, the dimension is $2$, with a basis $\{1, i\}$.
+    \item $\mathbb{R}$ over $\mathbb{C}$. No, since $i\in\mathbb{C}$, and $1\cdot i = i\notin\mathbb{R}$.
+    \item $\mathbb{R}$ over $\mathbb{Q}$. Yes, the dimension is infinite, since $1,\pi,\pi^2,\cdots$ are linearly independent over $\mathbb{Q}$.
+    \item $\mathbb{Q}$ over $\mathbb{R}$. No, since $\pi\in\mathbb{R}$, and $\pi\cdot 1 = \pi\notin\mathbb{Q}$.
+    \item $\mathbb{Q}$ over $\mathbb{Z}$. No, since $\mathbb{Z}$ is not a field.
+    \item $\mathbb{S} = \{a+\sqrt{2}b+\sqrt{5}c|\, a,b,c\in\mathbb{Q}\}$ over $\mathbb{Q},\mathbb{R}$ or $\mathbb{C}$. 
+    
+    Yes over $\mathbb{Q}$, and the dimension is $3$, with a basis $\{1,\sqrt{2},\sqrt{5}\}$. 
+    
+    No over $\mathbb{R}$, since $1+\sqrt{2}+\sqrt{5}\in\mathbb{S}, \sqrt{10}\in\mathbb{R}$, and $(1+\sqrt{2}+\sqrt{5})\cdot \sqrt{10}\notin\mathbb{S}$.
+    
+    No over $\mathbb{C}$, with the similar argument.
+\end{enumerate}
+\end{exercise}
 
 \medskip
 
@@ -636,7 +657,7 @@ Also, we can prove it with ${\rm dim}X/Y = 0$, which implies $X/Y = \{\{0\}\}$.
 \medskip
 
 \begin{theorem}
-Suppose $X$ is a ﬁnite-dimensional linear space, $U$ and $V$ two subspaces of $X$. Then we have
+Suppose $X$ is a finite-dimensional linear space, $U$ and $V$ two subspaces of $X$. Then we have
 \begin{align*}
     {\rm dim}(U+V) = {\rm dim}U + {\rm dim}V - {\rm dim}(U\cap V).
 \end{align*}
@@ -713,144 +734,6 @@ Since $K$ has infinitely many elements, then we can choose $\lambda_0\in K$ such
 
 \medskip
 
-\section{Exercises}
-\begin{exercise}\label{ex_1}
-Consider a polynomial $X(t):\mathbb{C}\to\mathbb{C}$. Let $V$ be vector space for all complex valued polynomials and let $M = \{X(t): X \,\text{is even}\}$ and $N = \{X(t): X \,\text{is odd}\}$. Prove that 
-\begin{enumerate}[label=(\alph*)]
-    \item $M,N$ are subspaces of $X$.
-    \item $M, N$ are each other's complement in $V$, i.e., $V = M\oplus N$.
-\end{enumerate}
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\alph*)]
-    \item Let $f(t), g(t)\in M$ and $\lambda\in\mathbb{C}$, then we have $f(-t) = f(t)$ and $g(t) = -g(-t)$. Thus, we have $(f+\lambda g)(-t) = f(-t) + \lambda g(-t) = f(t) + \lambda g(t) = (f+\lambda g)(t)$, which implies that $f+\lambda g\in M$. Same argument is similar for $N$.
-    \item Let $f(t)\in V$, then we have 
-    \begin{align*}
-        f(t) & = \frac{f(t) + f(-t)}{2} + \frac{f(t) - f(-t)}{2} \\
-        & = f_1(t) + f_2(t)
-    \end{align*}
-    and it is easy to see that $f_1\in M$ and $f_2\in N$. Also, if $f(t)\in M\cap N$, then we have $f(t) = f(-t)$ and $f(t) = -f(-t)$. Thus, $f(t) = 0$, which implies $M\cap N = \{0\}$. Thus, $V = M\oplus N$.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}\label{ex_2}
-Let $U, V$ and $W$ be subspaces of a finite-dimensional vector space $X$. Is the statement
-\begin{align*}
-    {\rm dim}(U + V + W) = & {\rm dim} U + {\rm dim} V + {\rm dim} W - {\rm dim}(U \cap V) - {\rm dim}(U \cap W) \\
-    & - {\rm dim}(V \cap W) + {\rm dim}(U \cap V \cap W)
-\end{align*}
-true or false? If true, prove it. If false, provide a counterexample
-\end{exercise}
-\begin{proof}
-The statement is not true. Consider three lines $U,V,W$ in $\mathbb{R}^2$ such that they intersect in one point. So we have
-$$\text{dim} (U+V+W) = 2$$
-and
-\begin{align*}
-   \text{dim}(U) + \text{dim}(V) & + \text{dim}(W) - \text{dim}(U \cap V) - \text{dim}(U \cap W) - \\
-   & \text{dim}(V \cap W) + \text{dim}(U \cap V \cap W) = 3
-\end{align*}
-the left and right sides are not the same. 
-\end{proof}
-
-\medskip
-
-\begin{exercise}\label{ex_3}
-Let $U, V$, and $W$ be subspaces of a finite dimensional linear space $X$. Show that if $W\subset U$, then 
-$$U\cup (V + W) = U\cup V + W$$
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item We set $u_1 \in U \cap (V+W)$, then there exist some $v_1 \in V$ and $w_1 \in W$ such that $u_1 = v_1 + w_1$ since $u_1 \in U$ and also $u_1 \in (V+W)$. Also, $u_1 \in U$ and $W \subset U$ which means $w_1 \in U$, then we have $v_1 \in U$ since $U$ is a subspace which is closed under addition. Then from $v_1 \in U$, we have $v_1 \in (U \cap V)$. Based on the fact that $u_1 = v_1 + w_1$ and $w_1 \in W$, we have $u_1 \in (U \cap V + W)$. This implies that $U \cap (V+W) \subset (U \cap V + W)$.
-    \item Now we set $u_2 \in (U \cap V + W)$, then there exist some $\lambda \in U \cap V$ and $w_2 \in W$ such that $u_2 = \lambda + w_2$. And we have $\lambda + w_2 \in V+W$, since $\lambda \in U \cap V$ and $w_2 \in W$. Also, we know that $W \subset U$, then we have $\lambda + w_2 \in U$. Thus we can have $\lambda + w_2 \in U \cap (V+W)$. Hence, $u_2 \in U \cap (V+W)$, which implies $(U \cap V + W) \subset U \cap (V+W)$.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}\label{ex_4}
-Denote by $X$ the linear space of all polynomials $p(t)$ of degree less than $n$, and denote by $Y$ the subset of $X$ containing polynomials that are zero at distinct $t_1,t_2,\cdots,t_m\in K$, where $m < n$.
-\begin{enumerate}[label=(\roman*)]
-    \item Show that $Y$ is a subspace of $X$.
-    \item Determine ${\rm dim}Y$ and find a basis of $Y$.
-    \item Determine ${\rm dim}X = Y$ and find a basis of $X/Y$.
-\end{enumerate}
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\roman*)]
-    \item Set $P_1, P_2 \in Y$ of form $P_i = (t-t_1)(t-t_2) \cdots (t-t_m)q_i(t)$ that are zero at distinct $t_1, t_2, \cdots, t_m\in K$. Then we have 
-    \begin{align*}
-        P_1 + P_2 &= \sum^2_{i=1}(t-t_1)(t-t_2) \cdots (t-t_m)q_i(t) \\
-        a P_1 &= a (t-t_1)(t-t_2) \cdots (t-t_m)q_1(t)
-    \end{align*}
-    where $a \in K$. It is easy to see that both $P_1 + P_2$ and $a P_1$ are zero at points $t_1, t_2, \cdots, t_m\in K$. So $Y$ is closed under addition and multiplication. Hence, $Y$ is a subspace of $X$.
-    \item In order to being zero at distinct $t_1, t_2, \cdots, t_m\in K$ where $m < n$, the polynomial $P_Y(t) \in Y$ has the form $P_Y(t) = (t-t_1)(t-t_2) \cdots (t-t_m)q(t)$, where $q(t)$ is not determined. Also, we know that the space of all polynomials is degree less than $n$, which means that $q(t)$ is degree less than $n-m$.
-    
-    Since the polynomials $P(t)$ in the space $X$ are degree less that $n$, it can be presented by the form
-    \begin{align*}
-        P(t) = \sum^{n-1}_{k=0} c_k t^k
-    \end{align*}
-    So the basis of $X$ can be written as ${1, t, t^2,\cdots, t^{n-1}}$, and we have dim $X = n$. Now we can present $q(t)$ by utilizing this basis as 
-    \begin{align*}
-        q(t) = \sum^{n-m-1}_{k=0} c_k t^k
-    \end{align*}
-    then the basis for subspace $Y$ can be presented as
-    \begin{align*}
-        \left\{ \prod^m_{i=1}(t-t_i), t\prod^m_{i=1}(t-t_i),\cdots, t^{n-m-1}\prod^m_{i=1}(t-t_i) \right\}
-    \end{align*}
-    and we can check that the linear combination of this basis is equal to zero if and only if all coefficients are all zero. So we have dim $Y = n-m$.
-    \item We have dim $X/Y =$ dim $X -$ dim $Y = m$. Now we set a basis that spans the subspace $X/Y$.
-    
-    We firstly set $P_1(t) = (t-t_2)\cdots(t-t_m)q(t)$ and the class $\{P_1\}$ of $P_1$ is the space $\left\{P(t)\in X: P(t) - P_1(t) \in Y \right\}$, and then set $P_2(t) = (t-t_1)(t-t_3)\cdots(t-t_m)q(t)$ and the class $\{P_2 \}$ in the same way. And we continue this process where we get rid of $(t-t_i)$ in class $P_i$ until we finally have $P_m(t) = (t-t_1)\cdots(t-t_{m-1})q(t)$ and the class $\{P_m \}$. Then we can check that $( \{P_1\}, \{P_2\}, \cdots, \{P_m\})$ is the span of $X/Y$.
-    
-    Better solution for (iii): From (ii) we know the basis of $Y$, and we can know that every $p(t)$ in $X$ can be replaced by a polynomial of degree less than $m$ in $x/Y$, so $1, t, \cdots, t^{m-1}$ form a basis of $X/Y$.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}\label{ex_5}
-Let $U_1,U_2,\cdots,U_k$ be subspaces of a finite-dimensional linear space $X$ such that
-\begin{align*}
-    {\rm dim}\,U_1 = {\rm dim}\,U_2 = \cdots = {\rm dim}\,U_k
-\end{align*}
-Then there is a subspace $V$ of $X$ for which
-\begin{align*}
-    X = U_1\oplus V = U_2\oplus V = \cdots = U_k\oplus V
-\end{align*}
-\end{exercise}
-\begin{proof}
-If ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n$, then we can simply take $V = \varnothing$.
-
-If ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n-1$, based on the fact that space $X$ cannot be a finite union of its proper subspace, there exists a $v \notin U_k$ for every $k$, and we can define the complement of $U_1, U_2, \cdots, U_k$ as $U^c = \text{span}(v)$.
-
-Then we consider the case when ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n-2$, also there exists a $v \notin U_k$ for every $k$. Then we can define a new subspace $\title{\Tilde{U}_i} = \text{span}(u_i,v)$ for $1 \leq i \leq k$, and we can immediately know that ${\rm dim}\, \Tilde{U}_i = n - 1$. Then we can get a complement of $\Tilde{U}_i$, denoted by $U_i^c$ and we have ${\rm dim}\, U_i^c = 1$. In particular, $v \notin U_i^c$, so we can take $\text{span} (U_i^c, v)$, which is dimension $2$ and a complement of $U_1, U_2, \cdots, U_k$.
-
-Now we can continue this induction and consider ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = m, m < n$, and we can find $v \notin U_k$ for every $k$. Then we can define $\title{\Tilde{U}_i} = \text{span}(u_i,v)$ for $1 \leq i \leq k$, and we can immediately know that ${\rm dim}\, \Tilde{U}_i = m + 1$. Then we can get a complement of $\Tilde{U}_i$, denoted by $U_i^c$ and we have ${\rm dim}\, U_i^c = n - m - 1$. In particular, $v \notin U_i^c$, so we can take $\text{span} (U_i^c, v)$, which is dimension $n - m$ and a complement of $U_1, U_2, \cdots, U_k$.
-\end{proof}
-Exercises (\ref{ex_1}) to (\ref{ex_5}) are Homework 1 for MATH2370. Next we present some exercises from the book Challenging Problems for Students by Fuzhen Zhang\cite{1} and other books.
-
-\medskip
-
-\begin{exercise}\label{ex_6}
-Let $\mathbb{C},\mathbb{R}$, and $\mathbb{Q}$ be the fields of complex, real, and rational numbers, respectively. Determine whether each of the following is a vector space. Find the dimension and a basis for each that is a vector space.
-\begin{enumerate}[label=(\alph*)]
-    \item $\mathbb{C}$ over $\mathbb{C}$. Yes, the dimension is $1$, with a basis $\{1\}$.
-    \item $\mathbb{C}$ over $\mathbb{R}$. Yes, the dimension is $2$, with a basis $\{1, i\}$.
-    \item $\mathbb{R}$ over $\mathbb{C}$. No, since $i\in\mathbb{C}$, and $1\cdot i = i\notin\mathbb{R}$.
-    \item $\mathbb{R}$ over $\mathbb{Q}$. Yes, the dimension is infinite, since $1,\pi,\pi^2,\cdots$ are linearly independent over $\mathbb{Q}$.
-    \item $\mathbb{Q}$ over $\mathbb{R}$. No, since $\pi\in\mathbb{R}$, and $\pi\cdot 1 = \pi\notin\mathbb{Q}$.
-    \item $\mathbb{Q}$ over $\mathbb{Z}$. No, since $\mathbb{Z}$ is not a field.
-    \item $\mathbb{S} = \{a+\sqrt{2}b+\sqrt{5}c|\, a,b,c\in\mathbb{Q}\}$ over $\mathbb{Q},\mathbb{R}$ or $\mathbb{C}$. 
-    
-    Yes over $\mathbb{Q}$, and the dimension is $3$, with a basis $\{1,\sqrt{2},\sqrt{5}\}$. 
-    
-    No over $\mathbb{R}$, since $1+\sqrt{2}+\sqrt{5}\in\mathbb{S}, \sqrt{10}\in\mathbb{R}$, and $(1+\sqrt{2}+\sqrt{5})\cdot \sqrt{10}\notin\mathbb{S}$.
-    
-    No over $\mathbb{C}$, with the similar argument.
-\end{enumerate}
-\end{exercise}
 
 
 
@@ -1019,56 +902,6 @@ $$l = m_1 l_1 + \cdots + m_n l_n.$$
 The integral of $p$ over $I$ is a linear function, therefore it can be represented as above.
 \end{proof}
 
-\medskip
-
-\section{Exercises}
-\begin{exercise}
-Suppose $\{x_1, x_2,\cdots, x_n\}$ is a basis for the vector space $X$. Show that there exists linear functions $\{e_1, e_2,\cdots, e_n\}$ in the dual space $X'$ satisfying 
-\begin{align*}
-    e_i(x_j) = \delta_{ij}
-\end{align*}
-Show that $\{e_1, e_2,\cdots, e_n\}$ is a basis of $X'$, called the dual basis.
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item First, we check that $\{e_1, e_2, \cdots, e_n\}$ are linearly independent. Suppose that there exist  $a_1, a_2, \cdots, a_n \in K$ such that 
-    \begin{align*}
-        a_1 e_1 + a_2 e_2 + \cdots + a_n e_n = 0
-    \end{align*}
-    then for $\forall x_i \in X$, we have
-    \begin{align*}
-        (a_1 e_1 + a_2 e_2 + \cdots + a_n e_n)(x_i) = a_1 e_1(x_i) + \cdots + a_n e_n(x_i) = a_i = 0
-    \end{align*}
-    Thus, $a_i = 0$, for $\forall a_i$, which means $\{e_1, e_2, \cdots, e_n\}$ are linearly independent.
-    \item Then, we need to show that span$(e_1, e_2, \cdots, e_n) = X'$. For any $f \in X'$, let $b_i  = f(x_i)$, and $f = b_1 e_1 + b_2 e_2 + \cdots + b_n e_n$. Then, for $\forall x_i$, we have
-    \begin{align*}
-        f(x_i) = (b_1 e_1 + b_2 e_2 + \cdots + b_n e_n)(x_i) = b_i
-    \end{align*}
-    Thus, $f$ can be presented by $\{e_1, e_2, \cdots, e_n\}$. The proof is complete.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $X$ be a finite dimensional linear space. Show that two nonzero linear functionals $T,S\in X'$ have the same null space if and only if there is a nonzero scalar $\lambda$ such that $S = \lambda T$.
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item Since $T: X \rightarrow R$, then there $\exist x_1 \in X$ such that $T x \neq 0$. And we let $x_2  = \frac{x_1}{T(x_1)}$, then we have $T(x_2) = 1$. And for $\forall x \in X$we can know
-    \begin{align*}
-        T(x - T(x)\cdot x_2) = T(x) - T(x) = 0
-    \end{align*}
-    Since $T$ and $S$ have the same null space, then we have $S(x - T(x)\cdot x_2) = 0$, then 
-    \begin{align*}
-        S(x) & = S(x - T(x)\cdot x_2 + T(x)\cdot x_2) \\
-        & = S(x - T(x)\cdot x_2) + S(T(x)\cdot x_2) \\
-        & = 0 + S(x_2) T(x)
-    \end{align*}
-    \item Let $\lambda = S(x_2)$, then we proved that $S = \lambda T$.
-    If $S = \lambda T$, then for $\forall x \in N_P$, we have $T(x) = \frac{1}{\lambda} S(x) = 0$, which means $N_P \subset N_T$. And for $\forall x \in N_T$, $S(x) = 0$, which means $N_T \subset N_P$. So $N_T = N_P$. The proof is complete.
-\end{enumerate}
-\end{proof}
 
 \medskip
 
@@ -1183,7 +1016,7 @@ A linear mapping $T:X\to U$ is called surjective (or onto) if its range equals $
 Suppose $X$ and $U$ are finite-dimensional vector spaces such that $\dim X > \dim U$, then no linear map from $X$ to $U$ is injective.
 \end{theorem}
 \begin{proof}
-Let $T:\mathcal{L}(X,U)$, then with Rank-Nullity theorem, we have
+Let $T:\mathscr{L}(X,U)$, then with Rank-Nullity theorem, we have
 \begin{align*}
     \dim N_T & = \dim X - \dim R_T \\
     & \geq \dim X - \dim U \\
@@ -1198,7 +1031,7 @@ Thus, $T$ is not injective.
 Suppose $X$ and $U$ are finite-dimensional vector spaces such that $\dim X < \dim U$, then no linear map from $X$ to $U$ is surjective.
 \end{theorem}
 \begin{proof}
-Let $T:\mathcal{L}(X,U)$, then with Rank-Nullity theorem, we have
+Let $T:\mathscr{L}(X,U)$, then with Rank-Nullity theorem, we have
 \begin{align*}
     \dim R_T & = \dim X - \dim R_T \\
     & \leq \dim X \\
@@ -1310,7 +1143,7 @@ A linear map is called invertible if it is one-to-one and onto, that is, if it i
 
 \section{Transposition}
 \begin{definition}
-Let $T\in L(X,U)$ the transpose $T'\in \mathscr{L}(U',X')$ of $T$ is defined by 
+Let $T\in \mathscr{L}(X,U)$ the transpose $T'\in \mathscr{L}(U',X')$ of $T$ is defined by 
 \begin{align*}
     \left(T'(l)\right)(x) = l(T(x))
 \end{align*}
@@ -1353,7 +1186,7 @@ Identifying $(\mathbb{R}^n)'=\mathbb{R}^n, \mathbb{R}^m=\mathbb{R}^m$, then $T':
 \medskip
 
 \begin{theorem}
-Let $T\in L(X,U)$. Identifying $X''=X, U''=U$, then $T''=T$.
+Let $T\in \mathscr{L}(X,U)$. Identifying $X''=X, U''=U$, then $T''=T$.
 \end{theorem}
 \begin{proof}
 We have $T'\in \mathscr{L}(U',X'), T''\in \mathscr{L}(X'',U'') = L(X,U)$. Now we pick $X'' \ni x^{**} = x\in X$, then we have
@@ -1501,116 +1334,6 @@ Then we have $P^2=P$.
 The commutator of two linear mappings $A$ and $B$ of $X$ into $X$ is $AB - BA$. Two mappings of $X$ into $X$ commute if their commutator is zero.
 \end{definition}
 
-\medskip
-
-\section{Exercises}
-\begin{exercise}
-Let $X,U$ be two linear spaces such that ${\rm dim}\, X = {\rm dim}\, U < \infty$. Prove that a linear mapping $T\in\mathscr{L}(X,U)$ is one-to-one if and only if it is onto.
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item ($\Rightarrow$) Assume $(x_1, x_2, \cdots, x_n)$ is a basis of $X$, then we have
-    $\text{dim} R_T = \text{dim} X - \text{dim} N_T$. If $T\in \mathscr{L}(X,U)$ is one-to-one, then $\text{dim} N_T = 0$. We can have 
-    $\text{dim} R_T = \text{dim} X = \text{dim} U$. Then $R_T = U$, which implies that $T$ is an isomorphism. Then $T$ is onto.
-    \item ($\Leftarrow$) If $T$ is onto, and $\text{dim} X = \text{dim} N$, then the only element $x\in X$ satisfying $Tx = 0$ is $x = 0$. So $\text{dim} N_T = 0$. Then $\text{dim} R_T = \text{dim} U$, which means $R_T = U$. Then $T$ is an isomorphism and $T$ is of course one-to-one.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $X$ be a finite dimensional linear space and $T\in\mathscr{L}(X,X)$. Suppose $${\rm dim}\, R_{T^2} = {\rm dim}\, R_T.$$
-Prove that $R_T\cap N_T = \{0\}$, where $T^2 = T\circ T$.
-\end{exercise}
-\begin{proof}
-We knew that $R_{T^2}\subset R_T$, and since ${\rm dim}\, R_{T^2} = {\rm dim}\, R_T$, we have $R_{T^2} = R_T$, which also implies $N_{T^2}\subset N_T$ by Rank-Nullity theorem.
-
-Assume $y\in N_T\cap R_T$,then there must exists a $x\in X$ such that $y = T x$. Then we have $T(Tx) = Ty = 0$, since $y\in N_T$. Then, $x\in N_{T^2} = N_T$, then $Tx = 0 = y$. Now we concluded that $R_T\cap N_T = \{0\}$.
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-If $Y$ and $Z$ are subspaces of a finite dimensional linear space, prove that 
-\begin{align*}
-    (Y + Z)^\bot = Y^\bot \cap Z^\bot\,\,{\rm and}\,\, (Y \cap Z)^\bot = Y^\bot + Z^\bot.
-\end{align*}
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item Assume $l \in (Y+Z)^\bot$. Then we have $l(m) = 0$, for all $m \in Y+Z$. Also, we know $Y\subset Y+Z$, so $l(y) = 0, \forall y \in Y$. Similarly, we have $l(z) = 0, \forall z \in Z$. Then we have $l \in Y^\bot \cap Z^\bot$, which implies $(Y+Z)^\bot \subset Y^\bot \cap Z^\bot$.
-    
-    Now assume $l \in Y^\bot \cap Z^\bot$, then we have $l(y) = 0$ and $l(z) = 0$, for $\forall y \in Y, \forall z \in Z$. Then, for $\forall m \in Y+Z$ we have $l(m) = 0$, since $m = y + z$ for some $y \in Y$ and $z \in Z$. Thus, we have $l \in (Y+Z)^\bot$, which implies $Y^\bot \cap Z^\bot \subset (Y+Z)^\bot$. Now we proved that $(Y+Z)^\bot = Y^\bot \cap Z^\bot$.
-    \item It is equivalent to prove that $(Y \cap Z)^{\bot\bot} = Y\cap Z = (Y^\bot + Z^\bot)^\bot$.
-    
-    
-    If $l \in (Y^\bot + Z^\bot)^\bot$, we have $l(l_1 + l_2) = 0$, for $l_1 \in Y^\bot$ and $l_2 \in Z^\bot$. Also, we have $Y^\bot \subset Y^\bot + Z^\bot$, we have $l(l_1) = 0$ for $\forall l_1 \in Y^\bot$. Similarly, we have $l(l_2) = 0$ for $\forall l_2 \in Z^\bot$. Then $l \in Y^{\bot\bot} = Y$ and $l \in Z^{\bot\bot} = Z$. Thus, $l \in Y\cap Z$, which implies $(Y^\bot + Z^\bot)^\bot \subset Y\cap Z$.
-    
-    
-    If $l \in Y\cap Z = (Y\cap Z)^{\bot\bot}$, we have $l \in Y\cap Z$, then $l \in Y = Y^{\bot\bot}$ and $l \in Z = Z^{\bot\bot}$. Then we have $l(l_1) = 0, l_1 \in Y^\bot$ and $l(l_2) = 0, l_2 \in Z^\bot$. Thus, we have $l(l_1 + l_2) = 0, l_1 + l_2 \in Y^\bot + Z^\bot$, which implies $l \in (Y^\bot + Z^\bot)^\bot$. Then we have $Y\cap Z \subset (Y^\bot + Z^\bot)^\bot$.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $X,Y$ be finite dimensional linear space and $T\in\mathscr{L}(X,Y)$ be invertible. Prove that $T'$ is also invertible and $(T^{-1})' = (T')^{-1}$.
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item Assume $l_1,l_2 \in Y'$,  and $(T'l_1)(x) = (T'l_2, x)$ for all $x\in X$. Then we have $(l_1 - l_2, Tx) = 0$ for all $x\in X$, then we have $l_1 = l_2$, which imlpies $T$ is one-to-one.
-    
-    Also, if $(T'l)(x) = 0$ for all $x\in X$, then it implies $l(T(x)) = 0$. Then $l$ can only be zero. Thus, $T'$ is invertible.
-    \item Since $T$ is invertible, then $T \circ T^{-1} = I$. For $T'$, we denote 
-    \begin{align*}
-        & (T \circ T^{-1})' = I' \\
-        \Rightarrow & (T^{-1})' \circ T' = I'
-    \end{align*}
-    We need to show $I = I'$. For $y \in Y$, we have 
-    \begin{align*}
-        & (I' l,y) = (l,I(y)) = (l, y)
-    \end{align*}
-    Then $I' = I$, thus we have $(T^{-1})' = (T')^{-1}$.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $X$ be an $n$-dimensional linear space and $T\in\mathscr{L}(X,X)$. Prove that there is a non-zero polynomial $p(t)$ of degree no more than $n^2$ such that $p(T) = 0$.
-\end{exercise}
-\begin{proof}
-Since $X$ is $n$-dimensional linear space, and $T\in\mathscr{L}(X,X)$, then $T$ can be presented as an $n\times n$ matrix. Polynomials $p(T)$ can be viewed as an operator acting on the space of matrix $T$, which is $n^2$-dimensional, denoted by $P$. Since $\text{dim} P = n^2$, then for any $T \in P$, $1, T, T^2, \cdots, T^{n^2}$ must be linear dependent, since there are $n^2 + 1$ elements. So there exist $a_0, a_1, a_2, \cdots, a_{n^2}$ such that
-\begin{align*}
-    p(T) = a_0 \cdot 1 + a_1 T + a_2 T^2 + \cdots + a_{n^2}T^{n^2} = 0
-\end{align*}
-which is at most degree $n^2$. 
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Prove that if $U,V,W$ are finite dimensional vector spaces, and $T\in\mathscr{L}(U,V), S\in\mathscr{L}(V,W)$, then
-\begin{align*}
-    {\rm dim}\, N_{ST} \leq {\rm dim}\, N_S + {\rm dim}\, N_T.
-\end{align*}
-\end{exercise}
-\begin{proof}
-Assume $u\in U$, such that $ST(u) = 0$. Then we have two possibilities, that is $u\in N_T$ or $T(u)\in N_S$.
-
-With Rank-Nullity theorem, we have 
-\begin{align*}
-    {\rm dim}\, N_{ST} & \leq {\rm dim}\, U = {\rm dim}\, N_T + {\rm dim}\, R_T \\
-    {\rm dim}\, R_T & \leq {\rm dim}\, V = {\rm dim}\, N_S + {\rm dim}\, R_S\\
-    \Rightarrow {\rm dim}\, N_{ST} & \leq {\rm dim}\, N_T + {\rm dim}\, N_S + {\rm dim}\, R_S
-\end{align*}
-Now we assume $Z = N_{ST}\subset U$, then we have $ST(z) = 0$  for $z\in Z$, and 
-\begin{align*}
-    {\rm dim}\, N_{ST} & = {\rm dim}\, Z = {\rm dim}\, N_T + {\rm dim}\, T|_Z \\
-    {\rm dim}\, T|_Z & \leq {\rm dim}\, N_S + {\rm dim}\, ST(Z)
-\end{align*}
-combining these, we have ${\rm dim}\, N_{ST} \leq {\rm dim}\, N_S + {\rm dim}\, N_T$.
-\end{proof}
 
 \medskip
 
@@ -1849,7 +1572,6 @@ Let $I$ be the identity matrix, if $A$ is invertible, then there exists a matrix
 
 \medskip
 
-\section{Exercises}
 
 
 \medskip
@@ -2515,122 +2237,7 @@ where $c_{ij} = \frac{1}{a_i + b_j}$. Then, the determinant of $C$ is
 \end{align*}
 \end{example}
 
-\medskip
 
-\section{Exercises}
-\begin{exercise}
-Let $A,B,C$ be $n\times n$ matrices satisfying $AB=BA$. Show that
-$$
-\det\left(  A+BC\right)  =\det\left(  A+CB\right).
-$$
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item If $B$ is invertible, since $AB=BA$, then we have $A=B^{-1}AB$. Then we have
-    \begin{align*}
-        \det (A+BC) &= \det (B^{-1}(A+BC)B) \\
-        & = \det(B^{-1}AB+CB) \\
-        & = \det(A+CB).
-    \end{align*}
-    \item If $B$ is not invertible. We can set a new matrix $M = \begin{pmatrix}
-    C & -I \\
-    A & B
-    \end{pmatrix}$, and we can solve for the determinant of this matrix. Since $AB=BA$, then $\det(M)=\det(CB-(-I)A)=\det(CB+A)$. Also, we have $-IB=B(-I)$, then the determinant can be presented as $\det (M)=\det(BC-(-I)A)=\det(BC+A)$. Then we have $\det(A+BC)=\det(A+CB)$. 
-\end{enumerate}
-\end{proof}
-
-\begin{remark}
-In (2), we used if $AB=BC$, then $\det(M)=\det(CB-(-I)A)$. We should give proper proof to this. Suppose matrix $M = \begin{pmatrix}
-P & Q \\
-R & S
-\end{pmatrix}$ and we have $RS=SR$. Then, if $S$ is invertible, we have 
-\begin{align*}
-    \det \begin{pmatrix}
-    P & Q \\
-    R & S
-    \end{pmatrix}
-    = &\det 
-    \begin{pmatrix}
-    P-RS^{-1}Q & 0 \\
-    R & S
-    \end{pmatrix} \\
-    & = \det(PS-RS^{-1}QS) \\
-    & = \det(PS-RSS^{-1}Q) \\
-    & = \det(PS-RQ)
-\end{align*}
-If $S$ is not invertibe, then there exists $\varepsilon_k \rightarrow 0$ such that $\det S_k = \det(B+\varepsilon_k I) \neq 0$ and $S_k R = R S_k$. Then $\det \begin{pmatrix}
-P & Q \\
-R & S_k
-\end{pmatrix} = \det (PS_k-QR)$. Taking $k\rightarrow \infty$ will prove this case. The proof is complete. Similarly, we can prove that if $QS=SQ$, then $\det M = \det(SP-QR)$.
-\end{remark}
-
-\medskip
-
-\begin{exercise}
-Let $A,B,C$ be $n\times n$ matrices. Is it always true that
-$$
-\det\left(  A+BC\right)  =\det\left(  A+CB\right)  ?
-$$
-Prove or find a counter example.
-\end{exercise}
-\begin{proof}
-In general, it is not true. Take $A = \begin{pmatrix}
-    1 & 0 \\
-    0 & 10
-    \end{pmatrix},
-    B = 
-    \begin{pmatrix}
-    2 & 3 \\
-    4 & 5
-    \end{pmatrix}$
-and $C = \begin{pmatrix}
-    0 & 1 \\
-    1 & 6
-    \end{pmatrix}$.
-Then we have $\det(A+BC) = 76$ and $\det(A+CB) = 85$.
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $n\geq2$. Given $\left(  2n-1\right)  $ scalars $x_{1}%
-,\cdots,x_{n-1}$ and $y_{1},\cdots,y_{n}$, we can define an $n\times n$ matrix
-$A=\left(  a_{ij}\right)  $ such that%
-\begin{align*}
-a_{ij} &  =x_{j}\text{ if }i>j,\\
-a_{ij} &  =y_{j}\text{ if }i\leq j.
-\end{align*}
-Show that%
-$$
-\det A=y_{n}%
-%TCIMACRO{\dprod \limits_{k=1}^{n-1}}%
-%BeginExpansion
-{\displaystyle\prod\limits_{k=1}^{n-1}}
-%EndExpansion
-\left(  y_{k}-x_{k}\right).
-$$
-\end{exercise}
-\begin{proof}
-We can know that $A$ has the form 
-\begin{align*}
-    A = \begin{pmatrix}
-    y_1 & y_2 & y_3 & \cdots & y_n \\
-    x_1 & y_2 & y_3 & \cdots & y_n \\
-    \vdots & \vdots & \vdots & \ddots & \vdots \\
-    x_1 & x_2 & x_3 & \cdots & y_n
-    \end{pmatrix}
-\end{align*}
-We can do elementary row operations that starting from the first row, and then apply $\text{row}_i=\text{row}_i+(-1)\text{row}_{i+1}$. Then we get new matrix
-\begin{align*}
-    A = \begin{pmatrix}
-    y_1-x_1 & 0 & 0 & \cdots & 0 \\
-    0 & y_2-x_2 & 0 & \cdots & 0 \\
-    \vdots & \vdots & \vdots & \ddots & \vdots \\
-    x_1 & x_2 & x_3 & \cdots & y_n
-    \end{pmatrix}
-\end{align*}
-Then it is obvious that $\det(A)=y_n \prod_{k=1}^{n-1} (y_k-x_k)$.
-\end{proof}
 
 \medskip
 
@@ -2814,8 +2421,10 @@ Then, substituting by $A$, we have
 \section{Generalized Eigenvectors and Spectral Theorem}
 \begin{definition}\label{spectral_theorem}
 A nonzero vector $u$ is said to be a generalized eigenvector of $A$ corresponding to eigenvalue $\lambda$ if 
-$$\left(A - \lambda I\right)^m u = 0$$
-for some $m\in\mathbb{N}$.
+$$\left(A - \lambda I\right)^m u = 0,$$
+but
+$$\left(A - \lambda I\right)^{m-1} u \neq 0,$$
+for some $m\in\mathbb{N}$ \cite{15}.
 \end{definition}
 
 \medskip
@@ -3480,7 +3089,7 @@ The inverse of this lemma is also true.
 
 \medskip
 
-\begin{theorem}
+\begin{theorem}\cite{18}\label{commute_eigenspace}
 Suppose $A, B$ are $n\times n$ matrices, such that $AB = BA$, then there is a basis of $\mathbb{C}^n$ which consists of eigenvectors and generalized eigenvectors of both $A$ and $B$.
 \end{theorem}
 \begin{proof}
@@ -3495,7 +3104,7 @@ where $N_j = N_{(A - \lambda_j I)^{d(\lambda_j)}}$. For any $x\in\mathbb{C}^n$, 
 If $x\in N_j$, then $ (A - \lambda_j I)^{d(\lambda_j)} x = 0$, which implies $Bx\in N_j$. Then, $B$ is a map from $N_j$ into $N_j$. Applying Spectral theorem (\ref{spectral_theorem}) to $B|_{N_j}$, then we obtain a spectral decomposition of each $N_j$, i.e., $N_j$ has a basis consisting of eigenvectors and generalized eigenvectors of $B$. Thus, we obtain a basis of $\mathbb{C}^n$. 
 \end{proof}
 
-\begin{remark}
+\begin{remark}\label{diagonalized_same_time}
 If $A,B$ are both diagonalizable and $AB = BA$, then $A,B$ can be diagonalized at the same time, i.e., there exists nonsingular matrix $S$ such that $S^{-1}AS$ and $S^{-1}BS$ are both diagonal.
 \end{remark}
 
@@ -3521,417 +3130,6 @@ We have
 \end{align*}
 Since $\lambda \neq \mu$, we have $u^T v = 0$.
 \end{proof}
-
-\medskip
-
-\section{Exercises}
-\begin{exercise}
-Let $A$ be an invertible $n\times n$ matrix, show that there exists a
-polynomial $g$ such that
-$$
-A^{-1}=g\left(A\right).
-$$
-\end{exercise}
-\begin{proof}
-Since $A$ is invertible, then $A$ has no zero engenvalues. Thus, the characteristic polynomial $P(x)$ for $A$ has constant terms, which can be written as $P(x)= x^n + a_{n-1} x^{n-1} + \cdots + a_0$. Also, we know that $P(A)=0$, thus we have
-\begin{align*}
-    & A^n + a_{n-1} A^{n-1} + \cdots + a_0 = 0 \\
-    \Rightarrow & A^{-1} = -\frac{1}{a_0}(A^{n-1}+a_{n-1}A^{n-2}+\cdots+a_1) = g(A)
-\end{align*}
-Then $A^{-1}=g(A)$, the proof is complete. 
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let
-\begin{align*}
-  A=\left(
-    \begin{array}
-    [c]{cc}%
-    A_{1} & \\
-    & A_{2}%
-    \end{array}
-    \right).  
-\end{align*}
-Show that the minimal polynomial $m_{A}$ is the least common multiple of
-$m_{A_{1}}$ and $m_{A_{2}}$.
-\end{exercise}
-\begin{proof}
-From the form of $A$, we can know that $\det(\lambda-IA)=\det(\lambda-IA_1)\det(\lambda-IA_1)$. Then, for any polynomial $T(x)$ such that $T(A)=0$, then we have $T(A_1)=0$ and $T(A_2)=0$. And since $m_A$, $m_{A_1}$ and $m_{A_2}$ are minimal polynomials corresponding to $A$, $A_1$ and $A_2$, then we have $T(x)=m_1 m_{A_1}(x)$ and $T(x)=m_2 m_{A_1}(x)$ for some $m_1, m_2$. Also, we have $m_A(x)|T(x)$, then we have $m_{A_1}(x)|m_A(x)$ and $m_{A_1}(x)|m_A(x)$, then $m_A$ is the least common multiple of $m_{A_{1}}$ and $m_{A_{2}}$.
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Find the minimal polynomial $m_{A}$ for%
-$$
-A=\left(
-\begin{array}
-[c]{ccc}%
-1 & -1 & 1\\
-0 & 2 & 0\\
-0 & 0 & 2
-\end{array}
-\right)  .
-$$
-\end{exercise}
-\begin{proof}
-The characteristic polynomial for $A$ is that $P(\lambda)=(\lambda-1)(\lambda-2)^2$. Then the minimal polynomial is $m_A=(\lambda-1)(\lambda-2)$.
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $A$ be an $n\times n$ matrix where $n\geq2$ satisfying
-$\operatorname*{rank}A=1$.
-\begin{enumerate}[label=(\arabic*)]
-    \item Show that there exists two column vectors $a,b$ such that $A=ab^{T}$.
-    \item Show that the minimal polynomial
-    $$m_{A}=\lambda^{2}-\left(  a^{T}b\right)  \lambda.$$
-\end{enumerate}
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item Since $\text{rank}A=1$, then the image of $A$ is one-dimensional. Thus, there exist $u,v\in \mathbb{R}^n$ such that $Au=kv$ for a fixed $v$. It also holds for a basis for $\mathbb{R}^n$, then every column of $A$ is a multiple of $v$. Then there exists $(w_1, w_2,\cdots,w_n)\in\mathbb{R}^n$, such that
-    \begin{align*}
-        A=v(w_1, w_2,\cdots,w_n)
-    \end{align*}
-    then we denote $v=a$, and $(w_1, w_2, \cdots, w_n) = b^T$, where $a,b\in\mathbb{R}^n$.Then $A=ab^T$.
-    \item We have $A^2 = ab^Tab^T = a(b^Ta)b^T = (b^Ta)ab^T = (b^Ta)A$, which implies $q(A)=A^2-(b^Ta)A=0$. This polynomial satisfies that $q(A)=0$, then $m_a|q(\lambda) = \lambda^2-(b^Ta)\lambda$. Also, $m_A$ cannot be $\lambda$ or $\lambda-(b^Ta)$, since this means $A$ is a scalar. Thus, $m_A = \lambda^2-(b^Ta)\lambda$. The proof is complete.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $A_{k}$, $1\leq k\leq K$ be $n\times n$ matrices satisfying%
-$$
-A_{i}A_{j}=A_{j}A_{i}\text{ for any }1\leq i,j\leq k.
-$$
-Show the existence of a basis of $\mathbb{C}^{n}$ which consists of
-eigenvector and generalized eigenvectors of $A_{k}$ for each $1\leq k\leq K$.
-\end{exercise}
-\begin{proof}
-Let $\{\lambda_j\}^J_{j=1}$ be $J$ distinct eigenvalues of $A_1$, and then we have
-\begin{align*}
-    \mathbb{C}^n = \bigoplus^J_{j=1}N_j
-\end{align*}
-where $N_j=N_{(A_1-\lambda_j I)^{d_j}}$, $d_j$ is index of $j$th eigenvalue $\lambda_j$. For $\forall x\in\mathbb{C}^n$, since $A_1 A_i=A_i A_1,2\leq i \leq K$, then we have $(A_1-\lambda_j I)^{d_j}A_i=A_i(A_1-\lambda_j I)^{d_j}$. Thus, if $x\in N_k$
-\begin{align*}
-    (A_1-\lambda_j I)^{d_j}A_ix =A_i(A_1-\lambda_j I)^{d_j}x = 0
-\end{align*}
-which means $A_i x\in N_j$. Thus, $A_i$ is a mapping from $N_j$ to $N_j$. Now we apply Spectral Theorem to the linear mapping $A_i$ and we know that $N_j$ has a basis consisting of eigenvevtors and generalized eigenvevtors of $A_i$. And it is true for all $A_i, 2\leq i \leq K$. Thus, a basis of $\mathbb{C}^{n}$ consists of
-eigenvectors and generalized eigenvectors of $A_{j}$ for each $1\leq j\leq K$. The proof is complete.
-\end{proof}
-
-\noindent \textbf{Method II of proof}
-\begin{proof}
-We will prove it by induction on $\dim V$ and $1\leq k\leq K$. And assume we have pairwise commuting operators $A_1, A_2,\cdots, A_K$ on $V$. 
-
-When $\dim V = 1$, and in this case, all $A_i$ are scalars. Take $B = \{1\}$, and $k$ be arbitrary. Assume the result is true whenever $\dim V < l$, and $A_1, A_2, \cdots, A_k$ are pairwise commuting operators on $V$ if $\dim V < l$. And we want to show that if $\dim V = l$, and $A_1, \cdots, A_{k+1}$ are pairwise commuting operators on $V$, then there exists a basis of generalized eigenvectors. 
-
-For $A_1$, we have 
-\begin{align*}
-    \mathbb{C}^l = \bigoplus^m_{j=1}N_{\lambda_j}(A_1)
-\end{align*}
-since $A_1A_i = A_iA_1, 2 \leq i \leq k+1$, we have $A_i:N_{\lambda_j}(A_1)\rightarrow N_{\lambda_j}(A_1), \forall j = 1,\cdots, m$ and $\forall i = 1,2,\cdots, k+1$. 
-\begin{enumerate}[label=(\arabic*)]
-    \item If $m = 1$, then there exists a basis $B$ of $\mathbb{C}^1$ consisting of generalized eigenvectors for $A_2, \cdots, A_k,A_{k+1}$. Any vectors in $\mathbb{C}^l$ is a generalized eigenvectors for $A_1$ because $\mathbb{C}^l = N_{\lambda_1}(A_1)$, then any vectors in $B$ is a a generalized eigenvectors for $A_1, A_2, \cdots, A_{k+1}$.
-    \item If $m > 1$, then $N_{\lambda_j}(A_1)\neq \mathbb{C}^l, \forall j = 1,\cdots, k+1$. On $N_{\lambda_j}(A_1)$, we have $A_1|_{N_{\lambda_j}(A_1)}, A_2|_N_{\lambda_j}(A_1), \cdots, A_{k+1}|_N_{\lambda_j}(A_1)$. By induction, there exists a basis $\beta_j, j=1,2,\cdots, m$ of $N_{\lambda_j}(A_1)$, which are generalized eigenvectors for $A_1|_{N_{\lambda_j}(A_1)}, \cdots, A_{k+1}|_N_{\lambda_j}(A_1)$. Take 
-    \begin{align*}
-        \beta = \bigcup^m_{j=1}\beta_j
-    \end{align*}
-    then $\beta$ is a basis for $\mathbb{C}^l$ consisting of generalized eigenvectors for $A_1, A_2, \cdots, A_{k+1}$.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $\lambda$ be an eigenvalue of an $n\times n$ matrix $A$. Suppose
-that%
-\begin{align*}
-    \dim N_{1}\left(\lambda\right) & = 2, \dim N_{2}\left(\lambda\right) = 4\\
-    \text{ and }\dim N_{3}\left(\lambda\right) & = \dim N_{4}\left(\lambda\right) = 5,
-\end{align*}
-Find the Jordan blocks of $A$ corresponding to $\lambda$.
-\end{exercise}
-\begin{proof}
-Since $\dim N_{3}\left(\lambda\right) = \dim N_{4}\left(\lambda\right) = 5$, then we can know that the index $d(\lambda) = 3$, then we can know the Jordan blocks of $A$ corresponding to $\lambda$ is 
-\begin{align*}
-    J = \left(\begin{array}
-    [c]{ccccc}%
-    \lambda & 1 & 0 & 0 & 0\\
-    0 & \lambda & 1 & 0 & 0\\
-    0 & 0 & \lambda & 0 & 0\\
-    0 & 0 & 0 & \lambda & 1\\
-    0 & 0 & 0 & 0 & \lambda
-    \end{array}\right).
-\end{align*}
-We can verify that this is the Jordan blocks we want. We can compute $N_{(J-\lambda I)}$, $N_{(J-\lambda I)^2}$, $N_{(J-\lambda I)^3}$ and $N_{(J-\lambda I)^4}$. We have
-\begin{align*}
-    J-\lambda I = \left(\begin{array}
-    [c]{ccccc}%
-    0 & 1 & 0 & 0 & 0\\
-    0 & 0 & 1 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 1\\
-    0 & 0 & 0 & 0 & 0
-    \end{array}\right)
-\end{align*}
-and it is obvious that $\dim N_{(J-\lambda I)} = 2$, since there are two $0$ column vectors. Similarly, we have 
-\begin{align*}
-    (J-\lambda I)^2 = \left(\begin{array}
-    [c]{ccccc}%
-    0 & 0 & 1 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0
-    \end{array}\right), 
-    (J-\lambda I)^3 = (J-\lambda I)^4 = \left(\begin{array}
-    [c]{ccccc}%
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0
-    \end{array}\right)
-\end{align*}
-and we can know that $\dim N_{(J-\lambda I)^2} = 4$ and $\dim N_{(J-\lambda I)^3} = \dim N_{(J-\lambda I)^3} = 5$. The proof is complete.
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $A$ be a $5\times5$ rank one matrix, find all possible Jordan canonical forms of $A$. The order of Jordan blocks should be ignored.
-\end{exercise}
-\begin{proof}
-Since $A$ is rank one matrix, then there exists two column vectors $a,b$ such that $A=ab^T$, also we know that the minimal polynomial for $A$ is $m_A(\lambda) = \lambda^2 - \alpha \lambda$. So $A$ has eigenvalue $0$ with multiplicity $4$ and $\alpha$ with multiplicity $1$. There are several possible Jordan forms for eigenvalue $0$, which are
-\begin{align*}
-    \left(\begin{array}
-    [c]{ccccc}%
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & \alpha
-    \end{array}\right),
-    \left(\begin{array}
-    [c]{ccccc}%
-    0 & 1 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & \alpha
-    \end{array}\right),
-    \left(\begin{array}
-    [c]{ccccc}%
-    0 & 1 & 0 & 0 & 0\\
-    0 & 0 & 1 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & \alpha
-    \end{array}\right),
-    \left(\begin{array}
-    [c]{ccccc}%
-    0 & 1 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 1 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & \alpha
-    \end{array}\right)
-\end{align*}
-and $$
-    \left(\begin{array}
-    [c]{ccccc}%
-    0 & 1 & 0 & 0 & 0\\
-    0 & 0 & 1 & 0 & 0\\
-    0 & 0 & 0 & 1 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & \alpha
-    \end{array}\right).$$
-Since the null space of $A-0I$ has dimension $4$ and one of them is generated by eigenvalue $\alpha$. Thus, $\dim N_{A-0I}=3$, which means that there are $3$ blocks corresponding to eigenvalue $0$. Thus, we can know that all possible Jordan canonical forms of $A$ are
-\begin{align*}
-    \left(\begin{array}
-    [c]{ccccc}%
-    0 & 1 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0
-    \end{array}\right), \text{and}
-    \left(\begin{array}
-    [c]{ccccc}%
-    0 & 1 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & 0\\
-    0 & 0 & 0 & 0 & \alpha
-    \end{array}\right).
-\end{align*}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let%
-$$
-A=\left(
-\begin{array}
-[c]{ccc}%
-1 & 1 & 1\\
-0 & 1 & 0\\
-0 & 0 & 1
-\end{array}
-\right)  .
-$$
-Find its eigenvectors and generalized eigenvectors. Find its Jordan canonical
-form $J$ and the corresponding matrix $S$ so that%
-$$
-A=SJS^{-1}\text{.}%
-$$
-\end{exercise}
-\begin{proof}
-Taking $A-\lambda I = 0$, we can have characteristic polynomial $p_A(\lambda) = (1-\lambda)^3$, which gives us eigenvalues $1$. Now we determine the null space of $A-1\dots I$
-\begin{align*}
-    A-I =\left(\begin{array}
-    [c]{ccc}%
-    0 & 1 & 1\\
-    0 & 0 & 0\\
-    0 & 0 & 0
-    \end{array}\right).
-\end{align*}
-So this eigenspace is dimensional-$2$. Hence there are two Jordan blocks corresponding to the eigenvalue 1 in the Jordan form. So we have its Jordan canonical form
-\begin{align*}
-    J = \left(\begin{array}
-    [c]{ccc}%
-    1 & 1 & 0\\
-    0 & 1 & 0\\
-    0 & 0 & 1
-    \end{array}\right).
-\end{align*}
-Then we can know the eigenvectors corresponding to $1$ are 
-\begin{align*}
-    v_1 = \left(\begin{array}
-    [c]{c}%
-    1 \\
-    0 \\
-    0 
-    \end{array}\right) 
-    \text{and}\,\,
-    v_2 = \left(\begin{array}
-    [c]{c}%
-    1 \\
-    1 \\
-    -1 
-    \end{array}\right).
-\end{align*}
-Each of these will give Jordan chain and we compute $(A-I)w_1 = v_1$ and $(A-I)w_2 = v_2$. The second equation does not have solution, so we can know that
-\begin{align*}
-    w_1 = \left(\begin{array}
-    [c]{c}%
-    1 \\
-    1 \\
-    0 
-    \end{array}\right).
-\end{align*}
-Then we have the engenvectors and generalized engenvectors, which are 
-\begin{align*}
-    \left(\begin{array}
-    [c]{c}%
-    1 \\
-    1 \\
-    0 
-    \end{array}\right),
-    \left(\begin{array}
-    [c]{c}%
-    1 \\
-    0 \\
-    0 
-    \end{array}\right),
-    \text{and}\,\,
-    \left(\begin{array}
-    [c]{c}%
-    1 \\
-    1 \\
-    -1 
-    \end{array}\right).
-\end{align*}
-Thus, we can find $S$, such that $AS=JS$, and we have
-\begin{align*}
-    S = \left(\begin{array}
-    [c]{ccc}%
-    1 & 1 & 1\\
-    0 & 1 & 1\\
-    0 & 0 & -1
-    \end{array}\right).
-\end{align*}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $P$ be the linear space of polynomials with real coefficients
-equipped with the scalar product%
-$$
-\left(  f,g\right)  =\int_{0}^{1}f\left(  x\right)  g\left(  x\right)  dx.
-$$
-\begin{enumerate}[label=(\arabic*)]
-    \item Using Gram-Schmidt process to generate an orthonormal basis of the span of vectors $\left\{  1,x^{2}\right\}$.
-    \item Find the projection of polynomial $x$ on the span of vectors $\left\{  1,x^{2}\right\}$.
-\end{enumerate}
-\end{exercise}
-\begin{proof}
-~\begin{enumerate}[label=(\arabic*)]
-    \item Set $y_1 = 1$ and $y_2 = x^2$, using Gram-Schmidt process, we can have 
-    \begin{align*}
-        x_1 & = \frac{y_1}{\left \|y_1\right \|} = \frac{1}{\sqrt{\int^1_0 1dx}} = 1 \\
-        x_2 & = \frac{y_2-(y_2,x_1)x_1}{\left \|y_2-(y_2,x_1)x_1\right \|} = \frac{x^2 - \frac{1}{3}}{\sqrt{\int^1_0 (x^2 - 1/3)^2}dx} = \frac{3\sqrt{5}x^2 - \sqrt{5}}{2}.
-    \end{align*}
-    \item Finding the projection of polynomial $x$ on the span of vectors $\left\{  1,x^{2}\right\}$ is equivalent to findind the solution for $a,b$ in the equations
-    \begin{align*}
-        (1,x-(a+bx^2)) & = 0 \\
-        (x^2,x-(a+bx^2)) & = 0 
-    \end{align*}
-    which gives us $b = \frac{15}{16}, a = \frac{3}{16}$. Thus, the projection is $\left(\frac{3}{16},\frac{15}{16}\right)$.
-\end{enumerate}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Find the least squares solution to the over-determined system%
-\begin{align*}
-3x-y  &  =1,\\
-x+y  &  =1,\\
-2x+3y  &  =2.
-\end{align*}
-\end{exercise}
-\begin{proof}
-Writting these equations into $AX=b$, where $A = \left(\begin{array}
-    [c]{cc}%
-    3 & -1\\
-    1 & 1\\
-    2 & 3
-    \end{array}\right), X = \left(\begin{array}
-    [c]{c}%
-    x\\
-    y\\
-    \end{array}\right)$, and $b = \left(\begin{array}
-    [c]{c}%
-    1\\
-    1\\
-    2
-    \end{array}\right)$, then the least square least solution can be determined by $z = (A^TA)^{-1}A^T b = \left(\begin{array}
-    [c]{c}%
-    0.4638\\
-    0.3768\\
-    \end{array}\right)
-    $.
-\end{proof}
-
 
 \medskip
 
@@ -4792,86 +3990,7 @@ We can have $r(A_1 A_2) = \lim_{k\to\infty} \left\|(A_1 A_2)^k\right\|^{1/k}$, a
 which implies $r(A_1 A_2) \leq r(A_1) r(A_2)$.
 \end{proof}
 
-\medskip
 
-\section{Exercises}
-\begin{exercise}
-Suppose $1\leq k\leq n$ and $x_{1},x_{2},\cdots x_{k}$ are $k$ vectors
-in $\mathbb{R}^{n}$ satisfying for any $1\leq i,j\leq k$,%
-$$
-\left(  x_{i},x_{j}\right)  =\delta_{ij}.
-$$
-For each $1\leq j\leq k$, let $a_{j}$ be the first component of $x_{j}$. Show
-that%
-$$
-\sum_{j=1}^{k}a_{j}^{2}\leq1.
-$$
-\end{exercise}
-\begin{proof}
-Since $(x_i,x_j) = \delta_{ij}, 1\leq i,j\leq n$, then we can arrange $x_1, x_2,\cdots, x_n$ into a matrix and denote it by $A = (x_1, x_2,\cdots, x_n)$, then we have $A$ is an orthogonal matrix with determinant $1$. Then $\det A^* = 1$. 
-
-Now we pick a vector $z = (1,0,\cdots,0)^T \in \mathbb{R}^{n}$. Then we have $A^*z = (a_1, a_2, \cdots, a_n)^T$, and therefore the first component of the vector $AA^*z$ is $\sum_{j=1}^{k}a_{j}^{2}$, which means $AA^*z = \left(\sum_{j=1}^{k}a_{j}^{2}, \cdots \right)^T$. Also, we have $\left\|AA^*z \right\| \leq \left\| I z \right\| = 1$. We denote other components of $AA^*z$ as $w_2, w_3, \cdots, w_n$, then we have 
-\begin{align*}
-    \sum_{j=1}^{k}a_{j}^{2} \leq \left\|AA^*z \right\|^{1/2} & = \sqrt{\sum_{j=1}^{k}a_{j}^{2} + w_2^2 + \cdots + w_n^2} = 1 \\
-    \Rightarrow \sum_{j=1}^{k}a_{j}^{2} & \leq 1.
-\end{align*}
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let $A$ be an $m\times n$ matrix, $c_{j}$ $1\leq j\leq n$ be column
-vectors of $A$ and $r_{i}$, $1\leq i\leq m$ be row vectors of $A$, show that%
-$$
-\left\Vert A\right\Vert \geq\max_{1\leq j\leq n}\left\Vert c_{j}\right\Vert
-\text{ and }\left\Vert A\right\Vert \geq\max_{1\leq i\leq m}\left\Vert
-r_{i}\right\Vert .
-$$
-Here we view $A$ as a linear map from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
-\end{exercise}
-\begin{proof}
-For $j$th column $c_j$ of $A$, we pick a unit vector $e_j = (0,\cdots, 0,1,0,\cdots,0)^T \in \mathbb{R}^n$, where $j$th entry is $1$, others are all zero. Then we can have $Ae_j = c_j$. Thus, we have 
-\begin{align*}
-    \left\|c_j \right\| \leq \left\|A \right\| \left\|e_j  \right\| = \left\|A \right\|
-\end{align*}
-since this is true for all $1\leq j \leq n$, then we have $\max_{1\leq j \leq n}\left\|c_j \right\| \leq \left\|A \right\|$. 
-
-For $i$th row $r_i$ of $A$, we can consider $A^* = (r_1, r_2,\cdots, r_m)$. And still, we pick a vector $e_i' = (0,\cdots, 0,1,0,\cdots,0)^T \in \mathbb{R}^m$, where $i$th entry is $1$, others are all zero. And then we take $A^* e_i' = r_i$, which gives us 
-\begin{align*}
-    \left\|r_i \right\| \leq \left\|A^* \right\| \left\|e_i'  \right\| = \left\|A^* \right\| = \left\|A \right\|
-\end{align*}
-in the last step we used the fact that $\left\|A^* \right\| = \left\|A \right\|$ . This is true for all $1\leq i \leq m$, then we have $\max_{1\leq i \leq m}\left\|r_i \right\| \leq \left\|A \right\|$. The proof is complete.
-\end{proof}
-
-\medskip
-
-\begin{exercise}
-Let
-$$
-A=\left(
-\begin{array}
-[c]{cc}%
-1 & 2\\
-0 & 3
-\end{array}
-\right)  .
-$$
-Find the spectral radius, operator norm and Hilbert-Schmidt norm of
-$A:\mathbb{R}^{n}\rightarrow\mathbb{R}^{n}$.
-\end{exercise}
-\begin{proof}
-The eigenvalues of $A$ are $1$ and $3$, and then we can know that the spectral radius is $r(a) = \max |\lambda| = 3$. The operator norm of $A$ is  the largest eigenvalues of $AA^T$, which is 
-$$
-AA^T=\left(
-\begin{array}
-[c]{cc}%
-5 & 6\\
-6 & 9
-\end{array}
-\right).
-$$
-And the charasteristic polynomial is $\lambda^2 - 14\lambda + 9 = 0$, which gives us norm of $A$ is $\max_{j=1,2} \lambda_j = 7+2\sqrt{10}$. The Hilbert-Schmidt norm of $A$ is $\left\| A\right\| = \left(\sum_{i,j}|a_{ij}^2| \right)^{1/2} = \sqrt{14}$.
-\end{proof}
 
 
 \chapter{Spectral Theory of Self-Adjoint Mappings}
@@ -4944,7 +4063,7 @@ which implies $A = U\Lambda U^{-1}$.
 
 \medskip
 
-\begin{theorem}
+\begin{theorem}\label{theorem_symmetric}
 A self-adjoint map $H$ of real Euclidean space $X$ into itself has real eigenvalues and a set of eigenvectors which is formed by orthogonal basis of $X$.
 \end{theorem}
 \begin{proof}
@@ -5463,7 +4582,7 @@ Continue this process and we can obtain an upper triangular matrix.
 \medskip
 
 \begin{theorem}
-Let $Ab = BA$, then $A$ and $B$ can be simultaneously upper diagonalized by a unitary matrix.
+Let $AB = BA$, then $A$ and $B$ can be simultaneously upper diagonalized by a unitary matrix.
 \end{theorem}
 \begin{proof}
 Let $\lambda_1\in\sigma(A), N_1 = N_{(A - \lambda_1 I)}$, then we can know $B$ is invariant under $N_1$, i.e., $B:N_1\to N_1$. Then we have 
@@ -5501,6 +4620,221 @@ where $\lambda_j\in\sigma(A), \mu_j\in\sigma(B)$. Thus we have
 \end{align*}
 \end{proof}
 
+\medskip
+
+\section{Exercises}
+
+\begin{exercise}
+Let%
+$$
+q\left(  x\right)  =2x_{1}x_{2}-6x_{2}x_{3}+2x_{1}x_{3}.
+$$
+Find an invertible matrix $L$, such that%
+$$
+q\left(  L^{-1}y\right)  =d_{1}y_{1}^{2}+d_{2}y_{2}^{2}+d_{3}y_{3}^{2}%
+$$
+where $d_{i}=0$ or $\pm1$.
+\end{exercise}
+\begin{proof}
+We have $q(x) = (x,Hx)$, where 
+$$
+H = \left(
+\begin{matrix}
+0 & 1 & 1\\
+1 & 0 & -3\\
+1 & -3 & 0
+\end{matrix}
+\right)
+$$
+and we need to normalize the matrix $H$, then we can compute for its eigenvalues, which are $\lambda = 3, \frac{3-\sqrt{17}}{2}, \frac{3+\sqrt{17}}{2}$, with eigenvectors 
+\begin{align*}
+    \left(\begin{matrix} 0 \\ - 1\\ 1 
+    \end{matrix}\right), 
+    \left(\begin{matrix} \frac{3-\sqrt{17}}{2} \\ 1\\ 1 
+    \end{matrix}\right), 
+    \left(\begin{matrix} \frac{3+\sqrt{17}}{2} \\ 1\\ 1 
+    \end{matrix}\right), 
+\end{align*}
+Now we can normalize these vectors and we get 
+\begin{align*}
+    \left(\begin{matrix} 0 \\ - \frac{1}{\sqrt{2}}\\ \frac{1}{\sqrt{2}} 
+    \end{matrix}\right), 
+    \left(\begin{matrix} -\sqrt{\frac{17-3\sqrt{17}}{34}} \\ \frac{2}{\sqrt{17-3\sqrt{17}}}\\ \frac{2}{\sqrt{17-3\sqrt{17}}} 
+    \end{matrix}\right), 
+    \left(\begin{matrix} \sqrt{\frac{17+3\sqrt{17}}{34}} \\ \frac{2}{\sqrt{17+3\sqrt{17}}} \\ \frac{2}{\sqrt{17+3\sqrt{17}}} 
+    \end{matrix}\right), 
+\end{align*}
+And we arrange eigenvectors into a matrix, denoting it by 
+\begin{align*}
+    C = \left(\begin{matrix}
+    0 & -\sqrt{\frac{17-3\sqrt{17}}{34}} & \sqrt{\frac{17+3\sqrt{17}}{34}} \\
+    - \frac{1}{\sqrt{2}} & \frac{2}{\sqrt{17-3\sqrt{17}}} & \frac{2}{\sqrt{17+3\sqrt{17}}} \\
+    \frac{1}{\sqrt{2}} & \frac{2}{\sqrt{17-3\sqrt{17}}} & \frac{2}{\sqrt{17+3\sqrt{17}}}
+    \end{matrix}\right).
+\end{align*}
+We can verify that $C^*HC = \left(
+\begin{matrix}
+3 & 0 & 0\\
+0 & \frac{3-\sqrt{17}}{2} & 0\\
+0 & 0 & \frac{3+\sqrt{17}}{2}
+\end{matrix}
+\right)$. Now we denote $z = Cx = (z_1, z_2, z_3)$, where 
+\begin{align*}
+    z_1 & = -\sqrt{\frac{17-3\sqrt{17}}{34}}x_2 + \sqrt{\frac{17+3\sqrt{17}}{34}}x_3\\
+    z_2 & = - \frac{1}{\sqrt{2}}x_1 + \frac{2}{\sqrt{17-3\sqrt{17}}}x_2 + \frac{2}{\sqrt{17+3\sqrt{17}}}x_3 \\
+    z_3 & = \frac{1}{\sqrt{2}}x_1 + \frac{2}{\sqrt{17-3\sqrt{17}}}x_2 + \frac{2}{\sqrt{17+3\sqrt{17}}}x_3
+\end{align*}
+and we need to change variable to get the quadratic form $q\left(  L^{-1}y\right)  =d_{1}y_{1}^{2}+d_{2}y_{2}^{2}+d_{3}y_{3}^{2}$. We make the change of variable
+\begin{align*}
+    y_1 & = \frac{1}{\sqrt{3}}z_1 \\
+    y_2 & = \sqrt{\frac{2}{3-\sqrt{17}}} z_2\\
+    y_3 & = \sqrt{\frac{2}{3+\sqrt{17}}} z_3
+\end{align*}
+and we can denote this transform by matrix $E$, where 
+\begin{align*}
+    E = \left(
+    \begin{matrix}
+    \frac{1}{\sqrt{3}} & 0 & 0\\
+    0 & \sqrt{\frac{2}{3-\sqrt{17}}} & 0\\
+    0 & 0 & \sqrt{\frac{2}{3+\sqrt{17}}}
+    \end{matrix}
+    \right)
+\end{align*}
+then we can know that $L^{-1} = CE$, which are defined above. And finally, $L = (CE)^{-1}$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Show that the congruence is an equivalence relation for symmetric
+matrices. Find the total number of equivalence classes for $n\times n$
+symmetric matrices.
+\end{exercise}
+\begin{proof}
+We denote the relation of congruence by $\sim$.
+\begin{enumerate}[label=(\arabic*)]
+    \item \begin{enumerate}[label=\alph*.]
+        \item For $A$ is a symmetric matrix, then we have $A\sim A$, since $A = I^TAI$, where $I$ is identity matrix.
+        \item For $A,B$ are symmetric matrices, we have if $A\sim B$ , then $B\sim A$. Since if $A = S^TBS$, where $S$ is invertible, then we have $B = (S^T)^{-1}AS^{-1}$, which means $B\sim A$.
+        \item For $A,B$ and $C$ are symmetric matrices, we have if $A\sim B,B\sim C$, then $A\sim C$. Since if we have $A = S^TBS$ and $B = P^TCP$, then we have $A = S^TP^TCPS = (PS)^TCPS$, which implies $A\sim C$. Then we proved the congruence is an equivalence relation.
+    \end{enumerate}
+    \item Suppose $A = S^TBS$, and $S$ is invetible. Also, we have $R_{BS}\subseteq R_{B}$ with equality when $S$ is invertible, since $S$ is full rank. Then we have, in this case, $\dim B = \dim BS$. Then we have $S^T$ is also full rank and $\dim A = \dim S^TBS = \dim B$. So we can know that for symmetric matrices $A$ and $B$, if they are congruent then they have the same rank, which means there are $n+1$ equivalebce classes, since there are matrix with rank $0,1,2,\cdots,n$, which are $n+1$ possibilities.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A,B$ be two $n\times n$ real orthogonal matrices satisfying
+$$\det A+\det B=0.$$
+Show there exists a unit vector $x$ such that%
+$$Ax=-Bx.$$
+\end{exercise}
+\begin{proof}
+Since $A$ and $B$ are orthogonal matrices, then we have $\det A = \det B = \pm 1$ and $A^TA = B^TB = I$. Also, with $\det A+\det B=0$, we have $\det A\det B = -1$. Now consider 
+\begin{align*}
+    \det(A+B) & = \det(A(A^T+B^T)B) \\
+    & = \det A \det(A^T+B^T) \det B \\
+    & = - \det(A^T+B^T) \\
+    & = - \det(A+B)^T  \\
+    &= - \det(A+B).
+\end{align*}
+Then we have $\det(A+B) = 0$, which means $A+B$ is not full rank. Then we can find a vector $y\in N_{A+B}$ such that $(A+B)y = 0$. Now we pick $x = \frac{y}{\|y\|}$, this is the unit vector we need.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $A$ and $B$ are normal complex $n\times n$ matrices. Prove that%
+$$
+r(AB)\leq r(A)r(B).
+$$
+Here $r(\cdot)$ is the spectral radius of a matrix. Find a counter example if
+$A$ or $B$ is not normal.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item We have $r(AB)\leq \|AB\|$, since if $\lambda$ be an eigenvalue of $AB$, then for $x\in\mathbb{C}^n, x\neq 0$ being corresponding eigenvector, we have 
+    \begin{align*}
+        AB x & = \lambda x \\
+        \Rightarrow \|AB\|\|x\| & \geq \|AB x\| = |\lambda|\|x\| \\
+        \Rightarrow \|AB\| & \geq |\lambda|.
+    \end{align*}
+    Also, we have $\|AB\|\leq \|A\| \|B\|$. And with $A, B$ being normal matrices, we know $\|A\| = r(A)$ and $\|B\| = r(B)$. Thus, with all the results above, we have 
+    \begin{align*}
+        r(AB)\leq \|AB\|\leq \|A\| \|B\| = r(A)r(B).
+    \end{align*}
+    The proof is complete. 
+    \item Take $A = \left(
+    \begin{matrix}
+        1 & 0\\
+        1 & 1
+        \end{matrix}
+    \right)$ and $B = \left(
+    \begin{matrix}
+        2 & 1\\
+        -1 & 0
+    \end{matrix}
+    \right)$ and $A,B$ are not normal. We can compute that $r(AB) = \sqrt{3}$ and $r(A)r(B) = 1\cdot 1 = 1 < r(AB)$. This is a counter example if $A$ and $B$ are not normal.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+What is the operator norm of the matrix%
+$$
+\left(
+\begin{array}
+[c]{ccc}%
+1 & 0 & 1\\
+2 & 3 & 0
+\end{array}
+\right)
+$$
+in the standard Euclidean structures of $\mathbb{R}^{2}$ and $\mathbb{R}^{3}$.
+\end{exercise}
+\begin{proof}
+Denote the matrix above by $A$, then the operator norm of $A$ is $\sqrt{r(A^*A)} = \sqrt{\frac{15+\sqrt{137}}{2}}$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $\left\{  \lambda_{i}\right\}  _{i=1}^{n}$ be eigenvalues of matrix
+$A=\left(  a_{ij}\right)  _{n\times n}$. Show that%
+$$
+\sum_{j=1}^{n}\left\vert \lambda_{j}\right\vert ^{2}\leq\sum_{i,j=1}%
+^{n}\left\vert a_{ij}\right\vert ^{2}.
+$$
+\end{exercise}
+\begin{proof}
+With Schur decomposition, we cnould know that $A = Q U Q^*$, where $Q$ is unitary and $U$ is upper triangular and its diagonal entries are engenvalues of $A$, since $A$ and $U$ are similar. And we can show that Hilbert-Schwarz norm norm $\|A\|_{HS} = \sqrt{\sum_{i,j=1}^{n} \left|a_{ij}\right|^2}$ is invariant under unitary matrix multiplication:
+\begin{align*}
+    \|QA\|_{HS}^2 = \text{tr} \left((QA)^* (QA)\right) = \text{tr} \left(A^* Q^* QA\right) = \text{tr} \left(A^* A\right) = \|A\|_{HS}^2
+\end{align*}
+then we can have 
+\begin{align*}
+    \|A\|_{HS}^2 = \|QAQ^*\|_{HS}^2 = \|U\|_{HS}^2.
+\end{align*}
+Also we can know that
+\begin{align*}
+    \sum_{j=1}^{n}\left| \lambda_{j}\right|^{2}\leq \sum_{i,j=1}^{n}\left| u_{ij}\right|^{2} = \|A\|_{HS}^2,
+\end{align*}
+since the square sum of all diagonal entries of $U$ is smaller than that of all entries of $U$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A=\left(  a_{ij}\right)  _{n\times n}$ be normal. Show that%
+$$
+r\left(  A\right)  \geq\max_{1\leq i\leq n}\left\vert a_{ii}\right\vert .
+$$
+\end{exercise}
+\begin{proof}
+Since $A$ is normal matrix, then we have $\|A\| = r(A)$. Also, we have known that for all $a_{ij}$, $\left|a_{ij}\right|\leq \|A\|$. Thus, we have $r(A)\geq \max_{1\leq i\leq n}\left|a_{ii}\right|$.
+\end{proof}
 
 
 
@@ -5635,14 +4969,2312 @@ Thus, we have
 which proved the theorem.
 \end{proof}
 
+\medskip
+
+\section{Matrix Exponential}
+
+We claim that the Taylor series also holds to define $e^A$ for any square matrix $A$:
+\begin{align*}
+    e^A = \sum^\infty_{k=0} \frac{A^k}{k!}.
+\end{align*}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\roman*)]
+    \item If $A,B$ are square matrices and $AB = BA$, then $$e^{A+B} = e^A e^B.$$
+    \item If $A$ and $B$ do not commute, then in general $$e^{A+B} \neq e^A e^B.$$
+    \item If $A(t)$ depends differentiable on $t$, then $e^{A(t)}$ is also differentiable.
+    \item If at some $t$, $A(t)$ and $\dot{A}(t)$ commute, then 
+    \begin{align*}
+        \dv{}{t}e^{A(t)} = e^{A(t)} \dot{A}(t).
+    \end{align*}
+    \item If $A$ is anti-self adjoint, i.e., $A^* = -A$, then $e^A$ is unitary.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item Since $AB = BA$, we have
+    \begin{align*}
+        e^{A+B} & = \sum^\infty_{k=0} \frac{(A+B)^k}{k!} \\
+        & = \sum^\infty_{k=0} \sum^k_{j=0} \frac{\binom{k}{j}A^k B^{k-j}}{k!} \\
+        & = \sum^\infty_{k=0} \sum^k_{j=0} \frac{A^k B^{k-j}}{j!(k-j)!} \\
+        & = \sum^\infty_{k=0} \frac{A^k}{k!} \sum^\infty_{j=0} \frac{B^j}{j!} = e^A e^B.
+    \end{align*}
+    \setcounter{enumi}{4}
+    \item Since $A^* = -A$, we have $AA^* = A^*A = - A^2$. Then we have $I  = e^0 = e^{A^* + A} = e^A e^{A^*} = e^A \left(e^A\right)^*$. Thus, $e^A$ is unitary.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+To calculate $e^A$, we could use Jordan canonical form $A = SJS^{-1}$, then we have $$e^A = Se^JS^{-1},$$
+where 
+$$J = \begin{pmatrix}
+    J_1 &  &  \\
+     & \ddots &  \\
+     &  & J_K
+    \end{pmatrix}, \,\, {\rm and} \,\, J_k =  \begin{pmatrix}
+    \lambda_k & 1 & & \\
+     & \ddots & \ddots & \\
+     &  & \ddots & 1 \\
+     &  &  & \lambda_k
+    \end{pmatrix}_{l\times l} = \lambda_k I + N_l.$$
+And we can calculate $e^J$ as 
+\begin{align*}
+    e^J = \begin{pmatrix}
+    e^{J_1} &  &  \\
+     & \ddots &  \\
+     &  & e^{J_K}
+    \end{pmatrix},
+\end{align*}
+where, with $I$ and $N_l$ commute, 
+\begin{align*}
+    e^{J_k} = e^{\lambda_k I + N_l} = e^{\lambda_k I}e^{N_l} = e^{\lambda_k} e^{N_l} = e^{\lambda_k} \sum^{l-1}_{j=0}\frac{N^j}{j!},
+\end{align*}
+where the summation only goes to $l-1$ since we can calculate 
+\begin{align*}
+    N_l = \begin{pmatrix}
+    0 & 1 & & \\
+     & \ddots & \ddots & \\
+     &  & \ddots & 1 \\
+     &  &  & 0
+    \end{pmatrix}, N_l^2 = \begin{pmatrix}
+    0 & 0 & 1 & &\\
+     & \ddots & \ddots & \ddots & \\
+     &  & \ddots & \ddots & 1 \\
+     &  &  & \ddots & 0 \\ 
+     &  &  &  &  0
+    \end{pmatrix}, \cdots, N_l^{l-1} = \begin{pmatrix}
+    0 & 0 & \cdots & 1 \\
+     & \ddots & \ddots & \vdots \\
+     &  & \ddots & 0 \\
+     &  &  & 0
+    \end{pmatrix}.
+\end{align*}
+
+\medskip
+
+\begin{corollary}
+$\det e^A = e^{\tr A}$.
+\end{corollary}
+\begin{proof}
+With Jordan canonical form, $A = SJS^{-1}$ and $e^A = Se^JS^{-1}$. Thus, we have
+\begin{align*}
+    \det e^A = \det e^J = \prod^n_{j=1} e^{\lambda_j} = e^{\sum^n_{j=1}\lambda_j} = e^{\tr A}.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+The eigenvalues depend continuously on the matrix in the sense: If $\lim_{n\to\infty}A_n = A$, then $\sigma(A_n)\to \sigma(A)$, i.e., for every $\varepsilon > 0$, there exists $N > 0$ such that for $\forall n\geq N$, all eigenvalues of $A_n$ are contained in the neighborhood of eigenvalues of $A$ with radius $\varepsilon$.
+\end{theorem}
+\begin{proof}
+$p_\lambda(A) = \det(\lambda I - A) = 0$ and roots of polynomials depend continuous on the coefficients.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $A(t)$ be differentiable. Suppose $A(0)$ has an eigenvalue $\lambda_0$ of multiplicity one. Then for $t$ small enough, $A(t)$ has an eigenvalue $\lambda(t)$ that depends differentiably on $t$ and $\lambda(0) = \lambda_0$.
+\end{theorem}
+\begin{proof}
+Let $p(\lambda, t) = \det (\lambda I - A(t))$. The assumption that $\lambda_0$ is a simple root of $p(s,0)$ implies 
+\begin{align*}
+    p(\lambda_0,0) & = 0 \\
+    \frac{\partial}{\partial \lambda}p(\lambda_0,0) & \neq 0
+\end{align*}
+and from the implicit function theorem, the equation $p(\lambda,t) = 0$ has a solution $\lambda = \lambda(t)$ in a neighborhood of $t=0$ that depends differentiably on $t$.
+\end{proof}
+
+\medskip
+
+\section{Simple Eigenvalues}
+
+\begin{theorem}
+Let $A(t)$ be differentiable and $\lambda(t)$ is a continuous function such that $\lambda(t)$ is an eigenvalue of $A(t)$ with multiplicity $1$. Then there exists eigenvector function $v(t)$ which depends differentiably on $t$. 
+\end{theorem}
+\begin{proof}
+We need a lemma to prove the theorem.
+\begin{lemma}
+Let $A$ be an $n\times n$ matrix, $p = p_A$ be its characteristic polynomial and $\lambda$ be some simple root of $p$. Then at least one of the $(n-1)\times(n-1)$ principle minors of $A - \lambda I$ has nonzero determinant. Moreover, suppose the $i$-th principal minor of $A - \lambda I$ has nonzero determinant, then the $i$-th component of an eigenvector $v$ of $A$ corresponding to the eigenvalue $\lambda$ is nonzero.
+\end{lemma}
+\begin{proof}
+Without losing generality, and assume $\lambda = 0$. Hence $p(0) = 0, p'(0) \neq 0$. We write $A = (c_1, \cdots, c_n)$ and denote $e_1, \cdots, e_n$ the standard unit vectors. Then we have
+\begin{align*}
+    s I - A = (se_1 - c_1, \cdots, se_n - c_n).
+\end{align*}
+Hence, we have
+\begin{align*}
+    p'(0) & = \sum^n_{j=1} \det (-c_1, \cdots, -c_{j-1}, e_j, -c_{j+1},\cdots, -c_n) \\
+    & = (-1)^{n-1} \sum^n_{j=1} \det A_j
+\end{align*}
+where $A_j$ is $j$-th principle minor of $A$. Since $p'(0) \neq 0$, then at least one of $\det A_j$ is nonzero.
+
+Now suppose the $i$-th principal minors of $A$ has nonzero determinant. Denote by $v_i$ the eigenvector obtained by omitting $i$-th component, and by $A_i$ the $i$-th principle minor of $A$. Then $v_i$ satisfies $A_i v_i = 0$. Since $\det A_i \neq 0$, we have $v_i = 0$, and hence $v = 0$, which is the eigenvector without omitting $i$-th component. This is a contradiction.
+\end{proof}
+
+Now we prove the theorem. Suppose $\lambda(0) = 0$, and $\det A_i(0) \neq 0$. Then for any $t$ small enough, we have $\det (A_i(t) - \lambda(t)I) \neq 0$ and hence the $i$-th component of $v(t)$ is not equal to $0$. We set it to $1$ in order to normalize $v(t)$. For the remaining components, we have an inhomogeneous system of equations 
+\begin{align*}
+    \left(A_i(t) - \lambda(t)I \right) v_i(t) = - c_i^{(i)}(t),
+\end{align*}
+where $c_i^{(i)}(t)$ is the vector obtained from $i$-th column of $A_i(t) - \lambda(t)I$, $c_i$ by omitting the $i$-th component. So we have 
+\begin{align*}
+    v_i(t) = - \left(A_i(t) - \lambda(t)I \right)^{-1} c_i^{(i)}(t).
+\end{align*}
+Since all terms on the right hand side depend differentiably on $t$, so does $v_i(t)$ and $v(t)$. 
+\end{proof}
+
+Now we consider the derivative of the eigenvalue $\lambda(t)$ and the eigenvector $v(t)$ of a matrix function $A(t)$ when $\lambda(t)$ is a simple root of the characteristic polynomial of $A(t)$. We consider $Av = \lambda v$, then we differentiate with respect to $t$:
+\begin{align*}
+    \dot{A}v + A\dot{v} = \dot{\lambda}v + \lambda \dot{v}.
+\end{align*}
+Let $u$ be an eigenvector of $A^T$ such that $A^T u = \lambda u$. If $(u,v)\neq 0$, then we have
+\begin{align*}
+    (u,\dot{A}v) = \dot{\lambda} (u,v)\,\, \Rightarrow \,\, \dot{\lambda} = \frac{(u,\dot{A}v)}{(u,v)}.
+\end{align*}
+
+\begin{lemma}
+Let $\lambda$ be an eigenvalue of $A$ with multiplicity $1$, such that $Av = \lambda v, A^Tu = \lambda u, uv \neq 0$, then $(u,v)\neq 0$.
+\end{lemma}
+\begin{proof}
+If $(u,v) = 0$, and $u\in N_{\left(A^T - \lambda I\right)}$, then we have 
+\begin{align*}
+    v \in N_{\left(A^T - \lambda I\right)}^\perp = R_{\left(A - \lambda I\right)},
+\end{align*}
+which implies there exists $w\neq 0$, such that $(A - \lambda I)w = v$. Then $w$ is an genaralized eigenvector, which is contradicted to the fact that $\lambda$ is multiplicity $1$.
+\end{proof}
+
+\medskip
 
 
+\chapter{Matrix Inequalities}
+
+\section{Positive Self-adjoint Matrix}
+
+\begin{definition}
+A self-adjoint linear mapping $H$ is called positive if 
+\begin{align*}
+    (x, Hx) > 0,\,\, \text{for all} \,\, x \neq 0.
+\end{align*}
+We write $H > 0$. Similarly, we can define $H < 0, H \geq 0$ and $H \leq 0$.
+\end{definition}
+
+\medskip
+
+Now we discuss some basic properties of positive mapping. 
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\roman*)]
+    \item The identity $I > 0$.
+    \item If $A, B > 0$, then $A + B > 0$.
+    \item If $A > 0, k > 0$, then $k A > 0$.
+    \item If $H > 0$ and $Q$ is invertible, then $Q^* H Q > 0$.
+    \item $H > 0$ if and only if all its eigenvalues are positive.
+    \item $H > 0$, then $H$ is invertible.
+    \item $H > 0$, then there exists a unique $S > 0$ such that $S^2 = H$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \setcounter{enumi}{3}
+    \item $(x, Q^* H Q x) = (Qx, HQx) > 0$.
+    \setcounter{enumi}{6}
+    \item $H > 0$, then $H$ can be diagonalized by a unitary matrix $U$ such that $U\Lambda U^*$, where 
+    \begin{align*}
+        \Lambda = \begin{pmatrix}
+            \lambda_1 &  &  \\
+            & \ddots &  \\
+            &  & \lambda_n
+        \end{pmatrix}.
+    \end{align*}
+    Define $S = U \begin{pmatrix}
+            \sqrt{\lambda_1} &  &  \\
+            & \ddots &  \\
+            &  & \sqrt{\lambda_n}
+        \end{pmatrix} U^*$, then $S^2  = H$. 
+        
+        Now we need to prove that $S$ is unique. Suppose there exists $T$ such that $T^2 = H, T > 0$, then we have
+        \begin{align*}
+            (x, (S+T)(S-T)x) & = (x, (TS - ST)x) \\
+            & = (x, TS x) - (x, STx) \\
+            & = (Tx, Sx) - (Sx, Tx).
+        \end{align*}
+        Then $\Re (x, (S+T)(S-T)x) = 0$. Pick $x$ to be eigenvector of $S-T$ such that $(S-T)x = \mu x$, then we have 
+        \begin{align*}
+            \Re \mu (x, (S+T)x) = 0,
+        \end{align*}
+        which implies $\mu = 0$. Thus, all eigenvalues of $S-T$ are zero, hence $S = T$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{proposition}
+~\begin{enumerate}[label=(\roman*)]
+    \item $M_1 < N_1, M_2 < N_2$, then $M_1 + M_2 < N_1 + N_2$.
+    \item $L < M, M < N$, then $L < M$.
+\end{enumerate}
+\end{proposition}
+
+\medskip
+
+\begin{theorem}
+If $M > N > 0$, then $0 < M^{-1} < N^{-1}$.
+\end{theorem}
+\begin{proof}
+${}$ \newline 
+\noindent{\bf Method I.} If $N = I, M > I$, then $M^{-1} < I$. Now turn to any matrix $N$. Let $R = \sqrt{N} > 0$, then we have $M > R^2$. Then
+\begin{align*}
+    R^{-1} M R & > I \\
+    \Rightarrow \left(R^{-1} M R\right)^{-1} & < I \\
+    \Rightarrow R M^{-1} R^{-1} & < I \\
+    \Rightarrow M^{-1} & < \left(R^2\right)^{-1} = N^{-1}.
+\end{align*}
+\noindent{\bf Method II.} Define $A(t) = tM + (1-t)M$, and for any $t\in [0,1]$, $A(t) > 0$. And we have 
+\begin{align*}
+    \dv{}{t}A^{-1}(t) = - A^{-1} \dot{A} A^{-1} = - A^{-1} (M - N) A^{-1} < 0.
+\end{align*}
+Also, $A^{-1}(0) = N^{-1}$  and $A^{-1}(1) = M^{-1}$. For any $x\in \mathbb{C}^n, x\neq 0$, we have 
+\begin{align*}
+    \left(x, \dv{}{t}A^{-1}(t)x \right) & = \dv{}{t} \left(x, A^{-1}(t)x \right) < 0 \\
+    \left(x, A^{-1}(0)x \right) & = \left(x, N^{-1}x \right) \\
+    \left(x, A^{-1}(1)x \right) & = \left(x, M^{-1}x \right)
+\end{align*}
+then we have $\left(x, N^{-1}x \right) > \left(x, M^{-1}x \right)$. Thus, $\left(x, (N^{-1} - M^{-1})x \right) > 0$, which implies $M^{-1} < N^{-1}$.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $A^* = A, B^* = B$, and $A > 0, AB + BA > 0$. Then, $B > 0$.
+\end{theorem}
+\begin{proof}
+Define $B(t) = B + tA$, and $S(t) = AB(t) + B(t)A = AB + BA + 2t A^2 > 0$. If $B = B(0)$ is not positive, then there exists $t_0 \geq 0$ such that $B(t_0)$ is not positive while $B(t) > 0$ for all $t > t_0$. Then, $0 \in \sigma(B(t_0))$. 
+
+Let $x \neq 0$, $B(t_0)x = 0$, then $(x, S(t_0)x) = (x, AB(t_0)x) + (x, B(t_0)Ax) = 0$. This is a contradiction.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+$M > N > 0$, then $\sqrt{M} > \sqrt{N} > 0$.
+\end{theorem}
+\begin{proof}
+Let $A(t) = tM + (1-t)N > 0$, and $R(t) = \sqrt{A(t)} > 0$. Then we have 
+\begin{align*}
+    \dot{A} = \dot{R}R + R \dot{R} = N - M > 0.
+\end{align*}
+Hence, $\dot{R} > 0$, which implies $R(0) < R(1)$, i.e., $\sqrt{N} < \sqrt{M}$.
+\end{proof}
+
+\medskip
+
+For any $A > 0$, we can write $A = U \Lambda U^*, \Lambda > 0$. We can define 
+\begin{align*}
+    \log A = U \log (\Lambda) U^*.
+\end{align*}
+If $\Lambda = \begin{pmatrix}
+\lambda_1 &  &  \\
+& \ddots &  \\
+&  & \lambda_n
+\end{pmatrix}$, then $\log (\Lambda) = \begin{pmatrix}
+ \log \lambda_1 &  &  \\
+& \ddots &  \\
+&  & \log \lambda_n
+\end{pmatrix}$.
+
+\medskip
+
+\begin{lemma}
+For any $A > 0$, $$\log A = \lim_{m\to\infty} m \left(A^{\frac{1}{m}} - 1\right).$$
+\end{lemma}
+\begin{proof}
+We need to check $\log \lambda = \lim_{m\to\infty} m \left(\lambda^{1/m} - 1\right)$ for any $\lambda > 0$. Indeed, 
+\begin{align*}
+    \lim_{m\to\infty} m \left(\lambda^{\frac{1}{m}} - 1\right) = \lim_{x\to 0^+} \frac{\lambda^x - 1}{x} = \lim_{x\to 0^+} \frac{\log \lambda \lambda^x}{1} = \log \lambda. 
+\end{align*}
+Then we have
+\begin{align*}
+    m \left(A^{\frac{1}{m}} - 1\right) & = 
+\end{align*}
+\end{proof}
+
+\chapter{Exercises}
+
+\section{Linear Spaces and Linear Operators}
+\begin{exercise}\label{ex_1}
+Consider a polynomial $X(t):\mathbb{C}\to\mathbb{C}$. Let $V$ be vector space for all complex valued polynomials and let $M = \{X(t): X \,\text{is even}\}$ and $N = \{X(t): X \,\text{is odd}\}$. Prove that 
+\begin{enumerate}[label=(\alph*)]
+    \item $M,N$ are subspaces of $X$.
+    \item $M, N$ are each other's complement in $V$, i.e., $V = M\oplus N$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Let $f(t), g(t)\in M$ and $\lambda\in\mathbb{C}$, then we have $f(-t) = f(t)$ and $g(t) = -g(-t)$. Thus, we have $(f+\lambda g)(-t) = f(-t) + \lambda g(-t) = f(t) + \lambda g(t) = (f+\lambda g)(t)$, which implies that $f+\lambda g\in M$. Same argument is similar for $N$.
+    \item Let $f(t)\in V$, then we have 
+    \begin{align*}
+        f(t) & = \frac{f(t) + f(-t)}{2} + \frac{f(t) - f(-t)}{2} \\
+        & = f_1(t) + f_2(t)
+    \end{align*}
+    and it is easy to see that $f_1\in M$ and $f_2\in N$. Also, if $f(t)\in M\cap N$, then we have $f(t) = f(-t)$ and $f(t) = -f(-t)$. Thus, $f(t) = 0$, which implies $M\cap N = \{0\}$. Thus, $V = M\oplus N$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{ex_2}
+Let $U, V$ and $W$ be subspaces of a finite-dimensional vector space $X$. Is the statement
+\begin{align*}
+    {\rm dim}(U + V + W) = & {\rm dim} U + {\rm dim} V + {\rm dim} W - {\rm dim}(U \cap V) - {\rm dim}(U \cap W) \\
+    & - {\rm dim}(V \cap W) + {\rm dim}(U \cap V \cap W)
+\end{align*}
+true or false? If true, prove it. If false, provide a counterexample
+\end{exercise}
+\begin{proof}
+The statement is not true. Consider three lines $U,V,W$ in $\mathbb{R}^2$ such that they intersect in one point. So we have
+$$\text{dim} (U+V+W) = 2$$
+and
+\begin{align*}
+   \text{dim}(U) + \text{dim}(V) & + \text{dim}(W) - \text{dim}(U \cap V) - \text{dim}(U \cap W) - \\
+   & \text{dim}(V \cap W) + \text{dim}(U \cap V \cap W) = 3
+\end{align*}
+the left and right sides are not the same. 
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{ex_3}
+Let $U, V$, and $W$ be subspaces of a finite dimensional linear space $X$. Show that if $W\subset U$, then 
+$$U\cup (V + W) = U\cup V + W$$
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item We set $u_1 \in U \cap (V+W)$, then there exist some $v_1 \in V$ and $w_1 \in W$ such that $u_1 = v_1 + w_1$ since $u_1 \in U$ and also $u_1 \in (V+W)$. Also, $u_1 \in U$ and $W \subset U$ which means $w_1 \in U$, then we have $v_1 \in U$ since $U$ is a subspace which is closed under addition. Then from $v_1 \in U$, we have $v_1 \in (U \cap V)$. Based on the fact that $u_1 = v_1 + w_1$ and $w_1 \in W$, we have $u_1 \in (U \cap V + W)$. This implies that $U \cap (V+W) \subset (U \cap V + W)$.
+    \item Now we set $u_2 \in (U \cap V + W)$, then there exist some $\lambda \in U \cap V$ and $w_2 \in W$ such that $u_2 = \lambda + w_2$. And we have $\lambda + w_2 \in V+W$, since $\lambda \in U \cap V$ and $w_2 \in W$. Also, we know that $W \subset U$, then we have $\lambda + w_2 \in U$. Thus we can have $\lambda + w_2 \in U \cap (V+W)$. Hence, $u_2 \in U \cap (V+W)$, which implies $(U \cap V + W) \subset U \cap (V+W)$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{ex_4}
+Denote by $X$ the linear space of all polynomials $p(t)$ of degree less than $n$, and denote by $Y$ the subset of $X$ containing polynomials that are zero at distinct $t_1,t_2,\cdots,t_m\in K$, where $m < n$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $Y$ is a subspace of $X$.
+    \item Determine ${\rm dim}Y$ and find a basis of $Y$.
+    \item Determine ${\rm dim}X = Y$ and find a basis of $X/Y$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item Set $P_1, P_2 \in Y$ of form $P_i = (t-t_1)(t-t_2) \cdots (t-t_m)q_i(t)$ that are zero at distinct $t_1, t_2, \cdots, t_m\in K$. Then we have 
+    \begin{align*}
+        P_1 + P_2 &= \sum^2_{i=1}(t-t_1)(t-t_2) \cdots (t-t_m)q_i(t) \\
+        a P_1 &= a (t-t_1)(t-t_2) \cdots (t-t_m)q_1(t)
+    \end{align*}
+    where $a \in K$. It is easy to see that both $P_1 + P_2$ and $a P_1$ are zero at points $t_1, t_2, \cdots, t_m\in K$. So $Y$ is closed under addition and multiplication. Hence, $Y$ is a subspace of $X$.
+    \item In order to being zero at distinct $t_1, t_2, \cdots, t_m\in K$ where $m < n$, the polynomial $P_Y(t) \in Y$ has the form $P_Y(t) = (t-t_1)(t-t_2) \cdots (t-t_m)q(t)$, where $q(t)$ is not determined. Also, we know that the space of all polynomials is degree less than $n$, which means that $q(t)$ is degree less than $n-m$.
+    
+    Since the polynomials $P(t)$ in the space $X$ are degree less that $n$, it can be presented by the form
+    \begin{align*}
+        P(t) = \sum^{n-1}_{k=0} c_k t^k
+    \end{align*}
+    So the basis of $X$ can be written as ${1, t, t^2,\cdots, t^{n-1}}$, and we have dim $X = n$. Now we can present $q(t)$ by utilizing this basis as 
+    \begin{align*}
+        q(t) = \sum^{n-m-1}_{k=0} c_k t^k
+    \end{align*}
+    then the basis for subspace $Y$ can be presented as
+    \begin{align*}
+        \left\{ \prod^m_{i=1}(t-t_i), t\prod^m_{i=1}(t-t_i),\cdots, t^{n-m-1}\prod^m_{i=1}(t-t_i) \right\}
+    \end{align*}
+    and we can check that the linear combination of this basis is equal to zero if and only if all coefficients are all zero. So we have dim $Y = n-m$.
+    \item We have dim $X/Y =$ dim $X -$ dim $Y = m$. Now we set a basis that spans the subspace $X/Y$.
+    
+    We firstly set $P_1(t) = (t-t_2)\cdots(t-t_m)q(t)$ and the class $\{P_1\}$ of $P_1$ is the space $\left\{P(t)\in X: P(t) - P_1(t) \in Y \right\}$, and then set $P_2(t) = (t-t_1)(t-t_3)\cdots(t-t_m)q(t)$ and the class $\{P_2 \}$ in the same way. And we continue this process where we get rid of $(t-t_i)$ in class $P_i$ until we finally have $P_m(t) = (t-t_1)\cdots(t-t_{m-1})q(t)$ and the class $\{P_m \}$. Then we can check that $( \{P_1\}, \{P_2\}, \cdots, \{P_m\})$ is the span of $X/Y$.
+    
+    Better solution for (iii): From (ii) we know the basis of $Y$, and we can know that every $p(t)$ in $X$ can be replaced by a polynomial of degree less than $m$ in $x/Y$, so $1, t, \cdots, t^{m-1}$ form a basis of $X/Y$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{ex_5}
+Let $U_1,U_2,\cdots,U_k$ be subspaces of a finite-dimensional linear space $X$ such that
+\begin{align*}
+    {\rm dim}\,U_1 = {\rm dim}\,U_2 = \cdots = {\rm dim}\,U_k
+\end{align*}
+Then there is a subspace $V$ of $X$ for which
+\begin{align*}
+    X = U_1\oplus V = U_2\oplus V = \cdots = U_k\oplus V
+\end{align*}
+\end{exercise}
+\begin{proof}
+If ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n$, then we can simply take $V = \varnothing$.
+
+If ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n-1$, based on the fact that space $X$ cannot be a finite union of its proper subspace, there exists a $v \notin U_k$ for every $k$, and we can define the complement of $U_1, U_2, \cdots, U_k$ as $U^c = \text{span}(v)$.
+
+Then we consider the case when ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = n-2$, also there exists a $v \notin U_k$ for every $k$. Then we can define a new subspace $\title{\Tilde{U}_i} = \text{span}(u_i,v)$ for $1 \leq i \leq k$, and we can immediately know that ${\rm dim}\, \Tilde{U}_i = n - 1$. Then we can get a complement of $\Tilde{U}_i$, denoted by $U_i^c$ and we have ${\rm dim}\, U_i^c = 1$. In particular, $v \notin U_i^c$, so we can take $\text{span} (U_i^c, v)$, which is dimension $2$ and a complement of $U_1, U_2, \cdots, U_k$.
+
+Now we can continue this induction and consider ${\rm dim}\, U_1 = \cdots = {\rm dim}\, U_k = m, m < n$, and we can find $v \notin U_k$ for every $k$. Then we can define $\title{\Tilde{U}_i} = \text{span}(u_i,v)$ for $1 \leq i \leq k$, and we can immediately know that ${\rm dim}\, \Tilde{U}_i = m + 1$. Then we can get a complement of $\Tilde{U}_i$, denoted by $U_i^c$ and we have ${\rm dim}\, U_i^c = n - m - 1$. In particular, $v \notin U_i^c$, so we can take $\text{span} (U_i^c, v)$, which is dimension $n - m$ and a complement of $U_1, U_2, \cdots, U_k$.
+\end{proof}
+Exercises (\ref{ex_1}) to (\ref{ex_5}) are Homework 1 for MATH2370. Next we present some exercises from other materials.
+
+\medskip
+
+\begin{exercise}
+Let $K$ be a field such that it has infinite elements. Let $X$ be a finite dimensional linear space over $K$. Show that $X$ cannot be written as a finite union of proper subspaces of $X$.
+\end{exercise}
+\begin{proof}
+Suppose to the contrary that there exist proper subspaces $w_1, w_2, \cdots, w_n$ of $X$ such that $X = \bigcup^n_{i=1}w_i$. If for any $1 \leq j \leq n$, $w_j \subset \bigcup^n_{i\neq j}w_i$, then we can remove such $w_j$. WLOG we can assume that no such $w_j$ is contained in the union of other $w_i$'s. 
+
+Note that since $w_i$'s are proper subspaces of $X$, we must have $n \geq 2$. Since $w_1 \not\subset \bigcup^n_{i\neq 1}w_i$, there exists $u \in w_1$ such that $u \in w_i, i \geq 2$. Also, since $w_i$ is a proper subspace, then there exists $y \notin w_1$. Now consider $v + \lambda u$ for $\lambda \in K$.
+
+Claim: $v + \lambda u \in w_j$ for at most one $\lambda \in K$. Indeed,
+\begin{enumerate}[label=(\alph*)]
+    \item Consider the case when $j = 1$. If $v + \lambda u \in w_1$, for some $\lambda \in K$. Then $(v + \lambda u) - \lambda u \in w_1$, which gives $v \in w_1$. 
+    
+    \item Consider $j \geq 2$. If $\lambda_1, \lambda_2 \in K, \lambda_1 \neq \lambda_2$ such that 
+    \begin{align*}
+        v + \lambda_1 u \in w_j, \,\, v + \lambda_2 u \in w_j.
+    \end{align*}
+    Then, $\left(v + \lambda_1 u\right) - \left(v + \lambda_2 u\right) = \left(\lambda_1 - \lambda_2\right)u \in w_j$. Since $\lambda_1 \neq \lambda_2$, then 
+    \begin{align*}
+        \left(\lambda_1 - \lambda_2\right)^{-1}\left(\lambda_1 - \lambda_2\right) u = u \in w_j,
+    \end{align*}
+    which is contracted to that $u \in w_1$.
+\end{enumerate}
+Thus we proved the claim. And the claim implies that there are only finitely many $\lambda \in K$, denoted by $\lambda_1, \cdots, \lambda_s$ such that
+\begin{align*}
+    v + \lambda_j u \in \bigcup^n_{i=1}w_i = X.
+\end{align*}
+Since $K$ is infinite, pick $\lambda_0 \in K$ such that $\lambda_0$ is not among $\{\lambda_1, \cdots, \lambda_s\}$, then $v + \lambda_0 u \notin \bigcup^n_{i=1}w_i = X$, which is a contradiction.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $V$ be an $n$ dimensional vector space over $\mathbb{R}$ with basis $\{x_1, x_2, \cdots, x_n\}$. Define 
+\begin{align*}
+    y_J = \frac{1}{J} \sum^J_{j=1} x_j.
+\end{align*}
+Show that for each $J$, ${\rm span} \{x_1, x_2, \cdots, x_J\} = {\rm span} \{y_1, y_2, \cdots, y_J\}$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item It is obvious that ${\rm span} \{y_1, y_2, \cdots, y_J\} \subset {\rm span} \{x_1, x_2, \cdots, x_J\}$, since each $y_j, 1 \leq j \leq J$ is a linear combination of $x_1, x_2, \cdots, x_J$.
+    
+    \item For another direction, we prove it by induction. $J = 1$ is trivial. Suppose that $${\rm span} \{y_1, \cdots, y_k\} \subset {\rm span} \{x_1, \cdots, x_k\},$$ 
+    for some $k > 1$. Now for $J = k + 1$, 
+    \begin{align*}
+        y_{k+1} = \frac{1}{k+1} \sum^{k+1}_{j=1} x_j,
+    \end{align*}
+    which implies
+    \begin{align*}
+        x_{k+1} = (k+1) y_{k+1} - \sum^k_{j=1} x_j \in {\rm span} \{y_1, \cdots, y_k, y_{k+1}\}.
+    \end{align*}
+    Then, ${\rm span} \{y_1, \cdots, y_J\} \subset {\rm span} \{x_1, \cdots, x_J\}$.
+\end{enumerate}
+Thus, we have ${\rm span} \{y_1, \cdots, y_J\} = {\rm span} \{x_1, \cdots, x_J\}$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $V$ be a finite dimensional vector space over $\mathbb{R}$ and $A: V \to V$ a linear transformation.
+\begin{enumerate}[label=(\alph*)]
+    \item If $R_A \cap N_A = \{0\}$, show that $R_A$ and $N_A$ reduce $A$, i.e., for $V = R_A \oplus N_A$, $A(R_A) \subset R_A$ and $A(N_A) \subset N_A$.
+    
+    \item Give a $2 \times 2$ matrix where $R_A \cap N_A$ is nontrivial.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item First, $V = R_A \oplus N_A$ since $R_A \cap N_A = \{0\}$ and $\dim V = \dim R_A + \dim N_A$.
+    
+    Second, it is trivial $A(R_A) \subset R_A$ since $Ax \in R_A$ for any $x \in R_A$. And it follows that $A(N_A) \subset N_A$, since $A(N_A) = 0 \subset N_A$.
+    
+    \item* First, $\dim R_A + \dim N_A = 2$. Since $R_A \cap N_A$, then $\dim R_A = \dim N_A = 1$. Then, $R_A = N_A$.
+    
+    Second, we can assume $x \in R_A$ and $x \neq 0$, so there exists $y \in V$ such that $Ay = x$ and $Ax = 0$. Pick $x = e_1$ and $y = e_2$ would yields $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\section{Duality}
+\begin{exercise}
+Suppose $\{x_1, x_2,\cdots, x_n\}$ is a basis for the vector space $X$. Show that there exists linear functions $\{e_1, e_2,\cdots, e_n\}$ in the dual space $X'$ satisfying 
+\begin{align*}
+    e_i(x_j) = \delta_{ij}
+\end{align*}
+Show that $\{e_1, e_2,\cdots, e_n\}$ is a basis of $X'$, called the dual basis.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item First, we check that $\{e_1, e_2, \cdots, e_n\}$ are linearly independent. Suppose that there exist  $a_1, a_2, \cdots, a_n \in K$ such that 
+    \begin{align*}
+        a_1 e_1 + a_2 e_2 + \cdots + a_n e_n = 0
+    \end{align*}
+    then for $\forall x_i \in X$, we have
+    \begin{align*}
+        (a_1 e_1 + a_2 e_2 + \cdots + a_n e_n)(x_i) = a_1 e_1(x_i) + \cdots + a_n e_n(x_i) = a_i = 0
+    \end{align*}
+    Thus, $a_i = 0$, for $\forall a_i$, which means $\{e_1, e_2, \cdots, e_n\}$ are linearly independent.
+    \item Then, we need to show that span$(e_1, e_2, \cdots, e_n) = X'$. For any $f \in X'$, let $b_i  = f(x_i)$, and $f = b_1 e_1 + b_2 e_2 + \cdots + b_n e_n$. Then, for $\forall x_i$, we have
+    \begin{align*}
+        f(x_i) = (b_1 e_1 + b_2 e_2 + \cdots + b_n e_n)(x_i) = b_i
+    \end{align*}
+    Thus, $f$ can be presented by $\{e_1, e_2, \cdots, e_n\}$. The proof is complete.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $X$ be a finite dimensional linear space. Show that two nonzero linear functionals $T,S\in X'$ have the same null space if and only if there is a nonzero scalar $\lambda$ such that $S = \lambda T$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Since $T: X \rightarrow R$, then there $\exists x_1 \in X$ such that $T x \neq 0$. And we let $x_2  = \frac{x_1}{T(x_1)}$, then we have $T(x_2) = 1$. And for $\forall x \in X$we can know
+    \begin{align*}
+        T(x - T(x)\cdot x_2) = T(x) - T(x) = 0
+    \end{align*}
+    Since $T$ and $S$ have the same null space, then we have $S(x - T(x)\cdot x_2) = 0$, then 
+    \begin{align*}
+        S(x) & = S(x - T(x)\cdot x_2 + T(x)\cdot x_2) \\
+        & = S(x - T(x)\cdot x_2) + S(T(x)\cdot x_2) \\
+        & = 0 + S(x_2) T(x)
+    \end{align*}
+    \item Let $\lambda = S(x_2)$, then we proved that $S = \lambda T$.
+    If $S = \lambda T$, then for $\forall x \in N_P$, we have $T(x) = \frac{1}{\lambda} S(x) = 0$, which means $N_P \subset N_T$. And for $\forall x \in N_T$, $S(x) = 0$, which means $N_T \subset N_P$. So $N_T = N_P$. The proof is complete.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Let $Y$ be a finite dimensional subspace of (not necessarily finite dimensional) linear space $X$. Show that $Y'$ is isomorphism to $X'/Y^\bot$\cite{12}.
+\end{exercise}
+\begin{proof}
+Define linear map $T: X' \to Y'$ such that for any $l \in X'$, $Tl = l|_Y$. $T$ is onto. Indeed, for any $\tilde{l} \in Y'$, we could extend $\tilde{l}$ to $X'$ by define $\tilde{l} = 0$ on $X'\setminus Y'$.
+
+Claim: $N_T = Y^\bot$. Indeed, for $l \in N_T$ and any $y \in Y$, $l|_Y(y) = Tl(y) = 0$. Then we can define isomorphism $\widetilde{T}: X'/Y^\bot \to Y'$ as $\widetilde{T}(\tilde{l}) = T(l),$ where $\tilde{l} = l + Y^\bot$ for $l \in X'$ \cite{14}. Indeed, 
+\begin{enumerate}[label=(\alph*)]
+    \item $T$ is one-to-one. Since if $\widetilde{T}(\tilde{l}) = 0$, then $T(l) = T\left(\tilde{l} - Y^\bot\right) = 0$. Then, $\tilde{l} = Y^\bot$, then $\{\tilde{l}\} = \{0\}$.
+    
+    \item $T$ is onto. For $l \in Y'$, define $\tilde{l}(y) = l(y)$. Then $T(\tilde{l})(y) = T(l)(y)$ for any $y \in Y$, which implies $T(\tilde{l} - l)(y) = 0$. Thus, $\tilde{l} - l \in Y^\bot$ and hence $\{\tilde{l}\} \in X'/Y^\bot$.
+\end{enumerate}
+Thus, $\widetilde{T}: X'/Y^\bot \to Y'$ is isomorphism.
+\end{proof}
+
+\medskip
+
+\section{Linear Mappings}
+\begin{exercise}
+Let $X,U$ be two linear spaces such that ${\rm dim}\, X = {\rm dim}\, U < \infty$. Prove that a linear mapping $T\in\mathscr{L}(X,U)$ is one-to-one if and only if it is onto.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) Assume $(x_1, x_2, \cdots, x_n)$ is a basis of $X$, then we have
+    $\text{dim} R_T = \text{dim} X - \text{dim} N_T$. If $T\in \mathscr{L}(X,U)$ is one-to-one, then $\text{dim} N_T = 0$. We can have 
+    $\text{dim} R_T = \text{dim} X = \text{dim} U$. Then $R_T = U$, which implies that $T$ is an isomorphism. Then $T$ is onto.
+    \item ($\Leftarrow$) If $T$ is onto, and $\text{dim} X = \text{dim} N$, then the only element $x\in X$ satisfying $Tx = 0$ is $x = 0$. So $\text{dim} N_T = 0$. Then $\text{dim} R_T = \text{dim} U$, which means $R_T = U$. Then $T$ is an isomorphism and $T$ is of course one-to-one.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $X$ be a finite dimensional linear space and $T\in\mathscr{L}(X,X)$. Suppose $${\rm dim}\, R_{T^2} = {\rm dim}\, R_T.$$
+Prove that $R_T\cap N_T = \{0\}$, where $T^2 = T\circ T$.
+\end{exercise}
+\begin{proof}
+We knew that $R_{T^2}\subset R_T$, and since ${\rm dim}\, R_{T^2} = {\rm dim}\, R_T$, we have $R_{T^2} = R_T$, which also implies $N_{T^2}\subset N_T$ by Rank-Nullity theorem.
+
+Assume $y\in N_T\cap R_T$,then there must exists a $x\in X$ such that $y = T x$. Then we have $T(Tx) = Ty = 0$, since $y\in N_T$. Then, $x\in N_{T^2} = N_T$, then $Tx = 0 = y$. Now we concluded that $R_T\cap N_T = \{0\}$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+If $Y$ and $Z$ are subspaces of a finite dimensional linear space, prove that 
+\begin{align*}
+    (Y + Z)^\bot = Y^\bot \cap Z^\bot\,\,{\rm and}\,\, (Y \cap Z)^\bot = Y^\bot + Z^\bot.
+\end{align*}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Assume $l \in (Y+Z)^\bot$. Then we have $l(m) = 0$, for all $m \in Y+Z$. Also, we know $Y\subset Y+Z$, so $l(y) = 0, \forall y \in Y$. Similarly, we have $l(z) = 0, \forall z \in Z$. Then we have $l \in Y^\bot \cap Z^\bot$, which implies $(Y+Z)^\bot \subset Y^\bot \cap Z^\bot$.
+    
+    Now assume $l \in Y^\bot \cap Z^\bot$, then we have $l(y) = 0$ and $l(z) = 0$, for $\forall y \in Y, \forall z \in Z$. Then, for $\forall m \in Y+Z$ we have $l(m) = 0$, since $m = y + z$ for some $y \in Y$ and $z \in Z$. Thus, we have $l \in (Y+Z)^\bot$, which implies $Y^\bot \cap Z^\bot \subset (Y+Z)^\bot$. Now we proved that $(Y+Z)^\bot = Y^\bot \cap Z^\bot$.
+    \item It is equivalent to prove that $(Y \cap Z)^{\bot\bot} = Y\cap Z = (Y^\bot + Z^\bot)^\bot$.
+    
+    
+    If $l \in (Y^\bot + Z^\bot)^\bot$, we have $l(l_1 + l_2) = 0$, for $l_1 \in Y^\bot$ and $l_2 \in Z^\bot$. Also, we have $Y^\bot \subset Y^\bot + Z^\bot$, we have $l(l_1) = 0$ for $\forall l_1 \in Y^\bot$. Similarly, we have $l(l_2) = 0$ for $\forall l_2 \in Z^\bot$. Then $l \in Y^{\bot\bot} = Y$ and $l \in Z^{\bot\bot} = Z$. Thus, $l \in Y\cap Z$, which implies $(Y^\bot + Z^\bot)^\bot \subset Y\cap Z$.
+    
+    
+    If $l \in Y\cap Z = (Y\cap Z)^{\bot\bot}$, we have $l \in Y\cap Z$, then $l \in Y = Y^{\bot\bot}$ and $l \in Z = Z^{\bot\bot}$. Then we have $l(l_1) = 0, l_1 \in Y^\bot$ and $l(l_2) = 0, l_2 \in Z^\bot$. Thus, we have $l(l_1 + l_2) = 0, l_1 + l_2 \in Y^\bot + Z^\bot$, which implies $l \in (Y^\bot + Z^\bot)^\bot$. Then we have $Y\cap Z \subset (Y^\bot + Z^\bot)^\bot$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $X,Y$ be finite dimensional linear space and $T\in\mathscr{L}(X,Y)$ be invertible. Prove that $T'$ is also invertible and $(T^{-1})' = (T')^{-1}$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Assume $l_1,l_2 \in Y'$,  and $(T'l_1)(x) = (T'l_2, x)$ for all $x\in X$. Then we have $(l_1 - l_2, Tx) = 0$ for all $x\in X$, then we have $l_1 = l_2$, which imlpies $T$ is one-to-one.
+    
+    Also, if $(T'l)(x) = 0$ for all $x\in X$, then it implies $l(T(x)) = 0$. Then $l$ can only be zero. Thus, $T'$ is invertible.
+    \item Since $T$ is invertible, then $T \circ T^{-1} = I$. For $T'$, we denote 
+    \begin{align*}
+        & (T \circ T^{-1})' = I' \\
+        \Rightarrow & (T^{-1})' \circ T' = I'
+    \end{align*}
+    We need to show $I = I'$. For $y \in Y$, we have 
+    \begin{align*}
+        & (I' l,y) = (l,I(y)) = (l, y)
+    \end{align*}
+    Then $I' = I$, thus we have $(T^{-1})' = (T')^{-1}$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $X$ be an $n$-dimensional linear space and $T\in\mathscr{L}(X,X)$. Prove that there is a non-zero polynomial $p(t)$ of degree no more than $n^2$ such that $p(T) = 0$.
+\end{exercise}
+\begin{proof}
+Since $X$ is $n$-dimensional linear space, and $T\in\mathscr{L}(X,X)$, then $T$ can be presented as an $n\times n$ matrix. Polynomials $p(T)$ can be viewed as an operator acting on the space of matrix $T$, which is $n^2$-dimensional, denoted by $P$. Since $\text{dim} P = n^2$, then for any $T \in P$, $1, T, T^2, \cdots, T^{n^2}$ must be linear dependent, since there are $n^2 + 1$ elements. So there exist $a_0, a_1, a_2, \cdots, a_{n^2}$ such that
+\begin{align*}
+    p(T) = a_0 \cdot 1 + a_1 T + a_2 T^2 + \cdots + a_{n^2}T^{n^2} = 0
+\end{align*}
+which is at most degree $n^2$. 
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf (April 2011/ August 2019 Prelim*)}\label{April_2011_p1}
+Prove that if $U,V,W$ are finite dimensional vector spaces, and $T\in\mathscr{L}(U,V), S\in\mathscr{L}(V,W)$, then
+\begin{align*}
+    {\rm dim}\, N_{ST} \leq {\rm dim}\, N_S + {\rm dim}\, N_T.
+\end{align*}
+\end{exercise}
+\begin{proof}
+Assume $u\in U$, such that $ST(u) = 0$. Then we have two possibilities, that is $u\in N_T$ or $T(u)\in N_S$.
+
+With Rank-Nullity theorem, we have 
+\begin{align*}
+    {\rm dim}\, N_{ST} & \leq {\rm dim}\, U = {\rm dim}\, N_T + {\rm dim}\, R_T \\
+    {\rm dim}\, R_T & \leq {\rm dim}\, V = {\rm dim}\, N_S + {\rm dim}\, R_S\\
+    \Rightarrow {\rm dim}\, N_{ST} & \leq {\rm dim}\, N_T + {\rm dim}\, N_S + {\rm dim}\, R_S.
+\end{align*}
+Now we assume $Z = N_{ST}\subset U$, then we have $ST(z) = 0$  for $z\in Z$, and 
+\begin{align*}
+    {\rm dim}\, N_{ST} & = {\rm dim}\, Z = {\rm dim}\, N_T + {\rm dim}\, T/Z, \\
+    {\rm dim}\, T/Z & \leq {\rm dim}\, N_S + {\rm dim}\, ST(Z),
+\end{align*}
+combining these, we have ${\rm dim}\, N_{ST} \leq {\rm dim}\, N_S + {\rm dim}\, N_T$.
+\end{proof}
+
+We present another approach of proof.
+
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Let $x \in N_T$, then we have $Tx = 0$. And then $STx = 0$, which implies $x \in N_{ST}$. Thus, $N_{T} \subset N_{ST}$ and it follows that $\dim N_T \leq \dim N_{ST}$.
+    
+    \item Let $x \in R_{ST}$, then there exists $y \in U$ such that $STy = x$, where $Ty \in V$. Then, $x \in R_S$. Thus, $R_{ST} \subset R_S$, and with rank-nullity theorem, $\dim N_S \leq \dim N_{ST}$\footnote{Also, we could argue that $\dim N_{ST} = \dim U - \dim R_{ST} \geq \dim U - \dim R_S = \dim N_S$, which is exactly the same with $(b)$\cite{9}.}.
+\end{enumerate}
+Now we have $\dim N_{ST} \geq \max \{\dim N_S, \dim N_T\}$. Also, we know that $T|_{N_{ST}}: N_{ST} \to N_S$. Indeed, for any $x \in N_{ST}$, $STx = 0$ and thus $Tx \in N_S$. Hence,
+\begin{align*}
+    \dim N_{ST} & = \dim N_{T|_{N_{ST}}} + \dim R_{T|_{N_{ST}}} \leq \dim N_T + \dim N_S,
+\end{align*}
+where in the last step we used $R_{T|_{N_{ST}}} \subset N_S$, since $T|_{N_{ST}}: N_{ST} \to N_S$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf (August 2010 Prelim*)}
+Let $U, V$ and $W$ be finite dimensional subapaces of $X$. Show that
+\begin{align*}
+    \dim U + \dim V + \dim W - \dim (U + V + W) \geq \\
+    \max \{\dim(U \cap V), \dim(V \cap W), \dim(U \cap W)\}.
+\end{align*}
+\end{exercise}
+\begin{proof}
+Since $\dim U + \dim V = \dim (U + V) + \dim (U \cap V)$, let $W_1 = U + V$ and $W_2 = W$, then 
+\begin{align*}
+    \dim (U+V) + \dim W = \dim (U + V + W) + \dim ((U+V) \cap W).
+\end{align*}
+Then,
+\begin{align*}
+    \dim U + \dim V - \dim (U \cap V) + \dim W = \dim (U + V + W) + \dim ((U+V) \cap W),
+\end{align*}
+which implies
+\begin{align*}
+    \dim U + \dim V + \dim W - \dim (U + V + W) & = \dim (U \cap V) + \dim ((U+V) \cap W) \\
+    & \geq \dim (U \cap V).
+\end{align*}
+For other two inequalities, it is similar.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf (January 2002 Prelim*)}
+Let $f$ be a linear functional on a finite dimensional vector space $V$ over a field $F$, i.e. $f: V \to \mathbb{R}$.
+\begin{enumerate}[label=(\alph*)]
+    \item Prove that if there is an $\alpha \in V$ such that $f(\alpha) \neq 0$, then every vector $\beta \in V$ can be written as 
+    \begin{align*}
+        \beta = c \alpha + \gamma, 
+    \end{align*}
+    where $f(\gamma) = 0, c \in F$.
+    
+    \item Let $f, g$ be linear functionals on $V$ and suppose that $f(\gamma) = 0$ implies that $g(\gamma) = 0$. Prove that $g$ is a scalar multiple of $f$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $\gamma \in {\rm Ker} (f)$, then $f(\gamma) = f(\beta - c \alpha) = f(\beta) - c f(\alpha) = 0$. Now pick $c = \frac{f(\beta)}{f(\alpha)}$, then $f(\gamma) = 0$. Thus $\beta = c \alpha + (\beta - c \alpha)$.
+    
+    \item Pick $x \in V$ such that $f(x) \neq 0$. Let $y$ be arbitrary and consider $y - \frac{f(y)}{f(x)}x$. Then, by linearity,
+    \begin{align*}
+        f \left(y - \frac{f(y)}{f(x)}x \right) = f(y) - \frac{f(y)}{f(x)}f(x) = 0,
+    \end{align*}
+    and it follows that $g \left(y - \frac{f(y)}{f(x)}x \right) = 0$. And then $g(y) = \frac{g(x)}{f(x)}f(y) = c f(x)$\cite{11}.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Let $A$ and $B$ be two complex square matrices. Suppose $AB - I$ is a projection. Is it true that $BA - I$ is a projection?
+\end{exercise}
+\begin{proof}
+True. $AB - I$ is a projection, then its eigenvlaues are $0$ and $1$, hence $AB$ has eigenvlaues $1$ or $2$, which implies $A,B$ are all invertible. Also, 
+\begin{align*}
+    BA - I = B\left(AB - I\right) B^{-1}.
+\end{align*}
+And then,
+\begin{align*}
+    (BA - I)^2 & = B\left(AB - I\right)^2 B^{-1} \\
+    & = B\left(AB - I\right) B^{-1} \\
+    & = BA - I.
+\end{align*}
+Thus, $BA - I$ is a projection.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $P_1, P_2$ and $P_1 + P_2$ are projections. Prove that $P_1 P_2 = 0$.
+\end{exercise}
+\begin{proof}
+Since $P_1, P_2$ and $P_1 + P_2$ are projections, then $P_1^2 = P_1, P_2^2 = P_2$ and 
+\begin{align*}
+    \left(P_1 + P_2\right)^2 = & P_1 + P_2 = P_1^2 + P_1 P_2 + P_2 P_1 + P_2^2 \\
+    & = P_1 + P_1 P_2 + P_2 P_1 + P_2,
+\end{align*}
+which implies $P_1 P_2 + P_2 P_1 = 0$. 
+
+Now we need to show that $R_{P_2} \subset N_{P_1}$. Let $x \in R_{P_2}$, then there exists $y \in V$ such that $P_2 y = x$. Then, $P_2 x = P_2^2 x = P_2 y = x$. Also,
+\begin{align*}
+    0 & = P_1 P_2 x + P_2 P_1 x \\
+      & = P_1 x + P_2 P_1 x,
+\end{align*}
+which implies $P_2 P_1 x = - P_1 x$. It follows naturally that $P_1 x$ is eigenvector of $P_2$ corresponding to eigenvalue $\lambda  = -1$. Since $P_2$ is a projection and it can only have eigenvalues $0$ or $1$, then $P_1 x$ can only be zero. Thus, $R_{P_2} \subset N_{P_1}$, and hence $P_1 P_2 = 0$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $B$ is a projection and $A^2$ commutes with $B$. Is it true that $A$ commutes with $B$?
+\end{exercise}
+\begin{proof}
+It is naturally to pick $A$ such that $A^2 = 0$, since zero matrix commutes with every matrix. Take
+\begin{align*}
+    A = \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix},\,\, A^2 = \begin{pmatrix}
+        0 & 0 \\
+        0 & 0
+    \end{pmatrix},
+\end{align*}
+and then pick 
+\begin{align*}
+    B = \begin{pmatrix}
+        1 & 0 \\
+        0 & 0
+    \end{pmatrix}.
+\end{align*}
+Now we have
+\begin{align*}
+    AB = \begin{pmatrix}
+        0 & 0 \\
+        0 & 0
+    \end{pmatrix} \neq BA = \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix}.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\section{Matrix}
+\begin{exercise}{\bf (April 2010 Prelim)}
+Suppose $A$ and $B$ are $n \times n$ matrices and $AB = 0$. Prove that $\rank A + \rank B \leq n$.
+\end{exercise}
+\begin{proof}
+Since $AB = 0$, then $R_B \subset N_A$, and it follows that $\rank B \leq \dim N_A$. Since $\rank A + \dim N_A = n$, thus $\rank A + \rank B \leq n$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $V$ be a finite dimensional vector space over a field $\mathbb{R}$ or $\mathbb{C}$. Let $A, B: V \to V$ be two linear transformations. Prove that
+\begin{align*}
+    \dim N_{AB} \geq \max\{\dim N_A, \dim N_B\}.
+\end{align*}
+\end{exercise}
+\begin{proof}
+It has been proved in (\ref{April_2011_p1}).
+\end{proof}
+
+\begin{exercise}
+Suppose $A, B, C$ and $D$ are $n \times n$ matrices such that $AC = BC$ and $AD = - BD$. Suppose that $A$ is invetible, prove that $\rank C + \rank D \leq n$.
+\end{exercise}
+\begin{proof}
+Since $A$ is invertible, then
+\begin{align*}
+    C\left(A^{-1} B - I \right) & = 0, \\
+    D\left(A^{-1} B + I \right) & = 0.
+\end{align*}
+Then, 
+\begin{align*}
+    R_{A^{-1} B - I} & \subset N_C, \\
+    R_{A^{-1} B + I} & \subset N_D.
+\end{align*}
+Also, $N_{A^{-1} B - I}$ and $N_{A^{-1} B + I}$ are eigenspaces of $A^{-1}B$, and then
+\begin{align*}
+    \dim N_{A^{-1} B - I} + \dim N_{A^{-1} B + I} \leq n.
+\end{align*}
+Then, 
+\begin{align*}
+    n - \dim R_{A^{-1} B - I} + n - \dim R_{A^{-1} B + I} \leq n, \\
+    \dim N_C + \dim N_D \geq \dim R_{A^{-1} B - I} + \dim R_{A^{-1} B + I} \geq n.
+\end{align*}
+Thus, 
+\begin{align*}
+    \dim R_C + \dim R_D \leq n.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be an $n \times n$ real matrix. Show that the null space of $A$ is the same
+as the null space of $A^T A$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $x \in N_A$, then $Ax = 0$, and hence $A^TAx = 0$. Thus, $N_A \subset N_{A^TA}$.
+    
+    \item If $x \in N_{A^TA}$, then
+    \begin{align*}
+        0 = \left(x, A^TA x\right) = \left(Ax, A x\right)  = \|Ax\|.
+    \end{align*}
+    Hence, $Ax = 0$, which implies $N_{A^TA} \subset N_A$.
+\end{enumerate}
+Thus, $N_A = N_{A^TA}$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Suppose $\sum^m_{j=1} A_j = I$. Show that 
+\begin{align*}
+    \sum^m_{j=1} \rank A_j = n,
+\end{align*}
+if and only if for every $1 \leq j \leq m, A_j^2 = A_j$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $A_j^2 = A_j$, then $A_j \left( A_j - I\right) = 0$, which implies the eigenvalues of $A_j$ are $0$ and $1$. Then,
+    \begin{align*}
+        \sum^m_{j=1} \rank A_j = \sum^m_{j=1} {\rm tr} A_j = {\rm tr} \sum^m_{j=1} A_j = {\rm tr} I = n.
+    \end{align*}
+    
+    \item Suppose $\sum^m_{j=1} \rank A_j = n$ and let $B_1 = \sum^m_{j=2} A_j$. Then $A_1 + B_1 = I$, and it follows that 
+    \begin{align*}
+        \rank A_1 + \rank B_1 \geq \rank I = n,
+    \end{align*}
+    also,
+    \begin{align}
+        \rank A_1 + \rank B_1 \leq \rank A_1 + \sum^m_{j=2} \rank A_j = n,
+    \end{align}
+    where we used the fact that for any $A, B$, $\rank A + \rank B \geq \rank (A+B)$. Then, $\rank A_1 + \rank B_1 = n$. With rank-nullity theorem, 
+    \begin{align*}
+        n & = \dim N_{A_1} + \dim N_{B_1} \\
+          & = \dim N_{A_1} + \dim N_{I - A_1} \\
+          & = \dim N_{A_1} + \dim N_{A_1 - I}.
+    \end{align*}
+    Then $A$ has a full set of eigenvectors with eigenvalues $0$ and $1$. Thus, $A_1$ is a projection, and similar argument can apply to each $A_j$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Suppose for any $\lambda$, 
+\begin{align*}
+    N_{A - \lambda I} \cap R_{A - \lambda I} = \{0\}.
+\end{align*}
+Show that $A$ is diagonalizable.
+\end{exercise}
+\begin{proof}
+Suppose $A$ is not diagonalizable, then there exists an eigenvalue $\lambda$ and a generalized eigenvector $x \neq 0$ such that \cite{15}
+\begin{align*}
+    (A - \lambda I)x \neq 0, (A - \lambda I)^2 x = 0.
+\end{align*}
+Then, $(A - \lambda I)x \in N_{A - \lambda I} \cap R_{A - \lambda I} \neq \{0\}$, which is a contradiction. 
+\end{proof}
+
+\medskip
+
+\section{Determinant and Trace}
+\begin{exercise}
+Let $A,B,C$ be $n\times n$ matrices satisfying $AB=BA$. Show that
+$$
+\det\left(  A+BC\right)  =\det\left(  A+CB\right).
+$$
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item If $B$ is invertible, since $AB=BA$, then we have $A=B^{-1}AB$. Then we have
+    \begin{align*}
+        \det (A+BC) &= \det (B^{-1}(A+BC)B) \\
+        & = \det(B^{-1}AB+CB) \\
+        & = \det(A+CB).
+    \end{align*}
+    \item If $B$ is not invertible. We can set a new matrix $M = \begin{pmatrix}
+    C & -I \\
+    A & B
+    \end{pmatrix}$, and we can solve for the determinant of this matrix. Since $AB=BA$, then $\det(M)=\det(CB-(-I)A)=\det(CB+A)$. Also, we have $-IB=B(-I)$, then the determinant can be presented as $\det (M)=\det(BC-(-I)A)=\det(BC+A)$. Then we have $\det(A+BC)=\det(A+CB)$. 
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+In (2), we used if $AB=BC$, then $\det(M)=\det(CB-(-I)A)$. We should give proper proof to this. Suppose matrix $M = \begin{pmatrix}
+P & Q \\
+R & S
+\end{pmatrix}$ and we have $RS=SR$. Then, if $S$ is invertible, we have 
+\begin{align*}
+    \det \begin{pmatrix}
+    P & Q \\
+    R & S
+    \end{pmatrix}
+    = &\det 
+    \begin{pmatrix}
+    P-RS^{-1}Q & 0 \\
+    R & S
+    \end{pmatrix} \\
+    & = \det(PS-RS^{-1}QS) \\
+    & = \det(PS-RSS^{-1}Q) \\
+    & = \det(PS-RQ)
+\end{align*}
+If $S$ is not invertibe, then there exists $\varepsilon_k \rightarrow 0$ such that $\det S_k = \det(B+\varepsilon_k I) \neq 0$ and $S_k R = R S_k$. Then $\det \begin{pmatrix}
+P & Q \\
+R & S_k
+\end{pmatrix} = \det (PS_k-QR)$. Taking $k\rightarrow \infty$ will prove this case. The proof is complete. Similarly, we can prove that if $QS=SQ$, then $\det M = \det(SP-QR)$.
+\end{remark}
+
+\medskip
+
+\begin{exercise}
+Let $A,B,C$ be $n\times n$ matrices. Is it always true that
+$$
+\det\left(  A+BC\right)  =\det\left(  A+CB\right)  ?
+$$
+Prove or find a counter example.
+\end{exercise}
+\begin{proof}
+In general, it is not true. Take $A = \begin{pmatrix}
+    1 & 0 \\
+    0 & 10
+    \end{pmatrix},
+    B = 
+    \begin{pmatrix}
+    2 & 3 \\
+    4 & 5
+    \end{pmatrix}$
+and $C = \begin{pmatrix}
+    0 & 1 \\
+    1 & 6
+    \end{pmatrix}$.
+Then we have $\det(A+BC) = 76$ and $\det(A+CB) = 85$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $n\geq2$. Given $\left(  2n-1\right)  $ scalars $x_{1}%
+,\cdots,x_{n-1}$ and $y_{1},\cdots,y_{n}$, we can define an $n\times n$ matrix
+$A=\left(  a_{ij}\right)  $ such that%
+\begin{align*}
+a_{ij} &  =x_{j}\text{ if }i>j,\\
+a_{ij} &  =y_{j}\text{ if }i\leq j.
+\end{align*}
+Show that%
+$$
+\det A=y_{n}%
+%TCIMACRO{\dprod \limits_{k=1}^{n-1}}%
+%BeginExpansion
+{\displaystyle\prod\limits_{k=1}^{n-1}}
+%EndExpansion
+\left(  y_{k}-x_{k}\right).
+$$
+\end{exercise}
+\begin{proof}
+We can know that $A$ has the form 
+\begin{align*}
+    A = \begin{pmatrix}
+    y_1 & y_2 & y_3 & \cdots & y_n \\
+    x_1 & y_2 & y_3 & \cdots & y_n \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_1 & x_2 & x_3 & \cdots & y_n
+    \end{pmatrix}
+\end{align*}
+We can do elementary row operations that starting from the first row, and then apply $\text{row}_i=\text{row}_i+(-1)\text{row}_{i+1}$. Then we get new matrix
+\begin{align*}
+    A = \begin{pmatrix}
+    y_1-x_1 & 0 & 0 & \cdots & 0 \\
+    0 & y_2-x_2 & 0 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_1 & x_2 & x_3 & \cdots & y_n
+    \end{pmatrix}
+\end{align*}
+Then it is obvious that $\det(A)=y_n \prod_{k=1}^{n-1} (y_k-x_k)$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf (April 2001 Prelim)}
+Let $M_n(\mathbb{F})$ denote the vector space of $n \times n$ matrices over a field $\mathbb{F}$, with the usual matrix addition and scalar multiplication, and for $A = \left(a_{ij}\right) \in M_n(\mathbb{F})$, let ${\rm tr}(A) = \sum_i a_{ii}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $A \mapsto {\rm tr}(A)$ defines a linear function on $M_n(\mathbb{F})$ and ${\rm tr}(AB) = {\rm tr}(BA)$ for all $A, B \in M_n(\mathbb{F})$.
+    
+    \item Show also that for any $B = \left(b_{ij}\right) \in M_n(\mathbb{F})$, the formula $f_B(A) = {\rm tr}\left(B^T A\right)$ defines a linear functional on $M_n(\mathbb{F})$ such that $f_B(E_{ij}) = b_{ij}$, where $E_{ij}$ is the matrix with a $1$ in the $(i,j)$ position and $0$ elsewhere.
+    
+    \item Show that any linear functional on $M_n(\mathbb{F})$ is of the form $f_B$ for a unique $B \in M_n(\mathbb{F})$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item \begin{enumerate}[label=\alph*)]
+        \item Let $c \in \mathbb{F}$, $A, B \in M_n(\mathbb{F})$, 
+        \begin{align*}
+            {\rm tr}(cA + B) & = \sum^n_{i=1} (cA + B)_{ii} \\
+            & = \sum^n_{i=1} \left(cA_{ii} + B_{ii}\right) \\
+            & = c {\rm tr}(A) + {\rm tr}(B).
+        \end{align*}
+        Thus, $A \mapsto {\rm tr}(A)$ is linear.
+        
+        \item 
+        \begin{align*}
+            {\rm tr}(AB) & = \sum^n_{i=1}\left(\sum^n_{k=1} a_{ik} b_{ki}\right) \\
+            & = \sum^n_{k=1}\left(\sum^n_{i=1} a_{ki} b_{ik}\right) = {\rm tr}(BA).
+        \end{align*}
+    \end{enumerate}
+    
+    \item \begin{enumerate}[label=\alph*)]
+        \item Let $c \in \mathbb{F}$ and $A_1, A_2 \in  M_n(\mathbb{F})$, then
+        \begin{align*}
+            f_B(cA_1 + A_2) & = {\rm tr}\left(B^T (cA_1 + A_2)\right) \\
+            & = {\rm tr}\left(c B^T A_1 + B^T A_2)\right) \\
+            & = c f_B\left(A_1\right) + f_B\left(A_2\right).
+        \end{align*}
+        Thus, $f_B$ is linear.
+        
+        \item 
+        \begin{align*}
+            f_B\left(E_{ij}\right) & = f_B\left(B^T E_{ij}\right) \\
+            & = {\rm tr} \begin{pmatrix}
+                b_{11} & b_{21} & \cdots & b_{n1} \\
+                b_{12} & b_{22} & \cdots & b_{n2} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                b_{1n} & b_{2n} & \cdots & b_{nn}
+            \end{pmatrix}\begin{pmatrix}
+                  &        & 0      &        & \\
+                  &        & \vdots &        & \\
+                0 & \cdots & 1_{(i,j)}& \cdots &  \\
+                  &        & \vdots &         &
+            \end{pmatrix}\\
+            & = {\rm tr} \begin{pmatrix}
+                  &        & b_{j1}   &        & \\
+                  &        & \vdots   &        & \\
+                  & \cdots & b_{ij}   & \cdots & \\
+                  &        & \vdots   &        &
+            \end{pmatrix} \\
+            & = b_{ij}.
+        \end{align*}
+    \end{enumerate}
+    
+    \item Let $f \in M_n(\mathbb{F})'$, then $f$ is determined by its value on $f\left(E_{ij}\right), 1\leq i,j \leq n$, such that for $B = \left(b_{ij}\right)$, $f\left(E_{ij}\right) = b_{ij}$. Now we need to show that $f_B = f$. It suffices to show that $f_B\left(E_{ij}\right) = f\left(E_{ij}\right)$\footnote{The regular functions on ${\bf GL}(V)$ that are linear combinations of the matrix entry functions $x_{ij}$, relative to some basis for $V$, can be described in the following basis-free way: Given $B \in V'$, we define a function $f_B$ on $V'$ by $$f_B(Y) = {\rm tr}(YB).$$ For example, when $V = \mathbb{C}^n$ and $B = e_{ij}$, then $f_{e_{ij}} = x_{ij}Y$\cite{10}.}. Indeed,
+    \begin{align*}
+        f_B\left(E_{ij}\right) = b_{ij} = f\left(E_{ij}\right).
+    \end{align*}
+    Hence, every linear functional on $M_n(\mathbb{F})$ comes from a matrix.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A, B$ be two $n \times n$ matrices, show that $\det (I - AB) = \det (I - BA)$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $B$ is invertible, then 
+    \begin{align*}
+        \det (I - AB) & = \det \left(B^{-1}\right) \det (B - BAB) \\
+        & = \det (B - BAB) \det \left(B^{-1}\right) \\
+        & = \det (I - BA).
+    \end{align*}
+    
+    \item If $B$ is not invertible, then let $\varepsilon_k \to 0$ such that $B_k = B + \varepsilon_k$ is invertible. Then the rest follows.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Prove there are no two matrices $A, B \in \mathbb{C}^{n \times n}$ such that $AB - BA = I$\cite{19}. 
+\end{exercise}
+\begin{proof}
+For any two matrices $A, B$, ${\rm tr}(AB - BA) = 0$\cite{20}. However, ${\rm tr} (I) = n$. Thus, there are no two matrices such that $AB - BA = I$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+For a given $n \times n$ matrix $C$, consider a bilinear form $F_C$ on the space of real $n \times n$ matrices, defined by the formula 
+\begin{align*}
+    F_C(A, B) = {\rm tr} \left(B^T C A\right).
+\end{align*}
+Prove that $F_C$ is non-degenerate if and only if $C$ is invertible. ($F_C$ is non-degenerate if $F_C(A,B) = 0$ for any $B$, then $A = 0$ and if $F_C(B,A) = 0$ for any $A$, then $B = 0$.)
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $F_C$ is non-degeneratem and suppose that $C$ is not invertible. Then there exists $A \neq 0$ such that $CA = 0$, and then $F_C(A,B) = 0$ for any $B$, which is a contradiction.
+    
+    \item If $C$ is invertible, then $F_C(A, B) = 0$ for any $B$, then we pick $B = CA$, and it follows that $CA = 0$. Since $C$ is invertible, then $A = 0$. Thus, $F_C$ is non-degenerate.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}\label{trace_ABC}
+Is it true that for any three $n \times n$ matrices $A, B, C$, ${\rm tr} (ABC) = {\rm tr} (ACB)$?
+\end{exercise}
+\begin{proof}
+No. Consider 
+\begin{align*}
+    A = \begin{pmatrix}
+        1 & 2 \\
+        3 & 4
+    \end{pmatrix}, B = \begin{pmatrix}
+        1 & 1 \\
+        2 & 1
+    \end{pmatrix}, C = \begin{pmatrix}
+        1 & -1 \\
+        -1 & 1
+    \end{pmatrix},
+\end{align*}
+then we have 
+\begin{align*}
+    ABC = \begin{pmatrix}
+        2 & -2 \\
+        4 & -4
+    \end{pmatrix}, \,\, ACB = \begin{pmatrix}
+        1 & 0 \\
+        1 & 0
+    \end{pmatrix},
+\end{align*}
+which implies ${\rm tr} (ABC) = -2 \neq 1 = {\rm tr} (ACB)$.
+\end{proof}
+\begin{remark}
+It is true that ${\rm tr} (ABC) = {\rm tr} (BCA) = {\rm tr} (CAB)$. But in general ${\rm tr} (ABC) = {\rm tr} (ACB)$ does not hold\cite{16}.
+\end{remark}
+
+\medskip
+
+\begin{exercise}
+Is it true that for any three $n \times n$ matrices $A, B, C$, $\det (I - ABC) = \det (I - BAC)$?
+\end{exercise}
+\begin{proof}
+No. Consider $A, B, C$ the same as (\ref{trace_ABC}), then we have
+\begin{align*}
+    ABC = \begin{pmatrix}
+        2 & -2 \\
+        4 & -4
+    \end{pmatrix}, \,\, BAC = \begin{pmatrix}
+        -2 & 2 \\
+        -3 & 3
+    \end{pmatrix},
+\end{align*}
+and it follows that
+\begin{align*}
+    \det (I - ABC) = \det \begin{pmatrix}
+        -1 & 2 \\
+        -4 & -5
+    \end{pmatrix} = 13 \neq 12 = \det (I - BAC) = \det \begin{pmatrix}
+        -3 & -2 \\
+        3 & -2
+    \end{pmatrix}.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Let $C$ be an $n \times n$ matrix such that 
+\begin{align*}
+    \det (C - AB) = \det (C - BA)
+\end{align*}
+holds for any pair of matrices $A, B$. Show that $C = kI$ for some scalar $k$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $A$ is invertible, then we have
+    \begin{align*}
+        \det \left(A^{-1}\right) \det (C-AB) = \det (C-BA) \det \left(A^{-1}\right), 
+    \end{align*}
+    then 
+    \begin{align*}
+        \det \left(A^{-1}C - B\right) = \det \left(CA^{-1} -B\right).
+    \end{align*}
+    Take $B = CA^{-1} - D$, and then
+    \begin{align*}
+        \det \left(A^{-1}C - CA^{-1} + D\right) = \det (D).
+    \end{align*}
+    We claim that if $\det (E+D) = \det (D)$ for any matrix $D$, then $E = 0$. Indeed, let $J_E$ be Jordan form for $E$, then $\det \left(J_E + D\right) = \det D$ for any matrix $D$. This implies that for any Jordan block $J_k$, 
+    \begin{align*}
+        \det \left(J_E + D_k\right) = \det D_k
+    \end{align*}
+    for any matrix $D_k$. Then, eigenvalue $\lambda_k$ corresponding to $J_k$ is zero. Thus, $A^{-1}C - CA^{-1} = 0$. And hence $A^{-1}C = CA^{-1}$, which implies that $C$ commutes with any invertible matrix and $C$ must be form of $kI$\cite{17}.
+    
+    \item If $A$ is not invertible, then we can use $\varepsilon_k \to 0$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Suppose $A, B$ and $C$ are $2 \times 2$ matrices. Suppose $AB = BA, AC = CA$ and $BC \neq CB$. Prove tha $A$ is a scalar matrix.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $A$ has two distinct eigenvalues $\lambda_1, \lambda_2$ such that
+    \begin{align*}
+        A x_1 = \lambda_1 x_1, \,\, A x_2 = \lambda_2 x_2.
+    \end{align*}
+    Then, $AB = BA, AC = CA$ implies that $x_1, x_2$ are also eigenvectors for $B$ and $C$ by (\ref{commute_eigenspace}). Then, $A, B, C$ can be simultaniously diagonalized by remark (\ref{diagonalized_same_time}). In particular, $BC = CD$., which is a contradiction.
+    
+    \item Thus, $A$ has repeated eigenvalue $\lambda$, and we could assume $\lambda = 0$ by considering $\widetilde{A} = A - \lambda I$. If $A \neq 0$, then we could assume 
+    \begin{align*}
+        A = \begin{pmatrix}
+            0 & 1 \\
+            0 & 0
+        \end{pmatrix}, B = \begin{pmatrix}
+            b_1 & b_2 \\
+            b_3 & b_4
+        \end{pmatrix},\,\, {\rm and}\,\, C = \begin{pmatrix}
+            c_1 & c_2 \\
+            c_3 & c_4
+        \end{pmatrix}.
+    \end{align*}
+    Then, we have
+    \begin{align*}
+        AB & = \begin{pmatrix}
+            b_3 & b_4 \\
+            0     & 0
+        \end{pmatrix} = BA = \begin{pmatrix}
+            0 & b_1 \\
+            0 & b_3
+        \end{pmatrix}, \\
+        AC & = \begin{pmatrix}
+            c_3 & c_4 \\
+            0     & 0
+        \end{pmatrix} = CA = \begin{pmatrix}
+            0 & c_1 \\
+            0 & c_3
+        \end{pmatrix},
+    \end{align*}
+    then 
+    \begin{align*}
+        b_1 = b_4 = b, b_3 = 0 \\
+        c_1 = c_4 = b, c_3 = 0.
+    \end{align*}
+    Also, 
+    \begin{align*}
+        BC & = \begin{pmatrix}
+            bc & bc_2+cb_2 \\
+            0     & bc
+        \end{pmatrix} = CB = \begin{pmatrix}
+            bc & bc_2+cb_2 \\
+            0     & bc
+        \end{pmatrix},
+    \end{align*}
+    which is a contradiction.
+\end{enumerate}
+Thus, $A$ can only be scalar matrix.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be a complex square matrix. Suppose that 
+\begin{align*}
+    \rank A = {\rm tr} (A) = 1.
+\end{align*}
+Prove that $A$ is a projection.
+\end{exercise}
+\begin{proof}
+We can have $\dim N_A = n-1$, also with Jordan form $J_A$ of $A$, we can have that the only eigenvalue is $1$. Thus, $\dim N_{A-I} = 1$, and hence $A$ is a projection.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Assume that $(A - B)^2 = 0$, show that 
+\begin{align*}
+    {\rm tr} (AB - BA)^3 = 0.
+\end{align*}
+\end{exercise}
+\begin{proof}
+Assume $A - B = N$, then $N^2 = 0$ and $A = B + N$. Then,
+\begin{align*}
+    AB - BA = B^2 + NB - B^2 - BN = NB - BN.
+\end{align*}
+and
+\begin{align*}
+    (AB - BA)^2 & = NBNB - NBBN + BNBN, \\
+    (AB - BA)^3 & = NBNBNB - NBNBBN + NBBNBN \\
+    & - BNBNBN.
+\end{align*}
+Since ${\rm tr} (NBNB \cdot NB) = {\rm tr} (NBNB \cdot BN)$ and ${\rm tr} (NB \cdot BNBN) = {\rm tr} (BN \cdot BNBN)$, then ${\rm tr} (AB - BA)^3 = 0$. In general, ${\rm tr} (AB - BA)^{2k+1} = 0$.
+\end{proof}
+
+\medskip
 
 
+\section{Spectral Theory}
+\begin{exercise}
+Let $A$ be an invertible $n\times n$ matrix, show that there exists a
+polynomial $g$ such that
+$$
+A^{-1}=g\left(A\right).
+$$
+\end{exercise}
+\begin{proof}
+Since $A$ is invertible, then $A$ has no zero engenvalues. Thus, the characteristic polynomial $P(x)$ for $A$ has constant terms, which can be written as $P(x)= x^n + a_{n-1} x^{n-1} + \cdots + a_0$. Also, we know that $P(A)=0$, thus we have
+\begin{align*}
+    & A^n + a_{n-1} A^{n-1} + \cdots + a_0 = 0 \\
+    \Rightarrow & A^{-1} = -\frac{1}{a_0}(A^{n-1}+a_{n-1}A^{n-2}+\cdots+a_1) = g(A)
+\end{align*}
+Then $A^{-1}=g(A)$, the proof is complete. 
+\end{proof}
 
+\medskip
 
+\begin{exercise}
+Let
+\begin{align*}
+  A=\left(
+    \begin{array}
+    [c]{cc}%
+    A_{1} & \\
+    & A_{2}%
+    \end{array}
+    \right).  
+\end{align*}
+Show that the minimal polynomial $m_{A}$ is the least common multiple of
+$m_{A_{1}}$ and $m_{A_{2}}$.
+\end{exercise}
+\begin{proof}
+From the form of $A$, we can know that $\det(\lambda-IA)=\det(\lambda-IA_1)\det(\lambda-IA_1)$. Then, for any polynomial $T(x)$ such that $T(A)=0$, then we have $T(A_1)=0$ and $T(A_2)=0$. And since $m_A$, $m_{A_1}$ and $m_{A_2}$ are minimal polynomials corresponding to $A$, $A_1$ and $A_2$, then we have $T(x)=m_1 m_{A_1}(x)$ and $T(x)=m_2 m_{A_1}(x)$ for some $m_1, m_2$. Also, we have $m_A(x)|T(x)$, then we have $m_{A_1}(x)|m_A(x)$ and $m_{A_1}(x)|m_A(x)$, then $m_A$ is the least common multiple of $m_{A_{1}}$ and $m_{A_{2}}$.
+\end{proof}
 
+\medskip
 
+\begin{exercise}
+Find the minimal polynomial $m_{A}$ for%
+$$
+A=\left(
+\begin{array}
+[c]{ccc}%
+1 & -1 & 1\\
+0 & 2 & 0\\
+0 & 0 & 2
+\end{array}
+\right)  .
+$$
+\end{exercise}
+\begin{proof}
+The characteristic polynomial for $A$ is that $P(\lambda)=(\lambda-1)(\lambda-2)^2$. Then the minimal polynomial is $m_A=(\lambda-1)(\lambda-2)$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be an $n\times n$ matrix where $n\geq2$ satisfying
+$\operatorname*{rank}A=1$.
+\begin{enumerate}[label=(\arabic*)]
+    \item Show that there exists two column vectors $a,b$ such that $A=ab^{T}$.
+    \item Show that the minimal polynomial
+    $$m_{A}=\lambda^{2}-\left(  a^{T}b\right)  \lambda.$$
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Since $\text{rank}A=1$, then the image of $A$ is one-dimensional. Thus, there exist $u,v\in \mathbb{R}^n$ such that $Au=kv$ for a fixed $v$. It also holds for a basis for $\mathbb{R}^n$, then every column of $A$ is a multiple of $v$. Then there exists $(w_1, w_2,\cdots,w_n)\in\mathbb{R}^n$, such that
+    \begin{align*}
+        A=v(w_1, w_2,\cdots,w_n)
+    \end{align*}
+    then we denote $v=a$, and $(w_1, w_2, \cdots, w_n) = b^T$, where $a,b\in\mathbb{R}^n$.Then $A=ab^T$.
+    \item We have $A^2 = ab^Tab^T = a(b^Ta)b^T = (b^Ta)ab^T = (b^Ta)A$, which implies $q(A)=A^2-(b^Ta)A=0$. This polynomial satisfies that $q(A)=0$, then $m_a|q(\lambda) = \lambda^2-(b^Ta)\lambda$. Also, $m_A$ cannot be $\lambda$ or $\lambda-(b^Ta)$, since this means $A$ is a scalar. Thus, $m_A = \lambda^2-(b^Ta)\lambda$. The proof is complete.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A_{k}$, $1\leq k\leq K$ be $n\times n$ matrices satisfying%
+$$
+A_{i}A_{j}=A_{j}A_{i}\text{ for any }1\leq i,j\leq k.
+$$
+Show the existence of a basis of $\mathbb{C}^{n}$ which consists of
+eigenvector and generalized eigenvectors of $A_{k}$ for each $1\leq k\leq K$.
+\end{exercise}
+\begin{proof}
+Let $\{\lambda_j\}^J_{j=1}$ be $J$ distinct eigenvalues of $A_1$, and then we have
+\begin{align*}
+    \mathbb{C}^n = \bigoplus^J_{j=1}N_j
+\end{align*}
+where $N_j=N_{(A_1-\lambda_j I)^{d_j}}$, $d_j$ is index of $j$th eigenvalue $\lambda_j$. For $\forall x\in\mathbb{C}^n$, since $A_1 A_i=A_i A_1,2\leq i \leq K$, then we have $(A_1-\lambda_j I)^{d_j}A_i=A_i(A_1-\lambda_j I)^{d_j}$. Thus, if $x\in N_k$
+\begin{align*}
+    (A_1-\lambda_j I)^{d_j}A_ix =A_i(A_1-\lambda_j I)^{d_j}x = 0
+\end{align*}
+which means $A_i x\in N_j$. Thus, $A_i$ is a mapping from $N_j$ to $N_j$. Now we apply Spectral Theorem to the linear mapping $A_i$ and we know that $N_j$ has a basis consisting of eigenvevtors and generalized eigenvevtors of $A_i$. And it is true for all $A_i, 2\leq i \leq K$. Thus, a basis of $\mathbb{C}^{n}$ consists of
+eigenvectors and generalized eigenvectors of $A_{j}$ for each $1\leq j\leq K$. The proof is complete.
+\end{proof}
+
+\noindent \textbf{Method II of proof}
+\begin{proof}
+We will prove it by induction on $\dim V$ and $1\leq k\leq K$. And assume we have pairwise commuting operators $A_1, A_2,\cdots, A_K$ on $V$. 
+
+When $\dim V = 1$, and in this case, all $A_i$ are scalars. Take $B = \{1\}$, and $k$ be arbitrary. Assume the result is true whenever $\dim V < l$, and $A_1, A_2, \cdots, A_k$ are pairwise commuting operators on $V$ if $\dim V < l$. And we want to show that if $\dim V = l$, and $A_1, \cdots, A_{k+1}$ are pairwise commuting operators on $V$, then there exists a basis of generalized eigenvectors. 
+
+For $A_1$, we have 
+\begin{align*}
+    \mathbb{C}^l = \bigoplus^m_{j=1}N_{\lambda_j}(A_1)
+\end{align*}
+since $A_1A_i = A_iA_1, 2 \leq i \leq k+1$, we have $A_i:N_{\lambda_j}(A_1)\rightarrow N_{\lambda_j}(A_1), \forall j = 1,\cdots, m$ and $\forall i = 1,2,\cdots, k+1$. 
+\begin{enumerate}[label=(\arabic*)]
+    \item If $m = 1$, then there exists a basis $B$ of $\mathbb{C}^1$ consisting of generalized eigenvectors for $A_2, \cdots, A_k,A_{k+1}$. Any vectors in $\mathbb{C}^l$ is a generalized eigenvectors for $A_1$ because $\mathbb{C}^l = N_{\lambda_1}(A_1)$, then any vectors in $B$ is a a generalized eigenvectors for $A_1, A_2, \cdots, A_{k+1}$.
+    \item If $m > 1$, then $N_{\lambda_j}(A_1)\neq \mathbb{C}^l, \forall j = 1,\cdots, k+1$. On $N_{\lambda_j}(A_1)$, we have $A_1|_{N_{\lambda_j}(A_1)}, A_2|_N_{\lambda_j}(A_1), \cdots, A_{k+1}|_N_{\lambda_j}(A_1)$. By induction, there exists a basis $\beta_j, j=1,2,\cdots, m$ of $N_{\lambda_j}(A_1)$, which are generalized eigenvectors for $A_1|_{N_{\lambda_j}(A_1)}, \cdots, A_{k+1}|_N_{\lambda_j}(A_1)$. Take 
+    \begin{align*}
+        \beta = \bigcup^m_{j=1}\beta_j
+    \end{align*}
+    then $\beta$ is a basis for $\mathbb{C}^l$ consisting of generalized eigenvectors for $A_1, A_2, \cdots, A_{k+1}$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $\lambda$ be an eigenvalue of an $n\times n$ matrix $A$. Suppose
+that%
+\begin{align*}
+    \dim N_{1}\left(\lambda\right) & = 2, \dim N_{2}\left(\lambda\right) = 4\\
+    \text{ and }\dim N_{3}\left(\lambda\right) & = \dim N_{4}\left(\lambda\right) = 5,
+\end{align*}
+Find the Jordan blocks of $A$ corresponding to $\lambda$.
+\end{exercise}
+\begin{proof}
+Since $\dim N_{3}\left(\lambda\right) = \dim N_{4}\left(\lambda\right) = 5$, then we can know that the index $d(\lambda) = 3$, then we can know the Jordan blocks of $A$ corresponding to $\lambda$ is 
+\begin{align*}
+    J = \left(\begin{array}
+    [c]{ccccc}%
+    \lambda & 1 & 0 & 0 & 0\\
+    0 & \lambda & 1 & 0 & 0\\
+    0 & 0 & \lambda & 0 & 0\\
+    0 & 0 & 0 & \lambda & 1\\
+    0 & 0 & 0 & 0 & \lambda
+    \end{array}\right).
+\end{align*}
+We can verify that this is the Jordan blocks we want. We can compute $N_{(J-\lambda I)}$, $N_{(J-\lambda I)^2}$, $N_{(J-\lambda I)^3}$ and $N_{(J-\lambda I)^4}$. We have
+\begin{align*}
+    J-\lambda I = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right)
+\end{align*}
+and it is obvious that $\dim N_{(J-\lambda I)} = 2$, since there are two $0$ column vectors. Similarly, we have 
+\begin{align*}
+    (J-\lambda I)^2 = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right), 
+    (J-\lambda I)^3 = (J-\lambda I)^4 = \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right)
+\end{align*}
+and we can know that $\dim N_{(J-\lambda I)^2} = 4$ and $\dim N_{(J-\lambda I)^3} = \dim N_{(J-\lambda I)^3} = 5$. The proof is complete.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be a $5\times5$ rank one matrix, find all possible Jordan canonical forms of $A$. The order of Jordan blocks should be ignored.
+\end{exercise}
+\begin{proof}
+Since $A$ is rank one matrix, then there exists two column vectors $a,b$ such that $A=ab^T$, also we know that the minimal polynomial for $A$ is $m_A(\lambda) = \lambda^2 - \alpha \lambda$. So $A$ has eigenvalue $0$ with multiplicity $4$ and $\alpha$ with multiplicity $1$. There are several possible Jordan forms for eigenvalue $0$, which are
+\begin{align*}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right)
+\end{align*}
+and $$
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right).$$
+Since the null space of $A-0I$ has dimension $4$ and one of them is generated by eigenvalue $\alpha$. Thus, $\dim N_{A-0I}=3$, which means that there are $3$ blocks corresponding to eigenvalue $0$. Thus, we can know that all possible Jordan canonical forms of $A$ are
+\begin{align*}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0
+    \end{array}\right), \text{and}
+    \left(\begin{array}
+    [c]{ccccc}%
+    0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & \alpha
+    \end{array}\right).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let%
+$$
+A=\left(
+\begin{array}
+[c]{ccc}%
+1 & 1 & 1\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{array}
+\right)  .
+$$
+Find its eigenvectors and generalized eigenvectors. Find its Jordan canonical
+form $J$ and the corresponding matrix $S$ so that%
+$$
+A=SJS^{-1}\text{.}%
+$$
+\end{exercise}
+\begin{proof}
+Taking $A-\lambda I = 0$, we can have characteristic polynomial $p_A(\lambda) = (1-\lambda)^3$, which gives us eigenvalues $1$. Now we determine the null space of $A-1\dots I$
+\begin{align*}
+    A-I =\left(\begin{array}
+    [c]{ccc}%
+    0 & 1 & 1\\
+    0 & 0 & 0\\
+    0 & 0 & 0
+    \end{array}\right).
+\end{align*}
+So this eigenspace is dimensional-$2$. Hence there are two Jordan blocks corresponding to the eigenvalue 1 in the Jordan form. So we have its Jordan canonical form
+\begin{align*}
+    J = \left(\begin{array}
+    [c]{ccc}%
+    1 & 1 & 0\\
+    0 & 1 & 0\\
+    0 & 0 & 1
+    \end{array}\right).
+\end{align*}
+Then we can know the eigenvectors corresponding to $1$ are 
+\begin{align*}
+    v_1 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    0 \\
+    0 
+    \end{array}\right) 
+    \text{and}\,\,
+    v_2 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    -1 
+    \end{array}\right).
+\end{align*}
+Each of these will give Jordan chain and we compute $(A-I)w_1 = v_1$ and $(A-I)w_2 = v_2$. The second equation does not have solution, so we can know that
+\begin{align*}
+    w_1 = \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    0 
+    \end{array}\right).
+\end{align*}
+Then we have the engenvectors and generalized engenvectors, which are 
+\begin{align*}
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    0 
+    \end{array}\right),
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    0 \\
+    0 
+    \end{array}\right),
+    \text{and}\,\,
+    \left(\begin{array}
+    [c]{c}%
+    1 \\
+    1 \\
+    -1 
+    \end{array}\right).
+\end{align*}
+Thus, we can find $S$, such that $AS=JS$, and we have
+\begin{align*}
+    S = \left(\begin{array}
+    [c]{ccc}%
+    1 & 1 & 1\\
+    0 & 1 & 1\\
+    0 & 0 & -1
+    \end{array}\right).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $P$ be the linear space of polynomials with real coefficients
+equipped with the scalar product%
+$$
+\left(  f,g\right)  =\int_{0}^{1}f\left(  x\right)  g\left(  x\right)  dx.
+$$
+\begin{enumerate}[label=(\arabic*)]
+    \item Using Gram-Schmidt process to generate an orthonormal basis of the span of vectors $\left\{  1,x^{2}\right\}$.
+    \item Find the projection of polynomial $x$ on the span of vectors $\left\{  1,x^{2}\right\}$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item Set $y_1 = 1$ and $y_2 = x^2$, using Gram-Schmidt process, we can have 
+    \begin{align*}
+        x_1 & = \frac{y_1}{\left \|y_1\right \|} = \frac{1}{\sqrt{\int^1_0 1dx}} = 1 \\
+        x_2 & = \frac{y_2-(y_2,x_1)x_1}{\left \|y_2-(y_2,x_1)x_1\right \|} = \frac{x^2 - \frac{1}{3}}{\sqrt{\int^1_0 (x^2 - 1/3)^2}dx} = \frac{3\sqrt{5}x^2 - \sqrt{5}}{2}.
+    \end{align*}
+    \item Finding the projection of polynomial $x$ on the span of vectors $\left\{  1,x^{2}\right\}$ is equivalent to findind the solution for $a,b$ in the equations
+    \begin{align*}
+        (1,x-(a+bx^2)) & = 0 \\
+        (x^2,x-(a+bx^2)) & = 0 
+    \end{align*}
+    which gives us $b = \frac{15}{16}, a = \frac{3}{16}$. Thus, the projection is $\left(\frac{3}{16},\frac{15}{16}\right)$.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Find the least squares solution to the over-determined system%
+\begin{align*}
+3x-y  &  =1,\\
+x+y  &  =1,\\
+2x+3y  &  =2.
+\end{align*}
+\end{exercise}
+\begin{proof}
+Writting these equations into $AX=b$, where $A = \left(\begin{array}
+    [c]{cc}%
+    3 & -1\\
+    1 & 1\\
+    2 & 3
+    \end{array}\right), X = \left(\begin{array}
+    [c]{c}%
+    x\\
+    y\\
+    \end{array}\right)$, and $b = \left(\begin{array}
+    [c]{c}%
+    1\\
+    1\\
+    2
+    \end{array}\right)$, then the least square least solution can be determined by $z = (A^TA)^{-1}A^T b = \left(\begin{array}
+    [c]{c}%
+    0.4638\\
+    0.3768\\
+    \end{array}\right)
+    $.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Let $A$ be a $4 \times 4$ real symmetric matrix. Suppose $A^2 + 3A = 0$ and $\rank A = 2$. Find ${\rm tr}(A)$.
+\end{exercise}
+\begin{proof}
+Since $A$ is real symmetric, then $A$ is diagonalizable\footnote{Every normal matrix is diagonalizable\cite{21}.} by (\ref{theorem_symmetric}). And $\rank A$ is equal to the number of nonzero eigenvalues. With $A^2 + 3A = 0$, the eigenvalues of $A$ are $\lambda = 0$ and $\lambda = -3$. Thus, ${\rm tr}(A) = 2(-3) = -6$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $A$ is a $2 \times 2$ real matrix with trace ${\rm tr}\left(A \right) = 7$ and determinant $\det (A) = 11$. Find ${\rm tr}\left(A^2 \right)$.
+\end{exercise}
+\begin{proof}
+Assume $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$, and then $a + d = 7, ad - bc = 11$. Also, $A^2 = \begin{pmatrix} a^2+bc &ad+bd \\ ac+bd & bc+d^2 \end{pmatrix}$. Thus, ${\rm tr}\left(A^2 \right) = a^2 + d^2 + 2bc = (a+d)^2 - 2(ad-bc) = 27$.
+\end{proof}
+
+\noindent{\bf Method II.}
+\begin{proof}
+\begin{align*}
+    {\rm tr}\left(A^2 \right) & = \lambda_1^2 + \lambda_2^2 \\
+    & = \left(\lambda^2 + \lambda^2\right)^2 - 2 \lambda_1 \lambda_2 \\
+    & = \left( {\rm tr}(A)\right)^2 - 2 \det (A) \\
+    & = 27.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be a $3 \times 3$ real matrix with characteristic polynomial
+\begin{align*}
+    p(\lambda) = \lambda^3 - 2 \lambda^2 + \lambda + 1.
+\end{align*}
+Show that $\dim X \leq 3$ where $X$ denotes the subspace of the vector space of all $3 \times 3$ matrices given by 
+\begin{align*}
+    X = {\rm span} \left\{A^j: j = 0,1,2,\cdots\right\}.
+\end{align*}
+\end{exercise}
+\begin{proof}
+$A$ satisfies $p(A) = 0$, then $A^3$ can be written as linear combination of $I, A, A^2$. Then, $X = {\rm span} \left\{I, A, A^2\right\}$, since higher order can also be expressed as combination of $I, A, A^2$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $\lambda_i, 1 \leq i \leq m$ be $m$ different eigenvalues of $A$. Show that
+\begin{align*}
+    n(m - 1) \leq \sum^m_{j=1} \rank \left(\lambda_j I - A\right).
+\end{align*}
+\end{exercise}
+\begin{proof}
+Since $\mathbb{C}^n = \oplus^m_{j=1} N_{\left(A - \lambda_j I\right)^{d_j}}$, then 
+\begin{align*}
+    \sum^m_{j=1} \dim N_{A - \lambda_j I} \leq n.
+\end{align*}
+With rank-nullity theorem, for each $j$, $\dim N_{A - \lambda_j I} = n - \rank \left(A - \lambda_j I\right)$, and then
+\begin{align*}
+    \sum^m_{j=1} \rank \left(\lambda_j I - A\right) \geq n(m - 1).
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be an $n \times n$ real matrix with $\det A \neq 0$. Show that $A^{-1}$ can be written as a polynomial in $A$ with real coefficients.
+\end{exercise}
+\begin{proof}
+Consider characteristic polynomial of $A$
+\begin{align*}
+    p(A) = A^n + a_{n-1}A^{n-1} + \cdots + a_1 A + \det(A)I.
+\end{align*}
+With $\det A \neq 0$, then
+\begin{align*}
+    A^{n-1} + a_{n-1}A^{n-2} + \cdots + a_1 I + \det(A) A^{-1} = 0.
+\end{align*}
+Thus, $A^{-1}$ can be written as a polynomial in $A$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Find the Jordan canonical form $J$ of the matrix $A$ below. Also, find the characteristic polynomial of $A$, and the matrix $T$ such that $J = T^{-1} A T$. 
+\begin{align*}
+    A = \begin{pmatrix}
+        1 & 1 & 1 \\
+        0 & 2 & 0 \\
+        0 & -2 & 1
+    \end{pmatrix}.
+\end{align*}
+\end{exercise}
+\begin{proof}
+The characteristic polynomial of $A$ is $(\lambda - 1)^2 (\lambda - 2) = 0$, which gives eigenvalues $\lambda = 1$ with multiplicity $2$ and $\lambda = 2$ with multiplicity $1$. For $\lambda = 2$, the corresponding eigenvector is 
+\begin{align*}
+    v_1 = \begin{pmatrix}
+        1 \\
+        -1 \\
+        2
+    \end{pmatrix}.
+\end{align*}
+For $\lambda = 1$, the corresponding eigenvector is 
+\begin{align*}
+    v_2 = \begin{pmatrix}
+        1 \\
+        0 \\
+        0
+    \end{pmatrix}.
+\end{align*}
+Since $\dim N_{A-I} = 1$, then there is only one Jordan block corresponding to $\lambda = 1$. Thus, the Jordan canonical form of $A$ is
+\begin{align*}
+    J = \begin{pmatrix}
+        1 & 1 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 2
+    \end{pmatrix}.
+\end{align*}
+
+Now, we could compute for generalized eigenvector $v_3$,
+\begin{align*}
+    (A - I)v_3 = \begin{pmatrix}
+        1 \\
+        0 \\
+        0
+    \end{pmatrix},
+\end{align*}
+which implies 
+\begin{align*}
+    v_3 = \begin{pmatrix}
+        1 \\
+        0 \\
+        1
+    \end{pmatrix}.
+\end{align*}
+Thus, $T$ can be arranged as
+\begin{align*}
+    T = \begin{pmatrix}
+        1 & 1 & 1 \\
+        0 & 0 & -1 \\
+        0 & 1 & 2
+    \end{pmatrix},
+\end{align*}
+and then
+\begin{align*}
+    T^{-1} A T = J = \begin{pmatrix}
+        1 & 1 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 2
+    \end{pmatrix}.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+~\begin{enumerate}[label=(\alph*)]
+    \item For $A = \begin{pmatrix}
+        7 & -4 \\
+        4 & -1
+    \end{pmatrix}$, find a nilpotent $N$ and a scalar $\lambda$ such that $A = \lambda I + N$.
+    
+    \item Show that for $A$, 
+    \begin{align*}
+        A^{100} = \begin{pmatrix}
+        3^{100} + 400\cdot 3^{99} & -400 \cdot 3^{99} \\
+        400 \cdot 3^{99} & 3^{100} - 400 \cdot 3^{99}
+    \end{pmatrix}.
+    \end{align*}
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item Consider the characteristic polynomial of $A$,
+    \begin{align*}
+        \lambda^2 - 6 \lambda + 9 = 0,
+    \end{align*}
+    which implies $\lambda = 3$, and then $N = A - \lambda I = \begin{pmatrix}
+        4 & -4 \\
+        4 & -4
+    \end{pmatrix}$.
+    
+    \item Since $A = \lambda I + N$, then
+    \begin{align*}
+        A^{100} = (\lambda I + N)^{100} = \lambda^{100}I + 100 \cdot 3^{99} N.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $V$ is the space of complex polynomials in $x$ and $y$ of total degree at most $3$, i.e.
+\begin{align*}
+    V = \left\{\sum_{i,j \geq 0, \,\, i+j \leq 3} a_{ij} x^i y^j \Bigg| a_{ij} \in \mathbb{C} \right\}.
+\end{align*}
+Suppose $D_x: V \to V$ is the partial derivative with respect to $x$. Find the Jordan canonical form of $D_x$.
+\end{exercise}
+\begin{proof}
+$V$ can be spanned by $\left\{1, x, x^2, x^3, y, y^2, y^3, xy, x^2y, xy^2\right\}$, then $\dim V = 10$. And under operator $D_x$, the polynomial will become $\left\{0, 1, 2x, 3x^2, 0, 0, 0, y, 2xy, y^2\right\}$. And $D_x^4 = 0. D_x^3 \neq 0$. Also, $\dim D_x = 4, \dim D_x^2 = 6$, then we have the Jordan form of $D_x$ is
+\begin{align*}
+    J = \begin{pmatrix}
+        \begin{bmatrix}
+            0 & 1 &   & \\
+              & 0 & 1 & \\
+              &   & 0 & 1 \\
+              &   &   & 0
+        \end{bmatrix} &  &  &  &  & \\
+        & \begin{bmatrix}
+            0 & 1 \\
+              & 0
+        \end{bmatrix} &  &  &  & \\
+        &  & [0] &  &  & \\
+        &  &  & [0] &  & \\
+        &  &  &  & [0] & \\
+        &  &  &  &  & [0]
+    \end{pmatrix}.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $N$ be a $3 \times 3$ nonzero matrix such that $N^2 = 0$. Show that $N$ is similar to
+\begin{align*}
+    \begin{pmatrix}
+        0 & 1 & 0 \\
+        0 & 0 & 0 \\
+        0 & 0 & 0
+    \end{pmatrix}.
+\end{align*}
+\end{exercise}
+\begin{proof}
+Since $N^2 = 0$, then the Jordan canonical form of $N$ must have a Jordan block $\begin{pmatrix}
+    0 & 1 \\
+    0 & 0 
+\end{pmatrix}$.
+
+Also, since $N$ is nilpotent, then the eigenvalues of $N$ are all zero, and thus its Jordan canonical form is the same as above. 
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $A$ is a complex matrix, such that $e^A = A$. Prove that $A$ is diagonalizable.
+\end{exercise}
+\begin{proof}
+Consider Jordan canonical form and each Jordan block.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Suppose $A^3$ is a unitary matrix. Prove that $A$ is diagonalizable.
+\end{exercise}
+\begin{proof}
+Since $A^3$ is unitary matrix, then of course $A^3$ is normal matrix, thus diagonalizable. Suppose $A^3 = S \Lambda_1 S^*$, where $S$ is unitary and $\Lambda_1$ is diagonal with diagonal entries $\lambda_1, \cdots, \lambda_m$. Then, consider diagonal matrix $\Lambda_2$ with diagonal entries $\sqrt[3]{\lambda_1}, \cdots, \sqrt[3]{\lambda_m}$, and it follows that $A = S \Lambda_2 S^*$. Hence, $A$ is also diagonalizable since $\lambda_i^3 \neq \lambda_j^3$ implies $\lambda_i \neq \lambda_j$ \cite{22}.
+\end{proof}
+
+\medskip
+
+\begin{exercise}{\bf *}
+Suppose $A$ and $B$ are $2 \times 2$ nilpotent matrices. Prove that $AB$ is diagonalizable.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $A = 0$, then $AB$ is diagonalizable.
+    
+    \item If $A \neq 0$, then Jordan canonical form $J_A$ of $A$ must be 
+    \begin{align*}
+        J_A = \begin{pmatrix}
+            0 & 1 \\
+            0 & 0
+        \end{pmatrix},
+    \end{align*}
+    since $A$ is nilpotent. And there exists invertibe matrix $P$ such that $A = P J_A P^{-1}$ and then $J_A = P^{-1} A P$. Let $\widetilde{B} = P^{-1} B P$, then
+    \begin{align*}
+        P^{-1} A B P = J_A \widetilde{B}.
+    \end{align*}
+    
+    Assume $\widetilde{B} = \begin{pmatrix}
+        b_1 & b_2 \\
+        b_3 & b_4
+    \end{pmatrix}$, and then 
+    \begin{align*}
+        J_A \widetilde{B} = \begin{pmatrix}
+            b_3 & b_4 \\
+            0   & 0
+        \end{pmatrix}.
+    \end{align*}
+    If $b_3 \neq 0$, then diagonalizable. If $b_3 = 0$, then with $J_A \widetilde{B}$ being nilpotent, $b_1 = b_4 = 0$ and then $J_A \widetilde{B} = 0$, hence also diagonalizable.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+~\begin{enumerate}[label=(\alph*)]
+    \item Let $A$ be an $n \times n$ real symmetric matrix which commutes with all $n \times n$ matrices. Show that $A = kI$ for some scalar $k$.
+    
+    \item Let $A$ be an $n \times n$ orthogonal matrix which commutes with all $n \times n$ matrices. Show that $A = kI$ for some scalar $k$.
+    
+    \item Let $A$ be an invertible $n \times n$ real matrix which commutes with all $n \times n$ matrices. Show that $A = kI$ for some scalar $k$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+For any $A, B$, such that $AB = BA$, $A: N_{B - \lambda I} \to N_{B - \lambda I}$, where $\lambda$ is eigenvalue of $B$. If $N_{B - \lambda I} \neq \{0\}$, then there exists an eigenvector of $A$ in $N_{B - \lambda I}$. If $\dim N_{B - \lambda I} = 1$, then for any nonzero $v \in N_{B - \lambda I}$ is an eigenvector of $A$.
+
+Claim: any nonzero vector is an eigenvector for $A$. For any real $v \neq 0$, need to find $Q$, so that $Qv = v$, $N_{Q-I} = {\rm span}\{v\}$.
+
+This argument works for $(b)$ and $(c)$, and for part $(a)$, we can split complex matrix $A$ into two parts $\Im A$ and $\Re A$ and this argument works.
+\end{proof}
+
+\noindent{\bf Method II.}\cite{23}
+\begin{proof}
+For a basis-free proof, consider $S \in \mathscr{L}(V, V)$ given by $Sx = f(x)v$ for some vector $v$ and some linear functional $f$ on $V$. Then $TS(x) = f(x) Tv = ST x = f(Tx) v$ for any $x$. In particular, as long as a nontrivial linear functional $f$ on $V$ exists, there is $x$ such that $f(x) \neq 0$ and then $Tv = \alpha v$ for all $v$, where $\alpha = f(Tx)/f(x)$. Thus, $T$ can only be scalar matrix.
+\end{proof}
+
+\section{Euclidean Structure}
+\begin{exercise}
+Suppose $1\leq k\leq n$ and $x_{1},x_{2},\cdots x_{k}$ are $k$ vectors
+in $\mathbb{R}^{n}$ satisfying for any $1\leq i,j\leq k$,%
+$$
+\left(  x_{i},x_{j}\right)  =\delta_{ij}.
+$$
+For each $1\leq j\leq k$, let $a_{j}$ be the first component of $x_{j}$. Show
+that%
+$$
+\sum_{j=1}^{k}a_{j}^{2}\leq1.
+$$
+\end{exercise}
+\begin{proof}
+Since $(x_i,x_j) = \delta_{ij}, 1\leq i,j\leq n$, then we can arrange $x_1, x_2,\cdots, x_n$ into a matrix and denote it by $A = (x_1, x_2,\cdots, x_n)$, then we have $A$ is an orthogonal matrix with determinant $1$. Then $\det A^* = 1$. 
+
+Now we pick a vector $z = (1,0,\cdots,0)^T \in \mathbb{R}^{n}$. Then we have $A^*z = (a_1, a_2, \cdots, a_n)^T$, and therefore the first component of the vector $AA^*z$ is $\sum_{j=1}^{k}a_{j}^{2}$, which means $AA^*z = \left(\sum_{j=1}^{k}a_{j}^{2}, \cdots \right)^T$. Also, we have $\left\|AA^*z \right\| \leq \left\| I z \right\| = 1$. We denote other components of $AA^*z$ as $w_2, w_3, \cdots, w_n$, then we have 
+\begin{align*}
+    \sum_{j=1}^{k}a_{j}^{2} \leq \left\|AA^*z \right\|^{1/2} & = \sqrt{\sum_{j=1}^{k}a_{j}^{2} + w_2^2 + \cdots + w_n^2} = 1 \\
+    \Rightarrow \sum_{j=1}^{k}a_{j}^{2} & \leq 1.
+\end{align*}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let $A$ be an $m\times n$ matrix, $c_{j}$ $1\leq j\leq n$ be column
+vectors of $A$ and $r_{i}$, $1\leq i\leq m$ be row vectors of $A$, show that%
+$$
+\left\Vert A\right\Vert \geq\max_{1\leq j\leq n}\left\Vert c_{j}\right\Vert
+\text{ and }\left\Vert A\right\Vert \geq\max_{1\leq i\leq m}\left\Vert
+r_{i}\right\Vert .
+$$
+Here we view $A$ as a linear map from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
+\end{exercise}
+\begin{proof}
+For $j$th column $c_j$ of $A$, we pick a unit vector $e_j = (0,\cdots, 0,1,0,\cdots,0)^T \in \mathbb{R}^n$, where $j$th entry is $1$, others are all zero. Then we can have $Ae_j = c_j$. Thus, we have 
+\begin{align*}
+    \left\|c_j \right\| \leq \left\|A \right\| \left\|e_j  \right\| = \left\|A \right\|
+\end{align*}
+since this is true for all $1\leq j \leq n$, then we have $\max_{1\leq j \leq n}\left\|c_j \right\| \leq \left\|A \right\|$. 
+
+For $i$th row $r_i$ of $A$, we can consider $A^* = (r_1, r_2,\cdots, r_m)$. And still, we pick a vector $e_i' = (0,\cdots, 0,1,0,\cdots,0)^T \in \mathbb{R}^m$, where $i$th entry is $1$, others are all zero. And then we take $A^* e_i' = r_i$, which gives us 
+\begin{align*}
+    \left\|r_i \right\| \leq \left\|A^* \right\| \left\|e_i'  \right\| = \left\|A^* \right\| = \left\|A \right\|
+\end{align*}
+in the last step we used the fact that $\left\|A^* \right\| = \left\|A \right\|$ . This is true for all $1\leq i \leq m$, then we have $\max_{1\leq i \leq m}\left\|r_i \right\| \leq \left\|A \right\|$. The proof is complete.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Let
+$$
+A=\left(
+\begin{array}
+[c]{cc}%
+1 & 2\\
+0 & 3
+\end{array}
+\right)  .
+$$
+Find the spectral radius, operator norm and Hilbert-Schmidt norm of
+$A:\mathbb{R}^{n}\rightarrow\mathbb{R}^{n}$.
+\end{exercise}
+\begin{proof}
+The eigenvalues of $A$ are $1$ and $3$, and then we can know that the spectral radius is $r(a) = \max |\lambda| = 3$. The operator norm of $A$ is  the largest eigenvalues of $AA^T$, which is 
+$$
+AA^T=\left(
+\begin{array}
+[c]{cc}%
+5 & 6\\
+6 & 9
+\end{array}
+\right).
+$$
+And the charasteristic polynomial is $\lambda^2 - 14\lambda + 9 = 0$, which gives us norm of $A$ is $\max_{j=1,2} \lambda_j = 7+2\sqrt{10}$. The Hilbert-Schmidt norm of $A$ is $\left\| A\right\| = \left(\sum_{i,j}|a_{ij}^2| \right)^{1/2} = \sqrt{14}$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Show that two vectors in a complex Euclidean space are orthogonal if and only if 
+\begin{align*}
+    \|ax + y\|^2 = |a|^2 \|x\|^2 + \|y\|^2,
+\end{align*}
+for all complex numbers $a$.
+\end{exercise}
+\begin{proof}
+~\begin{enumerate}[label=(\alph*)]
+    \item If $\|ax + y\|^2 = |a|^2 \|x\|^2 + \|y\|^2$, then $(ax,y) + (y, ax) = 0$. Pick $a = \overline{(x,y)}$, then 
+    \begin{align*}
+        2 \left\Re(x,y)\right (x,y) = 0,
+    \end{align*}
+    and hence $(x,y) = 0$.
+    
+    \item Inverse is trivial.
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $v_1, v_2, \cdots, v_n$ are vectors in $\mathbb{R}^{n-1}$ such that $v_i \cdot v_j < 0$ for all $i \neq j$. Prove that there exist nonnegative real numbers $c_1, c_2, \cdots, c_n$, not all zero, such that 
+\begin{align*}
+    \sum^n_{k=1} c_k v_k = 0.
+\end{align*}
+\end{exercise}
+\begin{proof}
+Since $\dim \mathbb{R}^{n-1} = n-1$, then there exists $c_1, c_2, \cdots, c_n$, not all zero, such that 
+\begin{align*}
+    \sum^n_{k=1} c_k v_k = 0.
+\end{align*}
+We could assume that at least one $c_k$ is positive, and we could assume for $1 \leq k \leq K$, $c_k > 0$ and $c_k \leq 0$ otherwise. If $K = n$, then we are done. If $K < n$, then 
+\begin{align*}
+    \sum^K_{k=1} c_k v_k = \sum^n_{k=K+1} \left|c_k\right| v_k.
+\end{align*}
+And it follows that 
+\begin{align*}
+    \left|\sum^K_{k=1} c_k v_k\right|^2 & = \left(\sum^K_{k=1} c_k v_k, \sum^n_{k=K+1} \left|c_k\right| v_k \right) \\
+    & = \sum^K_{j=1} \sum^n_{k=K+1} c_j \left|c_k\right| \left(v_j, v_k\right) \leq 0,
+\end{align*}
+where in the last step we used $\left(v_j, v_k\right) < 0$ for $j \neq k$. Since the RHS is greater or equal to zero, then $c_j\left|c_k\right| = 0$ for all $j,k$. And since $c_j > 0$, $c_k = 0, K+1 \leq k \leq n$. Thus, $C_i, 1 \leq i \leq n$ are nonnegative.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $v_1, v_2, \cdots, v_k$ are nonzero vectors in $\mathbb{R}^n$ such that $v_i \cdot v_j < 0$ for all $i \neq j$. Determine, with proof, the maximal possible $k$ for $n = 2$, and also for arbitrary $n$.
+\end{exercise}
+\begin{proof}
+Claim: $k = n + 1$. 
+
+Indeed, suppose there exists $v_{n+2}$. Since $v_1, \cdots, v_{n+1}$ are linearly independent, then by previous problem, there exists nonnegative $c_1, \cdots, c_{n+1}$ such that
+\begin{align*}
+    \sum^{n+1}_{j=1} c_j v_k = 0,
+\end{align*}
+and then
+\begin{align*}
+    0 = \left(\sum^{n+1}_{j=1} c_j v_k, v_{n+2}\right) = \sum^{n+1}_{j=1} c_j \left(v_k, v_{n+2} \right) < 0,
+\end{align*}
+which is a contradiction. 
+
+We proof by induction. For $n = 1$, it is trivial. Just pick $v_1 = 1$ and $v_2 = -1$. Suppose true for $n = N - 1$, then there exist $N+1$ nonzero vectors $v_1, v_2, \cdots, v_{N}$ in $\mathbb{R}^{N-1}$ such that $v_i \ctot v_j \leq 0$ for all $i \neq j$. Now for $\mathbb{R}^N = \mathbb{R}^{N-1} \times \mathbb{R}$, we could assume $v_1, v_2, \cdots, v_{N} \in \mathbb{R}^{N-1} \times \{0\}$. Let $v_{N+1} = e_N$ and define $\widetilde{v}_k = v_k - \varepsilon e_N, 1 \leq k \leq N$. For $\varepsilon$ small enough, $\left(\tilde{v_i}, \tilde{v_j}\right) < 0, 1 \leq i,j \leq N$ and $\left(\tilde{v}_i, v_{N+1} \right) = - \varepsilon, 1 \leq i \leq N$. Thus, it holds for $n = N$.
+\end{proof}
+
+\medskip
+
+\begin{exercise}
+Suppose $v_1, v_2, \cdots, v_k$ are nonzero vectors in $\mathbb{R}^n$ such that $v_i \cdot v_j \leq 0$ for all $i \neq j$. Determine the maximal possible $k$ for $n = 3$, and also for arbitrary $n$.
+\end{exercise}
+\begin{proof}
+Claim: $k = 2n$.
+
+We could simply pick $e_1, -e_1, e_2, -e_2, \cdots, e_n, -e_n$, and there are $2n$ vectors. Thus, existence is trivial. 
+
+Now we prove $k \leq 2n$ by induction. Let $v_1, \cdots, v_k$ be nonzero vectors in $\mathbb{R}^n$ such that $\left(v_i, v_j\right) \leq 0, i \neq j$. Fix $v_1 \neq 0$, define for any $j \geq 2$, 
+\begin{align*}
+    \hat{v}_j = v_j - \frac{\left(v_1, v_j\right)}{\left(v_1, v_1\right)} v_1,
+\end{align*}
+then for any $k,j$,
+\begin{align*}
+    \left(\hat{v}_k, \hat{v}_j\right) & = \left(v_k - \frac{\left(v_1, v_k\right)}{\left(v_1, v_1\right)} v_1, v_j - \frac{\left(v_1, v_j\right)}{\left(v_1, v_1\right)} v_1\right) \\
+    & = \left(v_k, v_j\right) - 2 \frac{\left(v_1, v_k\right)\left(v_1, v_j\right)}{\left(v_1, v_1\right)} + \frac{\left(v_1, v_k\right)\left(v_1, v_j\right)}{\left(v_1, v_1\right)} \leq 0.
+\end{align*}
+
+And we claim there cannot be more than one zero in $\hat{v}_i$. Otherwise, if $\hat{v}_i = \hat{v}_j = 0$, then 
+\begin{align*}
+    v_i = \frac{\left(v_1, v_i\right)v_1}{\left(v_1, v_1\right)}, \,\, v_j = \frac{\left(v_1, v_j\right)v_1}{\left(v_1, v_1\right)},
+\end{align*}
+Then,
+\begin{align*}
+    \left(v_i, v_j\right) = \left(v_1, v_i\right) \left(v_1, v_j\right) > 0,
+\end{align*}
+which is a contradiction. Hence, we constructed $k - 2$ vectors in $\mathbb{R}^{n-1}$.
+\end{proof}
 
 
 
@@ -5659,7 +7291,7 @@ which proved the theorem.
 
 
 \addcontentsline{toc}{chapter}{Bibliography}
-\bibliographystyle{plain}
+\bibliographystyle{unsrt}
 \bibliography{bibliography}
 
 \end{document}
