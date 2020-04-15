@@ -4311,8 +4311,23 @@ Then there exists a basis consisting of eigenvectors for both $A$ and $H$. Then 
 \medskip
 
 \begin{corollary}
-If $N$ is a normal matrix, then $N$ can be unitary diagonalized.
+$N$ is a normal matrix if and only if $N$ can be unitarily diagonalized.
 \end{corollary}
+\begin{proof}
+~\begin{enumerate}[label=(\arabic*)]
+    \item ($\Rightarrow$) We need three steps to show this direction\cite{25}.
+    \begin{enumerate}[label=(\alph*)]
+        \item If a normal matrix is upper triangular, then it is diagonal.
+        
+        \item By Schur decomposition\footnote{Schur decomposition theorem is talked later in theorem (\ref{Schur_Decomposition}).}, every matrix is unitary similar to an upper triangular matrix.
+        
+        \item Then, $N$ is similar to an upper triangular matrix, which is necessarily diagonal.
+    \end{enumerate}
+    Thus, $N$ is unitarily diagonalizable. 
+    
+    \item ($\Leftarrow$) This direction is obvious. Suppose there exists an unitary matrix $U$ such that $N = U \Lambda U^*$, where $\Lambda$ is diagonal. Then, $N N^* = U \Lambda^2 U^* = N^* N$. Thus, $N$ is normal.
+\end{enumerate}
+\end{proof}
 
 \medskip
 
@@ -4531,7 +4546,7 @@ Let $A:X\to Y$, then $\|A\| = \sqrt{r(A^*A)}$.
 
 \section{Schur Decomposition}
 
-\begin{theorem}
+\begin{theorem}\label{Schur_Decomposition}
 Let $A$ be an $n\times n$ matrix. There exists unitary matrix $U$ such that
 $$A = UTU^*$$
 for some upper triangular matrix $T$.
@@ -4947,10 +4962,10 @@ We can apply the above result to the determinant function $D(x_1,\cdots,x_n)$ de
 
 \medskip
 
-\begin{theorem}
+\begin{theorem}\label{trace_determinant}
 Let $Y(t)$ be a differentiable matrix valued function, then for those $t$ such that $Y$ is invertible, then
 \begin{align*}
-    \dv{}{t} \ln |\det Y(t)| = \tr \left(Y^{-1} \dot{Y}\right),
+    \dv{}{t} \log \det Y(t) = \tr \left(Y^{-1} \dot{Y}\right),
 \end{align*}
 which is equivalent to 
 \begin{align*}
@@ -5299,9 +5314,227 @@ We need to check $\log \lambda = \lim_{m\to\infty} m \left(\lambda^{1/m} - 1\rig
 \end{align*}
 Then we have
 \begin{align*}
-    m \left(A^{\frac{1}{m}} - 1\right) & = 
+    m \left(A^{\frac{1}{m}} - 1\right) & = m \left( U \Lambda^{\frac{1}{m}} U^* - 1 \right) \\
+    & = U \left[m \left(\Lambda^{\frac{1}{m}} - 1\right)\right] U^* \\
+    & = U \begin{pmatrix}
+        m \left(\lambda_1^{\frac{1}{m}} - 1\right) &  & \\
+        & \ddots & \\
+        &  & m \left(\lambda_n^{\frac{1}{m}} - 1\right)
+    \end{pmatrix} U^*,
+\end{align*}
+and hence 
+\begin{align*}
+    \lim_{m\to\infty} m \left(A^{\frac{1}{m}} - 1\right) = U \begin{pmatrix}
+        \log \lambda_1 &  & \\
+        & \ddots & \\
+        &  & \log \lambda_n
+    \end{pmatrix} U^* = \log A.
 \end{align*}
 \end{proof}
+
+\medskip
+
+\begin{theorem}
+Suppose $0 < M < N$, then $\log M \leq \log N$.
+\end{theorem}
+\begin{proof}
+It is obvious with the previous lemma.
+\end{proof}
+
+\medskip
+
+\begin{definition}
+A real-valued function $f(s)$ defined for $s > 0$ is called a monotone matrix function if all pairs of self-adjoint mappings $M, N$ satisfying $0 < M < N$, then $f(M) < f(N)$. 
+\end{definition}
+\begin{remark}
+The functions $f(s) = - 1/s, s^{1/m}, \log s$ are monotone functions, but $f(s) = s^2$ is not.
+\end{remark}
+
+\section{Gram Matrices}
+\begin{definition}
+Let $f_1, \cdots, f_m$ be an ordered set of vectors in the Euclidean space. The matrix $G$ with entries 
+\begin{align*}
+    G_{ij} = \left(f_i, f_j\right)
+\end{align*}
+is called the Gram matrix of the set of vectors.
+\end{definition}
+
+\medskip
+
+\begin{theorem}
+~\begin{enumerate}[label=(\roman*)]
+    \item Every Gram matrix is nonnegative.
+    
+    \item The Gram matrix of a set of linearly independent vectors is positive.
+    
+    \item Every positive matrix can be represented as a Gram matrix.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+~\begin{enumerate}[label=(\roman*)]
+    \item For any $x = \sum x_i e_i \in X$, 
+    \begin{align*}
+        (x,Gx) & = \sum_{i} x_i\left(\sum_{j}G_{ij}x_j\right) \\
+        & = \sum_{i,j} x_i G_{ij} x_j \\
+        & = \sum_{i,j} x_i \left(f_i, f_j\right) x_j \\
+        & = \left(\sum_i x_i f_i, \sum_j x_j f_j \right) \\
+        & = \left\|\sum x_i f_i \right\|^2.
+    \end{align*}
+    Then parts (i) and (ii) follows immediately. 
+    
+    \setcounter{enumi}{2}
+    \item Let $H = \left(h_{ij}\right)_{n \times n}$ be positive. Let $f_j = \sqrt{H} e_j$, then $\left(f_i, f_j\right) = \left(\sqrt{H} e_i, \sqrt{H} e_j\right) = h_{ij}$.\footnote{\noindent{\bf Method II:} Define on $\mathbb{C}^n$, $(x,y)_H = (x, Hy)$, and then the Gram matrix of the unit vectors $f_i = e_i$ is $\left(e_i, e_j\right)_H = \left(e_i, H e_j\right) = h_{ij}$.}
+\end{enumerate}
+\end{proof}
+
+\medskip
+
+\begin{example}
+Take the Euclidean space to consist of real-valued functions on the interval $[0,1]$, with the scalar product
+\begin{align*}
+    (f,g) = \int^1_0 f(x)g(x)\, dx.
+\end{align*}
+Choose $f_j = x^{k-1}, k = 1,2,\cdots,n$. Then,
+\begin{align*}
+    \left(f_i, f_j\right) = \frac{1}{i + j - 1}, 
+\end{align*}
+and the associated Gram matrix is 
+\begin{align*}
+    G_{ij} = \frac{1}{i + j - 1}.
+\end{align*}
+\end{example}
+
+\medskip
+
+\section{Schur's Theorem}
+\begin{definition}
+Let $A, B$ be two $m \times n$ matrices. The Hadamard product of $A, B$ is defined by 
+\begin{align*}
+    A \odot B = \left(a_{ij} b_{ij} \right)_{m \times n}.
+\end{align*}
+\end{definition}
+
+\medskip
+
+\begin{theorem}[Schur's Theorem]
+Let $A = \left(a_{ij}\right)_{n\times n}, B = \left(b_{ij}\right)_{n\times n}$ denote positive matrices. Then $A \odot B$ is also positive.
+\end{theorem}
+\begin{proof}
+Suppose $a_{ij} = \left(f_i, f_j\right)$ and $b_{ij} = \left(g_i, g_j\right)$. Let $f_i = \left(f^1_i, f^2_i, \cdots, f^n_i\right)^T$ and $g_i = \left(g^1_i, g^2_i, \cdots, g^n_i\right)^T$, then
+\begin{align*}
+    a_{ij} = \sum^n_{k=1} f^k_i \overline{f^k_j}, \quad b_{ij} = \sum^n_{k=1} g^k_i \overline{g^k_j}.
+\end{align*}
+Then 
+\begin{align*}
+    a_{ij} b_{ij} = \sum^n_{k,l=1} f^k_i \overline{f^k_j} \cdot g^l_i \overline{g^l_j},
+\end{align*}
+and we define $h_i = \left(f^k_i g^l_i \right)$, then $a_{ij} b_{ij} = \left(h_i, h_j \right)$. Thus, $A \odot B$ is a Gram matrix. 
+
+Suppose $\sum^n_{i=1} c_i h_i = 0$, then for any $k,l$ 
+\begin{align*}
+    \sum^n_{i=1} c_i f^k_i g^l_i = 0,
+\end{align*}
+which implies $c_i g^l_i = 0$ for any $i, l$. It follows that $c_i = 0$. Thus, $\{h_i\}$ are linearly independent, and hence $A \odot B$ is also positive.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $A$ and $B$ denote real, self-adjoint, positive $n \times n$ matrices. Then for all $t$ between $0$ and $1$,
+\begin{align*}
+    \det \left(tA + (1-t)B \right) \geq (\det A)^t (\det B)^{1-t}.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Since $\log$ is a monotonic function, we have the equivalent inequality:
+\begin{align*}
+    \log \det \left(tA + (1-t)B \right) \geq t \log (\det A) + (1-t) \log (\det B).
+\end{align*}
+It remains to show that $\log \det H$ is concave on the set of positive matrices. Note that a function whose {\em second derivative} is negative is concave. And we need to calculate the second derivative of the function $f(t) = \log \det (tA + (1-t)B)$ and verify that it is negative. Then, by theorem (\ref{trace_determinant}),
+\begin{align*}
+    \dv{}{t} \log \det Y = {\rm tr} \left(Y^{-1} \dot{Y} \right).
+\end{align*}
+and then
+\begin{align*}
+    \dv{^2}{t^2} \log \det Y & = {\rm tr} \dv{}{t} \left(Y^{-1} \dot{Y} \right) \\
+    & = {\rm tr} \left(- Y^{-1} \dot{Y} Y^{-1} \right) \dot{Y} \\
+    & = - {\rm tr} \left(- Y^{-1} \dot{Y} \right) \leq 0,
+\end{align*}
+where we used $Y(t) = tA + (1-t)B, \dot{Y} = A - B$ and $\ddot{Y} = 0$. 
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+The determinant of a positive matrix $H$ does not exceed the product of its diagonal elements, i.e.
+\begin{align*}
+    \det H \leq \prod^n_{i=1} h_{ii}.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Since $H$ is positive, so are its diagonal entries \footnote{Take the vector $e_1$ from the standard basis, then $a_{11} = \left(e_1, H e_i\right) > 0$. And similar argument can be applied to $a_{22}, \cdots, a_{nn}$\cite{24}.}. Define $d_i = 1/\sqrt{h_{ii}}$ and denote by $D$ the diagonal matrix with diagonal entries $d_i$. Denote by the matrix $B$ by $B = DHD$. Then, $B$ is symmetric and positive and all its diagonal entries are $1$'s. Also,
+\begin{align*}
+    \det B = \det H \det D^2 = \frac{\det H}{\prod h_{ii}}.
+\end{align*}
+It suffices to show that $\det B \leq 1$. Let $\lambda_1, \cdots, \lambda_n$ be positive eigenvalues of $B$, then
+\begin{align*}
+    \det B = \prod^n_{i=1} \lambda_i \leq \left(\frac{\sum^n_{i=1}\lambda_i}{n}\right)^n = 1.
+\end{align*}
+Thus the theorem follows.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $T$ be any $n \times n$ matrix whose columns are $c_1, \cdots, c_n$. Then the determinant of $T$ is in absolute value not greater than than the product of the length of its columns, i.e.
+\begin{align*}
+    \left|\det T \right| \leq \prod^n_{i=1} \left\|c_j \right\|.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Define $H = T^*T$, and its diagonal elements are
+\begin{align*}
+    h_{ii} = \sum_j t^*_{ij}t_{ji} = \sum_j \overline{t_{ij}} t_{ji} = \sum_j \left|t_{ij}\right|^2 = \left\|c_i \right\|^2.
+\end{align*}
+Then,
+\begin{align*}
+    \left|\det T \right|^2 = \det H \leq \prod^n_{i=1} \left\|c_i \right\|^2,
+\end{align*}
+and hence the theorem follows.
+\end{proof}
+
+\medskip
+
+\begin{theorem}
+Let $H$ be an $n \times n$ real, symmetric, positive matrix. Then,
+\begin{align*}
+    \frac{\pi^{n/2}}{\sqrt{\det H}} = \int_{\mathbb{R}^n} e^{-(x,Hx)}\, dx.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Let $y = \sqrt{H}x$, then $(x, Hx) = (y, y)$. Then,
+\begin{align*}
+    \int_{\mathbb{R}^n} e^{-(x,Hx)}\, dx & = \int_{\mathbb{R}^n} e^{-(y,y)} \frac{1}{\det \sqrt{H}} \, dy = \frac{\pi^{n/2}}{\sqrt{\det H}}.
+\end{align*}
+\end{proof}
+
+\section{Eigenvalues}
+\begin{lemma}
+Let $A$ be a self-adjoint map of a Euclidean space $U$ into itself. We denote by $p_+(A)$ the number of positive eigenvalues of $A$
+\end{lemma}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \chapter{Exercises}
 
@@ -7273,7 +7506,7 @@ Then,
 \begin{align*}
     \left(v_i, v_j\right) = \left(v_1, v_i\right) \left(v_1, v_j\right) > 0,
 \end{align*}
-which is a contradiction. Hence, we constructed $k - 2$ vectors in $\mathbb{R}^{n-1}$.
+which is a contradiction. Hence, we constructed $k - 2$ vectors in $\mathbb{R}^{n-1}$. 
 \end{proof}
 
 
